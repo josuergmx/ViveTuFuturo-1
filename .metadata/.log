@@ -111,3 +111,18 @@ java.net.ConnectException: Conexión rehusada (Connection refused)
 
 !ENTRY org.eclipse.wst.server.discovery 1 0 2017-06-23 19:35:08.987
 !MESSAGE already installed: org.eclipse.jst.server.generic.jonas4
+
+!ENTRY org.eclipse.jface.text 2 0 2017-06-23 21:34:40.120
+!MESSAGE Duplicate template id: 'org.eclipse.wst.xslt.templates.xpath.number'
+
+!ENTRY org.eclipse.jface.text 2 0 2017-06-23 21:34:40.121
+!MESSAGE Duplicate template id: 'org.eclipse.wst.xslt.templates.xpath.round'
+
+!ENTRY org.eclipse.jface.text 2 0 2017-06-23 21:34:40.377
+!MESSAGE Duplicate template id: 'org.eclipse.wst.xslt.templates.xpath.number'
+
+!ENTRY org.eclipse.jface.text 2 0 2017-06-23 21:34:40.378
+!MESSAGE Duplicate template id: 'org.eclipse.wst.xslt.templates.xpath.round'
+
+!ENTRY org.eclipse.wst.server.discovery 1 0 2017-06-23 21:42:58.371
+!MESSAGE already installed: org.eclipse.jst.server.generic.jonas4
