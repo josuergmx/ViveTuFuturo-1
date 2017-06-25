@@ -29,6 +29,13 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
+		<!--SpringBootDevTools agrega configuraciones para el entorno desarrollo como
+			HotSwapping que permiten recargar en las plantillas sin tener que reiniciar el servidor-->
+	    <dependency>
+	        <groupId>org.springframework.boot</groupId>
+	        <artifactId>spring-boot-devtools</artifactId>
+	        <optional>true</optional>
+	    </dependency>
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>

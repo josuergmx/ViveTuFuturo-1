@@ -3,7 +3,7 @@ spring:
     url: jdbc:mysql://localhost:3306/vive_tu_futuro
     username: vive
     password: vive
-  
+    
   jpa:
     show-sql: true
     hibernate:
@@ -12,4 +12,4 @@ spring:
         strategy: org.hibernate.cfg.ImprovedNamingStrategy
     properties:
       hibernate:
-        dialect: org.hibernate.dialect.MySQLDialect 
+        dialect: org.hibernate.dialect.MySQLDialect
