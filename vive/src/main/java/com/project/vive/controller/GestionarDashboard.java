@@ -12,6 +12,7 @@ public class GestionarDashboard {
 	@RequestMapping(method = RequestMethod.GET)
 	public ModelAndView dashboard(@RequestParam(name="nombre", defaultValue="Juan Castillo")String nombre) {
 		ModelAndView mav =  new ModelAndView("dashboard");
+		mav.addObject("nombre",nombre);
 		return mav;
 	}
 	
