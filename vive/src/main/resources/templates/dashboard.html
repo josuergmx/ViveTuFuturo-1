@@ -229,6 +229,7 @@
                 </p>
             </div>
         </div>
+        <!-- Seccion Gráfica -->
         <div class="row">
             <div class="col-lg-12">
                 <div class="hpanel">
@@ -237,58 +238,60 @@
                             <a class="showhide"><i class="fa fa-chevron-up"></i></a>
                             <a class="closebox"><i class="fa fa-times"></i></a>
                         </div>
-                        Dashboard information and statistics
+                        Información del Mes
                     </div>
                     <div class="panel-body">
                         <div class="row">
+                        	<!-- Info izquierda de la grafica -->
                             <div class="col-md-3 text-center">
-                                <div class="small">
-                                    <i class="fa fa-bolt"></i> Page views
-                                </div>
+                                <div class="font-extra-bold"> Citas del mes </div>
                                 <div>
-                                    <h1 class="font-extra-bold m-t-xl m-b-xs">
-                                        226,802
-                                    </h1>
-                                    <small>Page views in last month</small>
+                                    <h1 class="m-t-xl m-b-xs"> 22 </h1>
                                 </div>
                                 <div class="small m-t-xl">
-                                    <i class="fa fa-clock-o"></i> Data from January
+                                    <i class="fa fa-clock-o"></i> Datos del mes de Enero
                                 </div>
                             </div>
+                            <!-- Gráfica -->
                             <div class="col-md-6">
                                 <div class="text-center small">
-                                    <i class="fa fa-laptop"></i> Active users in current month (December)
+                                    <i class="fa fa-laptop"></i> Citas con clientes en el último mes
                                 </div>
+                                <!-- Contenedor de la gráfica, los datos de esta se pinta con el script en la parte inferior -->
                                 <div class="flot-chart" style="height: 160px">
                                     <div class="flot-chart-content" id="flot-line-chart"></div>
                                 </div>
                             </div>
+                            <!-- Info derecha de la gráfica -->
                             <div class="col-md-3 text-center">
                                 <div class="small">
-                                    <i class="fa fa-clock-o"></i> Active duration
+                                    <i class="fa fa-clock-o"></i> Prospectos nuevos
                                 </div>
                                 <div>
                                     <h1 class="font-extra-bold m-t-xl m-b-xs">
-                                        10 Months
+                                        10
                                     </h1>
-                                    <small>And four weeks</small>
+                                    <small>¡Genial!</small>
                                 </div>
                                 <div class="small m-t-xl">
-                                    <i class="fa fa-clock-o"></i> Last active in 12.10.2015
+                                    <i class="fa fa-clock-o"></i> Último inicio de sesión  12.05.2017
                                 </div>
                             </div>
                         </div>
                     </div>
+                    <!-- Footer de la gráfica -->
                     <div class="panel-footer">
                     <span class="pull-right">
-                          You have two new messages from <a href="">Monica Bolt</a>
+                          Tienes un incremento con respecto al mes anterior
                     </span>
-                        Last update: 21.05.2015
+                        Última actualización: 12.05.2017
                     </div>
                 </div>
             </div>
         </div>
+<!-- Seccion static info recuadros fijos -->
         <div class="row">
+        	<!-- Primer recuadro -->
             <div class="col-lg-3">
                 <div class="hpanel">
                     <div class="panel-body text-center h-200">
@@ -297,86 +300,85 @@
                         <h1 class="m-xs">$1 206,90</h1>
 
                         <h3 class="font-extra-bold no-margins text-success">
-                            All Income
+                            Último reporte
                         </h3>
-                        <small>Lorem ipsum dolor sit amet, consectetur adipiscing elit vestibulum.</small>
+                        <small>Revisa tu último reporte</small>
                     </div>
                     <div class="panel-footer">
-                        This is standard panel footer
+                        <a href="/reportes">Ir a mis reportes</a>
                     </div>
                 </div>
             </div>
+            <!-- Segundo recuadro -->
             <div class="col-lg-3">
                 <div class="hpanel stats">
                     <div class="panel-body h-200">
                         <div class="stats-title pull-left">
-                            <h4>Users Activity</h4>
+                            <h4>Contactos</h4>
                         </div>
                         <div class="stats-icon pull-right">
                             <i class="pe-7s-share fa-4x"></i>
                         </div>
                         <div class="m-t-xl">
-                            <h3 class="m-b-xs">210</h3>
-                    <span class="font-bold no-margins">
-                        Social users
-                    </span>
-
-                            <div class="progress m-t-xs full progress-small">
-                                <div style="width: 55%" aria-valuemax="100" aria-valuemin="0" aria-valuenow="55"
-                                     role="progressbar" class=" progress-bar progress-bar-success">
-                                    <span class="sr-only">35% Complete (success)</span>
-                                </div>
-                            </div>
-
+                            <h3 class="m-b-xs">60</h3>
+                    <!-- Barra -->
+                    <div class="progress m-t-xs full progress-small">
+                        <div style="width: 55%" aria-valuemax="100" aria-valuemin="0" aria-valuenow="55"
+                           role="progressbar" class=" progress-bar progress-bar-success">
+                           <span class="sr-only">35% son Clientes </span>
+                        </div>
+                    </div>
                             <div class="row">
                                 <div class="col-xs-6">
-                                    <small class="stats-label">Pages / Visit</small>
-                                    <h4>7.80</h4>
+                                    <p class="stats-label">Clientes</p>
+                                    <h4>30%</h4>
                                 </div>
 
                                 <div class="col-xs-6">
-                                    <small class="stats-label">% New Visits</small>
-                                    <h4>76.43%</h4>
+                                    <p class="stats-label">Prospectos</p>
+                                    <h4>70%</h4>
                                 </div>
                             </div>
+                            
                         </div>
                     </div>
                     <div class="panel-footer">
-                        This is standard panel footer
+                        <a href="/clientes">Ir a mis clientes</a>
                     </div>
                 </div>
             </div>
+            <!-- Tercer Recuadro -->
             <div class="col-lg-3">
                 <div class="hpanel stats">
                     <div class="panel-body h-200">
                         <div class="stats-title pull-left">
-                            <h4>Page Views</h4>
+                            <h4>Citas</h4>
                         </div>
                         <div class="stats-icon pull-right">
                             <i class="pe-7s-monitor fa-4x"></i>
                         </div>
                         <div class="m-t-xl">
-                            <h1 class="text-success">860k+</h1>
+                            <h1 class="text-success">5+</h1>
                     <span class="font-bold no-margins">
-                        Social users
+                        Con base al mes anterior
                     </span>
                             <br></br>
                             <small>
-                                Lorem Ipsum is simply dummy text of the printing and <strong>typesetting
-                                industry</strong>. Lorem Ipsum has been.
+                               Esta información utiliza el número de citas que se tenían en el mismo número de día del mes anterior. 
                             </small>
                         </div>
                     </div>
                     <div class="panel-footer">
-                        This is standard panel footer
+                        <a href="/clientes">Ir a mis citas</a>
                     </div>
                 </div>
             </div>
+            <!-- Cuarto recuadro -->
             <div class="col-lg-3">
                 <div class="hpanel stats">
                     <div class="panel-body h-200">
                         <div class="stats-title pull-left">
-                            <h4>Today income</h4>
+                            <h4>Mis Créditos</h4>
                         </div>
                         <div class="stats-icon pull-right">
                             <i class="pe-7s-cash fa-4x"></i>
@@ -388,43 +390,42 @@
                         <div class="m-t-xs">
 
                             <div class="row">
-                                <div class="col-xs-5">
-                                    <small class="stat-label">Today</small>
-                                    <h4>$230,00 </h4>
-                                </div>
-                                <div class="col-xs-7">
-                                    <small class="stat-label">Last week</small>
-                                    <h4>$7 980,60 <i class="fa fa-level-up text-success"></i></h4>
-                                </div>
+                            <small>
+                               El número de créditos que usas puede darte una idea de que tanto estas progresando. 
+                            </small>
                             </div>
                         </div>
                     </div>
                     <div class="panel-footer">
-                        This is standard panel footer
+                        <a href="/creditos">Ir a mis creditos</a>
                     </div>
                 </div>
             </div>
         </div>
+        <!-- Seccion closable info -->
         <div class="row">
+        <!-- Primer recuadro closable -->
             <div class="col-lg-3">
                 <div class="hpanel stats">
+                <!-- Opciones de cierre i minimizar -->
                     <div class="panel-heading">
                         <div class="panel-tools">
                             <a class="showhide"><i class="fa fa-chevron-up"></i></a>
                             <a class="closebox"><i class="fa fa-times"></i></a>
                         </div>
-                        Last active
+                        Modulo 1
                     </div>
+                    <!-- Cuerpo -->
                     <div class="panel-body list">
                         <div class="stats-title pull-left">
-                            <h4>Activity</h4>
+                            <h4>Actividad</h4>
                         </div>
                         <div class="stats-icon pull-right">
                             <i class="pe-7s-science fa-4x"></i>
                         </div>
                         <div class="m-t-xl">
                             <span class="font-bold no-margins">
-                                Social users
+                                Título
                             </span>
                             <br></br>
                             <small>
@@ -459,18 +460,20 @@
                         </div>
                     </div>
                     <div class="panel-footer">
-                        This is standard panel footer
+                        Link a otra página
                     </div>
                 </div>
             </div>
+            <!-- Segundo cuadro -->
             <div class="col-lg-6">
                 <div class="hpanel">
+                <!-- Opciones Cierre -->
                     <div class="panel-heading">
                         <div class="panel-tools">
                             <a class="showhide"><i class="fa fa-chevron-up"></i></a>
                             <a class="closebox"><i class="fa fa-times"></i></a>
                         </div>
-                        Recently active projects
+                        Mis aseguradoras
                     </div>
                     <div class="panel-body list">
                         <div class="table-responsive project-list">
@@ -478,64 +481,64 @@
                                 <thead>
                                 <tr>
 
-                                    <th colspan="2">Project</th>
-                                    <th>Completed</th>
-                                    <th>Task</th>
-                                    <th>Date</th>
-                                    <th>Action</th>
+                                    <th colspan="2">Projecto</th>
+                                    <th>General</th>
+                                    <th>%</th>
+                                    <th>Fecha</th>
+                                    <th>En progreso</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 <tr>
                                     <td><input type="checkbox" class="i-checks"/></td>
-                                    <td>Contract with Zender Company
+                                    <td>Seguros Bancarios
                                         <br></br>
-                                        <small><i class="fa fa-clock-o"></i> Created 14.08.2015</small>
+                                        <small><i class="fa fa-clock-o"></i> Creado el 14.08.2015</small>
                                     </td>
                                     <td>
                                         <span class="pie">1/5</span>
                                     </td>
                                     <td><strong>20%</strong></td>
-                                    <td>Jul 14, 2013</td>
+                                    <td>14 Julio, 2013</td>
                                     <td><a href=""><i class="fa fa-check text-success"></i></a></td>
                                 </tr>
                                 <tr>
                                     <td><input type="checkbox" class="i-checks"/></td>
-                                    <td>There are many variations of passages
+                                    <td>Blindaje
                                         <br></br>
-                                        <small><i class="fa fa-clock-o"></i> Created 21.07.2015</small>
+                                        <small><i class="fa fa-clock-o"></i> Creado el 21.07.2015</small>
                                     </td>
                                     <td>
                                         <span class="pie">1/4</span>
                                     </td>
                                     <td><strong>40%</strong></td>
-                                    <td>Jul 16, 2013</td>
+                                    <td>16 Julio, 2013</td>
                                     <td><a href=""><i class="fa fa-check text-navy"></i></a></td>
                                 </tr>
                                 <tr>
                                     <td><input type="checkbox" class="i-checks"/></td>
-                                    <td>Contrary to popular belief
+                                    <td>Inversión
                                         <br></br>
-                                        <small><i class="fa fa-clock-o"></i> Created 12.06.2015</small>
+                                        <small><i class="fa fa-clock-o"></i> Creado el 12.06.2015</small>
                                     </td>
                                     <td>
                                         <span class="pie">0.52/1.561</span>
                                     </td>
                                     <td><strong>75%</strong></td>
-                                    <td>Jul 18, 2013</td>
+                                    <td>18 Julio, 2013</td>
                                     <td><a href=""><i class="fa fa-check text-navy"></i></a></td>
                                 </tr>
                                 <tr>
                                     <td><input type="checkbox" class="i-checks"/></td>
-                                    <td>Gamma project
+                                    <td>Proyecto Gamma
                                         <br></br>
-                                        <small><i class="fa fa-clock-o"></i> Created 06.03.2015</small>
+                                        <small><i class="fa fa-clock-o"></i> Creado el 06.03.2015</small>
                                     </td>
                                     <td>
                                         <span class="pie">226/360</span>
                                     </td>
                                     <td><strong>16%</strong></td>
-                                    <td>Jul 22, 2013</td>
+                                    <td>22 Julio, 2013</td>
                                     <td><a href=""><i class="fa fa-check text-navy"></i></a></td>
                                 </tr>
                                 </tbody>
@@ -544,53 +547,53 @@
                     </div>
                 </div>
             </div>
+            <!-- Tercer Cuadro -->
             <div class="col-lg-3">
                 <div class="hpanel">
+                <!-- Opciones -->
                     <div class="panel-heading">
                         <div class="panel-tools">
                             <a class="showhide"><i class="fa fa-chevron-up"></i></a>
                             <a class="closebox"><i class="fa fa-times"></i></a>
                         </div>
-                        Activity
+                        Actividad
                     </div>
                     <div class="panel-body list">
 
                         <div class="pull-right">
-                            <a href="#" class="btn btn-xs btn-default">Today</a>
-                            <a href="#" class="btn btn-xs btn-default">Month</a>
+                            <a href="#" class="btn btn-xs btn-default">Hoy</a>
+                            <a href="#" class="btn btn-xs btn-default">Mes</a>
                         </div>
-                        <div class="panel-title">Last Activity</div>
-                        <small class="fo">This is simple example</small>
+                        <div class="panel-title">Úlitma actividad</div>
                         <div class="list-item-container">
                             <div class="list-item">
-                                <h3 class="no-margins font-extra-bold text-success">2,773</h3>
-                                <small>Tota Messages Sent</small>
+                                <h3 class="no-margins font-extra-bold text-success">27</h3>
+                                <small>Total de emails</small>
                                 <div class="pull-right font-bold">98% <i class="fa fa-level-up text-success"></i></div>
                             </div>
                             <div class="list-item">
-                                <h3 class="no-margins font-extra-bold text-color3">4,422</h3>
-                                <small>Last activity</small>
+                                <h3 class="no-margins font-extra-bold text-color3">42</h3>
+                                <small>Total de llamadas</small>
                                 <div class="pull-right font-bold">13% <i class="fa fa-level-down text-color3"></i></div>
                             </div>
                             <div class="list-item">
-                                <h3 class="no-margins font-extra-bold text-color3">9,180</h3>
-                                <small>Monthly income</small>
+                                <h3 class="no-margins font-extra-bold text-color3">90</h3>
+                                <small>Total sesiones</small>
                                 <div class="pull-right font-bold">22% <i class="fa fa-bolt text-color3"></i></div>
                             </div>
                             <div class="list-item">
-                                <h3 class="no-margins font-extra-bold text-success">1,450</h3>
-                                <small>Tota Messages Sent</small>
+                                <h3 class="no-margins font-extra-bold text-success">100</h3>
+                                <small>Total de Notificaciones</small>
                                 <div class="pull-right font-bold">44% <i class="fa fa-level-up text-success"></i></div>
                             </div>
                         </div>
-
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-<!-- Right SIDEBAR -->
+<!-- Right SIDEBAR Noticias -->
     <div id="right-sidebar" class="animated fadeInRight">
 
         <div class="p-m">
@@ -734,7 +737,7 @@
                 splines: {
                     show: true,
                     tension: 0.4,
-                    lineWidth: 1,
+                    lineWidth: 5,
                     fill: 0.4
                 },
             },
