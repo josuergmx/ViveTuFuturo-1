@@ -21,12 +21,31 @@
     <link rel="stylesheet" th:href="@{/fonts/pe-icon-7-stroke/css/pe-icon-7-stroke.css}" />
     <link rel="stylesheet" th:href="@{/fonts/pe-icon-7-stroke/css/helper.css}" />
     <link rel="stylesheet" th:href="@{/styles/style.css}"/>
+	<style type="text/css">
+	.landing-page .navbar-nav > li > a {
+  height: 55px;
+}
 
+.landing-page .navbar-nav > li > a:hover {
+  background: #EBEDEF;
+}
+
+.landing-page .navbar-nav > li > a:active {
+  background: #E5E7E9;
+}
+
+.landing-page header {
+  background: url('../images/landing/header1.jpg') 50% 0 no-repeat;
+  width: 100%;
+  padding-top: 50px;
+  margin-bottom: 30px;
+}
+	</style>
 </head>
 <body class="landing-page">
 
 <!-- Simple splash screen-->
-<div class="splash"> <div class="color-line"></div><div class="splash-title"><h1>Homer - Responsive Admin Theme</h1><p>Special AngularJS Admin Theme for small and medium webapp with very clean and aesthetic style and feel. </p><img src="images/loading-bars.svg" width="64" height="64" /> </div> </div>
+<div class="splash"> <div class="color-line"></div><div class="splash-title"><h1>Vive Tu Futuro</h1><p>Estamos preparando tu página, estas listo para comenzar con tu experiencia </p><img src="images/loading-bars.svg" width="64" height="64" /> </div> </div>
 
 <nav class="navbar navbar-default navbar-fixed-top">
     <div class="container">
@@ -131,14 +150,14 @@
             </div>
             <div class="col-md-6">
                 <!--<iframe width="560" height="315" src="images/landing/video1.mp4?=1" allowfullscreen></iframe>-->
-                <video width="480" height="280" >
+                <video width="480" height="280" controls="">
                     <source src="images/landing/video1.mp4" type="video/mp4"></source>
                 </video>
             </div>
         </div>
         <div class="row m-t-xl">
             <div class="col-md-6" >
-                <video width="480" height="280">
+                <video width="480" height="280" controls="">
                     <source src="images/landing/video2.mp4" type="video/mp4"></source>
                 </video>
             </div>
@@ -429,7 +448,7 @@
 
 <!-- App scripts -->
 <script src="../scripts/homer.js"></script>
-
+<script th:src="@{/scripts/hola.js}"></script>
 <!-- Local script for menu handle -->
 <!-- It can be also directive -->
 <script>
@@ -447,7 +466,6 @@
             target: '.navbar-fixed-top',
             offset: 80
         });
-
     });
 </script>
 </body>
