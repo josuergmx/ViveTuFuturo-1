@@ -2,15 +2,18 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-
-	<groupId>com.project</groupId>
+	<!-- Nombre de la empresa -->
+	<groupId>com.vinkmore</groupId>
+	<!-- Nombre del proyecto -->
 	<artifactId>vive</artifactId>
+	<!-- Versión, SNAPSHOT = En desarrollo -->
 	<version>0.0.1-SNAPSHOT</version>
+	<!-- Empaquetado: jar - para un Servlet Container Tomcat 8.5 con Apache 3.2 o superior -->
 	<packaging>jar</packaging>
 
 	<name>vive</name>
 	<description>Proyecto para Vive tu futuro</description>
-
+	<!-- Starters: Agregan los jars a nuestro classpath -->
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
@@ -25,54 +28,54 @@
 	</properties>
 
 	<dependencies>
+	<!-- Web Starter: Agrega las dependencias y configuraciones
+		 para el uso de	Apache, Tomcat, entre otros -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
-		<!--SpringBootDevTools agrega configuraciones para el entorno desarrollo como
-			HotSwapping que permiten recargar en las plantillas sin tener que reiniciar el servidor-->
+	<!--SpringBootDevTools agrega configuraciones para el entorno desarrollo como
+		HotSwapping que permiten recargar en las plantillas sin tener que reiniciar el servidor-->
 	    <dependency>
 	        <groupId>org.springframework.boot</groupId>
 	        <artifactId>spring-boot-devtools</artifactId>
 	        <optional>true</optional>
 	    </dependency>
-
+	<!-- Test Starter -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
-		
+	<!-- Security Starter -->
 		<dependency>
         	<groupId>org.springframework.security</groupId>
         	<artifactId>spring-security-web</artifactId>
         </dependency>
-        
+	<!-- Thymeleaf: Sistema de templates para las vistas en Java -->
    		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-thymeleaf</artifactId>   		
 		</dependency>
+	<!-- ORM para realizar los mapeos indicados a traves de JPA, de los datos que 
+    	 lleguen a través de un driver o connector de MySQL y los tipos de datos de Java -->
 		<dependency>
     		<groupId>org.hibernate</groupId>
     		<artifactId>hibernate-core</artifactId>
     	</dependency>
-     	
+    <!-- JPA: Configuraciones para realizar mapeos a través de anotaciones con sintaxis JPA
+    	 mediante el uso de un Entity Manager --> 	
      	<dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>
         </dependency>
-
-        <!-- Use MySQL Connector-J -->
-
+     <!-- Use MySQL Connector-J: Permite una conexion "directa" con una BD MySQL -->
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
         </dependency>
-
-    
-        
 	</dependencies>
-	
+	<!-- Repositorio de donde se obtendrán las dependencias anteriores -->
 	<repositories>
 	    <repository>
 	        <id>spring-milestones</id>
@@ -91,6 +94,4 @@
 			</plugin>
 		</plugins>
 	</build>
-
-
 </project>
