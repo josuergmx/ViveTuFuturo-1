@@ -10,6 +10,6 @@ public class GestionarLandingPage {
 	
 	@RequestMapping(method=RequestMethod.GET)
 	public String landingPage(){
-		return "hola";
+		return "index";
 	}
 }
