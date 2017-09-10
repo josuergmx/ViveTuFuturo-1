@@ -1,0 +1,12 @@
+{% extends 'base/main.html' %}
+{% load static  %}
+{% block content %}
+  <form method="POST" class="post-form">
+    {% csrf_token %}
+    {{mensaje}}
+    {{user.as_p}}
+    {{persona.as_p}}
+    <input class="" id= name={{persona.nombre}}/>
+    <button type="submit">aceptar</button>
+  </form>
+{% endblock %}

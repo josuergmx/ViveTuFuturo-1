@@ -1,0 +1,681 @@
+{% extends 'base/main.html' %}
+{% load static %}
+<!-- Simple splash screen-->
+{% block content %}
+
+<div class="splash"> <div class="color-line"></div><div class="splash-title"><h1>Vive Tu Futuro</h1><p>Estamos recopilando toda tu información.</p><img src="{% static "images/loading-bars.svg" %}" width="64" height="64"></img></div> </div>
+<!--[if lt IE 7]>
+<p class="alert alert-danger">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+<![endif]-->
+
+<!-- Header -->
+<div id="header">
+	<!-- Linea horizontal de diferentes colores-->
+    <div class="color-line"></div>
+    <!-- Logo y nombre de la App -->
+    <div id="logo" class="light-version">
+        <span>
+           Vive Tu Futuro
+        </span>
+    </div>
+
+    <nav role="navigation">
+    	<!--Menu Hamburguesa-->
+        <div class="header-link hide-menu"><i class="fa fa-bars"></i></div>
+
+        <div class="small-logo">
+            <span class="text-primary">ViveTuFuturo</span>
+        </div>
+        <!--Contenido del menú superior derecho-->
+        <div class="navbar-right">
+            <ul class="nav navbar-nav no-borders">
+                <li class="dropdown">
+                    <a class="dropdown-toggle" href="#" data-toggle="dropdown">
+                        <i class="pe-7s-user"></i>
+                    </a>
+					<!-- Configuración de la cuenta -->
+                    <div class="dropdown-menu hdropdown bigmenu animated flipInX">
+                        <table>
+                            <tbody>
+                            <tr>
+                                <td>
+                                    <a href="projects.html">
+                                        <i class="pe pe-7s-id text-info"></i><h5>Perfil</h5>
+                                    </a>
+                                </td>
+                                <td>
+                                    <a href="mailbox.html">
+                                        <i class="pe pe-7s-cash text-warning"></i><h5>Créditos</h5>
+                                    </a>
+                                </td>
+                                <td>
+                                    <a href="contacts.html">
+                                        <i class="pe pe-7s-users text-success"></i><h5>Clientes</h5>
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <a href="forum.html">
+                                        <i class="pe pe-7s-comment text-info"></i><h5>Notificaciones</h5>
+                                    </a>
+                                </td>
+                                <td>
+                                    <a href="analytics.html">
+                                        <i class="pe pe-7s-graph1 text-danger"></i><h5>Reportes</h5>
+                                    </a>
+                                </td>
+                                <td>
+                                    <a href="file_manager.html">
+                                        <i class="pe pe-7s-box1 text-success"></i><h5>Prospectos</h5>
+                                    </a>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </li>
+                <!-- Notificaciones -->
+                <li class="dropdown">
+                    <a class="dropdown-toggle label-menu-corner" href="#" data-toggle="dropdown">
+                        <i class="pe-7s-bell"></i>
+                        <span class="label label-success">4</span>
+                    </a>
+                    <ul class="dropdown-menu hdropdown animated flipInX">
+                        <div class="title">
+                            Tienes 4 nuevas notificaciones
+                        </div>
+                        <li>
+                            <a><span class="label label-success">Listo</span> Reporte semanal terminado</a>
+                        </li>
+                        <li>
+                            <a><span class="label label-warning">Trabajando</span> Creando reporte mensual</a>
+                        </li>
+                        <li>
+                            <a><span class="label label-success">Listo</span> Cita con cliente próxima</a>
+                        </li>
+                        <li>
+                            <a>¿Necesitas más créditos?</a>
+                        </li>
+                        <li class="summary"><a href="#">Ver todo</a></li>
+                    </ul>
+                </li>
+                <!-- Noticias menu Derecho -->
+                <li>
+                    <a href="#" id="sidebar" class="right-sidebar-toggle">
+                        <i class="pe-7s-upload pe-7s-news-paper"></i>
+                    </a>
+                </li>
+                <!-- Cerrar Sesión -->
+                <li class="dropdown">
+                    <a href="login.html">
+                        <i class="pe-7s-upload pe-rotate-90"></i>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</div>
+
+<!-- Menú de navegación lateral izquierdo -->
+<aside id="menu">
+    <div id="navigation">
+    	<!-- Datos Generales usuario -->
+        <div class="profile-picture">
+            <a href="/menu">
+                <img src="{% static "images/profile2.jpg" %}" class="img-circle m-b img-logo" alt="logo"></img>
+            </a>
+
+            <div class="stats-label text-color">
+                <span class="font-extra-bold font-uppercase" th:text="${nombre}"></span>
+
+				<!--
+                <div class="dropdown">
+                    <a class="dropdown-toggle" href="#" data-toggle="dropdown">
+                        <small class="text-muted">Founder of App <b class="caret"></b></small>
+                    </a>
+                    <ul class="dropdown-menu animated fadeInRight m-t-xs">
+                        <li><a href="contacts.html">Contacts</a></li>
+                        <li><a href="profile.html">Profile</a></li>
+                        <li><a href="analytics.html">Analytics</a></li>
+                        <li class="divider"></li>
+                        <li><a href="login.html">Logout</a></li>
+                    </ul>
+                </div> -->
+
+                <div id="sparkline1" class="small-chart m-t-sm"></div>
+                <div>
+                    <h4 class="font-extra-bold m-b-xs">
+                        $60104.20
+                    </h4>
+                    <small class="text-muted">Total de comisiones</small>
+                </div>
+            </div>
+        </div>
+	<!--MENU Lateral-->
+        <ul class="nav" id="side-menu">
+        	<li>
+                <a href="#"><span class="nav-label">Perfil</span></a>
+            </li>
+			<!--Item individual
+				Notificaciones-->
+            <li>
+                <a href="#"><span class="nav-label">Notificaciones</span></a>
+            </li>
+            <!-- Item con opciones desplegables
+            	 Actividad-->
+            <li>
+                <a href="#"><span class="nav-label">Mi Actividad</span><span class="fa arrow"></span> </a>
+                <ul class="nav nav-second-level">
+                    <li><a href="contacts.html">Reportes</a></li>
+                    <li><a href="projects.html">Planeación</a></li>
+                    <li><a href="project.html">Filtros</a></li>
+                </ul>
+            </li>
+            <!-- Clientes -->
+            <li>
+                <a href="#"><span class="nav-label">Clientes</span></a>
+            </li>
+            <!-- Prospectos -->
+            <li>
+                <a href="#"><span class="nav-label">Prospectos</span></a>
+            </li>
+            <!-- Créditos -->
+            <li>
+                <a href="#"><span class="nav-label">Créditos</span></a>
+            </li>
+        </ul>
+    </div>
+</aside>
+
+<!-- Contenido del BODY -->
+<div id="wrapper">
+
+    <div class="content animate-panel">
+    <!-- Panel de presentación -->
+        <div class="row">
+            <div class="col-lg-12 text-center m-t-md">
+                <h2>
+                    Bienvenido a tu Menú Principal
+                </h2>
+
+                <p>
+                    ¿Qué deseas hacer el día de hoy?
+                </p>
+            </div>
+        </div>
+        <!-- Seccion Gráfica -->
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="hpanel">
+                    <div class="panel-heading">
+                        <div class="panel-tools">
+                            <a class="showhide"><i class="fa fa-chevron-up"></i></a>
+                            <a class="closebox"><i class="fa fa-times"></i></a>
+                        </div>
+                        Información del Mes
+                    </div>
+                    <div class="panel-body">
+                        <div class="row">
+                        	<!-- Info izquierda de la grafica -->
+                            <div class="col-md-3 text-center">
+                                <div class="font-extra-bold"> Citas del mes </div>
+                                <div>
+                                    <h1 class="m-t-xl m-b-xs"> 22 </h1>
+                                </div>
+                                <div class="small m-t-xl">
+                                    <i class="fa fa-clock-o"></i> Datos del mes de Enero
+                                </div>
+                            </div>
+                            <!-- Gráfica -->
+                            <div class="col-md-6">
+                                <div class="text-center small">
+                                    <i class="fa fa-laptop"></i> Citas con clientes en el último mes
+                                </div>
+                                <!-- Contenedor de la gráfica, los datos de esta se pinta con el script en la parte inferior -->
+                                <div class="flot-chart" style="height: 160px">
+                                    <div class="flot-chart-content" id="flot-line-chart"></div>
+                                </div>
+                            </div>
+                            <!-- Info derecha de la gráfica -->
+                            <div class="col-md-3 text-center">
+                                <div class="small">
+                                    <i class="fa fa-clock-o"></i> Prospectos nuevos
+                                </div>
+                                <div>
+                                    <h1 class="font-extra-bold m-t-xl m-b-xs">
+                                        10
+                                    </h1>
+                                    <small>¡Genial!</small>
+                                </div>
+                                <div class="small m-t-xl">
+                                    <i class="fa fa-clock-o"></i> Último inicio de sesión  12.05.2017
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Footer de la gráfica -->
+                    <div class="panel-footer">
+                    <span class="pull-right">
+                          Tienes un incremento con respecto al mes anterior
+                    </span>
+                        Última actualización: 12.05.2017
+                    </div>
+                </div>
+            </div>
+        </div>
+<!-- Seccion static info recuadros fijos -->
+        <div class="row">
+        	<!-- Primer recuadro -->
+            <div class="col-lg-3">
+                <div class="hpanel">
+                    <div class="panel-body text-center h-200">
+                        <i class="pe-7s-graph1 fa-4x"></i>
+
+                        <h1 class="m-xs">$1 206,90</h1>
+
+                        <h3 class="font-extra-bold no-margins text-success">
+                            Último reporte
+                        </h3>
+                        <small>Revisa tu último reporte</small>
+                    </div>
+                    <div class="panel-footer">
+                        <a href="/reportes">Ir a mis reportes</a>
+                    </div>
+                </div>
+            </div>
+            <!-- Segundo recuadro -->
+            <div class="col-lg-3">
+                <div class="hpanel stats">
+                    <div class="panel-body h-200">
+                        <div class="stats-title pull-left">
+                            <h4>Contactos</h4>
+                        </div>
+                        <div class="stats-icon pull-right">
+                            <i class="pe-7s-share fa-4x"></i>
+                        </div>
+                        <div class="m-t-xl">
+                            <h3 class="m-b-xs">60</h3>
+                    <!-- Barra -->
+                    <div class="progress m-t-xs full progress-small">
+                        <div style="width: 55%" aria-valuemax="100" aria-valuemin="0" aria-valuenow="55"
+                           role="progressbar" class=" progress-bar progress-bar-success">
+                           <span class="sr-only">35% son Clientes </span>
+                        </div>
+                    </div>
+                            <div class="row">
+                                <div class="col-xs-6">
+                                    <p class="stats-label">Clientes</p>
+                                    <h4>30%</h4>
+                                </div>
+
+                                <div class="col-xs-6">
+                                    <p class="stats-label">Prospectos</p>
+                                    <h4>70%</h4>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="panel-footer">
+                        <a href="/clientes">Ir a mis clientes</a>
+                    </div>
+                </div>
+            </div>
+            <!-- Tercer Recuadro -->
+            <div class="col-lg-3">
+                <div class="hpanel stats">
+                    <div class="panel-body h-200">
+                        <div class="stats-title pull-left">
+                            <h4>Citas</h4>
+                        </div>
+                        <div class="stats-icon pull-right">
+                            <i class="pe-7s-monitor fa-4x"></i>
+                        </div>
+                        <div class="m-t-xl">
+                            <h1 class="text-success">5+</h1>
+                    <span class="font-bold no-margins">
+                        Con base al mes anterior
+                    </span>
+                            <br></br>
+                            <small>
+                               Esta información utiliza el número de citas que se tenían en el mismo número de día del mes anterior.
+                            </small>
+                        </div>
+                    </div>
+                    <div class="panel-footer">
+                        <a href="/clientes">Ir a mis citas</a>
+                    </div>
+                </div>
+            </div>
+            <!-- Cuarto recuadro -->
+            <div class="col-lg-3">
+                <div class="hpanel stats">
+                    <div class="panel-body h-200">
+                        <div class="stats-title pull-left">
+                            <h4>Mis Créditos</h4>
+                        </div>
+                        <div class="stats-icon pull-right">
+                            <i class="pe-7s-cash fa-4x"></i>
+                        </div>
+                        <div class="clearfix"></div>
+                        <div class="flot-chart">
+                            <div class="flot-chart-content" id="flot-income-chart"></div>
+                        </div>
+                        <div class="m-t-xs">
+
+                            <div class="row">
+                            <small>
+                               El número de créditos que usas puede darte una idea de que tanto estas progresando.
+                            </small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-footer">
+                        <a href="/creditos">Ir a mis creditos</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Seccion closable info -->
+        <div class="row">
+        <!-- Primer recuadro closable -->
+            <div class="col-lg-3">
+                <div class="hpanel stats">
+                <!-- Opciones de cierre i minimizar -->
+                    <div class="panel-heading">
+                        <div class="panel-tools">
+                            <a class="showhide"><i class="fa fa-chevron-up"></i></a>
+                            <a class="closebox"><i class="fa fa-times"></i></a>
+                        </div>
+                        Modulo 1
+                    </div>
+                    <!-- Cuerpo -->
+                    <div class="panel-body list">
+                        <div class="stats-title pull-left">
+                            <h4>Actividad</h4>
+                        </div>
+                        <div class="stats-icon pull-right">
+                            <i class="pe-7s-science fa-4x"></i>
+                        </div>
+                        <div class="m-t-xl">
+                            <span class="font-bold no-margins">
+                                Título
+                            </span>
+                            <br></br>
+                            <small>
+                                Lorem Ipsum is simply dummy text of the printing simply all dummy text. Lorem Ipsum is
+                                simply dummy text of the printing and typesetting industry. Lorem Ipsum has been.
+                            </small>
+                        </div>
+                        <div class="row m-t-md">
+                            <div class="col-lg-6">
+                                <h3 class="no-margins font-extra-bold text-success">300,102</h3>
+
+                                <div class="font-bold">98% <i class="fa fa-level-up text-success"></i></div>
+                            </div>
+                            <div class="col-lg-6">
+                                <h3 class="no-margins font-extra-bold text-success">280,200</h3>
+
+                                <div class="font-bold">98% <i class="fa fa-level-up text-success"></i></div>
+                            </div>
+                        </div>
+                        <div class="row m-t-md">
+                            <div class="col-lg-6">
+                                <h3 class="no-margins font-extra-bold ">120,108</h3>
+
+                                <div class="font-bold">38% <i class="fa fa-level-down"></i></div>
+                            </div>
+                            <div class="col-lg-6">
+                                <h3 class="no-margins font-extra-bold ">450,600</h3>
+
+                                <div class="font-bold">28% <i class="fa fa-level-down"></i></div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="panel-footer">
+                        Link a otra página
+                    </div>
+                </div>
+            </div>
+            <!-- Segundo cuadro -->
+            <div class="col-lg-6">
+                <div class="hpanel">
+                <!-- Opciones Cierre -->
+                    <div class="panel-heading">
+                        <div class="panel-tools">
+                            <a class="showhide"><i class="fa fa-chevron-up"></i></a>
+                            <a class="closebox"><i class="fa fa-times"></i></a>
+                        </div>
+                        Mis aseguradoras
+                    </div>
+                    <div class="panel-body list">
+                        <div class="table-responsive project-list">
+                            <table class="table table-striped">
+                                <thead>
+                                <tr>
+
+                                    <th colspan="2">Projecto</th>
+                                    <th>General</th>
+                                    <th>%</th>
+                                    <th>Fecha</th>
+                                    <th>En progreso</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td><input type="checkbox" class="i-checks"/></td>
+                                    <td>Seguros Bancarios
+                                        <br></br>
+                                        <small><i class="fa fa-clock-o"></i> Creado el 14.08.2015</small>
+                                    </td>
+                                    <td>
+                                        <span class="pie">1/5</span>
+                                    </td>
+                                    <td><strong>20%</strong></td>
+                                    <td>14 Julio, 2013</td>
+                                    <td><a href=""><i class="fa fa-check text-success"></i></a></td>
+                                </tr>
+                                <tr>
+                                    <td><input type="checkbox" class="i-checks"/></td>
+                                    <td>Blindaje
+                                        <br></br>
+                                        <small><i class="fa fa-clock-o"></i> Creado el 21.07.2015</small>
+                                    </td>
+                                    <td>
+                                        <span class="pie">1/4</span>
+                                    </td>
+                                    <td><strong>40%</strong></td>
+                                    <td>16 Julio, 2013</td>
+                                    <td><a href=""><i class="fa fa-check text-navy"></i></a></td>
+                                </tr>
+                                <tr>
+                                    <td><input type="checkbox" class="i-checks"/></td>
+                                    <td>Inversión
+                                        <br></br>
+                                        <small><i class="fa fa-clock-o"></i> Creado el 12.06.2015</small>
+                                    </td>
+                                    <td>
+                                        <span class="pie">0.52/1.561</span>
+                                    </td>
+                                    <td><strong>75%</strong></td>
+                                    <td>18 Julio, 2013</td>
+                                    <td><a href=""><i class="fa fa-check text-navy"></i></a></td>
+                                </tr>
+                                <tr>
+                                    <td><input type="checkbox" class="i-checks"/></td>
+                                    <td>Proyecto Gamma
+                                        <br></br>
+                                        <small><i class="fa fa-clock-o"></i> Creado el 06.03.2015</small>
+                                    </td>
+                                    <td>
+                                        <span class="pie">226/360</span>
+                                    </td>
+                                    <td><strong>16%</strong></td>
+                                    <td>22 Julio, 2013</td>
+                                    <td><a href=""><i class="fa fa-check text-navy"></i></a></td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Tercer Cuadro -->
+            <div class="col-lg-3">
+                <div class="hpanel">
+                <!-- Opciones -->
+                    <div class="panel-heading">
+                        <div class="panel-tools">
+                            <a class="showhide"><i class="fa fa-chevron-up"></i></a>
+                            <a class="closebox"><i class="fa fa-times"></i></a>
+                        </div>
+                        Actividad
+                    </div>
+                    <div class="panel-body list">
+
+                        <div class="pull-right">
+                            <a href="#" class="btn btn-xs btn-default">Hoy</a>
+                            <a href="#" class="btn btn-xs btn-default">Mes</a>
+                        </div>
+                        <div class="panel-title">Úlitma actividad</div>
+                        <div class="list-item-container">
+                            <div class="list-item">
+                                <h3 class="no-margins font-extra-bold text-success">27</h3>
+                                <small>Total de emails</small>
+                                <div class="pull-right font-bold">98% <i class="fa fa-level-up text-success"></i></div>
+                            </div>
+                            <div class="list-item">
+                                <h3 class="no-margins font-extra-bold text-color3">42</h3>
+                                <small>Total de llamadas</small>
+                                <div class="pull-right font-bold">13% <i class="fa fa-level-down text-color3"></i></div>
+                            </div>
+                            <div class="list-item">
+                                <h3 class="no-margins font-extra-bold text-color3">90</h3>
+                                <small>Total sesiones</small>
+                                <div class="pull-right font-bold">22% <i class="fa fa-bolt text-color3"></i></div>
+                            </div>
+                            <div class="list-item">
+                                <h3 class="no-margins font-extra-bold text-success">100</h3>
+                                <small>Total de Notificaciones</small>
+                                <div class="pull-right font-bold">44% <i class="fa fa-level-up text-success"></i></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<!-- Right SIDEBAR Noticias -->
+    <div id="right-sidebar" class="animated fadeInRight">
+
+        <div class="p-m">
+        <!-- Boton Cerrar -->
+            <button id="sidebar-close" class="right-sidebar-toggle sidebar-button btn btn-default m-b-md"><i class="pe pe-7s-close"></i>
+            </button>
+        <!-- Titulo eventos -->
+            <div>
+                <span class="font-bold no-margins"> Próximos Eventos </span>
+                <br></br>
+                <small> Te recordamos que en las próximas semanas tienes algunos asuntos que requerirán de tu atención</small>
+            </div>
+        <!-- Número eventos -->
+            <div class="row m-t-sm m-b-sm">
+                <div class="col-lg-6">
+                	<div>No.Pendientes: </div>
+                    <h5 class="no-margins font-extra-bold text-success">5</h5>
+                </div>
+            </div>
+        <!-- Barra -->
+            <div class="progress m-t-xs full progress-small">
+                <div style="width: 25%" aria-valuemax="100" aria-valuemin="0" aria-valuenow="25" role="progressbar"
+                     class=" progress-bar progress-bar-success">
+                    <span class="sr-only">35% Complete (success)</span>
+                </div>
+            </div>
+        </div>
+        <!-- Eventos -->
+        <div class="p-m bg-light border-bottom border-top">
+            <span class="font-bold no-margins"> Citas con Clientes</span>
+            <br></br>
+            <div class="m-t-md">
+            	<!-- Cita Individual -->
+                <div class="social-talk">
+                    <div class="media social-profile clearfix">
+                        <a class="pull-left">
+                            <img src="{% static "images/a1.jpg" %}" alt="profile-picture"></img>
+                        </a>
+
+                        <div class="media-body">
+                            <span class="font-bold">Andres López</span>
+                            <small class="text-muted">27-06-2017</small>
+                            <div class="social-content">
+                                Estatus: Primera Cita
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Cita Individual -->
+                <div class="social-talk">
+                    <div class="media social-profile clearfix">
+                        <a class="pull-left">
+                            <img src="{% static "images/a3.jpg" %}" alt="profile-picture"></img>
+                        </a>
+
+                        <div class="media-body">
+                            <span class="font-bold">Josue Rangel</span>
+                            <small class="text-muted">29-06-2017</small>
+                            <div class="social-content">
+								Estatus: Presentación de Solución
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Cita Individual -->
+                <div class="social-talk">
+                    <div class="media social-profile clearfix">
+                        <a class="pull-left">
+                            <img src="{% static "images/a4.jpg" %}" alt="profile-picture"></img>
+                        </a>
+
+                        <div class="media-body">
+                            <span class="font-bold">Mónica Argott</span>
+                            <small class="text-muted">30-06-2017</small>
+
+                            <div class="social-content">
+                                Estatus: Revisión de solución
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--Otra seccion de noticias-->
+        <div class="p-m">
+            <span class="font-bold no-margins">Otros temas</span>
+            <div class="m-t-xs">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <h4 class="m-t-xs">$170.20 <small>créditos disponibles</small></h4>
+                    </div>
+                </div>
+            </div>
+            <small> ¡Que tenga una increible semana!
+            </small>
+        </div>
+
+    </div>
+
+    <!-- Footer-->
+    <footer class="footer">
+        <span class="pull-right">
+            All rigths reserved
+        </span>
+       <span class="glyphicon glyphicon-copyright-mark" aria-hidden="true"></span>  2017 Copyright ViveTuFuturo
+    </footer>
+
+</div>
+
+{% endblock %}
