@@ -38,20 +38,3 @@ class UserForm(UserCreationForm):
 class loginForm(forms.Form):
     username = forms.CharField(widget=forms.TextInput(attrs={'name':'username'}))
     password = forms.CharField(widget=forms.PasswordInput(attrs={'name':'password'}))
-
-    def clean(self,*args,**kwargs):
-        if username and password:
-            username = self.cleaned_data.get['username']
-            password = self.cleaned_data.get['password']
-            user = auth.authenticate(username=username,password=password)
-
-            if not user:
-                raise forms.ValidationError('No existe el usuario')
-
-            if user.check_password(password):
-                raise forms.ValidationError('No exist la cotraseña')
-
-            if user.is_active:
-                raise forms.ValidationError('No estas activo')
-
-        return super(loginForm,self).clean(*args, **kwargs)

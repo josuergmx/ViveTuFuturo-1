@@ -1,11 +1,16 @@
 {% extends 'base/main.html' %}
 {% load static  %}
 {% block content %}
+{% if user.is_authenticated %}
+{% else %}
+<p class="errornote">
+  trans "Please correct the error below
+</p>
+{% endif %}
   <form method="POST" class="post-form">
     {% csrf_token %}
-    {{mensaje}}
-    {{form.as_p}}
-    <input class="" id= name={{persona.nombre}}/>
+    <input name="username" type="text">
+    <input name = "password" type="password">
     <button type="submit">aceptar</button>
   </form>
 {% endblock %}

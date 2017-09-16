@@ -11,8 +11,10 @@ from django.contrib import auth
     return redirect("namespace:unaurl")
 """
 def login(request):
+    print("tipo",request.method)
     if request.method == 'POST':
         form = f.loginForm(request.POST or None)
+        print("\n\nsoy for ", form.clean)
         usuario = request.POST['username']
         password = request.POST['password']
         user = auth.authenticate(username=usuario,password=password)

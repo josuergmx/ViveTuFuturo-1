@@ -22,6 +22,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'c8im-&h4mn2wzheql9r9z#d9&fj_xrhfu35l_5_i_lv@lk%hn3'
 
+#conecta public api key
+CONEKTA_PUBLIC_KEY = 'key_IDQbWFwwjesTzmqdMQYMxdA'
+
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
@@ -129,7 +132,9 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
 
-LOGIN_REDIRECT_URL = '/login/hola'
+LOGIN_REDIRECT_URL = reverse_lazy('login:hola')
+LOGIN_URL = reverse_lazy('login:login')
+LOGOUT_URL = reverse_lazy('login:logout')
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
