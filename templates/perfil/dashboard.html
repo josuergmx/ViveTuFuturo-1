@@ -146,7 +146,7 @@
                 <div id="sparkline1" class="small-chart m-t-sm"></div>
                 <div>
                     <h4 class="font-extra-bold m-b-xs">
-                        $60104.20
+                        {{user.username}}
                     </h4>
                     <small class="text-muted">Total de comisiones</small>
                 </div>
@@ -155,7 +155,7 @@
 	<!--MENU Lateral-->
         <ul class="nav" id="side-menu">
         	<li>
-                <a href="#"><span class="nav-label">Perfil</span></a>
+                <a href="{% url 'login:perfil' %}"><span class="nav-label">Perfil</span></a>
             </li>
 			<!--Item individual
 				Notificaciones-->

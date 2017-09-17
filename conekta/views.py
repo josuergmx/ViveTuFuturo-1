@@ -1,8 +1,23 @@
 from django.shortcuts import render
 from . import forms as f
-import conekta
+from django.http import HttpResponse
+from django.views.decorators.csrf import csrf_protect
+from .models import Sale,Creditos
+from django.conf import settings
 
-conekta.locale = 'es'
+@csrf_protect
+def index(request):
+    if request.method == 'GET':
+        return render(request, 'cargo.html')
+    else:
+        token_id = request.POST["conektaTokenId"]
+        sale = Sale()
+        if token_id: #Prevents send empty token
+            cantidad = int(request.POST.get("cantidad",None))
+            for x in range(0,cantidad):
+                Creditos.save()
+            return HttpResponse(sale.charge(15, token_id))
+
 
 # Create your views here.
 def crearOrden(request):

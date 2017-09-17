@@ -16,4 +16,9 @@ urlpatterns = [
         view=views.hola,
         name='hola'
     ),
+    url(
+        regex=r'^perfil/$',
+        view=views.perfil,
+        name='perfil'
+    ),
 ]
