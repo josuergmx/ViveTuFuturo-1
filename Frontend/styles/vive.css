@@ -1,0 +1,12 @@
+body{
+	background: #ddd url(back3.png) repeat top left;
+}
+.white{
+	color: white;
+}
+.a_white:hover{
+	color:white;
+}
+.mayusculas{
+	text-transform: uppercase;
+}

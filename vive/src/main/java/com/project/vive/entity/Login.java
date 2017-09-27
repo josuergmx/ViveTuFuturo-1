@@ -21,24 +21,32 @@ public class Login {
 	@Column(name = "password")
 	private String password;
 	
+	@Column(name = "idrole")
+	private Integer idRole;
+	
+	@Column(name = "idpersona")
+	private Integer idPersona;
+	
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "idrole")
-	private Rol idRole;
+	@JoinColumn(name = "idrole", updatable = false, insertable = false)
+	private Rol rol;
 	
 	@OneToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "idpersona")
-	private Persona idPersona;
+	@JoinColumn(name = "idpersona", updatable = false, insertable = false)
+	private Persona persona;
 
 	public Login(){
 		super();
 	}
 	
-	public Login(String id, String password, Rol idRole, Persona idPersona) {
+	public Login(String id, String password, Integer idRole, Integer idPersona, Rol rol, Persona persona) {
 		super();
 		this.id = id;
 		this.password = password;
 		this.idRole = idRole;
 		this.idPersona = idPersona;
+		this.rol = rol;
+		this.persona = persona;
 	}
 
 	public String getId() {
@@ -57,20 +65,36 @@ public class Login {
 		this.password = password;
 	}
 
-	public Rol getIdRole() {
+	public Integer getIdRole() {
 		return idRole;
 	}
 
-	public void setIdRole(Rol idRole) {
+	public void setIdRole(Integer idRole) {
 		this.idRole = idRole;
 	}
 
-	public Persona getIdPersona() {
+	public Integer getIdPersona() {
 		return idPersona;
 	}
 
-	public void setIdPersona(Persona idPersona) {
+	public void setIdPersona(Integer idPersona) {
 		this.idPersona = idPersona;
+	}
+
+	public Rol getRol() {
+		return rol;
+	}
+
+	public void setRol(Rol rol) {
+		this.rol = rol;
+	}
+
+	public Persona getPersona() {
+		return persona;
+	}
+
+	public void setPersona(Persona persona) {
+		this.persona = persona;
 	}
 	
 	

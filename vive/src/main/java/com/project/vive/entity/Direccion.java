@@ -9,6 +9,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+/**
+ * @author Mario Osorio
+ *
+ */
 @Entity
 @Table(name="direccion")
 public class Direccion {
@@ -17,12 +21,18 @@ public class Direccion {
 	@Column(name = "iddireccion")
 	private Integer id;
 	
+	@Column(name = "idpersona")
+	private Integer idPersona;
+	
+	@Column(name = "idtipodireccion")
+	private Integer idTipoDireccion;
+	
 	@ManyToOne(fetch=FetchType.EAGER)
-	@JoinColumn(name = "idpersona")
+	@JoinColumn(name = "idpersona", insertable=false, updatable=false)
 	private Persona propietario;
 	
 	@ManyToOne(fetch=FetchType.EAGER)
-	@JoinColumn(name = "idtipodireccion")
+	@JoinColumn(name = "idtipodireccion", insertable = false, updatable = false)
 	private TipoDireccion tipoDireccion;
 	
 	@Column(name = "calle")
@@ -46,11 +56,14 @@ public class Direccion {
 	public Direccion(){
 		super();
 	}
-
-	public Direccion(Integer id, Persona propietario, TipoDireccion tipoDireccion, String calle, String colonia,
-			String delegacion, String cp, String numeroInterior, String numeroExterior) {
+	
+	public Direccion(Integer id, Integer idPersona, Integer idTipoDireccion, Persona propietario,
+			TipoDireccion tipoDireccion, String calle, String colonia, String delegacion, String cp,
+			String numeroInterior, String numeroExterior) {
 		super();
 		this.id = id;
+		this.idPersona = idPersona;
+		this.idTipoDireccion = idTipoDireccion;
 		this.propietario = propietario;
 		this.tipoDireccion = tipoDireccion;
 		this.calle = calle;
@@ -131,6 +144,22 @@ public class Direccion {
 
 	public void setNumeroExterior(String numeroExterior) {
 		this.numeroExterior = numeroExterior;
+	}
+
+	public Integer getIdPersona() {
+		return idPersona;
+	}
+
+	public void setIdPersona(Integer idPersona) {
+		this.idPersona = idPersona;
+	}
+
+	public Integer getIdTipoDireccion() {
+		return idTipoDireccion;
+	}
+
+	public void setIdTipoDireccion(Integer idTipoDireccion) {
+		this.idTipoDireccion = idTipoDireccion;
 	}
 	
 }

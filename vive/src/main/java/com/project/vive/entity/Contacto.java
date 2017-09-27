@@ -29,17 +29,18 @@ public class Contacto {
 	@Column(name = "facebookid")
 	private String facebookId;
 	
+	@Column(name = "idpersona", insertable=false, updatable = false)
+	private Integer idPersona;
+	
 	@ManyToOne(fetch=FetchType.EAGER)
-	@JoinColumn(name = "idpersona")
+	@JoinColumn(name = "idpersona", insertable=false, updatable=false)
 	private Persona propietario;
 
 	public Contacto(){
 		super();
 	}
-	
-	
-	
-	public Contacto(Integer celular, String email, String telcasa, String oficina, String facebookId,
+
+	public Contacto(Integer celular, String email, String telcasa, String oficina, String facebookId, Integer idPersona,
 			Persona propietario) {
 		super();
 		this.celular = celular;
@@ -47,10 +48,9 @@ public class Contacto {
 		this.telcasa = telcasa;
 		this.oficina = oficina;
 		this.facebookId = facebookId;
+		this.idPersona = idPersona;
 		this.propietario = propietario;
 	}
-
-
 
 	public Integer getCelular() {
 		return celular;
@@ -98,6 +98,14 @@ public class Contacto {
 
 	public void setPropietario(Persona propietario) {
 		this.propietario = propietario;
+	}
+
+	public Integer getIdPersona() {
+		return idPersona;
+	}
+
+	public void setIdPersona(Integer idPersona) {
+		this.idPersona = idPersona;
 	}
 	
 	
