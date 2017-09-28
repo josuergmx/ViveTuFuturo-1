@@ -22,7 +22,8 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^login/',include('login.urls',namespace='login')),
     url(r'^asesor/',include('asesor.urls',namespace='asesor')),
-    url(r'^cliente/',include('conekta.urls',namespace='conekta')),    
+    url(r'^creditos/',include('conekta.urls',namespace='conekta')),
+    url(r'^cliente/',include('cliente.urls',namespace='cliente')),
 ]
 
 

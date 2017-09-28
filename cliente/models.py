@@ -38,3 +38,6 @@ class AsesorCliente(models.Model):
     ocupacion = models.CharField(max_length=150, blank=True, null=True)
     dependientes = models.CharField(max_length=150, blank=True, null=True)
     ingresos = models.FloatField(blank=True, null=True)
+    link = models.CharField(max_length=300,blank=True, null=True)
+    password = models.CharField(max_length=10,blank=True, null=True)
+    nombre = models.CharField(max_length=20, blank=True, null=True)

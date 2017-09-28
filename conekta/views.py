@@ -16,7 +16,7 @@ def index(request):
             cantidad = int(request.POST.get("cantidad",None))
             for x in range(0,cantidad):
                 Creditos.save()
-            return HttpResponse(sale.charge(15, token_id))
+            return HttpResponse(sale.charge(15, token_id, cantidad))
 
 
 # Create your views here.
@@ -41,4 +41,4 @@ def crearOrden(request):
         context = {
             "hola":"hola"
         }
-        return render(request,"conecta/orden.html",context)
+        return render(request,"conekta/tarjeta.html",context)

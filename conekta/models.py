@@ -12,7 +12,7 @@ class Sale(models.Model):
 
         conekta.api_key = settings.CONEKTA_PRIVATE_KEY
 
-    def charge(self, price_in_cents, token_id):
+    def charge(self, price_in_cents, token_id, total):
         try:
             charge = conekta.Charge.create({
               "description":"Stogies",
@@ -25,12 +25,12 @@ class Sale(models.Model):
                 "phone": "403-342-0642",
                 "email": "logan@x-men.org",
                 "line_items": [{
-                  "name": "Box of Cohiba S1s",
-                  "description": "Imported From Mex.",
+                  "name": "Credito de Asesor",
+                  "description": "",
                   "unit_price": price_in_cents,
-                  "quantity": 1,
+                  "quantity": total,
                   "sku": "cohb_s1",
-                  "category": "food"
+                  "category": "credit"
                 }],
                 "shipment": {
                     "carrier":"estafeta",
