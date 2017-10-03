@@ -1,0 +1,122 @@
+{% extends 'base/main.html' %}
+{% load static  %}
+{% block content %}
+<!-- Simple splash screen-->
+
+<div class="normalheader transition animated fadeIn">
+    <div class="hpanel">
+        <div class="panel-body">
+            <a class="small-header-action" href="">
+                <div class="clip-header">
+                    <i class="fa fa-arrow-up"></i>
+                </div>
+            </a>
+            <h3 class="font-light m-b-xs">
+                {{user.first_name}} {{user.last_name}}
+            </h3>
+            <small>Información del cliente.</small>
+        </div>
+    </div>
+</div>
+<div class="content animate-panel">
+  {% for i in clientes %}
+	<div class="row">
+		<div class="col-lg-4">
+	        <div class="hpanel hblue">
+	            <div class="panel-heading hbuilt">
+	                <div class="panel-tools">
+	                    <a class="showhide"><i class="fa fa-chevron-up"></i></a>
+	                    <a class="closebox"><i class="fa fa-times"></i></a>
+	                </div>
+	                Información Personal
+	            </div>
+	            <div class="panel-body">
+               	<dl class="dl-horizontal">
+                    <dt>Nombre: </dt>
+                    <dd>{{i.idCliente.user.first_name}}</dd>
+                    <dt>Apellidos: </dt>
+                    <dd>{{i.idCliente.user.last_name}}</dd>
+                    <dt>CURP:</dt>
+                    <dd>{{i.idCliente.curp}}</dd>
+                    <dt>RFC:</dt>
+                    <dd>{{i.idCliente.rfc}}</dd>
+                    <dt>Fecha de Nacimiento:</dt>
+                    <dd>{{i.idCliente.fechaDeNacimiento}}</dd>
+                    <dt>Estado Civil</dt>
+                    <dd>{{i.idCliente.estadoCivil}}</dd>
+                    <dt>Correo Principal</dt>
+                    <dd>{{i.idCliente.user.email}}</dd>
+                    <dt>Clinte Prospecto</dt>
+                    {% if i.clienteProspecto == True%}
+                      <dd>Si</dd>
+                    {% else %}
+                      <dd>No</dd>
+                    {% endif %}
+                </dl>
+            	</div>
+	        </div>
+	    </div>
+    {% for j in i.idCliente.direccion.all %}
+  		<div class="col-lg-4">
+  	        <div class="hpanel hyellow">
+  	            <div class="panel-heading hbuilt">
+  	                <div class="panel-tools">
+  	                    <a class="showhide"><i class="fa fa-chevron-up"></i></a>
+  	                    <a class="closebox"><i class="fa fa-times"></i></a>
+  	                </div>
+  	                Información Geográfica
+  	            </div>
+  	            <div class="panel-body">
+  	            <h4>Domcilio {{ forloop.counter }} </h4>
+  	             <dl class="dl-horizontal">
+                      <dt>Tipo de Dirección: </dt>
+                      <dd>{{j.idtipodireccion}}</dd>
+                      <dt>Delegación / Municipio:</dt>
+                      <dd>{{j.delegacion}}</dd>
+                      <dt>Calle: </dt>
+                      <dd>{{j.calle}}</dd>
+                      <dt>Colonia: </dt>
+                      <dd>{{j.colonia}}</dd>
+                      <dt>Codigo Postal:</dt>
+                      <dd>{{j.cp}}</dd>
+                  </dl>
+              	</div>
+  	        </div>
+  	    </div>
+        {%endfor%}
+        {% for j in i.idCliente.contacto.all %}
+  	    <div class="col-lg-4">
+  	        <div class="hpanel hgreen">
+  	            <div class="panel-heading hbuilt">
+  	                <div class="panel-tools">
+  	                    <a class="showhide"><i class="fa fa-chevron-up"></i></a>
+  	                    <a class="closebox"><i class="fa fa-times"></i></a>
+  	                </div>
+  	                Contacto
+  	            </div>
+                <div class="panel-body">
+                <h4>Contacto {{ forloop.counter }} </h4>
+  	             <dl class="dl-horizontal">
+                      <dt>Celular: </dt>
+                      <dd>{{j.celular}}</dd>
+                      <dt>Casa:</dt>
+                      <dd>{{j.telcasa}}</dd>
+                      <dt>Oficina: </dt>
+                      <dd>{{j.oficina}}</dd>
+                      <dt>Correo Secundario:</dt>
+                      <dd>{{j.email}}</dd>
+                      <dt>Facebook:</dt>
+                      <dd>{{j.facebookid}}</dd>
+                  </dl>
+              	</div>
+  	        </div>
+  	    </div>
+        {%endfor%}
+  	</div>
+  {% endfor %}
+</div>
+    <!-- Footer-->
+
+</div>
+
+{% endblock %}

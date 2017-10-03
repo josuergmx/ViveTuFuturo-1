@@ -21,7 +21,7 @@ class Libertadfinanciera(models.Model):
 
 class Sesion1(models.Model):
     idSesion = models.AutoField(primary_key=True)
-    idAsesorCliente = models.OneToOneField(AsesorCliente)
+    idAsesorCliente = models.OneToOneField(AsesorCliente,on_delete=models.CASCADE)
     videoPresentacion = models.CharField(max_length=100, blank=True, null=True)
     cartaConfidencialidad = models.CharField(max_length=100, blank=True, null=True)
     libertadFinancieraiDlf = models.ForeignKey(Libertadfinanciera)

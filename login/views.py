@@ -4,60 +4,55 @@ from . import forms as f
 from . import models as m_l
 from django.contrib import auth
 from django.contrib.auth.decorators import login_required
-
+from cliente import models as mCliente
 # Create your views here.
 
 """
     return redirect("namespace:unaurl")
 """
-def login(request):
-    print("tipo",request.method)
-    if request.method == 'POST':
-        form = f.loginForm(request.POST or None)
-        usuario = request.POST['username']
-        password = request.POST['password']
-        user = auth.authenticate(username=usuario,password=password)
-        if user is not None and user.is_active:
-            auth.login(request,user)
-            return redirect('login:hola')
-        else:
-            context = {
-                "mensaje":"Algo salio mal, ingresa de nuevo tus datos",
-                "form":f.loginForm(),
-            }
-            return render(request,'log/login.html',context)
 
-    return render(request,"log/login.html",{"form":f.loginForm()})
+def login(request):
+    print(request.user.is_authenticated())
+    if request.user.is_authenticated():
+        return redirect('login:hola')
+    else:
+        if request.method == 'POST':
+            usuario = request.POST['username']
+            password = request.POST['password']
+            user = auth.authenticate(username=usuario,password=password)
+            if user is not None and user.is_active:
+                auth.login(request,user)
+                return redirect('login:hola')
+            else:
+                return render(request,'log/login.html',context)
+
+        return render(request,"log/login.html",)
+
 
 def logout(request):
     auth.logout(request)
-    return render(request,"ok.html",{})
+    return redirect('principal')
 
 @login_required(redirect_field_name='login:login')
 def hola(request):
-    print("hola")
-    return render(request,"perfil/dashboard.html")
-
+    asesorClientes = mCliente.AsesorCliente.objects.filter(idAsesor=request.user.id)
+    n_clientes = len(asesorClientes)
+    context = {
+        "clientes":n_clientes
+    }
+    return render(request,"perfil/dashboard.html",context)
 
 @login_required(redirect_field_name='login:login')
-def perfil(request):
-    print("estoy dentro")
-    return render(request,"perfil/perfil.html")
-
-
-
 def registrar(request):
     if request.method == 'POST':
         form = f.UserForm(request.POST)
         formPersona = f.PersonaForm(request.POST)
         if form.is_valid():
             user = form.save()
-            print(m_l.EstadoCivil.objects.get(idEstadoCivil=1))
             estado = m_l.EstadoCivil.objects.get(idEstadoCivil=request.POST.get("estadoCivil",None))
             rol = m_l.Roles.objects.get(idRole=request.POST.get("idRol",None))
             m_l.Persona.objects.filter(user_id=user).update(
                 estadoCivil = estado,
-                folio = request.POST.get("folio",None),
                 curp = request.POST.get("curp",None),
                 rfc = request.POST.get("rfc",None),
                 fechaDeNacimiento = request.POST.get("fechaDeNacimiento",None),

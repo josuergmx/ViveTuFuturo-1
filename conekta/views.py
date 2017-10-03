@@ -4,11 +4,13 @@ from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_protect
 from .models import Sale,Creditos
 from django.conf import settings
+from django.contrib.auth.decorators import login_required
 
 @csrf_protect
+@login_required(redirect_field_name='login:login')
 def index(request):
     if request.method == 'GET':
-        return render(request, 'cargo.html')
+        return render(request, 'conekta/tarjeta.html')
     else:
         token_id = request.POST["conektaTokenId"]
         sale = Sale()
@@ -16,10 +18,11 @@ def index(request):
             cantidad = int(request.POST.get("cantidad",None))
             for x in range(0,cantidad):
                 Creditos.save()
-            return HttpResponse(sale.charge(15, token_id, cantidad))
+            return HttpResponse(sale.charge(15, token_id,cantidad,request.user.first_name,request.user.email))
 
 
 # Create your views here.
+@login_required(redirect_field_name='login:login')
 def crearOrden(request):
 
     if request.method == 'POST':

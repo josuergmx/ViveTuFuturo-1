@@ -9,21 +9,19 @@ import json
 class Sale(models.Model):
     def __init__(self, *args, **kwargs):
         super(Sale, self).__init__(*args, **kwargs)
-
         conekta.api_key = settings.CONEKTA_PRIVATE_KEY
 
-    def charge(self, price_in_cents, token_id, total):
+    def charge(self, price_in_cents, token_id, total,user,email):
         try:
             charge = conekta.Charge.create({
               "description":"Stogies",
               "amount": price_in_cents,
               "currency":"MXN",
-              "reference_id":"9839-wolf_pack",
+              "reference_id":"1_credito",
               "card": token_id,
               "details": {
-                "name": "Arnulfo Quimare",
-                "phone": "403-342-0642",
-                "email": "logan@x-men.org",
+                "name": user,
+                "email": email,
                 "line_items": [{
                   "name": "Credito de Asesor",
                   "description": "",
@@ -33,18 +31,9 @@ class Sale(models.Model):
                   "category": "credit"
                 }],
                 "shipment": {
-                    "carrier":"estafeta",
-                    "service":"international",
+                    "carrier":"ViveTuFuturo",
+                    "service":"Local",
                     "price": price_in_cents,
-                    "address": {
-                      "street1": "250 Alexis St",
-                      "street2": "Interior 303",
-                      "street3": "Col. Condesa",
-                      "city":"Red Deer",
-                      "state":"Alberta",
-                      "zip":"T4N 0B8",
-                      "country":"Canada"
-                    }
                   }
               }
             })
@@ -64,5 +53,5 @@ class Estatuscredito(models.Model):
 class Creditos(models.Model):
     idCredito = models.AutoField(primary_key=True)
     estatusCredito = models.OneToOneField(Estatuscredito)
-    idAsesor = models.ForeignKey(Asesor)
+    idAsesor = models.ForeignKey(Asesor,on_delete=models.CASCADE)
     idCliente = models.OneToOneField(AsesorCliente, blank=True, null=True)

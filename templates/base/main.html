@@ -9,7 +9,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
 
     <!-- Page title -->
-    <title>Menú | ViveTuFuturo</title>
+    <title>{% block title %}Menú | ViveTuFuturo{% endblock %}</title>
 
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
     <!--<link rel="shortcut icon" type="image/ico" href="favicon.ico" />-->
@@ -29,12 +29,80 @@
 
 </head>
   <body>
+    <!-- Simple splash screen-->
+    <div class="splash">
+        <div class="splash-title">
+            <img src="../images/loading-bars.svg" width="64" height="64" />
+        </div>
+    </div>
+
+    <div id="header">
+        {% block header %}
+        <div class="color-line">
+        </div>
+        <div id="logo" class="light-version">
+            <span>
+               Vive tu Futuro: {{user.username}}
+            </span>
+        </div>
+        <nav role="navigation">
+            <div class="navbar-right">
+                <ul class="nav navbar-nav no-borders">
+                    <li class="dropdown">
+                        <a class="dropdown-toggle label-menu-corner" href="#" data-toggle="dropdown">
+                            <i class="pe-7s-mail"></i>
+                            <span class="label label-success">3</span>
+                        </a>
+                        <ul class="dropdown-menu hdropdown animated flipInX">
+                            <div class="title">
+                                Tienes 4 mensajes nuevos
+                            </div>
+                            <li>
+                                <a>
+                                    Tus créditos estan por acabarse
+                                </a>
+                            </li>
+                            <li>
+                                <a>
+                                    Tienes una cita el día de hoy
+                                </a>
+                            </li>
+                            <li>
+                                <a>
+                                    Recuerda revisar tus estadísticas
+                                </a>
+                            </li>
+                            <li class="summary"><a href="#">Ver todos los mensajes</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#" id="sidebar" class="right-sidebar-toggle">
+                            <i class="pe-7s-upload pe-7s-news-paper"></i>
+                        </a>
+                    </li>
+                    <li class="dropdown">
+                        <a href="{% url 'login:logout' %}">
+                            <i class="pe-7s-upload pe-rotate-90"></i>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+      {% endblock %}
+    </div>
+
     {% block content %}
     {% endblock %}
     <!-- Vendor scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/core.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.map"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.slim.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.slim.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <script src="https://conektaapi.s3.amazonaws.com/v0.3.2/js/conekta.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/metisMenu/2.7.0/metisMenu.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
     <script src="{% static "vendor/jquery-ui/jquery-ui.min.js" %}"></script>
     <script src="{% static "vendor/slimScroll/jquery.slimscroll.min.js" %}"></script>
     <script src="{% static "vendor/jquery-flot/jquery.flot.js" %}"></script>
@@ -49,7 +117,7 @@
     <!-- App scripts -->
     <script src="{% static "scripts/homer.js" %}"></script>
     <script src="{% static "scripts/charts.js" %}"></script>
-  
+
 
     <script>
 
@@ -192,16 +260,143 @@
         });
 
     </script>
-    <script type="text/javascript">
+
+    <script>
+
         $(function(){
-            $('#id_password1').keyup(function(){
-                var pass1 = $('#id_password1').val();
-                console.log(pass1);
-                if(pass1 == $('#id_password2').val())
-                    alert("iguales");
-            });
+
+            $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+                $('a[data-toggle="tab"]').removeClass('btn-primary');
+                $('a[data-toggle="tab"]').addClass('btn-default');
+                $(this).removeClass('btn-default');
+                $(this).addClass('btn-primary');
+            })
+
+            $('.next').click(function(){
+                var nextId = $(this).parents('.tab-pane').next().attr("id");
+                $('[href=#'+nextId+']').tab('show');
+            })
+
+            $('.prev').click(function(){
+                var prevId = $(this).parents('.tab-pane').prev().attr("id");
+                $('[href=#'+prevId+']').tab('show');
+            })
+
+            $('.submitWizard').click(function(){
+
+                var approve = true;
+                if(approve) {
+                    // Got to step 1
+                    $('[href=#step1]').tab('show');
+
+                    // Serialize data to post method
+                    var datastring = $("#simpleForm").serialize();
+
+                    // Show notification
+                    swal({
+                        title: "Felicidades",
+                        text: "El cliente ha sido registrado con éxito",
+                        type: "success"
+                    });
+    //            Example code for post form
+    //            $.ajax({
+    //                type: "POST",
+    //                url: "your_link.php",
+    //                data: datastring,
+    //                success: function(data) {
+    //                    // Notification
+    //                }
+    //            });
+                } else {
+                    // Show notification
+                    swal({
+                        title: "Error",
+                        text: "El cliente no pudo ser registrado",
+                        type: "error"
+                    });
+                }
+            })
         });
     </script>
 
+    <script>
+
+        $(function(){
+
+            $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+                $('a[data-toggle="tab"]').removeClass('btn-primary');
+                $('a[data-toggle="tab"]').addClass('btn-default');
+                $(this).removeClass('btn-default');
+                $(this).addClass('btn-primary');
+            })
+
+            $('.next').click(function(){
+                var nextId = $(this).parents('.tab-pane').next().attr("id");
+                $('[href=#'+nextId+']').tab('show');
+            })
+
+            $('.prev').click(function(){
+                var prevId = $(this).parents('.tab-pane').prev().attr("id");
+                $('[href=#'+prevId+']').tab('show');
+            })
+
+            $('.submitWizard').click(function(){
+
+                var approve = true;
+                if(approve) {
+                    // Got to step 1
+                    $('[href=#step1]').tab('show');
+
+                    // Serialize data to post method
+                    var datastring = $("#simpleForm").serialize();
+
+                    // Show notification
+                    swal({
+                        title: "Felicidades",
+                        text: "El cliente ha sido registrado con éxito",
+                        type: "success"
+                    });
+    //            Example code for post form
+    //            $.ajax({
+    //                type: "POST",
+    //                url: "your_link.php",
+    //                data: datastring,
+    //                success: function(data) {
+    //                    // Notification
+    //                }
+    //            });
+                } else {
+                    // Show notification
+                    swal({
+                        title: "Error",
+                        text: "El cliente no pudo ser registrado",
+                        type: "error"
+                    });
+                }
+            })
+        });
+    </script>
+    <script type="text/javascript">
+      Conekta.setPublishableKey('key_IDQbWFwwjesTzmqdMQYMxdA');
+      $(function () {
+        $("#card-form").submit(function(event) {
+          var $form = $(this);
+          $form.find("button").prop("disabled", true); //Prevents double click
+          Conekta.token.create($form, conektaSuccessResponseHandler, conektaErrorResponseHandler);
+          return false;
+        });
+      });
+      var conektaSuccessResponseHandler = function(token) {
+        var $form = $("#card-form");
+        $form.append($("<input type='hidden' name='conektaTokenId'>").val(token.id)); //Add hidden input with token_id
+        console.log(token.id);
+        $form.get(0).submit();
+      };
+      var conektaErrorResponseHandler = function(response) {
+        var $form = $("#card-form");
+        $form.find(".card-errors").text(response.message_to_purchaser); //Display the error
+        $form.find("button").prop("disabled", false);
+      };
+    </script>
   </body>
 </html>

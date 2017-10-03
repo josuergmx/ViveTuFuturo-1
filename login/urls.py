@@ -4,8 +4,12 @@ from django.conf.urls import url
 
 
 urlpatterns = [
-    url(r'^login/$',auth_views.login,{'template_name':'log/login.html'},'login'),
-    url(r'^logout/$',auth_views.logout_then_login,{'template_name':'log/logout.html'},'hola'),
+    url(r'^logout/$',auth_views.logout,{'template_name':'hola.html'},'logout'),
+    url(
+        regex=r'^login/$',
+        view=views.login,
+        name='login'
+    ),
     url(
         regex=r'^registrar/$',
         view=views.registrar,
@@ -16,9 +20,5 @@ urlpatterns = [
         view=views.hola,
         name='hola'
     ),
-    url(
-        regex=r'^perfil/$',
-        view=views.perfil,
-        name='perfil'
-    ),
+
 ]

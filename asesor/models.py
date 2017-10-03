@@ -7,6 +7,7 @@ from aseguradoras.models import Servicios
 class Asesor(models.Model):
     idAsesor = models.OneToOneField(Persona,primary_key=True)
     tipoLicencia = models.PositiveIntegerField(blank=True, null=True)
+    folio = models.CharField(max_length=15,blank=True,null=True)
 
 class ReporteActividad(models.Model):
     idReporte = models.AutoField(primary_key=True)

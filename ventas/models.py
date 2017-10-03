@@ -5,7 +5,7 @@ from asesor.models import Asesor
 
 class PlanesConcretados(models.Model):
     idPlan = models.AutoField(primary_key=True)
-    idAsesor = models.ForeignKey(Asesor)
+    idAsesor = models.ForeignKey(Asesor,on_delete=models.CASCADE)
     idCliente = models.ForeignKey(Cliente)
     idServicio = models.ManyToMany(Servicios)
     fechaContratacion = models.TimeField()

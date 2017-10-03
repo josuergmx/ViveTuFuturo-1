@@ -6,10 +6,15 @@ from django.contrib import auth
 
 
 class PersonaForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super(PersonaForm, self).__init__(*args, **kwargs)
+        for field in self.fields:
+            self.fields[field].widget.attrs = {
+                'class': 'form-control'
+            }
     class Meta:
         model = m.Persona
         fields = (
-            'folio',
             'curp',
             'rfc',
             'fechaDeNacimiento',
@@ -18,9 +23,15 @@ class PersonaForm(forms.ModelForm):
         )
 
 class UserForm(UserCreationForm):
+    def __init__(self, *args, **kwargs):
+        super(UserForm, self).__init__(*args, **kwargs)
+        for field in self.fields:
+            self.fields[field].widget.attrs = {
+                'class': 'form-control'
+            }
     class Meta:
         model = User
-        fields = (
+        fields=(
             'first_name',
             'last_name',
             'username',
@@ -28,13 +39,9 @@ class UserForm(UserCreationForm):
             'password2',
             'email',
         )
+
     def save(self,commit=True):
         user= super(UserForm,self).save(commit=False)
         if commit:
             user.save()
             return  user
-
-
-class loginForm(forms.Form):
-    username = forms.CharField(widget=forms.TextInput(attrs={'name':'username'}))
-    password = forms.CharField(widget=forms.PasswordInput(attrs={'name':'password'}))
