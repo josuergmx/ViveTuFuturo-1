@@ -96,13 +96,32 @@
                 </div>-->
                 <div class="panel-body">
                         <div class="text-center m-b-md" id="wizardControl">
-                            <a class="btn btn-info" href="#step1" data-toggle="tab">Planes</a>
-                            <a class="btn btn-default" href="#step2" onclick="activar()" data-toggle="tab">Citas</a>
-                            <a class="btn btn-default" href="#step3" data-toggle="tab">Paso 3: Contacto</a>
+                            <a class="btn btn-info" href="#step1" data-toggle="tab">Citas</a>
+                            <a class="btn btn-default" href="#step2" onclick="activar()" data-toggle="tab">Planes</a>
+                            <a class="btn btn-default" href="#step3" data-toggle="tab">Tu información</a>
+                            <a class="btn btn-default" href="#step3" data-toggle="tab">Informacion tu asesor</a>
                         </div>
 
                         <div class="tab-content">
                         <div id="step1" class="p-m tab-pane active">
+							
+
+                            <div class="row">
+                                <div class="col-lg-2 text-center">
+                                    <i class="pe-7s-date fa-5x text-muted"></i>
+                                    <p class="middle m-t-md">
+                                        <strong>Tus citas</strong> organizate a tus tiempos
+                                        <br/>
+                                    </p>
+                                </div>
+							        <div class="col-lg-10">
+							        	<div id="calendar"></div>
+							        </div>
+                            </div>
+                        </div>
+
+                        <div id="step2" class="p-m tab-pane">
+							
                             <div class="row">
                                 <div class="col-lg-2 text-center">
                                     <i class="pe-7s-user fa-5x text-muted"></i>
@@ -174,24 +193,6 @@
                                 <a class="btn btn-default prev" href="#">Anterior</a>
                                 <a class="btn btn-default next" href="#">Siguiente</a>
                             </div>
-
-                        </div>
-
-                        <div id="step2" class="p-m tab-pane">
-
-                            <div class="row">
-                                <div class="col-lg-2 text-center">
-                                    <i class="pe-7s-date fa-5x text-muted"></i>
-                                    <p class="middle m-t-md">
-                                        <strong>Tus citas</strong> organizate a tus tiempos
-                                        <br/>
-                                    </p>
-                                </div>
-							        <div class="col-lg-10">
-							        	<div id="calendar"></div>
-							        </div>
-                            </div>
-
                         </div>
                         <div id="step3" class="tab-pane">
                             <div class="row">
