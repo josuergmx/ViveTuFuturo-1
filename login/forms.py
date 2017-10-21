@@ -21,12 +21,15 @@ class PersonaForm(forms.ModelForm):
             'estadoCivil',
             'idRol',
         )
-
 class UserForm(UserCreationForm):
     def __init__(self, *args, **kwargs):
         super(UserForm, self).__init__(*args, **kwargs)
         for field in self.fields:
             self.fields[field].widget.attrs = {
+                'class': 'form-control'
+            }
+            self.fields['email'].widget.attrs = {
+                'placeholder':'user@email.com',
                 'class': 'form-control'
             }
     class Meta:

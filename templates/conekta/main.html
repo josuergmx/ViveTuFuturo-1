@@ -1,0 +1,126 @@
+{% extends 'base/main.html' %}
+{% load static  %}
+{% block title %}Creditos{% endblock %}
+
+{% block content %}
+
+<!-- Simple splash screen-->
+<div class="content">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="hpanel animated-panel zoomIn" style="animation-delay: 0.3s;">
+                <!--<div class="panel-heading mayusculas">
+                    Ingresa los datos de tu tarjeta.
+                </div>-->
+                <form method="POST" id="card-form" class="text-center">
+                    <div class="panel-body">
+                        <h1 class="text-center padding-up">Ingresa los datos de tu tarjeta.</h1><hr>
+                        <div class="row">
+                            <div class="col-lg-3 text-center">
+                                <i class="pe-7s-credit fa-5x text-muted"></i>
+                                <p class="small m-t-md">
+                                    <strong>Ingresa los datos de tu tarjeta</strong> established fact that a reader will be distracted by the readable
+                                    <br/><br/>Many desktop publishing packages and web page editors now use
+                                </p>
+                            </div>
+                            <div class="col-lg-9">
+                                <div class="row">
+                                    <div class="form-group col-lg-12">
+                                        <label>Name on Card</label>
+                                        <input class="form-control" type="text" size="20" data-conekta="card[name]" class="input"/>
+                                    </div>
+                                    <div class="form-group col-lg-6">
+                                        <label>Card Number</label>
+                                        <input class="form-control" type="text" size="20" data-conekta="card[number]" class="input"/>
+                                    </div>
+                                    <div class="form-group col-lg-6">
+                                        <label>Billing Address</label>
+                                        <input type="text" value="" id="" class="form-control" name="" name="billing_address">
+                                    </div>
+                                    <div class="form-group col-lg-12">
+                                        <div class="row">
+                                            <div class="col-xs-6 col-sm-4 form-group">
+                                                <label>Expiration</label>
+                                                <input class="form-control" type="text" size="2" data-conekta="card[exp_month]" class="input cell-4 exp"/>
+                                            </div>
+                                            <div class="col-xs-6 col-sm-4 form-group">
+                                                <label> </label>
+                                                <input class="form-control" type="text" size="4" data-conekta="card[exp_year]" class="input cell-4 exp"/>
+                                            </div>
+                                            <div class="col-xs-12 col-sm-4 form-group">
+                                                <label>CVC</label>
+                                                <input class="form-control" type="password" size="4" data-conekta="card[cvc]" class="input"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--Informacion sobre dirección -->
+                                    <div class="col-xs-12 col-sm-4 form-group">
+                                        <label>Address</label>
+                                        <input class="form-control" type="text" size="25" data-conekta="card[address][street1]" class="input"/>
+                                    </div>
+                                    <div class="col-xs-12 col-sm-4 form-group">
+                                        <label>City</label>
+                                        <input class="form-control" type="text" size="25" data-conekta="card[address][city]" class="input"/>
+                                    </div>
+                                    <div class="col-xs-12 col-sm-4 form-group">
+                                        <label>State</label>
+                                        <input class="form-control" type="text" size="25" data-conekta="card[address][state]" class="input"/>
+                                    </div>
+                                    <div class="col-xs-12 col-sm-4 form-group">
+                                        <label>ZIP</label>
+                                        <input class="form-control" type="text" size="5" data-conekta="card[address][zip]" class="input"/>
+                                    </div>
+                                    <div class="col-xs-12 col-sm-4 form-group">
+                                        <label>Country</label>
+                                        <input class="form-control" type="text" size="25" data-conekta="card[address][country]" class="input"/>
+                                    </div>
+                                    <!-- Cantidad Prod -->
+                                    <div class="col-xs-12 col-sm-4 form-group">
+                                        <label>Cantidad</label>
+                                        <input id="demo2" name="cantidad" value="0" data-conekta="card[line_items][quantity]" class="form-control" style="display: block;" type="number"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="text-right m-t-xs">
+                            <button type="submit" class="btn w-xs btn-success">Charge me, babe!</button>
+                        </div>
+                    </div>
+
+                </form>
+
+
+                <div class="m-t-md">
+                    <p>
+                        <strong>Aviso de confidencialidad: </strong>This is a wizard form which can be easy adjusted. Since each step is a tab, and each clik to next tab is a function you can easily add validation or any other functionality. <strong><i class="fa fa-lock"></i> </strong>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+  Conekta.setPublishableKey('key_IDQbWFwwjesTzmqdMQYMxdA');
+  $(function () {
+    $("#card-form").submit(function(event) {
+      var $form = $(this);
+      $form.find("button").prop("disabled", true); //Prevents double click
+      Conekta.token.create($form, conektaSuccessResponseHandler, conektaErrorResponseHandler);
+      return false;
+    });
+  });
+  var conektaSuccessResponseHandler = function(token) {
+    var $form = $("#card-form");
+    $form.append($("<input type='hidden' name='conektaTokenId'>").val(token.id)); //Add hidden input with token_id
+    console.log(token.id);
+    $form.get(0).submit();
+  };
+  var conektaErrorResponseHandler = function(response) {
+    var $form = $("#card-form");
+    $form.find(".card-errors").text(response.message_to_purchaser); //Display the error
+    $form.find("button").prop("disabled", false);
+  };
+</script>
+
+{% endblock %}

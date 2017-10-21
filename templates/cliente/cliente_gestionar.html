@@ -14,123 +14,45 @@
                 <thead>
                 <tr>
                     <th>Cliente</th>
-                    <th>Ventas</th>
-                    <th>Edad</th>
-                    <th>Celular</th>
-                    <th>Acciones</th>
+                    <th>Email</th>
+                    <th>Prospecto</th>
+                    <th>Origen</th>
+                    <th>Estatus</th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <td>Juan Daniel Castillo Reyes</td>
-                    <td>$20,800</td>
-                    <td>29</td>
-                    <td>0445589653412</td>
-                    <td>
-                        <a href="cliente_show.html" class="white a_white">
-                        <button class="btn btn-info btn-xs" type="button">
-                            <i class="fa fa-info"></i>
-                        </button>
-                        </a>
-                        <button class="btn btn-warning btn-xs" type="button">
-                            <i class="fa fa-pencil"></i>
-                        </button>
-                        <button class="btn btn-danger btn-xs" type="button" data-toggle="modal" data-target="#myModal">
-                            <i class="fa fa-times"></i>
-                        </button>
-                    </td>
-                </tr>
-
-                <tr>
-                    <td>Javier Said Naranjo Miranda</td>
-                    <td>$10,000</td>
-                    <td>31</td>
-                    <td>0445589653412</td>
-                    <td>
-                        <a href="cliente_show.html" class="white a_white">
-                        <button class="btn btn-info btn-xs" type="button">
-                            <i class="fa fa-info"></i>
-                        </button>
-                        </a>
-                        <button class="btn btn-warning btn-xs" type="button">
-                            <i class="fa fa-pencil"></i>
-                        </button>
-                        <button class="btn btn-danger btn-xs" type="button" data-toggle="modal" data-target="#myModal">
-                            <i class="fa fa-times"></i>
-                        </button>
-                    </td>
-                </tr>
-
-                <tr>
-                    <td>An Sofía Jerónimo Vega</td>
-                    <td>$800</td>
-                    <td>18</td>
-                    <td>0445559671823</td>
-                    <td>
-                        <a href="cliente_show.html" class="white a_white">
-                        <button class="btn btn-info btn-xs" type="button">
-                            <i class="fa fa-info"></i>
-                        </button>
-                        </a>
-                        <button class="btn btn-warning btn-xs" type="button">
-                            <i class="fa fa-pencil"></i>
-                        </button>
-                        <button class="btn btn-danger btn-xs" type="button" data-toggle="modal" data-target="#myModal">
-                            <i class="fa fa-times"></i>
-                        </button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Jose Alejandro Mendz Ruiz</td>
-                    <td>$2000</td>
-                    <td>35</td>
-                    <td>0445500664423</td>
-                    <td>
-                        <a href="cliente_show.html" class="white a_white">
-                        <button class="btn btn-info btn-xs" type="button">
-                            <i class="fa fa-info"></i>
-                        </button>
-                        </a>
-                        <button class="btn btn-warning btn-xs" type="button">
-                            <i class="fa fa-pencil"></i>
-                        </button>
-                        <button class="btn btn-danger btn-xs" type="button" data-toggle="modal" data-target="#myModal">
-                            <i class="fa fa-times"></i>
-                        </button>
-                    </td>
-                </tr>
-
-                </tbody>
-                </table>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="color-line"></div>
-                <div class="modal-header text-center">
-                    <h4 class="modal-title">Eliminar cliente</h4>
-                </div>
-                <div class="modal-body">
-                    Está seguro que desea eliminar al cliente <strong>Juan Daniel Castillo Reyes</strong> todos sus datos personales serán eliminados pero la información sobre ventas permanecerá.
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-                    <button type="button" class="btn btn-danger">Eliminar</button>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Footer-->
-    <footer class="footer">
-        <span class="pull-right">
-            Example text
-        </span>
-        Company 2015-2020
-    </footer>
+                {% for i in clientes %}
+                {% if i.activo == True %}
+                  <tr>
+                      <td>{{i.idCliente.user.first_name}} {{i.idCliente.user.last_name}}</td>
+                      <td>{{i.idCliente.user.email}}</td>
+                      {% if i.clienteProspecto == True%}
+                        <td>Si</td>
+                      {% else %}
+                        <td>No</td>
+                      {% endif %}
+                      <td>{{i.Origen}}</td>
+                      <td>{{i.Estatus}}</td>
+                      <td>
+                          <a href="{% url 'cliente:clientes' i.idAsesorCliente %}" class="white a_white">
+                            <button class="btn btn-info btn-xs" type="button">
+                                <i class="fa fa-info"></i>
+                            </button>
+                          </a>
+                          <a href="{% url 'cliente:editar' i.idAsesorCliente %}" class="white a_white">
+                            <button class="btn btn-warning btn-xs" type="button">
+                                <i class="fa fa-pencil"></i>
+                            </button>
+                          </a>
+                          <a href="{% url 'cliente:eliminar' i.idAsesorCliente %}" class="white a_white">
+                            <button class="btn btn-danger btn-xs" type="button" data-toggle="modal" data-target="#myModal">
+                                <i class="fa fa-times"></i>
+                            </button>
+                          </a>
+                      </td>
+                  </tr>
+                {% endif %}
+                {%endfor%}
 
 </div>
 

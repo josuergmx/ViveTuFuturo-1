@@ -37,3 +37,6 @@ class AsesorCliente(models.Model):
     link = models.CharField(max_length=300,blank=True, null=True)
     password = models.CharField(max_length=10,blank=True, null=True)
     nombre = models.CharField(max_length=20, blank=True, null=True)
+    activo = models.NullBooleanField()
+    def __str__(self):
+        return (self.idCliente.user.username)

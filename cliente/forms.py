@@ -29,6 +29,14 @@ class PersonaForm(forms.ModelForm):
             self.fields[field].widget.attrs = {
                 'class': 'form-control'
             }
+            self.fields['curp'].widget.attrs = {
+                'class': 'form-control',
+                'maxlength' : '18'
+            }
+            self.fields['rfc'].widget.attrs = {
+                'class': 'form-control',
+                'maxlength' : '13'
+            }
     class Meta:
         model = mLogin.Persona
         fields = (
@@ -49,6 +57,10 @@ class DireccionForm(forms.ModelForm):
             self.fields['numinterior'].label = 'Numero Interior'
             self.fields['numexterior'].label = 'Numero Exterior'
             self.fields['idtipodireccion'].label = 'Lugar de Direccion'
+            self.fields['cp'].widget.attrs = {
+                'class': 'form-control',
+                'maxlength' : '5'
+            }
     class Meta:
         model = mLogin.Direccion
         fields = (
@@ -69,20 +81,35 @@ class ContactoForm(forms.ModelForm):
             self.fields[field].widget.attrs = {
                 'class': 'form-control'
             }
-            self.fields['email'].widget.attrs = {
-                'placeholder':'user@email.com',
-                'class': 'form-control'
-            }
             self.fields['facebookid'].label = 'Facebook'
             self.fields['telcasa'].label = 'Telefono de Casa'
             self.fields['oficina'].label = 'Telefono de Oficina'
-            self.fields['email'].label = 'Segundo Email'
+
     class Meta:
         model = mLogin.Contacto
         fields = (
             'celular',
-            'email',
             'telcasa',
             'oficina',
             'facebookid',
+        )
+
+class UserForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super(UserForm, self).__init__(*args, **kwargs)
+        for field in self.fields:
+            self.fields[field].widget.attrs = {
+                'class': 'form-control'
+            }
+            self.fields['email'].widget.attrs = {
+                'placeholder':'user@email.com',
+                'class': 'form-control'
+            }
+    class Meta:
+        model = User
+        fields=(
+            'first_name',
+            'last_name',
+            'username',
+            'email',
         )

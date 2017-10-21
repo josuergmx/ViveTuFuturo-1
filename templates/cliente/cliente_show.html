@@ -19,7 +19,6 @@
     </div>
 </div>
 <div class="content animate-panel">
-  {% for i in clientes %}
 	<div class="row">
 		<div class="col-lg-4">
 	        <div class="hpanel hblue">
@@ -33,21 +32,21 @@
 	            <div class="panel-body">
                	<dl class="dl-horizontal">
                     <dt>Nombre: </dt>
-                    <dd>{{i.idCliente.user.first_name}}</dd>
+                    <dd>{{clientes.idCliente.user.first_name}}</dd>
                     <dt>Apellidos: </dt>
-                    <dd>{{i.idCliente.user.last_name}}</dd>
+                    <dd>{{clientes.idCliente.user.last_name}}</dd>
                     <dt>CURP:</dt>
-                    <dd>{{i.idCliente.curp}}</dd>
+                    <dd>{{clientes.idCliente.curp}}</dd>
                     <dt>RFC:</dt>
-                    <dd>{{i.idCliente.rfc}}</dd>
+                    <dd>{{clientes.idCliente.rfc}}</dd>
                     <dt>Fecha de Nacimiento:</dt>
-                    <dd>{{i.idCliente.fechaDeNacimiento}}</dd>
+                    <dd>{{clientes.idCliente.fechaDeNacimiento}}</dd>
                     <dt>Estado Civil</dt>
-                    <dd>{{i.idCliente.estadoCivil}}</dd>
+                    <dd>{{clientes.idCliente.estadoCivil}}</dd>
                     <dt>Correo Principal</dt>
-                    <dd>{{i.idCliente.user.email}}</dd>
+                    <dd>{{clientes.idCliente.user.email}}</dd>
                     <dt>Clinte Prospecto</dt>
-                    {% if i.clienteProspecto == True%}
+                    {% if clientes.clienteProspecto == True%}
                       <dd>Si</dd>
                     {% else %}
                       <dd>No</dd>
@@ -56,7 +55,7 @@
             	</div>
 	        </div>
 	    </div>
-    {% for j in i.idCliente.direccion.all %}
+    {% for j in clientes.idCliente.direccion.all %}
   		<div class="col-lg-4">
   	        <div class="hpanel hyellow">
   	            <div class="panel-heading hbuilt">
@@ -84,7 +83,7 @@
   	        </div>
   	    </div>
         {%endfor%}
-        {% for j in i.idCliente.contacto.all %}
+        {% for j in clientes.idCliente.contacto.all %}
   	    <div class="col-lg-4">
   	        <div class="hpanel hgreen">
   	            <div class="panel-heading hbuilt">
@@ -113,7 +112,6 @@
   	    </div>
         {%endfor%}
   	</div>
-  {% endfor %}
 </div>
     <!-- Footer-->
 

@@ -11,14 +11,13 @@ urlpatterns = [
         name='login'
     ),
     url(
-        regex=r'^registrar/$',
-        view=views.registrar,
-        name='registrar'
-    ),
-    url(
         regex=r'^hola/$',
         view=views.hola,
         name='hola'
     ),
-
+    url(
+        regex=r'^seleccion/$',
+        view=views.tipo,
+        name='tipo'
+    ),
 ]

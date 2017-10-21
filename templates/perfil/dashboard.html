@@ -25,7 +25,7 @@
                                 <span class="bold">Agregar</span>
 			                       	  <i class="fa fa-pencil"></i>
                               </a>
-			                       	<a href="{% url 'cliente:clientes' %}" class="btn btn-success btn-m">
+			                       	<a href="{% url 'cliente:gestionarCliente' %}" class="btn btn-success btn-m">
                                   <span class="bold">Ver más</span>
 			                       	    <i class="fa fa-angle-right"></i>
                               </a>
@@ -73,10 +73,11 @@
 	                            </small>
 	                        </div>
 	                        <div class="m-t-xl text-center">
-		                        <button class="btn btn-warning	 btn-m">
-			                       	<span class="bold">Ver más</span>
-			                       	<i class="fa fa-angle-right"></i>
-			                    </button>
+														<a href="{% url 'conekta:orden' %}" class="btn btn-warning	 btn-m">
+															 <span class="bold">Ver más</span>
+															 <i class="fa fa-angle-right"></i>
+													 </a>
+
 		                	</div>
 	                    </div>
 	                </div>
