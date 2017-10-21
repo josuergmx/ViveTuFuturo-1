@@ -1,6 +1,6 @@
 from django.db import models
 from asesor.models import Asesor
-from login.models import Persona
+import login.models as lm
 import datetime
 from vive import settings
 from django.contrib.auth.models import User
@@ -25,7 +25,7 @@ class OrigenRecomendacion(models.Model):
 
 class AsesorCliente(models.Model):
     idAsesorCliente = models.AutoField(primary_key=True)
-    idCliente = models.OneToOneField(Persona,on_delete=models.CASCADE)
+    idCliente = models.OneToOneField(lm.Persona,on_delete=models.CASCADE)
     idAsesor = models.ForeignKey(User,on_delete=models.CASCADE)
     clienteProspecto = models.BooleanField()
     Origen = models.ForeignKey(OrigenRecomendacion)
@@ -40,3 +40,9 @@ class AsesorCliente(models.Model):
     activo = models.NullBooleanField()
     def __str__(self):
         return (self.idCliente.user.username)
+
+class RecomendadoCliente(models.Model):
+    nombre = models.CharField(max_length=80)
+    celular = models.IntegerField()
+    estadoCivil = models.ForeignKey(lm.EstadoCivil)
+    hijos = models.BooleanField()
