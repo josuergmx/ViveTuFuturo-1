@@ -4,6 +4,7 @@ from . import forms as f
 from . import models as m
 from login import forms as fLogin
 from login import models as mLogin
+from agenda import models as mAgenda
 from datetime import date
 from django.contrib.auth.decorators import login_required
 from django.core.exceptions import PermissionDenied
@@ -155,6 +156,8 @@ def eliminar(request,idAsesorCliente):
         raise PermissionDenied
 
 
-
+@login_required(redirect_field_name='login:login')
 def hola(request):
+    asesorcliente = m.AsesorCliente.objects.get(idCliente=request.user.persona)
+    #citas_base = mAgenda.Cita.objects.get(idAsesorCliente=)
     return render(request,"cliente/cliente.html")

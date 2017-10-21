@@ -12,7 +12,7 @@ class CatEstatuscita(models.Model):
     descripcion = models.CharField(max_length=100, blank=True, null=True)
 
     def __str__(self):
-        return (self.nombre,self.descripcion)
+        return (self.nombre)
 
 class CatTipocita(models.Model):
     idTipoCita = models.BigIntegerField(primary_key=True)
@@ -20,12 +20,11 @@ class CatTipocita(models.Model):
     descripcion = models.CharField(max_length=100, blank=True, null=True)
 
     def __str__(self):
-        return (self.nombre,self.descripcion)
+        return (self.nombre)
 
 
 class Cita(models.Model):
     idCita = models.BigIntegerField(primary_key=True)
-    idAsesor = models.ForeignKey(Asesor,on_delete=models.CASCADE)
     idAsesorCliente = models.ForeignKey(AsesorCliente,on_delete=models.CASCADE)
     idTipoCita = models.OneToOneField(CatTipocita)
     idEstatus = models.OneToOneField(CatEstatuscita)

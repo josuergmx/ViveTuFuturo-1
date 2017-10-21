@@ -39,7 +39,7 @@ class AsesorCliente(models.Model):
     nombre = models.CharField(max_length=20, blank=True, null=True)
     activo = models.NullBooleanField()
     def __str__(self):
-        return (self.idCliente.user.username)
+        return (str(self.idAsesorCliente))
 
 class RecomendadoCliente(models.Model):
     nombre = models.CharField(max_length=80)
