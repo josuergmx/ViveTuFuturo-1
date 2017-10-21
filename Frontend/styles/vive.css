@@ -10,3 +10,7 @@ body{
 .mayusculas{
 	text-transform: uppercase;
 }
+.titulo1{
+	color: #3498DB;
+	font-weight:bold;
+}
