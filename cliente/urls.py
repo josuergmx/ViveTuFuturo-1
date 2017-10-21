@@ -26,4 +26,9 @@ urlpatterns = [
         view=views.eliminar,
         name='eliminar'
     ),
+    url(
+        regex=r'^hola/$',
+        view=views.hola,
+        name='hola'
+    ),
 ]

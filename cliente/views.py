@@ -152,3 +152,8 @@ def eliminar(request,idAsesorCliente):
         return redirect('cliente:gestionarCliente')
     else:
         raise PermissionDenied
+
+
+
+def hola(request):
+    return render(request,"cliente/cliente.html")

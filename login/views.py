@@ -24,7 +24,7 @@ def login(request):
                 auth.login(request,user)
                 print(type(user.persona.idRol))
                 if user.persona.idRol.idRole == 1: #cliente
-                    return redirect('login:hola')
+                    return redirect('cliente:hola')
                 elif user.persona.idRol.idRole == 2: #Asesor
                     return redirect('login:hola')
                 else:
