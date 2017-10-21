@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
     <!-- Page title -->
-    <title>Mis clientes</title>
+    <title>Agregar Servicio</title>
 
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
     <!--<link rel="shortcut icon" type="image/ico" href="favicon.ico" />-->
@@ -87,10 +87,61 @@
         </div>
     </nav>
 </div>
+    <div class="content animate-panel">
+        <div class="row">
+            <div class="col-md-5">
+                <div class="hpanel hgreen">
+                    <div class="panel-heading mayusculas hbuilt">
+                        <p class="text-transparent">Agregar Servicio</p>
+                    </div>
+                    <div class="panel-body">
+                    <form method="get" class="form-horizontal">
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Institución Financiera</label>
+                            <div class="col-sm-8"><select class="form-control m-b" name="account">
+                                <option>AXXA Seguros</option>
+                                <option>GNP Seguros</option>
+                                <option>SURA</option>
+                                <option>Otros</option>
+                            </select>
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed color-gray"></div>  
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Departamento</label>
+                            <div class="col-sm-8"><select class="form-control m-b" name="account">
+                                <option>Departamento 1</option>
+                                <option>Departamento 2</option>
+                                <option>Departamento 3</option>
+                                <option>Departamento 4</option>
+                            </select>
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed color-gray"></div>
 
-<div class="content animate-panel">
-    <div class="row">
-        <div class="col-lg-12">
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Nombre</label>
+                            <div class="col-sm-8"><input type="text" placeholder="Ej. Seguro de Vida" class="form-control"></div>
+                        </div>
+                        <div class="hr-line-dashed color-gray"></div>
+
+                        <div class="form-group">
+                            <label class="col-lg-3 control-label">Descripción</label>
+                            <div class="col-lg-8"><input type="text" placeholder="Ingrese una descripción de su servicio aquí" class="form-control"></div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        
+                        <div class="form-group">
+                            <div class="col-sm-8 col-sm-offset-5">
+                                <button class="btn btn-default" type="submit">Cancelar</button>
+                                <button class="btn btn-primary" type="submit">Agregar</button>
+                            </div>
+                        </div>
+                    </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-7">
             <div class="hpanel">
                 <div class="panel-heading mayusculas hbuilt">
                     Mis clientes
@@ -191,28 +242,9 @@
                 </div>
             </div>
         </div>
-    </div>
-</div>
-    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="color-line"></div>
-                <div class="modal-header text-center">
-                    <h4 class="modal-title">Eliminar cliente</h4>
-                </div>
-                <div class="modal-body">
-                    Está seguro que desea eliminar al cliente <strong>Juan Daniel Castillo Reyes</strong> todos sus datos personales serán eliminados pero la información sobre ventas permanecerá.
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-                    <button type="button" class="btn btn-danger">Eliminar</button>
-                </div>
-            </div>
         </div>
     </div>
-
 </div>
-
 <footer class="footer">
     <span class="pull-right">
         Todos los Derechos Reservados <i class="fa fa-copyright"></i>
@@ -232,22 +264,5 @@
 
 <!-- App scripts -->
 <script src="../scripts/homer.js"></script>
-
-
-<script>
-
-    $(function () {
-
-        // Initialize Example 1
-        $('#example1').dataTable( {
-            "ajax": 'api/datatables.json'
-        });
-
-        // Initialize Example 2
-        $('#example2').dataTable();
-
-    });
-
-</script>
 </body>
 </html>

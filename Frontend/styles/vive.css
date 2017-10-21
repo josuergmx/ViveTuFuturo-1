@@ -8,8 +8,11 @@ body{
 	color:white;
 }
 .mayusculas{
+	color:gray !important;
 	text-transform: uppercase;
 	text-align: center;
+	font-size: 1.5em;
+	font-weight: 100 !important;
 }
 .menu a{
 	color: gray;
@@ -23,4 +26,7 @@ body{
 .lista li strong{
 	text-transform: capitalize;
 	padding-right: 8px;
+}
+.color-gray{
+	border-top: 1px dotted #d4d4d4 !important;
 }
