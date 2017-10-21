@@ -9,4 +9,18 @@ body{
 }
 .mayusculas{
 	text-transform: uppercase;
+	text-align: center;
+}
+.menu a{
+	color: gray;
+}
+.lista{
+	list-style-type: none;
+}
+.lista li{
+	padding: 0.5em;
+}
+.lista li strong{
+	text-transform: capitalize;
+	padding-right: 8px;
 }
