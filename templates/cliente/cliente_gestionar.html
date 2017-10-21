@@ -44,18 +44,53 @@
                                 <i class="fa fa-pencil"></i>
                             </button>
                           </a>
-                          <a href="{% url 'cliente:eliminar' i.idAsesorCliente %}" class="white a_white">
-                            <button class="btn btn-danger btn-xs" type="button" data-toggle="modal" data-target="#myModal">
-                                <i class="fa fa-times"></i>
-                            </button>
-                          </a>
+                          <button class="btn btn-danger btn-xs" type="button" data-toggle="modal" data-target="#{{i}}">
+                              <i class="fa fa-times"></i>
+                          </button>
+                          <div class="modal fade" id="{{i}}" tabindex="-1" role="dialog" aria-hidden="true">
+                                  <div class="modal-dialog">
+                                      <div class="modal-content">
+                                          <div class="color-line"></div>
+                                          <div class="modal-header text-center">
+                                              <h4 class="modal-title">Eliminar cliente</h4>
+                                          </div>
+                                          <div class="modal-body">
+                                              Está seguro que desea eliminar al cliente <strong>{{i.idCliente.user.first_name}}</strong> todos sus datos personales serán eliminados pero la información sobre ventas permanecerá.
+                                          </div>
+                                          <div class="modal-footer">
+                                              <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                                              <a href="{% url 'cliente:eliminar' i.idAsesorCliente %}" class="white a_white">
+                                                <button type="button" class="btn btn-danger">Eliminar</button>
+                                              </a>
+                                          </div>
+                                      </div>
+                                  </div>
+                          </div>
                       </td>
                   </tr>
                 {% endif %}
                 {%endfor%}
 
 </div>
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="color-line"></div>
+                <div class="modal-header text-center">
+                    <h4 class="modal-title">Eliminar cliente</h4>
 
+                </div>
+                <div class="modal-body">
+                    Está seguro que desea eliminar al cliente <strong>Juan Daniel Castillo Reyes</strong> todos sus datos personales serán eliminados pero la información sobre ventas permanecerá.
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-danger">Eliminar</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
 <footer class="footer">
     <span class="pull-right">
         Todos los Derechos Reservados <i class="fa fa-copyright"></i>

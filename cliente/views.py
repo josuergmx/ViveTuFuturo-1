@@ -67,7 +67,8 @@ def agregarCliente(request):
                 cl = contacto.save()
                 direccion.save()
                 return redirect('cliente:agregarCliente')
-
+            else:
+                return render()
         usuario = fLogin.UserForm()
         persona = f.PersonaForm()
         cliente = f.ClienteForm()
