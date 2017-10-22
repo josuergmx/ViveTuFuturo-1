@@ -1,9 +1,9 @@
 $(function () {
     var body = $('body');
     var backgrounds = [
-      'url(../images/login/login1.jpg) no-repeat center center fixed', 
-      'url(../images/login/login2.jpg) no-repeat center center fixed',
-      'url(../images/login/login3.jpg) no-repeat center center fixed'];
+      'url(login1.jpg) no-repeat center center fixed',
+      'url(login2.jpg) no-repeat center center fixed',
+      'url(login3.jpg) no-repeat center center fixed'];
     var current = 0
 
     function nextBackground() {

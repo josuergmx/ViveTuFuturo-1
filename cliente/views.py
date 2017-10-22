@@ -159,5 +159,14 @@ def eliminar(request,idAsesorCliente):
 @login_required(redirect_field_name='login:login')
 def hola(request):
     asesorcliente = m.AsesorCliente.objects.get(idCliente=request.user.persona)
+    print(asesorcliente.idAsesor.persona.user.first_name)
+    contacto = mLogin.Contacto.objects.get(idpersona=asesorcliente.idAsesor.persona)
+    direccion = mLogin.Direccion.objects.get(idpersona=asesorcliente.idAsesor.persona)
+    print(contacto)
+    context = {
+        "asesor":asesorcliente,
+        "contactos":contacto,
+        "direcciones":direccion,
+    }
     #citas_base = mAgenda.Cita.objects.get(idAsesorCliente=)
-    return render(request,"cliente/cliente.html")
+    return render(request,"cliente/cliente.html",context)

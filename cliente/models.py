@@ -38,8 +38,6 @@ class AsesorCliente(models.Model):
     password = models.CharField(max_length=10,blank=True, null=True)
     nombre = models.CharField(max_length=20, blank=True, null=True)
     activo = models.NullBooleanField()
-    def __str__(self):
-        return (str(self.idAsesorCliente))
 
 class RecomendadoCliente(models.Model):
     nombre = models.CharField(max_length=80)

@@ -1,10 +1,10 @@
 body {
-	background: url(../images/login/login1.jpg) no-repeat center center fixed; 
+	background: url(login1.jpg) no-repeat center center fixed;
 	-webkit-background-size: cover;
 	-moz-background-size: cover;
 	-o-background-size: cover;
 	background-size: cover;t;
-	
+
 	 -webkit-transition: background 1s ease;
     -moz-transition: background 1s ease;
     -o-transition: background 1 ease;
