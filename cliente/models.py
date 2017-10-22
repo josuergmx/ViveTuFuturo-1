@@ -1,5 +1,6 @@
 from django.db import models
 from asesor.models import Asesor
+from login.models import Persona
 import login.models as lm
 import datetime
 from vive import settings
@@ -41,6 +42,7 @@ class AsesorCliente(models.Model):
 
 class RecomendadoCliente(models.Model):
     nombre = models.CharField(max_length=80)
-    celular = models.IntegerField()
-    estadoCivil = models.ForeignKey(lm.EstadoCivil)
+    celular = models.IntegerField(blank=True, null=True)
+    estadoCivil = models.ForeignKey(lm.EstadoCivil,blank=True, null=True)
     hijos = models.BooleanField()
+    asesor = models.ForeignKey(Persona,blank=True, null=True)

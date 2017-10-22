@@ -121,9 +121,9 @@ def editar(request,idAsesorCliente):
             usuario = f.UserForm(request.POST,instance=editar.idCliente.user)
             persona = f.PersonaForm(request.POST,instance=editar.idCliente)
             cliente = f.ClienteForm(request.POST,instance=editar)
-            print(usuario.is_valid())
             print(request.POST)
             if usuario.is_valid():
+                print(persona)
                 usuario.save()
                 persona.save()
                 cl = cliente.save()
@@ -158,15 +158,42 @@ def eliminar(request,idAsesorCliente):
 
 @login_required(redirect_field_name='login:login')
 def hola(request):
-    asesorcliente = m.AsesorCliente.objects.get(idCliente=request.user.persona)
-    print(asesorcliente.idAsesor.persona.user.first_name)
-    contacto = mLogin.Contacto.objects.get(idpersona=asesorcliente.idAsesor.persona)
-    direccion = mLogin.Direccion.objects.get(idpersona=asesorcliente.idAsesor.persona)
-    print(contacto)
-    context = {
-        "asesor":asesorcliente,
-        "contactos":contacto,
-        "direcciones":direccion,
-    }
-    #citas_base = mAgenda.Cita.objects.get(idAsesorCliente=)
-    return render(request,"cliente/cliente.html",context)
+    if request.user.persona.idRol.idRole == 1:
+        mensaje= ""
+        asesorcliente = m.AsesorCliente.objects.get(idCliente=request.user.persona)
+        contacto2 = mLogin.Contacto.objects.get(idpersona=asesorcliente.idAsesor.persona)
+        domicilio = mLogin.Direccion.objects.get(idpersona=asesorcliente.idAsesor.persona)
+        if request.method == 'POST':
+            direccion1 = f.DireccionForm(request.POST,instance=domicilio)
+            contacto3 = f.ContactoForm(request.POST,instance=contacto2)
+            direccion1.save()
+            contacto3.save()
+        direccion = f.DireccionForm(instance=domicilio)
+        contacto1 = f.ContactoForm(instance=contacto2)
+        recomendacion = f.RecomendadoClienteForm()
+        context = {
+            "direccion":direccion,
+            "asesor":asesorcliente,
+            "contacto":contacto1,
+            "contactoA":contacto2,
+            "recomendacion":recomendacion,
+            "mensaje":mensaje,
+        }
+        return render(request,"cliente/cliente.html",context)
+
+def recomendar(request):
+        asesorcliente = m.AsesorCliente.objects.get(idCliente=request.user.persona)
+        if request.POST.get("hijos",None) == "on":
+            hijo = True
+        else:
+            hijo = False
+        estado = mLogin.EstadoCivil.objects.get(idEstadoCivil=request.POST.get("estadoCivil",None))
+        recomendacion = m.RecomendadoCliente(
+            nombre = request.POST.get("nombre",None),
+            celular = request.POST.get("celular",None),
+            estadoCivil = estado,
+            hijos = hijo,
+            asesor = asesorcliente.idAsesor.persona,
+        )
+        recomendacion.save()
+        return redirect('cliente:hola')

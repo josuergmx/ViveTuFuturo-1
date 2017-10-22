@@ -21,6 +21,21 @@ class ClienteForm(forms.ModelForm):
             "Estatus",
         )
 
+class RecomendadoClienteForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super(RecomendadoClienteForm, self).__init__(*args, **kwargs)
+        for field in self.fields:
+            self.fields[field].widget.attrs = {
+                'class': 'form-control'
+            }
+    class Meta:
+        model = m.RecomendadoCliente
+        fields = (
+            "nombre",
+            "celular",
+            "estadoCivil",
+            "hijos",
+        )
 
 class PersonaForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
