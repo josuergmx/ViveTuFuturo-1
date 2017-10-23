@@ -86,12 +86,12 @@ WSGI_APPLICATION = 'vive.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'vive',
         'USER': 'vive',
         'PASSWORD': 'vive',
-        'HOST': 'localhost',   # Or an IP Address that your DB is hosted on
-        'PORT': '3306',
+        'HOST': 'localhost',
+        'PORT': '',
     }
 }
 
