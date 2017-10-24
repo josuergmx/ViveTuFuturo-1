@@ -1,0 +1,91 @@
+{% extends 'base/main.html' %}
+{% load static  %}
+{% block header %}
+<div class="color-line">
+</div>
+<div id="logo" class="light-version">
+    <span>
+        Vive Tu Futuro
+    </span>
+</div>
+{% endblock %}
+{% block content %}
+<!-- Simple splash screen-->
+<div class="splash">
+    <div class="splash-title">
+        <img src="../images/loading-bars.svg" width="64" height="64" />
+    </div>
+</div>
+<div class="color-line"></div>
+
+<div class="normalheader transition animated fadeIn">
+    <div class="hpanel">
+        <div class="panel-body">
+            <a class="" href="">
+                <div class="clip-header">
+                    <i class="pe-7s-power fa-3x"></i>
+                </div>
+            </a>
+            <div id="hbreadcrumb" class="pull-right m-t-lg">
+                <ol class="hbreadcrumb breadcrumb">
+                    <li>
+                        <span>Asesor</span>
+                    </li>
+                    <li>
+                        <span>Promotor</span>
+                    </li>
+                </ol>
+            </div>
+            <h2 class="font-light m-b-xs">
+                Bienvenido a Vive Tu Futuro
+            </h2>
+            <small>Esta cuenta esta asociada a más de un rol para iniciar sesión, elige con que cuenta quieres acceder.</small>
+        </div>
+    </div>
+</div>
+<div class="content animate-panel">
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-3">
+            <div class="hpanel">
+                <div class="panel-body">
+                    <div class="text-center">
+                        <h2 class="m-b-xs">Asesor</h2>
+                        <p class="font-bold text-success">Bloqueado</p>
+                        <div class="m">
+                            <i class="pe-7s-portfolio fa-5x"></i>
+                        </div>
+                        <p class="small">
+                            Descripción: Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+                        </p>
+                        <a href="{% url 'login:hola' %}" class="btn btn-info btn-sm">
+                            <span class="bold">Ingresa</span>
+                            <i class="fa fa-angle-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="hpanel">
+                <div class="panel-body">
+                    <div class="text-center">
+                        <h2 class="m-b-xs">Promotor</h2>
+                        <p class="font-bold text-info">Disponible</p>
+                        <div class="m">
+                            <i class="pe-7s-users fa-5x"></i>
+                        </div>
+                        <p class="small">
+                         Descripción: Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+                     </p>
+                     <a href="{% url 'login:hola' %}" class="btn btn-info btn-sm">
+                         <span class="bold">Ingresa</span>
+                         <i class="fa fa-angle-right"></i>
+                     </a>
+                 </div>
+             </div>
+         </div>
+     </div>
+ </div>
+</div>
+{% endblock %}
