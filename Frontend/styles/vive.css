@@ -10,6 +10,7 @@ body{
 .mayusculas{
 	color:gray !important;
 	text-transform: uppercase;
+<<<<<<< HEAD
 	text-align: center;
 	font-size: 1.5em;
 	font-weight: 100 !important;
@@ -30,3 +31,14 @@ body{
 .color-gray{
 	border-top: 1px dotted #d4d4d4 !important;
 }
+=======
+}
+.titulo1{
+	color: #3498DB;
+	font-weight:bold;
+}
+
+.icono{
+	padding-right: 10px;
+}
+>>>>>>> c02faf53037d2a71bb7ecfcddbe98b0a089c0806
