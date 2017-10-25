@@ -7,7 +7,7 @@ urlpatterns = [
         name='agregarCliente'
     ),
     url(
-        regex=r'^/(?P<idAsesorCliente>\d+)/$',
+        regex=r'^(?P<idAsesorCliente>\d+)$',
         view=views.clientes,
         name='clientes'
     ),
