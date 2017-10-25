@@ -20,13 +20,22 @@ def agregarCliente(request):
             cliente = f.ClienteForm(request.POST)
             print(usuario.is_valid())
             print(request.POST)
-            if usuario.is_valid() and persona.is_valid and cliente.is_valid():
+            if usuario.is_valid() and persona.is_valid() and cliente.is_valid():
                 user = usuario.save()
                 rol = mLogin.Roles.objects.get(idRole=1)
                 fecha = request.POST.get("fechaDeNacimiento",None)
+                estadoCivil = request.POST.get("estadoCivil",None)
+                direccion = request.POST.get("idtipodireccion",None)
                 persona = mLogin.Persona.objects.get(user_id=user)
-                tipodireccion = mLogin.CatTipodireccion.objects.get(idtipoDireccion=request.POST.get("idtipodireccion",None))
-                estado = mLogin.EstadoCivil.objects.get(idEstadoCivil=request.POST.get("estadoCivil",None))
+                if estadoCivil == "":
+                    estado = mLogin.EstadoCivil.objects.get(idEstadoCivil="1")
+                else:
+                    estado = mLogin.EstadoCivil.objects.get(idEstadoCivil=estadoCivil)
+                if direccion == "":
+                    tipodireccion = mLogin.CatTipodireccion.objects.get(idtipoDireccion="1")
+                else:
+                    tipodireccion = mLogin.CatTipodireccion.objects.get(idtipoDireccion=direccion)
+
                 if request.POST.get("clienteProspecto",None) == "on":
                     prospecto = True
                 else:
@@ -69,7 +78,7 @@ def agregarCliente(request):
                 direccion.save()
                 return redirect('cliente:agregarCliente')
             else:
-                return render()
+                return redirect('cliente:agregarCliente')
         usuario = fLogin.UserForm()
         persona = f.PersonaForm()
         cliente = f.ClienteForm()

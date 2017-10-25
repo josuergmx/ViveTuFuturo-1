@@ -10,36 +10,63 @@ class Sale(models.Model):
     def __init__(self, *args, **kwargs):
         super(Sale, self).__init__(*args, **kwargs)
         conekta.api_key = settings.CONEKTA_PRIVATE_KEY
-
+        conekta.locale = 'es'
     def charge(self, price_in_cents, token_id, total,user,email):
         try:
-            charge = conekta.Charge.create({
-              "description":"Stogies",
-              "amount": price_in_cents,
-              "currency":"MXN",
-              "reference_id":"1_credito",
-              "card": token_id,
-              "details": {
-                "name": user,
-                "email": email,
-                "line_items": [{
-                  "name": "Credito de Asesor",
-                  "description": "",
-                  "unit_price": price_in_cents,
-                  "quantity": total,
-                  "sku": "cohb_s1",
-                  "category": "credit"
-                }],
-                "shipment": {
-                    "carrier":"ViveTuFuturo",
-                    "service":"Local",
-                    "price": price_in_cents,
-                  }
-              }
-            })
+            order = conekta.Order.create({
+            "line_items": [
+            {
+                "name": "Box of Cohiba S1s",
+                "description": "Imported From Mex.",
+                "unit_price": 20000,
+                "quantity": 1,
+                "sku": "cohb_s1",
+                "category": "food",
+                "type" : "physical",
+                "tags" : ["food", "mexican food"]
+            }],
+            "shipping_lines":[
+            {
+                "amount": 0,
+                "tracking_number": "TRACK123",
+                "carrier": "USPS",
+                "method": "Train",
+            "metadata": {
+                "random_key": "random_value"
+            }
+            }],
+            "customer_info":{
+                "name": "John Constantine",
+                "phone": "+525533445566",
+                "email": "john@meh.com",
+                "corporate": False,
+                "vertical_info": {}
+            },
+            "shipping_contact":{
+                "phone" : "5544332211",
+                "receiver": "Marvin Fuller",
+                "between_streets": "Ackerman Crescent",
+                "address": {
+                    "street1": "250 Alexis St",
+                    "state": "Alberta",
+                    "country": "MX",
+                    "postal_code": "23455",
+                    "metadata":{ "soft_validations": True}
+                }
+            },
+            "charges": [{
+                "payment_method":{
+                "type": "card",
+                "token_id": token_id
+                },
+                "amount": 20000
+            }],
+            "currency" : "mxn",
+            "metadata" : {"test" : "extra info"}
+        })
             return json.dumps(charge.__dict__)
         except conekta.ConektaError as e:
-            return e.error_json['message']
+            print(e.message)
 
 
 class Estatuscredito(models.Model):
