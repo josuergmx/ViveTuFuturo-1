@@ -20,7 +20,7 @@ def index(request):
                 cantidad = int(request.POST.get("cantidad",None))
                 for x in range(0,cantidad):
                     Creditos.save()
-                return HttpResponse(sale.charge(15, token_id,cantidad,request.user.first_name,request.user.email))
+                return HttpResponse(sale.charge(token_id,cantidad,request.user.first_name,request.user.email))
     else:
         raise PermissionDenied
 

@@ -1,72 +1,50 @@
+from __future__ import unicode_literals
+
 from django.db import models
 from cliente.models import AsesorCliente
 from asesor.models import Asesor
-# Create your models here.
 from django.conf import settings
 import conekta
-import json
 
 class Sale(models.Model):
     def __init__(self, *args, **kwargs):
         super(Sale, self).__init__(*args, **kwargs)
-        conekta.api_key = settings.CONEKTA_PRIVATE_KEY
-        conekta.locale = 'es'
-    def charge(self, price_in_cents, token_id, total,user,email):
+        conekta.api_key = settings.CONEKTA_PUBLIC_KEY
+ #request.user.first_name,request.user.email
+    def charge(self, token_id,cantidad,nombre,email):
+        total = 0
+        for i in range(0,cantidad):
+            total = total + 20000
         try:
             order = conekta.Order.create({
             "line_items": [
             {
-                "name": "Box of Cohiba S1s",
-                "description": "Imported From Mex.",
+                "name": "Creditos",
+                "description": "Creditos de Vive Tu futuro.",
                 "unit_price": 20000,
-                "quantity": 1,
-                "sku": "cohb_s1",
-                "category": "food",
-                "type" : "physical",
-                "tags" : ["food", "mexican food"]
-            }],
-            "shipping_lines":[
-            {
-                "amount": 0,
-                "tracking_number": "TRACK123",
-                "carrier": "USPS",
-                "method": "Train",
-            "metadata": {
-                "random_key": "random_value"
-            }
+                "quantity": cantidad,
             }],
             "customer_info":{
-                "name": "John Constantine",
-                "phone": "+525533445566",
-                "email": "john@meh.com",
+                "name": nombre,
+                "phone": "+52553344556",
+                "email": email,
                 "corporate": False,
                 "vertical_info": {}
-            },
-            "shipping_contact":{
-                "phone" : "5544332211",
-                "receiver": "Marvin Fuller",
-                "between_streets": "Ackerman Crescent",
-                "address": {
-                    "street1": "250 Alexis St",
-                    "state": "Alberta",
-                    "country": "MX",
-                    "postal_code": "23455",
-                    "metadata":{ "soft_validations": True}
-                }
             },
             "charges": [{
                 "payment_method":{
                 "type": "card",
                 "token_id": token_id
                 },
-                "amount": 20000
+                "amount": total
             }],
             "currency" : "mxn",
             "metadata" : {"test" : "extra info"}
-        })
-            return json.dumps(charge.__dict__)
+            })
+            print(order.id)
+
         except conekta.ConektaError as e:
-            print(e.message)
+            return e.error_json['message']
 
 
 class Estatuscredito(models.Model):
@@ -79,6 +57,6 @@ class Estatuscredito(models.Model):
 
 class Creditos(models.Model):
     idCredito = models.AutoField(primary_key=True)
-    estatusCredito = models.OneToOneField(Estatuscredito)
+    estatusCredito = models.ForeignKey(Estatuscredito, blank=True, null=True)
     idAsesor = models.ForeignKey(Asesor,on_delete=models.CASCADE)
     idCliente = models.OneToOneField(AsesorCliente, blank=True, null=True)

@@ -23,7 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'c8im-&h4mn2wzheql9r9z#d9&fj_xrhfu35l_5_i_lv@lk%hn3'
 
 #conecta public api key
-CONEKTA_PUBLIC_KEY = 'key_IDQbWFwwjesTzmqdMQYMxdA'
+CONEKTA_PUBLIC_KEY = 'key_wfarNpvgNDNvt1kknSQfPw'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
