@@ -2,8 +2,9 @@ from __future__ import unicode_literals
 
 from django.db import models
 from cliente.models import AsesorCliente
-from asesor.models import Asesor
+from login.models import Persona
 from django.conf import settings
+from django.contrib.auth.models import User
 import conekta
 
 class Sale(models.Model):
@@ -11,8 +12,9 @@ class Sale(models.Model):
         super(Sale, self).__init__(*args, **kwargs)
         conekta.api_key = settings.CONEKTA_PUBLIC_KEY
  #request.user.first_name,request.user.email
-    def charge(self, token_id,cantidad,nombre,email):
+    def charge(self,token_id,cantidad):
         total = 0
+        print("model: ",cantidad,type(cantidad))
         for i in range(0,cantidad):
             total = total + 20000
         try:
@@ -25,9 +27,9 @@ class Sale(models.Model):
                 "quantity": cantidad,
             }],
             "customer_info":{
-                "name": nombre,
+                "name": "nombre",
                 "phone": "+52553344556",
-                "email": email,
+                "email": "eckobik@gmail.com",
                 "corporate": False,
                 "vertical_info": {}
             },
@@ -53,10 +55,10 @@ class Estatuscredito(models.Model):
     descripcion = models.CharField(max_length=200, blank=True, null=True)
 
     def __str__(self):
-        return (self.nombre,self.descripcion)
+        return self.nombre
 
 class Creditos(models.Model):
     idCredito = models.AutoField(primary_key=True)
     estatusCredito = models.ForeignKey(Estatuscredito, blank=True, null=True)
-    idAsesor = models.ForeignKey(Asesor,on_delete=models.CASCADE)
+    idAsesor = models.ForeignKey(Persona,on_delete=models.CASCADE)
     idCliente = models.OneToOneField(AsesorCliente, blank=True, null=True)

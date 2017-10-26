@@ -3,6 +3,7 @@ from . import forms as f
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_protect
 from .models import Sale,Creditos
+from . import models as m
 from django.conf import settings
 from django.contrib.auth.decorators import login_required
 from django.core.exceptions import PermissionDenied
@@ -14,13 +15,19 @@ def index(request):
         if request.method == 'GET':
             return render(request, 'conekta/main.html')
         else:
-            token_id = request.POST["conektaTokenId"]
+            token_id = request.POST.get("conektaTokenId",False)
             sale = Sale()
+            print(token_id)
             if token_id: #Prevents send empty token
                 cantidad = int(request.POST.get("cantidad",None))
                 for x in range(0,cantidad):
-                    Creditos.save()
-                return HttpResponse(sale.charge(token_id,cantidad,request.user.first_name,request.user.email))
+                    estatus = m.Estatuscredito.objects.get(nombre="Sin asignar")
+                    credito = Creditos(
+                        idAsesor=request.user.persona,
+                        estatusCredito=estatus
+                    )
+                    credito.save()
+                return HttpResponse(sale.charge(token_id,cantidad))
     else:
         raise PermissionDenied
 

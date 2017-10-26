@@ -74,7 +74,7 @@ def agregarCliente(request):
                     facebookid = request.POST.get("facebookid",None),
                 )
                 clientec.save()
-                cl = contacto.save()
+                contacto.save()
                 direccion.save()
                 return redirect('cliente:agregarCliente')
             else:
