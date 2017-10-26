@@ -66,6 +66,6 @@ body{
   color: #6a6c6f;
   font-weight: lighter;
 }
-#recent-actions-module{
-
+.breadcrumbs{
+  background-color: #354a5e !important;
 }
