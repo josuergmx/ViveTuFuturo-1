@@ -9,7 +9,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
 
     <!-- Page title -->
-    <title>{% block title %}Menú | ViveTuFuturo{% endblock %}</title>
+    <title>{% block title %}Compra creditos{% endblock %}</title>
 
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
     <!--<link rel="shortcut icon" type="image/ico" href="favicon.ico" />-->
@@ -34,6 +34,29 @@
     </style>
 </head>
 <body>
+
+      <div id="header">
+          {% block header %}
+          <div class="color-line">
+          </div>
+          <div id="logo" class="light-version">
+              <span>
+                 Vive tu Futuro: {{user.username}}
+              </span>
+          </div>
+          <nav role="navigation">
+              <div class="navbar-right">
+                  <ul class="nav navbar-nav no-borders">
+                      <li>
+                          <a href="{% url 'login:hola' %}" id="sidebar" class="right-sidebar-toggle">
+                              <i class="pe-7s-upload pe-7s-news-paper"></i>
+                          </a>
+                      </li>
+                  </ul>
+              </div>
+          </nav>
+        {% endblock %}
+      </div>
 <!-- Simple splash screen-->
 <div class="content">
     <div class="row">

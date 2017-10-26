@@ -44,8 +44,8 @@ INSTALLED_APPS = [
     'aseguradoras',
     'asesor',
     'cliente',
-    'conekta',
     'login',
+    'creditos',
     'sesion1',
 
 ]

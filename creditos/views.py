@@ -57,3 +57,6 @@ def crearOrden(request):
             return render(request,"conekta/main.html",context)
     else:
         raise PermissionDenied
+from django.shortcuts import render
+
+# Create your views here.
