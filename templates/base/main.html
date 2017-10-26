@@ -21,15 +21,18 @@
     <link rel="stylesheet" href="{% static "login/login.css" %}">
     <link rel="stylesheet" href="{% static "vendor/admin-tools/admin-forms/css/admin-forms.css" %}">
     <link rel="stylesheet" href="{% static "vendor/bootstrap/dist/css/bootstrap.css" %}">
+    <link rel="stylesheet" href="{% static "vendor/datatables_plugins/integration/bootstrap/3/dataTables.bootstrap.css" %}">
 
     <!-- App styles -->
     <link rel="stylesheet" href="{% static "fonts/pe-icon-7-stroke/css/pe-icon-7-stroke.css" %}" />
     <link rel="stylesheet" href="{% static "fonts/pe-icon-7-stroke/css/helper.css" %}" />
     <link rel="stylesheet" href="{% static "styles/style.css" %}"/>
     <link rel="stylesheet" href="{% static "dashboard/dashboard.css" %}"/>
+    <!--
     <link rel="stylesheet" href="{% static "vendor/fullcalendar/dist/fullcalendar.print.css" %}" media="print">
     <link rel="stylesheet" href="{% static "vendor/fullcalendar/dist/fullcalendar.min.css" %}">
     <script src="{% static "vendor/fullcalendar/dist/fullcalendar.min.js" %}"></script>
+    -->
     <style media="screen">
       .text-center  { text-align: center; }
       .padding-up { margin: 5% 0; }
@@ -58,6 +61,11 @@
         <nav role="navigation">
             <div class="navbar-right">
                 <ul class="nav navbar-nav no-borders">
+                    <li>
+                        <a href="{% url 'login:hola' %}" id="sidebar" class="right-sidebar-toggle">
+                            <i class="pe-7s-upload pe-7s-home"></i>
+                        </a>
+                    </li>
                     <li class="dropdown">
                         <a class="dropdown-toggle label-menu-corner" href="#" data-toggle="dropdown">
                             <i class="pe-7s-mail"></i>
@@ -84,11 +92,6 @@
                             </li>
                             <li class="summary"><a href="#">Ver todos los mensajes</a></li>
                         </ul>
-                    </li>
-                    <li>
-                        <a href="{% url 'login:hola' %}" id="sidebar" class="right-sidebar-toggle">
-                            <i class="pe-7s-upload pe-7s-news-paper"></i>
-                        </a>
                     </li>
                     <li class="dropdown">
                         <a href="{% url 'login:logout' %}">
