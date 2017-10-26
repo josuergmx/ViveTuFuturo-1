@@ -5,7 +5,7 @@ from cliente.models import AsesorCliente
 from login.models import Persona
 from django.conf import settings
 from django.contrib.auth.models import User
-import conekta
+
 
 class Sale(models.Model):
     def __init__(self, *args, **kwargs):
