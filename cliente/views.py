@@ -7,7 +7,7 @@ from login import models as mLogin
 from agenda import models as mAgenda
 from datetime import date
 from django.contrib.auth.decorators import login_required
-from django.core.exceptions import PermissionDenied
+
 
 # Create your views here.
 
@@ -20,13 +20,22 @@ def agregarCliente(request):
             cliente = f.ClienteForm(request.POST)
             print(usuario.is_valid())
             print(request.POST)
-            if usuario.is_valid() and persona.is_valid and cliente.is_valid():
+            if usuario.is_valid() and persona.is_valid() and cliente.is_valid():
                 user = usuario.save()
                 rol = mLogin.Roles.objects.get(idRole=1)
                 fecha = request.POST.get("fechaDeNacimiento",None)
+                estadoCivil = request.POST.get("estadoCivil",None)
+                direccion = request.POST.get("idtipodireccion",None)
                 persona = mLogin.Persona.objects.get(user_id=user)
-                tipodireccion = mLogin.CatTipodireccion.objects.get(idtipoDireccion=request.POST.get("idtipodireccion",None))
-                estado = mLogin.EstadoCivil.objects.get(idEstadoCivil=request.POST.get("estadoCivil",None))
+                if estadoCivil == "":
+                    estado = mLogin.EstadoCivil.objects.get(idEstadoCivil="1")
+                else:
+                    estado = mLogin.EstadoCivil.objects.get(idEstadoCivil=estadoCivil)
+                if direccion == "":
+                    tipodireccion = mLogin.CatTipodireccion.objects.get(idtipoDireccion="1")
+                else:
+                    tipodireccion = mLogin.CatTipodireccion.objects.get(idtipoDireccion=direccion)
+
                 if request.POST.get("clienteProspecto",None) == "on":
                     prospecto = True
                 else:
@@ -65,11 +74,11 @@ def agregarCliente(request):
                     facebookid = request.POST.get("facebookid",None),
                 )
                 clientec.save()
-                cl = contacto.save()
+                contacto.save()
                 direccion.save()
                 return redirect('cliente:agregarCliente')
             else:
-                return render()
+                return redirect('cliente:agregarCliente')
         usuario = fLogin.UserForm()
         persona = f.PersonaForm()
         cliente = f.ClienteForm()
@@ -84,7 +93,8 @@ def agregarCliente(request):
         }
         return render(request,"cliente/cliente_add.html",context)
     else:
-        raise PermissionDenied
+        return render(request,'error/404.html')
+
 
 @login_required(redirect_field_name='login:login')
 def clientes(request,idAsesorCliente):
@@ -100,7 +110,8 @@ def clientes(request,idAsesorCliente):
         }
         return render(request,"cliente/cliente_show.html",context)
     else:
-        raise PermissionDenied
+        return render(request,'error/404.html')
+
 
 @login_required(redirect_field_name='login:login')
 def gestionarClientes(request):
@@ -111,7 +122,8 @@ def gestionarClientes(request):
         }
         return render(request,"cliente/cliente_gestionar.html",context)
     else:
-        raise PermissionDenied
+        return render(request,'error/404.html')
+
 
 @login_required(redirect_field_name='login:login')
 def editar(request,idAsesorCliente):
@@ -142,7 +154,8 @@ def editar(request,idAsesorCliente):
             }
             return render(request,"cliente/cliente_editar.html",context)
     else:
-        raise PermissionDenied
+        return render(request,'error/404.html')
+
 
 @login_required(redirect_field_name='login:login')
 def eliminar(request,idAsesorCliente):
@@ -153,7 +166,8 @@ def eliminar(request,idAsesorCliente):
         )
         return redirect('cliente:gestionarCliente')
     else:
-        raise PermissionDenied
+        return render(request,'error/404.html')
+
 
 
 @login_required(redirect_field_name='login:login')

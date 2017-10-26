@@ -39,8 +39,9 @@ class Persona(models.Model):
         if kwargs['created']:
             persona_profile = Persona.objects.create(user=kwargs['instance'])
     post_save.connect(create_profile,sender=User)
+
     def __str__(self):
-        return self.user.first_name
+        return (self.user.first_name)
 
 class Contacto(models.Model):
     celular = models.CharField(max_length=15,primary_key=True)

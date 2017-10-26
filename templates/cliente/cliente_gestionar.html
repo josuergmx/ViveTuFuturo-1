@@ -70,8 +70,14 @@
                   </tr>
                 {% endif %}
                 {%endfor%}
-
+              </tbody>
+              </table>
+              <a href="{% url 'login:hola' %}" class="btn btn-success btn-m">
+                  <span class="bold">Regresar</span>
+                  <i class="fa fa-angle-right"></i>
+              </a>
 </div>
+
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">

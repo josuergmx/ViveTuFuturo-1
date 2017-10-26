@@ -5,7 +5,7 @@ from . import models as m_l
 from django.contrib import auth
 from django.contrib.auth.decorators import login_required
 from cliente import models as mCliente
-from django.core.exceptions import PermissionDenied
+
 # Create your views here.
 
 """
@@ -31,15 +31,14 @@ def login(request):
                     return redirect('login:tipo')
             else:
                 return redirect("login:login")
-        return render(request,"log/login.html",)
+        return render(request,"log/login.html")
 
 @login_required(redirect_field_name='login:login')
 def tipo(request):
     if request.user.persona.idRol.idRole == 3:
-        return render(request,'log/roles.html',)
+        return render(request,'log/roles.html')
     else:
-        raise PermissionDenied
-
+        return render(request,'log/404.html')
 def logout(request):
     auth.logout(request)
     return redirect('principal')
@@ -60,4 +59,4 @@ def hola(request):
         }
         return render(request,"perfil/dashboard.html",context)
     else: #Aqui va la vista del cliente
-        raise PermissionDenied
+        return render(request,'log/404.html')
