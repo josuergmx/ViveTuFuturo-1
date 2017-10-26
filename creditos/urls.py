@@ -6,7 +6,12 @@ from . import views
 urlpatterns = [
     url(
         regex=r'^orden/$',
-        view=views.index,
+        view=views.orden,
         name='orden'
     ),
+	url(
+		regex=r'^inicio/$',
+		view=views.index,
+		name='inicio'
+	),
 ]
