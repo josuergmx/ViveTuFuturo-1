@@ -6,7 +6,6 @@ from .models import Sale,Creditos
 from . import models as m
 from django.conf import settings
 from django.contrib.auth.decorators import login_required
-from django.core.exceptions import PermissionDenied
 
 @csrf_protect
 @login_required(redirect_field_name='login:login')
@@ -29,7 +28,8 @@ def index(request):
                     credito.save()
                 return HttpResponse(sale.charge(token_id,cantidad))
     else:
-        raise PermissionDenied
+        return render(request,'error/404.html')
+
 
 # Create your views here.
 @login_required(redirect_field_name='login:login')
@@ -56,7 +56,8 @@ def crearOrden(request):
             }
             return render(request,"conekta/main.html",context)
     else:
-        raise PermissionDenied
+        return render(request,'error/404.html')
+
 from django.shortcuts import render
 
 # Create your views here.

@@ -7,7 +7,7 @@ from login import models as mLogin
 from agenda import models as mAgenda
 from datetime import date
 from django.contrib.auth.decorators import login_required
-from django.core.exceptions import PermissionDenied
+
 
 # Create your views here.
 
@@ -93,7 +93,8 @@ def agregarCliente(request):
         }
         return render(request,"cliente/cliente_add.html",context)
     else:
-        raise PermissionDenied
+        return render(request,'error/404.html')
+
 
 @login_required(redirect_field_name='login:login')
 def clientes(request,idAsesorCliente):
@@ -109,7 +110,8 @@ def clientes(request,idAsesorCliente):
         }
         return render(request,"cliente/cliente_show.html",context)
     else:
-        raise PermissionDenied
+        return render(request,'error/404.html')
+
 
 @login_required(redirect_field_name='login:login')
 def gestionarClientes(request):
@@ -120,7 +122,8 @@ def gestionarClientes(request):
         }
         return render(request,"cliente/cliente_gestionar.html",context)
     else:
-        raise PermissionDenied
+        return render(request,'error/404.html')
+
 
 @login_required(redirect_field_name='login:login')
 def editar(request,idAsesorCliente):
@@ -151,7 +154,8 @@ def editar(request,idAsesorCliente):
             }
             return render(request,"cliente/cliente_editar.html",context)
     else:
-        raise PermissionDenied
+        return render(request,'error/404.html')
+
 
 @login_required(redirect_field_name='login:login')
 def eliminar(request,idAsesorCliente):
@@ -162,7 +166,8 @@ def eliminar(request,idAsesorCliente):
         )
         return redirect('cliente:gestionarCliente')
     else:
-        raise PermissionDenied
+        return render(request,'error/404.html')
+
 
 
 @login_required(redirect_field_name='login:login')
