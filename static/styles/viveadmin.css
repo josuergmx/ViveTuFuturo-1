@@ -69,3 +69,37 @@ body{
 .breadcrumbs{
   background-color: #354a5e !important;
 }
+#panel-contenido h1{
+  font-weight: lighter;
+  font-size: 25px;
+  color: #34495e;
+}
+#panel-contenido{
+  text-align: center;
+}
+label{
+  text-align: right;
+  width: 25%;
+  margin-left:25%;
+}
+input[type=text], input[type=number], select, .related-widget-wrapper{
+  width: 25%;
+}
+.form-row{
+  text-align: left;
+}
+@media (max-width: 650px) {
+  label{
+    margin-left:15%;
+  }
+  #nombreLabel{
+    display: none;
+  }
+  #panel-contenido h1{
+    font-size: 20px;
+  }
+}
+
+  #content-related{
+    display: none;
+  }

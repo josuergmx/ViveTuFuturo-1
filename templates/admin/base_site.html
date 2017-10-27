@@ -56,14 +56,14 @@
     {% include "admin/header.html"%}
     <!-- End: header -->
     <!-- Main Wrapper -->
-        <div class="content animate-panel margin_small ">
+    <div class="row">
+        <div class="col-sm-1 col-xs-1 col-md-1"></div>
+        <div id="panel-general" class="content animate-panel margin_small col-sm-10 col-xs-10 col-md-10">
             <!--  Contenido Principal de la Aplicacion -->
-           <!-- Container -->
-            <div id="container">
                 {% if not is_popup %}
                 <!-- Header -->
-                <div class="margin_xsmall ">
-                    <div class="hpanel">
+                <div class="margin_xsmall">
+                    <div class="hpanel" id="panel-header">
                         <div class="panel-body panel-titulo-admin">
                             <div id="branding font_medium">
                             {% block branding %}{% endblock %}
@@ -94,7 +94,7 @@
                             {% endif %}
                             {% endblock %}
                             {% block nav-global %}{% endblock %}
-                            <p> Mi Nombre: {{user.first_name}}</p>
+                            <p id="nombreLabel"> Mi Nombre: {{user.first_name}}</p>
                         </div>
                     </div>
                 </div>
@@ -117,9 +117,7 @@
 
                 <!--Contenido DJango-->
                     <div id="contenido" class="row margin_small">
-                        <div class="col-md-1"></div>
-                        <div class="col-md-8">
-                            <div class="hpanel panel-titulo-admin font-admin">
+                            <div id="panel-contenido" class="hpanel panel-titulo-admin font-admin">
                                 <div class="panel-body list tabla-admin">
 
                                         {% block pretitle %}{% endblock %}
@@ -130,28 +128,20 @@
                                         {% endblock %}
                                         {% block sidebar %}{% endblock %}
                                         <br class="clear" />
-
                                 </div>
                             </div>
-                        </div>
                     </div>
-
                 <!-- END Content -->
-
                 {% block footer %}<div id="footer"></div>{% endblock %}
-            </div>
             <!-- END Container -->
-
         </div>
-
-
-
+    </div>
         <!-- Footer-->
         <footer class="footer left-zero">
             <span class="pull-right">
-                Example text
+                Página de Administración
             </span>
-            Company 2015-2021
+            Vive Tu Futuro 2017-2021
         </footer>
 
 
@@ -163,18 +153,9 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js" integrity="sha256-T0Vest3yCU7pafRw9r+settMBX6JkKN06dqBnpQ8d30=" crossorigin="anonymous"></script>
     <script src="{%static 'vendor/slimScroll/jquery.slimscroll.min.js'%}"></script>
-    <script src="{%static 'vendor/jquery-flot/jquery.flot.js'%}"></script>
-    <script src="{%static 'vendor/jquery-flot/jquery.flot.resize.js'%}"></script>
-    <script src="{%static 'vendor/jquery-flot/jquery.flot.pie.js'%}"></script>
-    <script src="{%static 'vendor/flot.curvedlines/curvedLines.js'%}"></script>
-    <script src="{%static 'vendor/jquery.flot.spline/index.js'%}"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/metisMenu/2.7.0/metisMenu.min.js"></script>
-    <script src="{%static 'vendor/iCheck/icheck.min.js'%}"></script>
-    <script src="{%static 'vendor/peity/jquery.peity.min.js'%}"></script>
-    <script src="{%static 'vendor/sparkline/index.js'%}"></script>
-
     <!-- App scripts -->
     <script src="{%static 'scripts/homer.js'%}"></script>
-    <script src="{%static 'scripts/charts.js'%}"></script>
+
 </body>
 </html>
