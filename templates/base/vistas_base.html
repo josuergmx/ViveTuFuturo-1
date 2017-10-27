@@ -10,7 +10,8 @@
 
     <!-- title -->
     <title>{% block title %}Menú | ViveTuFuturo{% endblock %}</title>
-
+    
+    <!-- CSS que utlizan todas las vistas--> 
     {% endblock %}
     <!-- Vendor styles -->
     <link rel="stylesheet" href="{% static "vendor/fontawesome/css/font-awesome.min.css" %}">
@@ -22,6 +23,8 @@
     <link rel="stylesheet" href="{% static "fonts/pe-icon-7-stroke/css/pe-icon-7-stroke.css" %}" />
     <link rel="stylesheet" href="{% static "fonts/pe-icon-7-stroke/css/helper.css" %}" />
     <link rel="stylesheet" href="{% static "styles/style.css" %}"/>
+
+    <!--CSS que pueden utilizar otras visats-->
     {% block css %}{% endblock %}
 </head>
   <body>
@@ -87,19 +90,20 @@
       {% endblock %}
     </div>
 
+    <!-- Bloque del contenido que estará debajo del navbar--> 
     {% block content %}
     {% endblock %}
-    <!-- Vendor scripts -->
+
+    <!-- Javascript que utilizan todas las vistas -->
     <script src="{% static "vendor/jquery/dist/jquery.min.js" %}"></script>
     <script src="{% static "vendor/jquery-ui/jquery-ui.min.js" %}"></script>
     <script src="{% static "vendor/slimScroll/jquery.slimscroll.min.js" %}"></script>
     <script src="{% static "vendor/bootstrap/dist/js/bootstrap.min.js" %}"></script>
     <script src="{% static "vendor/metisMenu/src/metisMenu.js" %}"></script>
     <script src="{% static "vendor/iCheck/icheck.min.js" %}"></script>
-
-    {% block javascripts %}
     
-    {% endblock %}
+    <!-- Javascript que utilizan de forma individual-->
+    {% block javascripts %}{% endblock %}
     <!-- App scripts -->
     <script src="{% static "scripts/homer.js" %}"></script>
 
