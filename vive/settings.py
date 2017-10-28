@@ -28,7 +28,7 @@ CONEKTA_PUBLIC_KEY = 'key_wfarNpvgNDNvt1kknSQfPw'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['vivefuturo.herokuapp.com']
+ALLOWED_HOSTS = ['localhost','vivefuturo.herokuapp.com']
 
 
 # Application definition
@@ -148,6 +148,7 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = (os.path.join(BASE_DIR,'static'),)
 
 #HTTP and SSL para heroku
+"""
 CORS_REPLACE_HTTPS_REFERER   = True
 HOST_SCHEME                  = "https://"
 SECURE_PROXY_SSL_HEADER      = ('HTTP_X_FORWARDED_PROTO','https')
@@ -157,3 +158,4 @@ CSRF_COOKIE_SECURE           = True
 SECURE_HSTS_INCLUDE_SUBDOMAINS = True
 SECURE_HSTS_SECONDS          = 1000000
 SECURE_FRAME_DENY            = True
+"""
