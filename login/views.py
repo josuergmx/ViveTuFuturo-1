@@ -53,9 +53,9 @@ def hola(request):
             for i in asesorPromotor:
                 if i.activo == True:
                     n_asesores = n_asesores + 1
-
+        print(request.user.persona.idRol.idRole)
         context = {
-            "rol":request.persona.idRol.idRol,
+            "rol":request.user.persona.idRol.idRole,
             "asesores":n_asesores,
             "clientes":n_clientes
         }

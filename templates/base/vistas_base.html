@@ -10,8 +10,8 @@
 
     <!-- title -->
     <title>{% block title %}Menú | ViveTuFuturo{% endblock %}</title>
-    
-    <!-- CSS que utlizan todas las vistas--> 
+
+    <!-- CSS que utlizan todas las vistas-->
     {% endblock %}
     <!-- Vendor styles -->
     <link rel="stylesheet" href="{% static "vendor/fontawesome/css/font-awesome.min.css" %}">
@@ -77,7 +77,7 @@
                         </ul>
                     </li>
                     <li>
-                        <a href="#" id="sidebar" class="right-sidebar-toggle">
+                        <a href="{% url 'login:hola' %}" id="sidebar" class="right-sidebar-toggle">
                             <i class="pe-7s-upload pe-7s-news-paper"></i>
                         </a>
                     </li>
@@ -91,12 +91,12 @@
         </nav>
       {% endblock %}
     </div>
-    
-    <!-- Bloque del contenido que estará debajo del navbar--> 
+
+    <!-- Bloque del contenido que estará debajo del navbar-->
     {% block content %}
     {% endblock %}
-    
-    
+
+
     <footer class="footer" style="position: fixed;">
         Vive Tu Futuro 2017-2020
         <span class="pull-right">
@@ -112,10 +112,10 @@
     <script src="{% static "vendor/metisMenu/src/metisMenu.js" %}"></script>
     <script src="{% static "vendor/iCheck/icheck.min.js" %}"></script>
     <script src="{% static "scripts/homer.js" %}"></script>
-    
+
     <!-- Javascript que utilizan de forma individual-->
     {% block javascripts %}{% endblock %}
     <!-- App scripts -->
-    
+
   </body>
 </html>
