@@ -5,7 +5,7 @@ from . import models as m_l
 from django.contrib import auth
 from django.contrib.auth.decorators import login_required
 from cliente import models as mCliente
-
+from promotor import models as mPromotor
 # Create your views here.
 
 """
@@ -25,20 +25,14 @@ def login(request):
                 print(type(user.persona.idRol))
                 if user.persona.idRol.idRole == 1: #cliente
                     return redirect('cliente:hola')
-                elif user.persona.idRol.idRole == 2: #Asesor
-                    return redirect('login:hola')
                 else:
-                    return redirect('login:tipo')
+                    return redirect('login:hola')
             else:
+
                 return redirect("login:login")
         return render(request,"log/login.html")
 
-@login_required(redirect_field_name='login:login')
-def tipo(request):
-    if request.user.persona.idRol.idRole == 3:
-        return render(request,'log/roles.html')
-    else:
-        return render(request,'log/404.html')
+
 def logout(request):
     auth.logout(request)
     return redirect('principal')
@@ -48,13 +42,21 @@ def hola(request):
     #Vista del Asesor-promotor
     if request.user.persona.idRol.idRole == 2 or request.user.persona.idRol.idRole == 3:
         n_clientes = 0
+        n_asesores = 0
         asesorClientes = mCliente.AsesorCliente.objects.filter(idAsesor=request.user.id)
         for i in asesorClientes:
             if i.activo == True:
                 n_clientes = n_clientes + 1
+
         if request.user.persona.idRol.idRole == 3: #agregamos la parte de gestionar asesores
-            pass
+            asesorPromotor = mPromotor.promotorAsesor.objects.filter(idPromotor=request.user.id)
+            for i in asesorPromotor:
+                if i.activo == True:
+                    n_asesores = n_asesores + 1
+        print(request.user.persona.idRol.idRole)
         context = {
+            "rol":request.user.persona.idRol.idRole,
+            "asesores":n_asesores,
             "clientes":n_clientes
         }
         return render(request,"perfil/dashboard.html",context)

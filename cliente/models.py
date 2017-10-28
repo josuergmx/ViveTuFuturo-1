@@ -1,5 +1,4 @@
 from django.db import models
-from asesor.models import Asesor
 from login.models import Persona
 import login.models as lm
 import datetime
@@ -29,8 +28,8 @@ class AsesorCliente(models.Model):
     idCliente = models.OneToOneField(lm.Persona,on_delete=models.CASCADE)
     idAsesor = models.ForeignKey(User,on_delete=models.CASCADE)
     clienteProspecto = models.BooleanField()
-    Origen = models.ForeignKey(OrigenRecomendacion)
-    Estatus = models.ForeignKey(Estatus)
+    Origen = models.ForeignKey(OrigenRecomendacion,blank=True, null=True)
+    Estatus = models.ForeignKey(Estatus,blank=True, null=True)
     fechaActualizacion = models.DateField()
     ocupacion = models.CharField(max_length=150, blank=True, null=True)
     dependientes = models.CharField(max_length=150, blank=True, null=True)

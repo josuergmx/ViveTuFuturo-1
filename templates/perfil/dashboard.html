@@ -1,4 +1,4 @@
-{% extends 'base/main.html' %}
+{% extends 'base/vistas_base.html' %}
 {% load static  %}
 {% block content %}
 
@@ -33,6 +33,36 @@
 	                    </div>
 	                </div>
 	            </div>
+							{% if rol == 3 %}
+							<div class="col-md-3">
+								 <div class="hpanel">
+										 <div class="panel-body">
+												 <div class="stats-title pull-left">
+														 <h4>Asesores</h4>
+												 </div>
+												 <div class="stats-icon pull-right">
+														 <i class="pe-7s-user  fa-4x"></i>
+												 </div>
+												 <div class="m-t-xl">
+														 <h1 class="text-success">{{asesores}}</h1>
+														 <small>
+																 Lorem Ipsum is simply dummy text of the printing and <strong>typesetting industry</strong>. Lorem Ipsum has been.
+														 </small>
+												 </div>
+												 <div class="m-t-xl text-center">
+													 <!--<a href="{% url 'asesor:agregarAsesor' %}" class="btn btn-success btn-m">
+															<span class="bold">Agregar</span>
+														 <i class="fa fa-pencil"></i>
+														</a>
+													 <a href="{% url 'asesor:gestionarAsesor' %}" class="btn btn-success btn-m">
+																<span class="bold">Ver más</span>
+															 <i class="fa fa-angle-right"></i>
+														</a>-->
+										 </div>
+										 </div>
+								 </div>
+						 </div>
+						 {% endif %}
 	            <div class="col-md-3">
 	                <div class="hpanel">
 	                    <div class="panel-body">

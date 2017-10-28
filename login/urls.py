@@ -15,9 +15,5 @@ urlpatterns = [
         view=views.hola,
         name='hola'
     ),
-    url(
-        regex=r'^seleccion/$',
-        view=views.tipo,
-        name='tipo'
-    ),
+
 ]

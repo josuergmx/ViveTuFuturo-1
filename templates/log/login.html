@@ -10,6 +10,12 @@
     </span>
 </div>
 {% endblock %}
+
+<!-- CSS individuales -->
+{% block css %}
+    <link rel="stylesheet" href="{% static "login/login.css" %}">
+{% endblock %}
+
 {% block content %}
 {% if user.is_authenticated %}
 {% else %}
@@ -24,12 +30,13 @@ PARA VER ERRORES DE INICIO DE SESION
 <div class="login-container">
     <div class="row">
         <div class="col-md-12">
-            <div class="text-center m-b-md">
-                <h3>Vive tu Futuro</h3>
-                <small>Inicia sesion :)</small>
-            </div>
+            
             <div class="hpanel">
                 <div class="panel-body">
+                        <div class="text-center m-b-md">
+                            <h3>Vive tu Futuro</h3>
+                            <small>Inicia sesion :)</small>
+                        </div>
                         <form method="POST" id="loginForm">
                             {% csrf_token %}
                             <div class="form-group">
@@ -44,14 +51,16 @@ PARA VER ERRORES DE INICIO DE SESION
                             </div>
                             <button class="btn btn-success btn-block">Login</button>
                         </form>
+                        <div class="row">
+                            <br>
+                            <div class="col-md-12 text-center">
+                                <strong>Vive</strong> tu Futuro <br/> 2017 Copyright
+                            </div>
+                        </div>
                 </div>
             </div>
         </div>
     </div>
-    <div class="row">
-        <div class="col-md-12 text-center">
-            <strong>Vive</strong> tu Futuro <br/> 2017 Copyright
-        </div>
-    </div>
+    
 </div>
 {% endblock %}
