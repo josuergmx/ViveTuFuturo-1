@@ -1,10 +1,10 @@
 from django.conf.urls import url
-from reportesventas import views
+from . import views
 
 urlpatterns = [
     url(
-        regex=r'^reportes_ventas/$',
+        regex=r'^reportes/$',
         view=views.ReporteVentas.as_view(),
-        name='reportes_ventas'
+        name='reportes_'
     ),
 ]
