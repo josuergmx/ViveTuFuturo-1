@@ -18,7 +18,7 @@
     <link rel="stylesheet" href="{% static "vendor/metisMenu/src/metisMenu.css" %}">
     <link rel="stylesheet" href="{% static "vendor/animate.css/animate.css" %}">
     <link rel="stylesheet" href="{% static "vendor/bootstrap/dist/css/bootstrap.css" %}">
-     
+
     <!-- App styles -->
     <link rel="stylesheet" href="{% static "fonts/pe-icon-7-stroke/css/pe-icon-7-stroke.css" %}" />
     <link rel="stylesheet" href="{% static "fonts/pe-icon-7-stroke/css/helper.css" %}" />
@@ -27,7 +27,7 @@
     <!--CSS que pueden utilizar otras visats-->
     {% block css %}{% endblock %}
 </head>
-  <body>
+  <body class="fixed-footer">
     <!-- Simple splash screen-->
     <div class="splash">
         <div class="splash-title">
@@ -93,17 +93,34 @@
     <!-- Bloque del contenido que estará debajo del navbar--> 
     {% block content %}
     {% endblock %}
+<<<<<<< HEAD
 
     <!-- Javascript que utilizan todas las vistas -->
+=======
+    <footer class="footer">
+        <span class="pull-right">
+            Todos los Derechos Reservados <i class="fa fa-copyright"></i>
+        </span>
+        Vive Tu Futuro 2017-2020
+    </footer>
+    <!-- Vendor scripts -->
+>>>>>>> 95a3669db598a458d00da8e5b37a1abed791ffcd
     <script src="{% static "vendor/jquery/dist/jquery.min.js" %}"></script>
     <script src="{% static "vendor/jquery-ui/jquery-ui.min.js" %}"></script>
     <script src="{% static "vendor/slimScroll/jquery.slimscroll.min.js" %}"></script>
     <script src="{% static "vendor/bootstrap/dist/js/bootstrap.min.js" %}"></script>
     <script src="{% static "vendor/metisMenu/src/metisMenu.js" %}"></script>
     <script src="{% static "vendor/iCheck/icheck.min.js" %}"></script>
+<<<<<<< HEAD
     
     <!-- Javascript que utilizan de forma individual-->
     {% block javascripts %}{% endblock %}
+=======
+
+    {% block javascripts %}
+
+    {% endblock %}
+>>>>>>> 95a3669db598a458d00da8e5b37a1abed791ffcd
     <!-- App scripts -->
     <script src="{% static "scripts/homer.js" %}"></script>
 
