@@ -1,4 +1,4 @@
-#Python compilado
+venv
 *.pyc
-
-vive/*/migrations/*.py
+staticfiles
+.env

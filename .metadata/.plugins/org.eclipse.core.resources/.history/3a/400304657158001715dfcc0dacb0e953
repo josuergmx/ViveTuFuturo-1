@@ -1,6 +1,0 @@
-package com.project.control.hola;
-
-@RestController
-public class HolaControl {
-
-}

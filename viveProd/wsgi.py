@@ -1,5 +1,5 @@
 """
-WSGI config for vive project.
+WSGI config for viveProd project.
 
 It exposes the WSGI callable as a module-level variable named ``application``.
 
@@ -11,12 +11,6 @@ import os
 
 from django.core.wsgi import get_wsgi_application
 
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "vive.settings")
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "viveProd.settings")
 
 application = get_wsgi_application()
-
-from django.core.wsgi import get_wsgi_application
-from whitenoise.django import DjangoWhiteNoise
-
-application = get_wsgi_application()
-application = DjangoWhiteNoise(application)

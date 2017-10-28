@@ -3,19 +3,16 @@ from django.contrib.auth.decorators import login_required
 from . import models as mAsesor
 from login import models as mLogin
 from login import forms as fLogin
-from cliente import forms as f
-from . import forms as fAsesor
-
+from cliente import forms as fInfo
+from . import forms as f
 # Create your views here.
 @login_required(redirect_field_name='login:login')
 def agregarAsesor(request):
         if request.user.persona.idRol.idRole == 3:
             if request.method == 'POST':
                 usuario = fLogin.UserForm(request.POST)
-                persona = f.PersonaForm(request.POST)
-                print(usuario.is_valid())
-                print(request.POST)
-                if usuario.is_valid() and persona.is_valid() and cliente.is_valid():
+                persona = fInfo.PersonaForm(request.POST)
+                if usuario.is_valid():
                     user = usuario.save()
                     rol = mLogin.Roles.objects.get(idRole=2)
                     fecha = request.POST.get("fechaDeNacimiento",None)
@@ -61,16 +58,16 @@ def agregarAsesor(request):
                     clientec.save()
                     contacto.save()
                     direccion.save()
-
                     return redirect('asesor:gestionarAsesor')
                 else:
                     return redirect('asesor:agregarAsesor')
             usuario = fLogin.UserForm()
-            persona = f.PersonaForm()
-            direccion = f.DireccionForm()
-            contacto = f.ContactoForm()
-            institucion = fAsesor.promotorAsesorForm()
+            institucion = f.promotorAsesorForm()
+            persona = fInfo.PersonaForm()
+            direccion = fInfo.DireccionForm()
+            contacto = fInfo.ContactoForm()
             context = {
+                "institucion":institucion,
                 "usuario":usuario,
                 "persona":persona,
                 "contacto":contacto,
