@@ -5,6 +5,6 @@ from login.models import Persona
 # Create your models here.
 
 class promotorAsesor(models.Model):
-    idAsesor = models.ForeingKey(Persona)
+    idAsesor = models.ForeignKey(Persona)
     idPromotor = models.ForeignKey(User,on_delete=models.CASCADE)
     institucion = models.ForeignKey(Institucionfinanciera)
