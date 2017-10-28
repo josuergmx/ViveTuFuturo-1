@@ -20,7 +20,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/1.11/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'c8im-&h4mn2wzheql9r9z#d9&fj_xrhfu35l_5_i_lv@lk%hn3'
+SECRET_KEY = os.environ.get('SECRET_KEY','c8im-&h4mn2wzheql9r9z#d9&fj_xrhfu35l_5_i_lv@lk%hn3')
 
 #conecta public api key
 CONEKTA_PUBLIC_KEY = 'key_wfarNpvgNDNvt1kknSQfPw'
@@ -28,7 +28,7 @@ CONEKTA_PUBLIC_KEY = 'key_wfarNpvgNDNvt1kknSQfPw'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['vivefuturo.herokuapp.com']
 
 
 # Application definition
@@ -96,6 +96,11 @@ DATABASES = {
     }
 }
 
+#Para la conexion con el servicio gratuito de postgres en heroku
+import dj_database_url
+db_from_env = dj_database_url.config()
+DATABASES['default'].update(db_from_env)
+DATABASES['default']['CONN_MAX_AGE'] = 500
 
 # Password validation
 # https://docs.djangoproject.com/en/1.10/ref/settings/#auth-password-validators
@@ -142,9 +147,9 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 STATIC_URL = '/static/'
 STATICFILES_DIRS = (os.path.join(BASE_DIR,'static'),)
 
-
+#HTTP and SSL para heroku
 CORS_REPLACE_HTTPS_REFERER   = True
-HOST_SCHEME                  = "http://"
+HOST_SCHEME                  = "https://"
 SECURE_PROXY_SSL_HEADER      = ('HTTP_X_FORWARDED_PROTO','https')
 SECURE_SSL_REDIRECT          = True
 SESSION_COOKIE_SECURE        = True
