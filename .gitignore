@@ -1,2 +1,4 @@
 #Python compilado
 *.pyc
+
+vive/*/migrations/*.py
