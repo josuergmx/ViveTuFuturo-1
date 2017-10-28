@@ -2,17 +2,17 @@ from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from . import models as mAsesor
 from login import models as mLogin
-from login import forms as f
-from . import forms as fAesor
-# Create your views here.
+from login import forms as fLogin
+from cliente import forms as f
+from . import forms as fAsesor
 
+# Create your views here.
 @login_required(redirect_field_name='login:login')
 def agregarAsesor(request):
         if request.user.persona.idRol.idRole == 3:
             if request.method == 'POST':
                 usuario = fLogin.UserForm(request.POST)
                 persona = f.PersonaForm(request.POST)
-                cliente = f.ClienteForm(request.POST)
                 print(usuario.is_valid())
                 print(request.POST)
                 if usuario.is_valid() and persona.is_valid() and cliente.is_valid():
@@ -30,7 +30,6 @@ def agregarAsesor(request):
                         tipodireccion = mLogin.CatTipodireccion.objects.get(idtipoDireccion="1")
                     else:
                         tipodireccion = mLogin.CatTipodireccion.objects.get(idtipoDireccion=direccion)
-
                     if request.POST.get("clienteProspecto",None) == "on":
                         prospecto = True
                     else:
@@ -41,15 +40,6 @@ def agregarAsesor(request):
                         idRol = rol,
                         curp = request.POST.get("curp",None),
                         rfc = request.POST.get("rfc",None),
-                    )
-                    clientec = m.AsesorCliente(
-                        idCliente   = persona,
-                        idAsesor    = get_user(request),
-                        clienteProspecto = prospecto,
-                        Origen  = m.OrigenRecomendacion.objects.get(idOrigen=request.POST.get("Origen",None)),
-                        Estatus = m.Estatus.objects.get(idEstatus=request.POST.get("Estatus",None)),
-                        fechaActualizacion = date.today(),
-                        activo = True,
                     )
                     direccion = mLogin.Direccion(
                         idpersona = persona,
@@ -71,22 +61,22 @@ def agregarAsesor(request):
                     clientec.save()
                     contacto.save()
                     direccion.save()
+
                     return redirect('asesor:gestionarAsesor')
                 else:
                     return redirect('asesor:agregarAsesor')
             usuario = fLogin.UserForm()
             persona = f.PersonaForm()
-            cliente = f.ClienteForm()
             direccion = f.DireccionForm()
             contacto = f.ContactoForm()
+            institucion = fAsesor.promotorAsesorForm()
             context = {
                 "usuario":usuario,
                 "persona":persona,
-                "cliente":cliente,
                 "contacto":contacto,
                 "direccion":direccion,
             }
-            return render(request,"asesor/cliente_add.html",context)
+            return render(request,"asesor/asesor_add.html",context)
         else:
             return render(request,'error/404.html')
 

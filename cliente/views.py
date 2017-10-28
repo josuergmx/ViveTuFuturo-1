@@ -23,6 +23,8 @@ def agregarCliente(request):
             if usuario.is_valid() and persona.is_valid() and cliente.is_valid():
                 user = usuario.save()
                 rol = mLogin.Roles.objects.get(idRole=1)
+                origin = request.POST.get("Origen",None)
+                status = request.POST.get("Estatus",None)
                 fecha = request.POST.get("fechaDeNacimiento",None)
                 estadoCivil = request.POST.get("estadoCivil",None)
                 direccion = request.POST.get("idtipodireccion",None)
@@ -35,6 +37,14 @@ def agregarCliente(request):
                     tipodireccion = mLogin.CatTipodireccion.objects.get(idtipoDireccion="1")
                 else:
                     tipodireccion = mLogin.CatTipodireccion.objects.get(idtipoDireccion=direccion)
+                if origin == "":
+                    origenCliente = mLogin.CatTipodireccion.objects.get(idtipoDireccion="1")
+                else:
+                    origenCliente = mLogin.CatTipodireccion.objects.get(idtipoDireccion=origin)
+                if status == "":
+                    estatusCliente = m.Estatus.objects.get(idEstatus="1")
+                else:
+                    estatusCliente = m.Estatus.objects.get(idEstatus=status)
 
                 if request.POST.get("clienteProspecto",None) == "on":
                     prospecto = True
@@ -51,8 +61,8 @@ def agregarCliente(request):
                     idCliente   = persona,
                     idAsesor    = get_user(request),
                     clienteProspecto = prospecto,
-                    Origen  = m.OrigenRecomendacion.objects.get(idOrigen=request.POST.get("Origen",None)),
-                    Estatus = m.Estatus.objects.get(idEstatus=request.POST.get("Estatus",None)),
+                    Origen  = origenCliente,
+                    Estatus = estatusCliente,
                     fechaActualizacion = date.today(),
                     activo = True,
                 )

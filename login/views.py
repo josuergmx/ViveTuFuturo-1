@@ -47,7 +47,6 @@ def hola(request):
         for i in asesorClientes:
             if i.activo == True:
                 n_clientes = n_clientes + 1
-
         if request.user.persona.idRol.idRole == 3: #agregamos la parte de gestionar asesores
             asesorPromotor = mPromotor.promotorAsesor.objects.filter(idPromotor=request.user.id)
             for i in asesorPromotor:

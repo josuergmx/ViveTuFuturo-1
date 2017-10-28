@@ -60,5 +60,5 @@ class Estatuscredito(models.Model):
 class Creditos(models.Model):
     idCredito = models.AutoField(primary_key=True)
     estatusCredito = models.ForeignKey(Estatuscredito, blank=True, null=True)
-    idAsesor = models.ForeignKey(Persona,on_delete=models.CASCADE)
+    idAsesor = models.ForeignKey(User,on_delete=models.CASCADE)
     idCliente = models.OneToOneField(AsesorCliente, blank=True, null=True)
