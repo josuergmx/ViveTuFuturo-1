@@ -55,7 +55,7 @@ def hola(request):
                     n_asesores = n_asesores + 1
 
         context = {
-            "rol":request.persona.idRol.idRol,
+            #"rol":request.persona.idRol.idRol,
             "asesores":n_asesores,
             "clientes":n_clientes
         }
