@@ -1,6 +1,5 @@
 from django.db import models
-from cliente.models import Cliente
-from asesor.models import Asesor
+from aseguradoras.models import Servicios
 from login.models import Persona
 from django.contrib.auth.models import User
 # Create your models here.

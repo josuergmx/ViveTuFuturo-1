@@ -11,7 +11,14 @@ class ReporteVentas(View):
         # Utilizamos el archivo logo_django.png que esta guardado en la carpeta media/imagenes
         archivo_imagen = (settings.MEDIA_ROOT+'/images/vive/a.png')
         # Definimos el tamano de la imagen a cargar y las coordenadas correspondientes
-        pdf.drawImage(archivo_imagen, 40, 750, 120, 90, preserveAspectRatio=True)
+        pdf.drawImage(archivo_imagen, 40, 750, 120, 70, preserveAspectRatio=True)
+
+        # Establecemos el tamaño de letra en 16 y el tipo de letra Helvetica
+        pdf.setFont("Helvetica", 18)
+        # Dibujamos una cadena en la ubicación X,Y especificada
+        pdf.drawString(230, 790, u"VIVE TU FUTURO")
+        pdf.setFont("Helvetica", 14)
+        pdf.drawString(200, 770, u"REPORTE DE VENTAS")
 
     def get(self, request, *args, **kwargs):
         # Indicamos el tipo de contenido a devolver, en este caso un pdf
