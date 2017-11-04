@@ -25,6 +25,7 @@ urlpatterns = [
     url(r'^asesor/',include('asesor.urls',namespace='asesor')),
     url(r'^creditos/',include('creditos.urls',namespace='conekta')),
     url(r'^cliente/',include('cliente.urls',namespace='cliente')),
+    url(r'^ventas/',include('ventas.urls',namespace='ventas')),
 ]
 
 

@@ -3,8 +3,8 @@ from . import views
 
 urlpatterns = [
     url(
-        regex=r'^reportes/$',
+        regex=r'^reporte/$',
         view=views.ReporteVentas.as_view(),
-        name='reportes_'
+        name='reporte'
     ),
 ]
