@@ -18,6 +18,9 @@
     <link rel="stylesheet" href="{% static "vendor/metisMenu/src/metisMenu.css" %}">
     <link rel="stylesheet" href="{% static "vendor/animate.css/animate.css" %}">
     <link rel="stylesheet" href="{% static "vendor/bootstrap/dist/css/bootstrap.css" %}">
+    
+     <!--CSS que pueden utilizar otras visats-->
+    {% block css %}{% endblock %}
 
     <!-- App styles -->
     <link rel="stylesheet" href="{% static "fonts/pe-icon-7-stroke/css/pe-icon-7-stroke.css" %}" />
@@ -26,14 +29,12 @@
     <link rel="stylesheet" href="{% static "styles/style.css" %}"/>
     <link rel="stylesheet" href="{% static "styles/vive.css"%}"/>
 
-    <!--CSS que pueden utilizar otras visats-->
-    {% block css %}{% endblock %}
-
 </head>
   <body class="fixed-footer">
     <!-- Simple splash screen-->
     <div class="splash">
         <div class="splash-title">
+            <h1>Espera, por favor. </h1><p>El sistema está cargando tu futuro. </p>
             <img src="{% static "images/loading-bars.svg" %}" width="64" height="64" />
         </div>
     </div>
@@ -112,6 +113,7 @@
     <script src="{% static "vendor/bootstrap/dist/js/bootstrap.min.js" %}"></script>
     <script src="{% static "vendor/metisMenu/src/metisMenu.js" %}"></script>
     <script src="{% static "vendor/iCheck/icheck.min.js" %}"></script>
+    <script src="{% static "vendor/sparkline/index.js" %}"></script>
     <script src="{% static "scripts/homer.js" %}"></script>
 
     <!-- Javascript que utilizan de forma individual-->
