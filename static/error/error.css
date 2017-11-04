@@ -1,0 +1,14 @@
+body {
+	background: url(../images/error.png); 
+}
+.text-success{
+	color:#34495e;
+}
+.btn-success {
+    background-color: #34495e;
+    border-color: #34495e;
+    color: #FFFFFF;
+}
+.fuerte{
+	font-size: 2em;
+}

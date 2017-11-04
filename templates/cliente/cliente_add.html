@@ -1,0 +1,125 @@
+{% extends 'base/vistas_base.html' %}
+{% load static  %}
+{% block title %}Agregar Cliente{% endblock %}
+
+{% block content %}
+<!-- Simple splash screen-->
+
+<div class="content">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="hpanel">
+                <div class="panel-heading mayusculas">
+                    Agregar Cliente
+                </div>
+                <div class="panel-body">
+                    <div class="text-center m-b-md" id="wizardControl">
+                        <a class="btn btn-primary" href="#step1" data-toggle="tab">Paso 1: Información Personal</a>
+                        <a class="btn btn-default" href="#step2" data-toggle="tab">Paso 2: Información Geográfica</a>
+                        <a class="btn btn-default" href="#step3" data-toggle="tab">Paso 3: Contacto</a>
+                    </div>
+                      <form method="POST" class="post-form">
+                        {% csrf_token %}
+                        <div class="tab-content">
+                          <div id="step1" class="p-m tab-pane active">
+                            <div class="row">
+                                <div class="col-lg-3 text-center">
+                                    <i class="pe-7s-user fa-5x text-muted"></i>
+                                    <p class="small m-t-md">
+                                        <strong>Lorem Ipsum</strong> is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard.
+                                        <br/><br/>Lorem Ipsum has been the industry's dummy text of the printing and typesetting
+                                    </p>
+                                </div>
+                                <div class="col-lg-9">
+                                  <div class="alert alert-info">La contraseña por defecto sera la primera letra del nombre y de los apellidos seguido por c1234.</div>
+                                    <div class="row">
+                                        <div class="form-group col-lg-8">
+                                            {{usuario.as_p}}
+                                            {{persona.as_p}}
+                                            {{cliente.as_p}}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="text-right m-t-xs">
+                                <a class="btn btn-default next" href="#step2" data-toggle="tab">Siguiente</a>
+                            </div>
+                        </div>
+                        <div id="step2" class="p-m tab-pane">
+                            <div class="row">
+                                <div class="col-lg-3 text-center">
+                                    <i class="pe-7s-map-marker fa-5x text-muted"></i>
+                                    <p class="small m-t-md">
+                                        <strong>It is a long</strong> established fact that a reader will be distracted by the readable
+                                        <br/><br/>Many desktop publishing packages and web page editors now use
+                                    </p>
+                                </div>
+                                <div class="col-lg-9">
+                                    <div class="row">
+                                        <div class="form-group col-lg-12">
+                                            {{direccion.as_p}}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="text-right m-t-xs">
+                                <a class="btn btn-default prev" href="#step1" data-toggle="tab">Anterior</a>
+                                <a class="btn btn-default next" href="#step3" data-toggle="tab">Siguiente</a>
+                            </div>
+                        </div>
+                          <div id="step3" class="tab-pane">
+                              <div class="row">
+                                <div class="col-lg-3 text-center">
+                                    <i class="pe-7s-call fa-5x text-muted"></i>
+                                    <p class="small m-t-md">
+                                        <strong>It is a long</strong> established fact that a reader will be distracted by the readable
+                                        <br/><br/>Many desktop publishing packages and web page editors now use
+                                    </p>
+                                </div>
+                                <div class="col-lg-9">
+                                    <div class="row">
+                                        <div class="form-group col-lg-12">
+                                          <div class="row">
+                                              <div class="col-xs-4 form-group">
+                                                <label>{{contacto.celular.label}}:</label>
+                                                {{contacto.celular}}
+                                              </div>
+                                              <div class="col-xs-4 form-group">
+                                                <label>{{contacto.telcasa.label}}:</label>
+                                                {{contacto.telcasa}}
+                                              </div>
+                                              <div class="col-xs-4 form-group">
+                                                <label>{{contacto.oficina.label}}:</label>
+                                                {{contacto.oficina}}
+                                              </div>
+                                            </div>
+                                            <div class="row">
+                                              <div class="form-group col-lg-6">
+                                                <label>{{contacto.facebookid.label}}:</label>
+                                                {{contacto.facebookid}}
+                                              </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="text-right m-t-xs">
+                                <a class="btn btn-default prev" href="#step2"data-toggle="tab">Anterior</a>
+                                <button type="submit">Agregar</button>
+                            </div>
+                        </div>
+                      </div>
+                    </form>
+                    <div class="m-t-md">
+                      <p>
+                          <strong>Vive Tu Futuro 2017-2020 </strong>  Todos los Derechos Reservados <strong><i class="fa fa-copyright"></i> </strong>
+                      </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}
