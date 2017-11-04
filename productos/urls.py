@@ -2,8 +2,8 @@ from django.conf.urls import url
 from . import views
 
 urlpatterns = [
-    url(regex = r'',view=views.gestionr,name='gestionarProducto'),
-    url(regex = r'',view=views.gestionr,name='agregarProducto'),
-    url(regex = r'',view=views.gestionr,name='editarProducto'),
-    url(regex = r'',view=views.gestionr,name='eliminarProducto'),
+    url(regex = r'',view=views.gestionarProducto,name='gestionarProducto'),
+    url(regex = r'',view=views.agregarProducto,name='agregarProducto'),
+    url(regex = r'',view=views.editarProducto,name='editarProducto'),
+    url(regex = r'',view=views.eliminarProducto,name='eliminarProducto'),
 ]
