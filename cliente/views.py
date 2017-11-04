@@ -187,7 +187,7 @@ def hola(request):
         mensaje= ""
         asesorcliente = m.AsesorCliente.objects.get(idCliente=request.user.persona)
         contacto2 = mLogin.Contacto.objects.get(idpersona=asesorcliente.idAsesor.persona)
-        domicilio = mLogin.Direccion.objects.get(idpersona=asesorcliente.idAsesor.persona)
+        domicilio = mLogin.Direccion.objects.get(idpersona=request.user.persona)
         if request.method == 'POST':
             direccion1 = f.DireccionForm(request.POST,instance=domicilio)
             contacto3 = f.ContactoForm(request.POST,instance=contacto2)
