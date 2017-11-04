@@ -20,7 +20,7 @@ class CatTipocita(models.Model):
 
 class Cita(models.Model):
     idCita = models.BigIntegerField(primary_key=True)
-    idAsesorCliente = models.ForeignKey(AsesorCliente,on_delete=models.CASCADE)
+    idAsesorCliente = models.ForeignKey(AsesorCliente)
     idTipoCita = models.OneToOneField(CatTipocita)
     idEstatus = models.OneToOneField(CatEstatuscita)
     fecha = models.DateTimeField()

@@ -25,14 +25,8 @@ urlpatterns = [
     url(r'^asesor/',include('asesor.urls',namespace='asesor')),
     url(r'^creditos/',include('creditos.urls',namespace='conekta')),
     url(r'^cliente/',include('cliente.urls',namespace='cliente')),
-<<<<<<< HEAD
     url(r'^ventas/',include('ventas.urls',namespace='ventas')),
-=======
-    url(r'^ventas/', include('ventas.urls')),
->>>>>>> cd4b6a08a70fe645422ac16977d32119f2d0184d
 ]
-
-
 if settings.DEBUG:
     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

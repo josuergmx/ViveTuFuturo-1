@@ -6,8 +6,8 @@ from django.contrib.auth.models import User
 
 class PlanesConcretados(models.Model):
     idPlan = models.AutoField(primary_key=True)
-    idAsesor = models.ForeignKey(User,on_delete=models.CASCADE)
-    idCliente = models.ForeignKey(Persona,on_delete=models.CASCADE)
+    idAsesor = models.ForeignKey(User)
+    idCliente = models.ForeignKey(Persona)
     idServicio = models.ForeignKey(Servicios)
     fechaContratacion = models.TimeField()
     numeroPoliza = models.CharField(max_length=10)
@@ -15,4 +15,3 @@ class PlanesConcretados(models.Model):
     plazoAnos = models.IntegerField()
     valorPlan = models.FloatField()
     observaciones = models.CharField(max_length=300, blank=True, null=True)
-    
