@@ -1,7 +1,6 @@
 from django.db import models
 from login.models import Persona
 from django.contrib.auth.models import User
-from productos.models import Servicios
 # Create your models here.
 
 class ReporteActividad(models.Model):

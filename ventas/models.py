@@ -1,5 +1,5 @@
 from django.db import models
-from aseguradoras.models import Servicios
+from productos.models import Servicio
 from login.models import Persona
 from django.contrib.auth.models import User
 # Create your models here.
@@ -8,7 +8,7 @@ class PlanesConcretados(models.Model):
     idPlan = models.AutoField(primary_key=True)
     idAsesor = models.ForeignKey(User)
     idCliente = models.ForeignKey(Persona)
-    idServicio = models.ForeignKey(Servicios)
+    idServicio = models.ForeignKey(Servicio)
     fechaContratacion = models.TimeField()
     numeroPoliza = models.CharField(max_length=10)
     primaNetaAnual = models.FloatField()
