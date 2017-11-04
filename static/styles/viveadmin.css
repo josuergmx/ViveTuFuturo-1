@@ -5,11 +5,18 @@ body{
 #header a {
     color:grey !important;
 }
-
+h1{
+  font-family: 'Oswald', sans-serif;
+  padding-bottom: 0.5em;
+  margin-bottom: 0.5em;
+  border-bottom: 1px dashed #3498DA;
+}
 #logo{
     line-height: 0px;
 }
-
+.color_blue{
+  color: #34495e;
+}
 .panel-titulo-admin{
 	margin-top: 100px;
 }
@@ -42,19 +49,25 @@ body{
 #user-tools p{
 	font-size: 1.5em !important;
 }
-
-.margin_small{
-  margin-top: -6em;
-}
-.margin_xsmall{
-  margint_top: -9em;
-}
 .font_medium{
   font-size: 18px !important;
+}
+.admin_header{
+  position: fixed !important;
+  top: 0 !important;
+  border-bottom: 1px solid #e4e5e7;
+  left: 0;
+  right: 0;
+  z-index: 10;
 }
 #user-tools{
   font-size: 14px !important;
   text-transform: none;
+  padding-top: 0.5em;
+  text-align: center;
+  margin: 0;
+  float: none;
+  color: gray;
 }
 #contenido #content-main{
   font-size: 12px !important;
@@ -82,8 +95,11 @@ label{
   width: 25%;
   margin-left:25%;
 }
-input[type=text], input[type=number], select, .related-widget-wrapper{
+input[type=text], input[type=number], .related-widget-wrapper{
   width: 25%;
+}
+select{
+  width: 100%;
 }
 .form-row{
   text-align: left;
@@ -100,6 +116,6 @@ input[type=text], input[type=number], select, .related-widget-wrapper{
   }
 }
 
-  #content-related{
-    display: none;
-  }
+#content-related{
+  display: none;
+}

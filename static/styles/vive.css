@@ -1,3 +1,4 @@
+
 body{
 	background: #ddd url(back3.png) repeat top left;
 }
@@ -8,13 +9,29 @@ body{
 	color:white;
 }
 .mayusculas{
+	color:gray !important;
 	text-transform: uppercase;
+	text-align: center;
+	font-size: 1.5em;
+	font-weight: 100 !important;
 }
-.titulo1{
-	color: #3498DB;
-	font-weight:bold;
+.menu a{
+	color: gray;
+}
+.lista{
+	list-style-type: none;
+}
+.lista li{
+	padding: 0.5em;
+}
+.lista li strong{
+	text-transform: capitalize;
+	padding-right: 8px;
+}
+.color-gray{
+	border-top: 1px dotted #d4d4d4 !important;
 }
 
-.icono{
-	padding-right: 10px;
+#logo{
+	width: 25%;
 }

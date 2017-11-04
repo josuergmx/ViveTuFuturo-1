@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'creditos',
     'sesion1',
     'promotor',
+    'ventas',
 
 ]
 
