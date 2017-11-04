@@ -35,3 +35,12 @@ body{
 #logo{
 	width: 25%;
 }
+
+.icono{
+	padding-right: 10px;
+}
+
+.titulo1{
+	color: #3498DB;
+	font-weight:bold;
+}
