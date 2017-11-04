@@ -11,7 +11,7 @@ urlpatterns = [
     url(r'^creditos/',include('creditos.urls',namespace='conekta')),
     url(r'^cliente/',include('cliente.urls',namespace='cliente')),
     url(r'^ventas/',include('ventas.urls',namespace='ventas')),
-    url(r'^productos/',include('productos.urls',namespace='productos')),
+    url(r'^productos/',include('productos.urls',namespace='producto')),
 ]
 
 if settings.DEBUG:

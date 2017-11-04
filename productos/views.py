@@ -5,7 +5,7 @@ from django.contrib.auth.decorators import login_required
 
 @login_required(redirect_field_name='login:login')
 def gestionarProducto(request):
-    pass
+    return render(request,"productos/productos_gestionar.html")
 
 @login_required(redirect_field_name='login:login')
 def agregarProducto(request):
