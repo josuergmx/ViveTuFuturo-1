@@ -25,8 +25,8 @@ class OrigenRecomendacion(models.Model):
 
 class AsesorCliente(models.Model):
     idAsesorCliente = models.AutoField(primary_key=True)
-    idCliente = models.OneToOneField(lm.Persona,on_delete=models.CASCADE)
-    idAsesor = models.ForeignKey(User,on_delete=models.CASCADE)
+    idCliente = models.OneToOneField(lm.Persona)
+    idAsesor = models.ForeignKey(User)
     clienteProspecto = models.BooleanField()
     Origen = models.ForeignKey(OrigenRecomendacion,blank=True, null=True)
     Estatus = models.ForeignKey(Estatus,blank=True, null=True)
