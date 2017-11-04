@@ -5,6 +5,7 @@ from . import models as m
 from login import forms as fLogin
 from login import models as mLogin
 from agenda import models as mAgenda
+from cliente import models as mcliente
 from datetime import date
 from django.contrib.auth.decorators import login_required
 
@@ -38,13 +39,13 @@ def agregarCliente(request):
                 else:
                     tipodireccion = mLogin.CatTipodireccion.objects.get(idtipoDireccion=direccion)
                 if origin == "":
-                    origenCliente = mLogin.CatTipodireccion.objects.get(idtipoDireccion="1")
+                    origenCliente = mcliente.OrigenRecomendacion.objects.get(idOrigen="1")
                 else:
-                    origenCliente = mLogin.CatTipodireccion.objects.get(idtipoDireccion=origin)
+                    origenCliente = mcliente.OrigenRecomendacion.objects.get(idOrigen=origin)
                 if status == "":
-                    estatusCliente = m.Estatus.objects.get(idEstatus="1")
+                    estatusCliente = mcliente.Estatus.objects.get(idEstatus="1")
                 else:
-                    estatusCliente = m.Estatus.objects.get(idEstatus=status)
+                    estatusCliente = mcliente.Estatus.objects.get(idEstatus=status)
 
                 if request.POST.get("clienteProspecto",None) == "on":
                     prospecto = True
@@ -186,7 +187,7 @@ def hola(request):
         mensaje= ""
         asesorcliente = m.AsesorCliente.objects.get(idCliente=request.user.persona)
         contacto2 = mLogin.Contacto.objects.get(idpersona=asesorcliente.idAsesor.persona)
-        domicilio = mLogin.Direccion.objects.get(idpersona=asesorcliente.idAsesor.persona)
+        domicilio = mLogin.Direccion.objects.get(idpersona=request.user.persona)
         if request.method == 'POST':
             direccion1 = f.DireccionForm(request.POST,instance=domicilio)
             contacto3 = f.ContactoForm(request.POST,instance=contacto2)
