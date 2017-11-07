@@ -29,7 +29,7 @@ class CatTipodireccion(models.Model):
 
 
 class Persona(models.Model):
-    user = models.OneToOneField(User,on_delete=models.CASCADE)
+    user = models.OneToOneField(User)
     curp = models.CharField(max_length=18, blank=True, null=True)
     rfc = models.CharField(max_length=13, blank=True, null=True)
     fechaDeNacimiento = models.CharField(max_length=10, blank=True, null=True)
@@ -44,7 +44,7 @@ class Persona(models.Model):
         return (self.user.first_name)
 
 class Contacto(models.Model):
-    celular = models.CharField(max_length=15,primary_key=True)
+    celular = models.CharField(max_length=15)
     idpersona = models.ForeignKey(Persona,related_name='contacto')
     telcasa = models.CharField(max_length=15,blank=True,null=True)
     oficina = models.CharField(max_length=15,blank=True,null=True)

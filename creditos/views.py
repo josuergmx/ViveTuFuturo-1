@@ -33,5 +33,10 @@ def orden(request):
 @login_required(redirect_field_name='login:login')
 def index(request):
     if request.user.persona.idRol.idRole == 2 or request.user.persona.idRol.idRole == 3:
-        return render(request,'conekta/creditos.html')
+        n_creditos = m.Creditos.objects.filter(idAsesor=request.user)
+        print(n_creditos)
+        context = {
+            "creditos":n_creditos,
+        }
+        return render(request,'conekta/creditos.html',context)
 # Create your views here.

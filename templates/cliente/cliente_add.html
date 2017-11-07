@@ -1,4 +1,4 @@
-{% extends 'base/main.html' %}
+{% extends 'base/vistas_base.html' %}
 {% load static  %}
 {% block title %}Agregar Cliente{% endblock %}
 
@@ -8,7 +8,7 @@
 <div class="content">
     <div class="row">
         <div class="col-lg-12">
-            <div class="hpanel">
+            <div class="hpanel hgreen">
                 <div class="panel-heading mayusculas">
                     Agregar Cliente
                 </div>
@@ -31,7 +31,24 @@
                                     </p>
                                 </div>
                                 <div class="col-lg-9">
+
                                   <div class="alert alert-info">La contraseña por defecto sera la primera letra del nombre y de los apellidos seguido por c1234.</div>
+                                  <div class=" alert alert-info">
+                                    {% if usuario.errors %}
+                                      {% for field in usuario %}
+                                          {% for error in field.errors %}
+                                              <div class="alert alert-danger">
+                                                  <strong>{{ error|escape }}</strong>
+                                              </div>
+                                          {% endfor %}
+                                      {% endfor %}
+                                      {% for error in usuario.non_field_errors %}
+                                          <div class="alert alert-danger">
+                                              <strong>{{ error|escape }}</strong>
+                                          </div>
+                                      {% endfor %}
+                                  {% endif %}
+                                  </div>
                                     <div class="row">
                                         <div class="form-group col-lg-8">
                                             {{usuario.as_p}}
@@ -45,9 +62,7 @@
                                 <a class="btn btn-default next" href="#step2" data-toggle="tab">Siguiente</a>
                             </div>
                         </div>
-
                         <div id="step2" class="p-m tab-pane">
-
                             <div class="row">
                                 <div class="col-lg-3 text-center">
                                     <i class="pe-7s-map-marker fa-5x text-muted"></i>
@@ -111,7 +126,7 @@
                             </div>
                         </div>
                       </div>
-                    </for m>
+                    </form>
                     <div class="m-t-md">
                       <p>
                           <strong>Vive Tu Futuro 2017-2020 </strong>  Todos los Derechos Reservados <strong><i class="fa fa-copyright"></i> </strong>

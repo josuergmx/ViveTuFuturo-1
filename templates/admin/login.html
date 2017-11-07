@@ -1,0 +1,89 @@
+{% extends "admin/base_site.html" %}
+{% load i18n static %}
+
+{% block extrastyle %}{{ block.super }}
+<link rel="stylesheet" type="text/css" href="{% static "admin/css/login.css" %}" />
+{{ form.media }}
+{% endblock %}
+
+{% block bodyclass %}{{ block.super }} login{% endblock %}
+
+{% block usertools %}{% endblock %}
+
+{% block nav-global %}{% endblock %}
+
+{% block content_title %}{% endblock %}
+
+{% block breadcrumbs %}{% endblock %}
+
+{% block content %}
+{% if form.errors and not form.non_field_errors %}
+<p class="errornote">
+{% if form.errors.items|length == 1 %}{% trans "Please correct the error below." %}{% else %}{% trans "Please correct the errors below." %}{% endif %}
+</p>
+{% endif %}
+
+{% if form.non_field_errors %}
+{% for error in form.non_field_errors %}
+<p class="errornote">
+    {{ error }}
+</p>
+{% endfor %}
+{% endif %}
+
+<div id="content-main">
+
+{% if user.is_authenticated %}
+<p class="errornote">
+{% blocktrans trimmed %}
+    You are authenticated as {{ username }}, but are not authorized to
+    access this page. Would you like to login to a different account?
+{% endblocktrans %}
+</p>
+{% endif %}
+
+
+<div class="login-container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="hpanel">
+                <div  id="login-container" class="panel-body">
+                        <div class="text-center m-b-md">
+                            <h3>Administrador Vive</h3>
+                            <small>Inicio de sesión</small>
+                        </div>
+                        <form action="{{ app_path }}" method="post" id="login-form">{% csrf_token %}
+                            {% csrf_token %}
+                            <div class="form-group">
+                                <label class="control-label" for="username">Usuario</label>
+                                {{ form.username.errors }}
+                                {{ form.username }}
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label" for="password">Contraseña</label>
+                                {{ form.password.errors }}
+                                {{ form.password }}
+                                <span class="help-block small">¿Olvidaste tu contraseña?</span>
+                                <input type="hidden" name="next" value="{{ next }}" />
+                            </div>
+                            {% url 'admin_password_reset' as password_reset_url %}
+                            {% if password_reset_url %}
+                            <div class="password-reset-link">
+                              <a href="{{ password_reset_url }}">{% trans 'Forgotten your password or username?' %}</a>
+                            </div>
+                            {% endif %}
+                            <input type="submit" class="btn btn-success btn-block">
+                        </form>
+                        <div class="row">
+                            <br>
+                            <div class="col-md-12 text-center">
+                                <strong>Vive</strong> tu Futuro <br/> 2017 Copyright
+                            </div>
+                        </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+{% endblock %}

@@ -1,6 +1,7 @@
 from . import views
 from django.contrib.auth import views as auth_views
 from django.conf.urls import url
+from django.conf.urls import handler404
 
 
 urlpatterns = [
@@ -15,9 +16,5 @@ urlpatterns = [
         view=views.hola,
         name='hola'
     ),
-    url(
-        regex=r'^seleccion/$',
-        view=views.tipo,
-        name='tipo'
-    ),
+
 ]
