@@ -3321,6 +3321,7 @@ ul.h-list li:hover a {
   height: 480px;
   padding-top: 50px;
   margin-bottom: 30px;
+  /*filter:brightness(0.6);*/
 }
 .landing-page section {
   padding: 50px 0 50px 0;

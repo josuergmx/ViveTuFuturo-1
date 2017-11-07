@@ -28,7 +28,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'agenda',
-    'aseguradoras',
     'asesor',
     'cliente',
     'login',

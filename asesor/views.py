@@ -1,10 +1,13 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect,render_to_response
 from django.contrib.auth.decorators import login_required
 from . import models as mAsesor
+from promotor import models as mPromotor
 from login import models as mLogin
 from login import forms as fLogin
 from cliente import forms as fInfo
 from . import forms as f
+from django.contrib.auth import get_user
+
 # Create your views here.
 @login_required(redirect_field_name='login:login')
 def agregarAsesor(request):
@@ -31,6 +34,7 @@ def agregarAsesor(request):
                         prospecto = True
                     else:
                         prospecto = False
+
                     mLogin.Persona.objects.filter(user_id=user).update(
                         estadoCivil = estado,
                         fechaDeNacimiento = fecha,
@@ -55,27 +59,47 @@ def agregarAsesor(request):
                         oficina = request.POST.get("oficina",None),
                         facebookid = request.POST.get("facebookid",None),
                     )
-                    clientec.save()
+                    promotor = mPromotor.promotorAsesor(
+                        idAsesor = persona,
+                        idPromotor = get_user(request),
+                    )
                     contacto.save()
                     direccion.save()
-                    return redirect('asesor:gestionarAsesor')
+                    return redirect('asesor:agregar')
+
                 else:
-                    return redirect('asesor:agregarAsesor')
+                    context = {
+                        'usuario':usuario,
+                        'persona':persona,
+                    }
+                    return  render_to_response('asesor/asesor_add.html',context)
+
             usuario = fLogin.UserForm()
-            institucion = f.promotorAsesorForm()
             persona = fInfo.PersonaForm()
             direccion = fInfo.DireccionForm()
             contacto = fInfo.ContactoForm()
             context = {
-                "institucion":institucion,
                 "usuario":usuario,
                 "persona":persona,
                 "contacto":contacto,
                 "direccion":direccion,
             }
             return render(request,"asesor/asesor_add.html",context)
-        else:
-            return render(request,'error/404.html')
+
+
+def handler404(request):
+    response = render_to_response('error/404.html', {},
+                                  context_instance=RequestContext(request))
+    response.status_code = 404
+    return response
+
+
+def handler500(request):
+    response = render_to_response('500.html', {},
+                                  context_instance=RequestContext(request))
+    response.status_code = 500
+    return response
+
 
 @login_required(redirect_field_name='login:login')
 def editarAsesor(request):
@@ -88,10 +112,10 @@ def eliminarAsesor(request):
 @login_required(redirect_field_name='login:login')
 def gestionarAsesor(request):
     if request.user.persona.idRol.idRole == 3:
-        asesorClientes = m.AsesorCliente.objects.filter(idAsesor=request.user.id)
+        asesorClientes = mPromotor.promotorAsesor.objects.filter(idPromotor=request.user)
         context = {
             "clientes":asesorClientes,
         }
-        return render(request,"cliente/cliente_gestionar.html",context)
+        return render(request,"asesor/asesor_gestionar.html",context)
     else:
         return render(request,'error/404.html')

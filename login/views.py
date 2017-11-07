@@ -7,6 +7,7 @@ from django.contrib.auth.decorators import login_required
 from cliente import models as mCliente
 from promotor import models as mPromotor
 # Create your views here.
+from django.views.defaults import page_not_found
 
 """
     return redirect("namespace:unaurl")
