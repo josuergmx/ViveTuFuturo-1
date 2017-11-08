@@ -9,12 +9,12 @@ def gestionarProducto(request):
 
 @login_required(redirect_field_name='login:login')
 def agregarProducto(request):
-    pass
+    return render(request,"productos/productos_add.html")
 
 @login_required(redirect_field_name='login:login')
 def editarProducto(request):
-    pass
+    return render(request,"productos/productos_editar.html")
 
 @login_required(redirect_field_name='login:login')
 def eliminarProducto(request):
-    pass
+    return render(request,"productos/prodcutos_show.html")
