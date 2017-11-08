@@ -5,7 +5,25 @@ from io import BytesIO
 from reportlab.pdfgen import canvas
 from django.views.generic import View
 
+from .forms import ReporteVentasForm
+
 class ReporteVentas(View):
+
+    def creaReporte_view(request):
+        print(request.POST)
+        form = ReporteVentasForm(request.POST or None)
+        if(form.is_valid()):
+            print(form)
+            data = form.cleaned_data
+            periodoInicial = data.get("periodoInicial")
+            periodoFinal = data.get("periodoFinal")
+            institucion = data.get("institucion")
+            plan = data.get("plan")
+        template = "ventas/ventas.html"
+        context = {
+            "form" : form,
+        }
+        return render(request, template, context)
 
     def cabecera(self,pdf):
         # Utilizamos el archivo logo_django.png que esta guardado en la carpeta media/imagenes

@@ -2,6 +2,14 @@
 {% load static  %}
 {%block title%}Hola Cliente{%endblock%}
 {% block content %}
+
+  <form method="POST" action="">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Crear Reporte" />
+  </form>
+
+
     <div class='form-group'>
         <div class="row">
             <div class="col-lg-9">
