@@ -1,0 +1,84 @@
+{% extends 'base/main.html' %}
+{% load static %}
+{% block title %} Producto Vive {% endblock %}
+{% block content%}
+<div class="content animate-panel">
+  <div class="row">
+  <div class="col-md-1"></div>
+  <div class="col-md-10">
+      <div class="hpanel hblue">
+          <div class="panel-heading hbuilt">
+              Información Servicio
+          </div>
+          <div class="panel-body">
+              <div class="text-center m-b-md">
+                  <h3>Seguro para Automóvil Particulars</h3>
+              </div>
+              <div class="text-justify m-b-md">
+                  <small><strong>Descripción: </strong>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                  tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                  quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                  consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+                  cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+                  proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</small><br/>
+              </div>
+              <div class="text-justify m-b-md">
+                  <small><strong>Nota:</strong> De click en un nombre para ver más información.</small>
+              </div>
+              <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                  <div class="panel panel-default">
+                      <div class="panel-heading" role="tab" id="headingTwo">
+                          <h4 class="panel-title">
+                              <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                  Información de la Institución Financiera
+                              </a>
+                          </h4>
+                      </div>
+                      <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+                          <div class="panel-body">
+                             <ul class="lista">
+                                  <li><strong>Nombre:</strong>AXXA Seguros</li>
+                                  <li><strong>País:</strong>México</li>
+                                  <li><strong>Estado:</strong>CDMX</li>
+                                  <li><strong>Localidad:</strong>Localidad 1</li>
+                                  <li><strong>Calle:</strong>Juan de Dios Bátiz, Nueva Industrial Vallejo, Ciudad de México, CDMX</li>
+                                  <li><strong>Colonia:</strong>Colonia Uno</li>
+                                  <li><strong>Codigo Postal:</strong>55717</li>
+                                  <li><strong>Num. Int:</strong>2</li>
+                                  <li><strong>Num. Ext:</strong>32</li>
+                              </ul>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="panel panel-default">
+                      <div class="panel-heading" role="tab" id="headingOne">
+                          <h4 class="panel-title">
+                              <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                  Información del Departamento
+                              </a>
+                          </h4>
+                      </div>
+                      <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+                          <div class="panel-body">
+                              <ul class="lista">
+                                  <li><strong>Nombre:</strong>Departamento de Materiales y Personas</li>
+                                  <li><strong>Ubicación:</strong>Juan de Dios Bátiz, Nueva Industrial Vallejo, Ciudad de México, CDMX</li>
+                                  <li><strong>Teléfono:</strong>01 55 5729 6000</li>
+                                  <li><strong>Extensión:</strong>Ext. 69</li>
+                              </ul>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>
+</div>
+<footer class="footer">
+    <span class="pull-right">
+        Todos los Derechos Reservados <i class="fa fa-copyright"></i>
+    </span>
+    Vive Tu Futuro 2017-2020
+</footer>
+{% endblock %}
