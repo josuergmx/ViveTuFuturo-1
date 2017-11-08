@@ -26,3 +26,17 @@ class ReporteVentasForm(forms.Form):
             raise forms.ValidationError("El periodo final debe tener el formato dd/mm/yyyy")
         else:
             return periodoFinal
+
+    def cleaned_institucion(self):
+        institucion = self.cleaned_data.get("institucion")
+        if(len(institucion) == 0 or institucion == None):
+            raise forms.ValidationError("No se ha seleccionado ninguna institucion financiera")
+        else:
+            return institucion
+
+    def cleaned_plan(self):
+        plan = self.cleaned_data.get("plan")
+        if(len(plan) == 0 or plan == None):
+            raise forms.ValidationError("No se ha seleccionado ningun plan")
+        else:
+            return plan
