@@ -4,7 +4,6 @@ from __future__ import unicode_literals
 from django.db import models
 from login.models import Persona
 
-# Create your models here.
 class CatPais(models.Model):
     idPais = models.AutoField(primary_key=True)
     nombre = models.CharField(max_length=100)
