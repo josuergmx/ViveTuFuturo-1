@@ -1,4 +1,4 @@
-{% extends 'base/main.html' %}
+{% extends 'base/vistas_base.html' %}
 {% load static %}
 {% block title %} Producto Vive {% endblock %}
 {% block content%}
@@ -7,20 +7,17 @@
   <div class="col-md-1"></div>
   <div class="col-md-10">
       <div class="hpanel hblue">
-          <div class="panel-heading hbuilt">
+          <div class="panel-heading hbuilt mayusculas">
               Información Servicio
           </div>
           <div class="panel-body">
               <div class="text-center m-b-md">
-                  <h3>Seguro para Automóvil Particulars</h3>
+                  <h3>{{servicio.nombre}}</h3>
               </div>
               <div class="text-justify m-b-md">
-                  <small><strong>Descripción: </strong>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                  tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                  quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                  consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-                  cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-                  proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</small><br/>
+                  <small><strong>Descripción: </strong>
+                      {{servicio.descripcion}}
+                  </small><br/>
               </div>
               <div class="text-justify m-b-md">
                   <small><strong>Nota:</strong> De click en un nombre para ver más información.</small>
@@ -37,15 +34,15 @@
                       <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
                           <div class="panel-body">
                              <ul class="lista">
-                                  <li><strong>Nombre:</strong>AXXA Seguros</li>
-                                  <li><strong>País:</strong>México</li>
-                                  <li><strong>Estado:</strong>CDMX</li>
-                                  <li><strong>Localidad:</strong>Localidad 1</li>
-                                  <li><strong>Calle:</strong>Juan de Dios Bátiz, Nueva Industrial Vallejo, Ciudad de México, CDMX</li>
-                                  <li><strong>Colonia:</strong>Colonia Uno</li>
-                                  <li><strong>Codigo Postal:</strong>55717</li>
-                                  <li><strong>Num. Int:</strong>2</li>
-                                  <li><strong>Num. Ext:</strong>32</li>
+                                  <li><strong>Nombre:</strong>{{servicio.idDepartamento.idInstitucion.nombre}}</li>
+                                  <li><strong>País:</strong>{{servicio.idDepartamento.idInstitucion.idLocalidad.CatPais.nombre}}</li>
+                                  <li><strong>Estado:</strong>{{servicio.idDepartamento.idInstitucion.idLocalidad.CatEstados.nombre}}</li>
+                                  <li><strong>Localidad:</strong>{{servicio.idDepartamento.idInstitucion.idLocalidad.nombre}}</li>
+                                  <li><strong>Calle:</strong>{{servicio.idDepartamento.idInstitucion.calle}}</li>
+                                  <li><strong>Colonia:</strong>{{servicio.idDepartamento.idInstitucion.colonia}}</li>
+                                  <li><strong>Codigo Postal:</strong>{{servicio.idDepartamento.idInstitucion.cp}}</li>
+                                  <li><strong>Num. Int:</strong>{{servicio.idDepartamento.idInstitucion.num_int}}</li>
+                                  <li><strong>Num. Ext:</strong>{{servicio.idDepartamento.idInstitucion.num_ext}}</li>
                               </ul>
                           </div>
                       </div>
@@ -61,15 +58,19 @@
                       <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
                           <div class="panel-body">
                               <ul class="lista">
-                                  <li><strong>Nombre:</strong>Departamento de Materiales y Personas</li>
-                                  <li><strong>Ubicación:</strong>Juan de Dios Bátiz, Nueva Industrial Vallejo, Ciudad de México, CDMX</li>
-                                  <li><strong>Teléfono:</strong>01 55 5729 6000</li>
-                                  <li><strong>Extensión:</strong>Ext. 69</li>
+                                  <li><strong>Nombre:</strong>{{servicio.idDepartamento.nombre}}</li>
+                                  <li><strong>Ubicación:</strong>{{servicio.idDepartamento.ubicacion}}</li>
+                                  <li><strong>Teléfono:</strong>{{servicio.idDepartamento.telefono}}</li>
+                                  <li><strong>Extensión:</strong>{{servicio.idDepartamento.extension}}</li>
                               </ul>
                           </div>
                       </div>
                   </div>
               </div>
+              <a href="{% url 'producto:gestionarProducto'%}" class="btn btn-success btn-m">
+                <span class="bold">Regresar</span>
+                <i class="fa fa-angle-right"></i>
+              </a>
           </div>
       </div>
   </div>
