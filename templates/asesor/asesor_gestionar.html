@@ -1,6 +1,7 @@
 {% extends 'base/vistas_base.html' %}
 {% load static  %}
 {% block content %}
+{% block title %}{% endblock %}
 
 <div class="content animate-panel">
     <div class="row">
@@ -16,7 +17,7 @@
                     <th>Asesor</th>
                     <th>Email</th>
                     <th>Institucion</th>
-                    <th>Gestionar</th>
+                      <th>Gestionar</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -37,10 +38,10 @@
                                 <i class="fa fa-pencil"></i>
                             </button>
                           </a>
-                          <button class="btn btn-danger btn-xs" type="button" data-toggle="modal" data-target="#{{i}}">
+                          <button class="btn btn-danger btn-xs" type="button" data-toggle="modal" data-target="#{{i.idAsesorPromotor}}">
                               <i class="fa fa-times"></i>
                           </button>
-                          <div class="modal fade" id="{{i}}" tabindex="-1" role="dialog" aria-hidden="true">
+                          <div class="modal fade" id="{{i.idAsesorPromotor}}" tabindex="-1" role="dialog" aria-hidden="true">
                               <div class="modal-dialog">
                                   <div class="modal-content">
                                       <div class="color-line"></div>
