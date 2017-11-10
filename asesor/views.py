@@ -7,6 +7,7 @@ from login import forms as fLogin
 from cliente import forms as fInfo
 from . import forms as f
 from django.contrib.auth import get_user
+from productos import models as mProductos
 
 # Create your views here.
 @login_required(redirect_field_name='login:login')
@@ -15,6 +16,9 @@ def agregarAsesor(request):
             if request.method == 'POST':
                 usuario = fLogin.UserForm(request.POST)
                 persona = fInfo.PersonaForm(request.POST)
+                direccion = fInfo.DireccionForm(request.POST)
+                contacto = fInfo.ContactoForm(request.POST)
+                asesor = f.promotorAsesorForm(request.POST)
                 if usuario.is_valid():
                     user = usuario.save()
                     rol = mLogin.Roles.objects.get(idRole=2)
@@ -22,6 +26,7 @@ def agregarAsesor(request):
                     estadoCivil = request.POST.get("estadoCivil",None)
                     direccion = request.POST.get("idtipodireccion",None)
                     persona = mLogin.Persona.objects.get(user_id=user)
+                    nombreaux = request.POST.get("institucion",None)
                     if estadoCivil == "":
                         estado = mLogin.EstadoCivil.objects.get(idEstadoCivil="1")
                     else:
@@ -35,6 +40,9 @@ def agregarAsesor(request):
                     else:
                         prospecto = False
 
+                    nombre = nombreaux.split(" ")
+                    print(nombre[0])
+                    institucion = mProductos.InstitucionFinanciera.objects.get(idInstitucion=nombre[0])
                     mLogin.Persona.objects.filter(user_id=user).update(
                         estadoCivil = estado,
                         fechaDeNacimiento = fecha,
@@ -62,15 +70,19 @@ def agregarAsesor(request):
                     promotor = mPromotor.promotorAsesor(
                         idAsesor = persona,
                         idPromotor = get_user(request),
+                        institucion = institucion,
+                        activo = True,
                     )
                     contacto.save()
                     direccion.save()
+                    promotor.save()
                     return redirect('asesor:agregar')
-
                 else:
                     context = {
-                        'usuario':usuario,
-                        'persona':persona,
+                        "usuario":usuario,
+                        "persona":persona,
+                        "contacto":contacto,
+                        "direccion":direccion,
                     }
                     return  render_to_response('asesor/asesor_add.html',context)
 
@@ -78,27 +90,15 @@ def agregarAsesor(request):
             persona = fInfo.PersonaForm()
             direccion = fInfo.DireccionForm()
             contacto = fInfo.ContactoForm()
+            asesor = f.promotorAsesorForm()
             context = {
                 "usuario":usuario,
                 "persona":persona,
                 "contacto":contacto,
                 "direccion":direccion,
+                "asesor":asesor,
             }
             return render(request,"asesor/asesor_add.html",context)
-
-
-def handler404(request):
-    response = render_to_response('error/404.html', {},
-                                  context_instance=RequestContext(request))
-    response.status_code = 404
-    return response
-
-
-def handler500(request):
-    response = render_to_response('500.html', {},
-                                  context_instance=RequestContext(request))
-    response.status_code = 500
-    return response
 
 
 @login_required(redirect_field_name='login:login')
@@ -109,12 +109,15 @@ def editarAsesor(request):
 def eliminarAsesor(request):
     return render()
 
+def asesor(request):
+    pass
+
 @login_required(redirect_field_name='login:login')
 def gestionarAsesor(request):
     if request.user.persona.idRol.idRole == 3:
-        asesorClientes = mPromotor.promotorAsesor.objects.filter(idPromotor=request.user)
+        promotorAsesor = mPromotor.promotorAsesor.objects.filter(idPromotor=request.user)
         context = {
-            "clientes":asesorClientes,
+            "promotorAsesor":promotorAsesor,
         }
         return render(request,"asesor/asesor_gestionar.html",context)
     else:

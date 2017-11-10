@@ -33,7 +33,7 @@
                                   <div class="alert alert-info">
                                     La contraseña por defecto sera la primera letra del nombre y de los apellidos seguido por c1234.</div>
                                     <div class="alert alert-info">
-                                    {% if persona.errors %}
+                                    {% if usuario.errors %}
                                         {% for field in usuario %}
                                             {% for error in field.errors %}
                                                 <div class="alert alert-danger">
@@ -68,7 +68,7 @@
                                         <div class="form-group col-lg-8">
                                             {{usuario.as_p}}
                                             {{persona.as_p}}
-                                            {{cliente.as_p}}
+                                            {{asesor.as_p}}
                                         </div>
                                     </div>
                                 </div>

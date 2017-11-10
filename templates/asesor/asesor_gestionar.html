@@ -7,7 +7,7 @@
         <div class="col-lg-12">
             <div class="hpanel">
                 <div class="panel-heading mayusculas">
-                    Mis clientes
+                    Mis Asesores
                 </div>
                 <div class="panel-body">
                 <table id="example2" class="table table-striped table-bordered table-hover">
@@ -16,30 +16,23 @@
                     <th>Asesor</th>
                     <th>Email</th>
                     <th>Institucion</th>
-                    <th>Origen</th>
-                    <th>Estatus</th>
+                    <th>Gestionar</th>
                 </tr>
                 </thead>
                 <tbody>
-                {% for i in clientes %}
+                {% for i in promotorAsesor %}
                 {% if i.activo == True %}
                   <tr>
-                      <td>{{i.idCliente.user.first_name}} {{i.idCliente.user.last_name}}</td>
-                      <td>{{i.idCliente.user.email}}</td>
-                      {% if i.clienteProspecto == True%}
-                        <td>Si</td>
-                      {% else %}
-                        <td>No</td>
-                      {% endif %}
-                      <td>{{i.Origen}}</td>
-                      <td>{{i.Estatus}}</td>
+                      <td>{{i.idAsesor.user.first_name}} {{i.idAsesor.user.last_name}}</td>
+                      <td>{{i.idAsesor.user.email}}</td>
+                      <td>{{i.institucion}}</td>
                       <td>
-                          <a href="{% url 'cliente:clientes' i.idAsesorCliente %}" class="white a_white">
+                          <a href="{% url 'asesor:asesor' i.idAsesorPromotor %}" class="white a_white">
                             <button class="btn btn-info btn-xs" type="button">
                                 <i class="fa fa-info"></i>
                             </button>
                           </a>
-                          <a href="{% url 'cliente:editar' i.idAsesorCliente %}" class="white a_white">
+                          <a href="{% url 'asesor:editar' i.idAsesorPromotor %}" class="white a_white">
                             <button class="btn btn-warning btn-xs" type="button">
                                 <i class="fa fa-pencil"></i>
                             </button>
@@ -48,23 +41,23 @@
                               <i class="fa fa-times"></i>
                           </button>
                           <div class="modal fade" id="{{i}}" tabindex="-1" role="dialog" aria-hidden="true">
-                                  <div class="modal-dialog">
-                                      <div class="modal-content">
-                                          <div class="color-line"></div>
-                                          <div class="modal-header text-center">
-                                              <h4 class="modal-title">Eliminar cliente</h4>
-                                          </div>
-                                          <div class="modal-body">
-                                              Está seguro que desea eliminar al cliente <strong>{{i.idCliente.user.first_name}}</strong> todos sus datos personales serán eliminados pero la información sobre ventas permanecerá.
-                                          </div>
-                                          <div class="modal-footer">
-                                              <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-                                              <a href="{% url 'cliente:eliminar' i.idAsesorCliente %}" class="white a_white">
-                                                <button type="button" class="btn btn-danger">Eliminar</button>
-                                              </a>
-                                          </div>
+                              <div class="modal-dialog">
+                                  <div class="modal-content">
+                                      <div class="color-line"></div>
+                                      <div class="modal-header text-center">
+                                          <h4 class="modal-title">Eliminar cliente</h4>
+                                      </div>
+                                      <div class="modal-body">
+                                          Está seguro que desea eliminar al Asesor <strong>{{i.idAsesor.user.first_name}}</strong> todos sus datos personales serán eliminados pero la información sobre ventas permanecerá.
+                                      </div>
+                                      <div class="modal-footer">
+                                          <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                                          <a href="{% url 'asesor:eliminar' i.idAsesorPromotor %}" class="white a_white">
+                                            <button type="button" class="btn btn-danger">Eliminar</button>
+                                          </a>
                                       </div>
                                   </div>
+                              </div>
                           </div>
                       </td>
                   </tr>
@@ -78,25 +71,6 @@
               </a>
 </div>
 
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="color-line"></div>
-                <div class="modal-header text-center">
-                    <h4 class="modal-title">Eliminar cliente</h4>
-
-                </div>
-                <div class="modal-body">
-                    Está seguro que desea eliminar al cliente <strong>Juan Daniel Castillo Reyes</strong> todos sus datos personales serán eliminados pero la información sobre ventas permanecerá.
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-                    <button type="button" class="btn btn-danger">Eliminar</button>
-                </div>
-            </div>
-        </div>
-
-    </div>
 <footer class="footer">
     <span class="pull-right">
         Todos los Derechos Reservados <i class="fa fa-copyright"></i>
