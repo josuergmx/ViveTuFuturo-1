@@ -202,6 +202,8 @@ def hola(request):
             "mensaje":mensaje,
         }
         return render(request,"cliente/cliente.html",context)
+    else:
+        return render(request,'error/404.html')
 
 def recomendar(request):
         asesorcliente = m.AsesorCliente.objects.get(idCliente=request.user.persona)
