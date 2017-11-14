@@ -14,7 +14,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY','c8im-&h4mn2wzheql9r9z#d9&fj_xrhfu35l_5
 CONEKTA_PUBLIC_KEY = 'key_wfarNpvgNDNvt1kknSQfPw'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['localhost','vivefuturo.herokuapp.com']
 
