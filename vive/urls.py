@@ -12,6 +12,7 @@ urlpatterns = [
     url(r'^cliente/',include('cliente.urls',namespace='cliente')),
     url(r'^ventas/',include('ventas.urls',namespace='ventas')),
     url(r'^productos/',include('productos.urls',namespace='producto')),
+    url(r'^cita/',include('agenda.urls',namespace='citas')),
 ]
 
 if settings.DEBUG:

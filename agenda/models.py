@@ -17,7 +17,6 @@ class CatTipocita(models.Model):
     def __str__(self):
         return (self.nombre)
 
-
 class Cita(models.Model):
     idCita = models.BigIntegerField(primary_key=True)
     idAsesorCliente = models.ForeignKey(AsesorCliente)

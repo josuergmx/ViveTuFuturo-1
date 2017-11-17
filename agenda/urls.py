@@ -5,7 +5,6 @@ urlpatterns = [
     url(
         regex=r'^$',
         view=views.agenda,
-        name='agenda'
+        name='agenda',
     ),
-
 ]
