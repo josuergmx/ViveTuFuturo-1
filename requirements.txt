@@ -3,9 +3,6 @@ dj-database-url==0.4.2
 Django==1.11.5
 psycopg2==2.7.3.1
 reportlab==3.4.0
-<<<<<<< HEAD
 whitenoise==3.3.1
 gunicorn==19.6.0
-=======
 conekta==2.4.0
->>>>>>> 6eabc1ca323edf36eca85835af460b5234ec1037
