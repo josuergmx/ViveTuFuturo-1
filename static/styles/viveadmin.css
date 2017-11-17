@@ -119,3 +119,63 @@ select{
 #content-related{
   display: none;
 }
+.actions button{
+  margin: 2em 1em 1em 1em !important;
+  border: 1px solid #354a5e !important;
+  background: #354a5e !important;
+  color: #fff !important;
+  font-family: 'Oswald', sans-serif !important;
+  letter-spacing: 1px !important;
+}
+#changelist .actions select:focus {
+    text-decoration:none;
+}
+.tabla-admin h2{
+  font-size: 1em;
+  font-weight: lighter;
+  color: #34495e;
+  font-family: 'Oswald', sans-serif !important;
+}
+.tabla-admin ul li{
+  list-style-type: none;
+}
+.tabla-admin ul{
+  padding-left: 0;
+}
+.delete-confirmation form input[type="submit"]{
+  font-size: 14px;
+  padding: 0.5em;
+  font-family: 'Oswald', sans-serif !important;
+}
+form input[type="submit"]{
+  border: 1px solid #354a5e !important;
+  background: #354a5e !important;
+  color: #fff !important;
+  font-family: 'Oswald', sans-serif
+}
+.delete-confirmation form .cancel-link{
+  display: initial;
+  font-size: 14px;
+  padding: 0.5em;
+  font-family: 'Oswald', sans-serif !important;
+}
+.datetime{
+  color: #447e9b !important;
+  margin-left: 37% !important;
+}
+.datetime input{
+  margin: 1em 0;
+}
+#changelist #toolbar form #searchbar{
+  height: auto;
+}
+.tabla-admin td{
+  padding: 5px !important;
+  text-align: center;
+}
+#changelist table thead th{
+  text-align: center;
+}
+.submit-row a.deletelink{
+    height: auto;
+}

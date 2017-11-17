@@ -4,127 +4,126 @@
 {% get_current_language as LANGUAGE_CODE %}{% get_current_language_bidi as LANGUAGE_BIDI %}
 <html lang="{{ LANGUAGE_CODE|default:"en-us" }}" {% if LANGUAGE_BIDI %}dir="rtl"{% endif %}>
 <head>
-    <!-- Page title -->
-    <title>Vive - Administrador</title>
-    <link rel="stylesheet" type="text/css" href="{% block stylesheet %}{% static "admin/css/base.css" %}{% endblock %}" />
-    <!-- Meta, title, CSS, favicons, etc. -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
-    <!--<link rel="shortcut icon" type="image/ico" href="favicon.ico" />-->
+  <!-- Page title -->
+  <title>Vive - Administrador</title>
+  <link rel="stylesheet" type="text/css" href="{% block stylesheet %}{% static "admin/css/base.css" %}{% endblock %}" />
+  <!-- Meta, title, CSS, favicons, etc. -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+  <!--<link rel="shortcut icon" type="image/ico" href="favicon.ico" />-->
 
-    <!-- Vendor styles -->
-    <link rel="stylesheet" href="{%static 'vendor/fontawesome/css/font-awesome.css'%}" />
-    <link rel="stylesheet" href="{%static 'vendor/animate.css/animate.css'%}" />
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">  <!-- Font Awesome -->    <!-- App styles -->
-    <link href="https://cdn.jsdelivr.net/npm/metismenu@2.7.0/dist/metisMenu.css" rel="stylesheet">  <!-- Font Awesome -->    <!-- App styles -->
-    <!-- App styles -->
-    <link rel="stylesheet" href="{%static 'fonts/pe-icon-7-stroke/css/pe-icon-7-stroke.css'%}" />
-    <link rel="stylesheet" href="{%static 'fonts/pe-icon-7-stroke/css/helper.css'%}" />
-    <link rel="stylesheet" href="{%static 'styles/style.css'%}">
-    <link href="https://fonts.googleapis.com/css?family=Oswald" rel="stylesheet">
+  <!-- Vendor styles -->
+  <link rel="stylesheet" href="{%static 'vendor/fontawesome/css/font-awesome.css'%}" />
+  <link rel="stylesheet" href="{%static 'vendor/animate.css/animate.css'%}" />
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">  <!-- Font Awesome -->    <!-- App styles -->
+  <link href="https://cdn.jsdelivr.net/npm/metismenu@2.7.0/dist/metisMenu.css" rel="stylesheet">  <!-- Font Awesome -->    <!-- App styles -->
+  <!-- App styles -->
+  <link rel="stylesheet" href="{%static 'fonts/pe-icon-7-stroke/css/pe-icon-7-stroke.css'%}" />
+  <link rel="stylesheet" href="{%static 'fonts/pe-icon-7-stroke/css/helper.css'%}" />
+  <link rel="stylesheet" href="{%static 'styles/style.css'%}">
+  <link href="https://fonts.googleapis.com/css?family=Oswald" rel="stylesheet">
 
-    {% block extrastyle %}{% endblock %}
-    {% if LANGUAGE_BIDI %}<link rel="stylesheet" type="text/css" href="{% block stylesheet_rtl %}{% static "admin/css/rtl.css" %}{% endblock %}" />{% endif %}
-    {% block extrahead %}{% endblock %}
-    {% block responsive %}
-    <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1.0, maximum-scale=1.0">
+  {% block extrastyle %}{% endblock %}
+  {% if LANGUAGE_BIDI %}<link rel="stylesheet" type="text/css" href="{% block stylesheet_rtl %}{% static "admin/css/rtl.css" %}{% endblock %}" />{% endif %}
+  {% block extrahead %}{% endblock %}
+  {% block responsive %}
+  <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
-    {% if LANGUAGE_BIDI %}<link rel="stylesheet" type="text/css" href="{% static "admin/css/responsive_rtl.css" %}" />{% endif %}
-    {% endblock %}
-    {% block blockbots %}<meta name="robots" content="NONE,NOARCHIVE" />{% endblock %}
+  {% if LANGUAGE_BIDI %}<link rel="stylesheet" type="text/css" href="{% static "admin/css/responsive_rtl.css" %}" />{% endif %}
+  {% endblock %}
+  {% block blockbots %}<meta name="robots" content="NONE,NOARCHIVE" />{% endblock %}
 
-    <link rel="stylesheet" href="{%static 'styles/viveadmin.css'%}">
+  <link rel="stylesheet" href="{%static 'styles/viveadmin.css'%}">
 </head>
 {% load i18n %}
 
 <body class="{% if is_popup %}popup {% endif %}{% block bodyclass %}{% endblock %} fixed-footer"
-  data-admin-utc-offset="{% now "Z" %}">
+data-admin-utc-offset="{% now "Z" %}">
 
 
 
-    <div class="row">
-        <div class="col-sm-1 col-xs-1 col-md-1"></div>
-        <div id="panel-general" class="content animate-panel margin_small col-sm-10 col-xs-10 col-md-10">
-            <div class="hpanel admin_header" id="header">
-              <div class="color-line">
-              </div>
-
-                          {% block usertools %}
-                          {% if has_permission %}
-                          <div id="user-tools">
-                              {% block welcome-msg %}
-                                  {% trans 'Welcome,' %}
-                                  <strong>{% firstof user.get_short_name user.get_username %}</strong>.
-                              {% endblock %}
-                              {% block userlinks %}
-                                  {% if site_url %}
-                                      <a href="{{ site_url }}">{% trans 'View site' %}</a> /
-                                  {% endif %}
-                                  {% if user.is_active and user.is_staff %}
-                                      {% url 'django-admindocs-docroot' as docsroot %}
-                                      {% if docsroot %}
-                                          <a href="{{ docsroot }}">{% trans 'Documentation' %}</a> /
-                                      {% endif %}
-                                  {% endif %}
-                                  {% if user.has_usable_password %}
-                                  <a href="{% url 'admin:password_change' %}">{% trans 'Change password' %}</a> /
-                                  {% endif %}
-                                  <a href="{% url 'admin:logout' %}">{% trans 'Log out' %}</a>
-                              {% endblock %}
-                          </div>
-                          {% endif %}
-                          {% endblock %}
-                          {% block nav-global %}{% endblock %}
-                 </div>
-                    <div id="contenido" class="row margin_small">
-                            <div id="panel-contenido" class="hpanel panel-titulo-admin font-admin">
-                              {% block breadcrumbs %}
-                              <div class="breadcrumbs">
-                                <a href="{% url 'admin:index' %}">{% trans 'Home' %}</a>
-                                {% if title %} &rsaquo; {{ title }}{% endif %}
-                              </div>
-                              {% endblock %}
-
-                              {% block messages %}
-                                  {% if messages %}
-                                  <ul class="messagelist">{% for message in messages %}
-                                  <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message|capfirst }}</li>
-                                  {% endfor %}</ul>
-                                  {% endif %}
-                              {% endblock messages %}
-                                <div class="panel-body list tabla-admin">
-                                        {% block pretitle %}{% endblock %}
-                                        {% block content_title %}{% if title %}<h1>{{ title }}</h1>{% endif %}{% endblock %}
-                                        {% block content %}
-                                        {% block object-tools %}{% endblock %}
-                                        {{ content }}
-                                        {% endblock %}
-                                        {% block sidebar %}{% endblock %}
-                                        <br class="clear" />
-                                </div>
-                            </div>
-                    </div>
-                <!-- END Content -->
-                {% block footer %}<div id="footer"></div>{% endblock %}
-            <!-- END Container -->
-        </div>
+<div class="row">
+  <div class="col-sm-1 col-xs-1 col-md-1"></div>
+  <div id="panel-general" class="content animate-panel margin_small col-sm-10 col-xs-10 col-md-10">
+    <div class="hpanel admin_header" id="header">
+      <div class="color-line">
+      </div>
+      {% block usertools %}
+      {% if has_permission %}
+      <div id="user-tools">
+        {% block welcome-msg %}
+        {% trans 'Welcome,' %}
+        <strong>{% firstof user.get_short_name user.get_username %}</strong>.
+        {% endblock %}
+        {% block userlinks %}
+        {% if site_url %}
+        <a href="{{ site_url }}">{% trans 'View site' %}</a> /
+        {% endif %}
+        {% if user.is_active and user.is_staff %}
+        {% url 'django-admindocs-docroot' as docsroot %}
+        {% if docsroot %}
+        <a href="{{ docsroot }}">{% trans 'Documentation' %}</a> /
+        {% endif %}
+        {% endif %}
+        {% if user.has_usable_password %}
+        <a href="{% url 'admin:password_change' %}">{% trans 'Change password' %}</a> /
+        {% endif %}
+        <a href="{% url 'admin:logout' %}">{% trans 'Log out' %}</a>
+        {% endblock %}
+      </div>
+      {% endif %}
+      {% endblock %}
+      {% block nav-global %}{% endblock %}
     </div>
+    <div id="contenido" class="row margin_small">
+      <div id="panel-contenido" class="hpanel panel-titulo-admin font-admin">
+        {% block breadcrumbs %}
+        <div class="breadcrumbs">
+          <a href="{% url 'admin:index' %}">{% trans 'Home' %}</a>
+          {% if title %} &rsaquo; {{ title }}{% endif %}
+        </div>
+        {% endblock %}
 
-        <footer class="footer left-zero">
-            <span class="pull-right">
-                Página de Administración
-            </span>
-            Vive Tu Futuro 2017-2021
-        </footer>
+        {% block messages %}
+        {% if messages %}
+        <ul class="messagelist">{% for message in messages %}
+          <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message|capfirst }}</li>
+          {% endfor %}</ul>
+          {% endif %}
+          {% endblock messages %}
+          <div class="panel-body list tabla-admin">
+            {% block pretitle %}{% endblock %}
+            {% block content_title %}{% if title %}<h1>{{ title }}</h1>{% endif %}{% endblock %}
+            {% block content %}
+            {% block object-tools %}{% endblock %}
+            {{ content }}
+            {% endblock %}
+            {% block sidebar %}{% endblock %}
+            <br class="clear" />
+          </div>
+        </div>
+      </div>
+      <!-- END Content -->
+      {% block footer %}<div id="footer"></div>{% endblock %}
+      <!-- END Container -->
+    </div>
+  </div>
 
-    <script src="https://code.jquery.com/jquery-3.2.1.js" integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE=" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js" integrity="sha256-T0Vest3yCU7pafRw9r+settMBX6JkKN06dqBnpQ8d30=" crossorigin="anonymous"></script>
-    <script src="{%static 'vendor/slimScroll/jquery.slimscroll.min.js'%}"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/metisMenu/2.7.0/metisMenu.min.js"></script>
-    <script src="{%static 'scripts/homer.js'%}"></script>
+  <footer class="footer left-zero">
+    <span class="pull-right">
+      Página de Administración
+    </span>
+    Vive Tu Futuro 2017-2021
+  </footer>
+
+  <script src="https://code.jquery.com/jquery-3.2.1.js" integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE=" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js" integrity="sha256-T0Vest3yCU7pafRw9r+settMBX6JkKN06dqBnpQ8d30=" crossorigin="anonymous"></script>
+  <script src="{%static 'vendor/slimScroll/jquery.slimscroll.min.js'%}"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/metisMenu/2.7.0/metisMenu.min.js"></script>
+  <script src="{%static 'scripts/homer.js'%}"></script>
 </body>
 </html>
