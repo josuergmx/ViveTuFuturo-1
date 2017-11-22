@@ -6,7 +6,9 @@ from django.contrib import auth
 from django.contrib.auth.decorators import login_required
 from cliente import models as mCliente
 from promotor import models as mPromotor
+from creditos import models as mCreditos
 # Create your views here.
+from django.views.defaults import page_not_found
 
 """
     return redirect("namespace:unaurl")
@@ -52,11 +54,13 @@ def hola(request):
             for i in asesorPromotor:
                 if i.activo == True:
                     n_asesores = n_asesores + 1
-        print(request.user.persona.idRol.idRole)
+        n_creditos = mCreditos.Creditos.objects.filter(idAsesor=request.user)
+        print(n_creditos)
         context = {
             "rol":request.user.persona.idRol.idRole,
             "asesores":n_asesores,
-            "clientes":n_clientes
+            "clientes":n_clientes,
+            "creditos":len(n_creditos),
         }
         return render(request,"perfil/dashboard.html",context)
     else: #Aqui va la vista del cliente

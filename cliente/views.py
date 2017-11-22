@@ -9,9 +9,6 @@ from cliente import models as mcliente
 from datetime import date
 from django.contrib.auth.decorators import login_required
 
-
-# Create your views here.
-
 @login_required(redirect_field_name='login:login')
 def agregarCliente(request):
     if request.user.persona.idRol.idRole == 2 or request.user.persona.idRol.idRole == 3:
@@ -205,6 +202,8 @@ def hola(request):
             "mensaje":mensaje,
         }
         return render(request,"cliente/cliente.html",context)
+    else:
+        return render(request,'error/404.html')
 
 def recomendar(request):
         asesorcliente = m.AsesorCliente.objects.get(idCliente=request.user.persona)

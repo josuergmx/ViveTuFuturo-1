@@ -1,10 +1,9 @@
-{% extends 'base/main.html' %}
+{% extends 'base/vistas_base.html' %}
 {% load static  %}
-{% block title %}Agregar Cliente{% endblock %}
+{% block title %}Agregar Asesor{% endblock %}
 
 {% block content %}
 <!-- Simple splash screen-->
-
 <div class="content">
     <div class="row">
         <div class="col-lg-12">
@@ -31,12 +30,45 @@
                                     </p>
                                 </div>
                                 <div class="col-lg-9">
-                                  <div class="alert alert-info">La contraseña por defecto sera la primera letra del nombre y de los apellidos seguido por c1234.</div>
+                                  <div class="alert alert-info">
+                                    La contraseña por defecto sera la primera letra del nombre y de los apellidos seguido por c1234.</div>
+                                    <div class="alert alert-info">
+                                    {% if usuario.errors %}
+                                        {% for field in usuario %}
+                                            {% for error in field.errors %}
+                                                <div class="alert alert-danger">
+                                                    <strong>{{ error|escape }}</strong>
+                                                </div>
+                                            {% endfor %}
+                                        {% endfor %}
+                                        {% for error in usuario.non_field_errors %}
+                                            <div class="alert alert-danger">
+                                                <strong>{{ error|escape }}</strong>
+                                            </div>
+                                        {% endfor %}
+                                    {% endif %}
+                                  </div>
+                                    <div class="alert alert-info">
+                                    {% if persona.errors %}
+                                        {% for field in persona %}
+                                            {% for error in field.errors %}
+                                                <div class="alert alert-danger">
+                                                    <strong>{{ error|escape }}</strong>
+                                                </div>
+                                            {% endfor %}
+                                        {% endfor %}
+                                        {% for error in persona.non_field_errors %}
+                                            <div class="alert alert-danger">
+                                                <strong>{{ error|escape }}</strong>
+                                            </div>
+                                        {% endfor %}
+                                    {% endif %}
+                                  </div>
                                     <div class="row">
                                         <div class="form-group col-lg-8">
                                             {{usuario.as_p}}
                                             {{persona.as_p}}
-                                            {{cliente.as_p}}
+                                            {{asesor.as_p}}
                                         </div>
                                     </div>
                                 </div>

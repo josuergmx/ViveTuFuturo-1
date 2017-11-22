@@ -12,12 +12,17 @@ urlpatterns = [
         name='agregar'
     ),
     url(
-        regex=r'^eliminar/$',
+        regex=r'^ver/(?P<idAsesorPromotor>\d+)$',
+        view=views.asesor,
+        name='asesor'
+    ),
+    url(
+        regex=r'^eliminar/(?P<idAsesorPromotor>\d+)$',
         view=views.eliminarAsesor,
         name='eliminar'
     ),
     url(
-        regex=r'^editar/$',
+        regex=r'^editar/(?P<idAsesorPromotor>\d+)$',
         view=views.editarAsesor,
         name='editar'
     ),

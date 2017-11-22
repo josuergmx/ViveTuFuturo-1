@@ -1,0 +1,85 @@
+{% extends 'base/vistas_base.html' %}
+{% load static %}
+{% block title %} Producto Vive {% endblock %}
+{% block content%}
+<div class="content animate-panel">
+  <div class="row">
+  <div class="col-md-1"></div>
+  <div class="col-md-10">
+      <div class="hpanel hblue">
+          <div class="panel-heading hbuilt mayusculas">
+              Información Servicio
+          </div>
+          <div class="panel-body">
+              <div class="text-center m-b-md">
+                  <h3>{{servicio.nombre}}</h3>
+              </div>
+              <div class="text-justify m-b-md">
+                  <small><strong>Descripción: </strong>
+                      {{servicio.descripcion}}
+                  </small><br/>
+              </div>
+              <div class="text-justify m-b-md">
+                  <small><strong>Nota:</strong> De click en un nombre para ver más información.</small>
+              </div>
+              <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                  <div class="panel panel-default">
+                      <div class="panel-heading" role="tab" id="headingTwo">
+                          <h4 class="panel-title">
+                              <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                  Información de la Institución Financiera
+                              </a>
+                          </h4>
+                      </div>
+                      <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+                          <div class="panel-body">
+                             <ul class="lista">
+                                  <li><strong>Nombre:</strong>{{servicio.idDepartamento.idInstitucion.nombre}}</li>
+                                  <li><strong>País:</strong>{{servicio.idDepartamento.idInstitucion.idLocalidad.CatPais.nombre}}</li>
+                                  <li><strong>Estado:</strong>{{servicio.idDepartamento.idInstitucion.idLocalidad.CatEstados.nombre}}</li>
+                                  <li><strong>Localidad:</strong>{{servicio.idDepartamento.idInstitucion.idLocalidad.nombre}}</li>
+                                  <li><strong>Calle:</strong>{{servicio.idDepartamento.idInstitucion.calle}}</li>
+                                  <li><strong>Colonia:</strong>{{servicio.idDepartamento.idInstitucion.colonia}}</li>
+                                  <li><strong>Codigo Postal:</strong>{{servicio.idDepartamento.idInstitucion.cp}}</li>
+                                  <li><strong>Num. Int:</strong>{{servicio.idDepartamento.idInstitucion.num_int}}</li>
+                                  <li><strong>Num. Ext:</strong>{{servicio.idDepartamento.idInstitucion.num_ext}}</li>
+                              </ul>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="panel panel-default">
+                      <div class="panel-heading" role="tab" id="headingOne">
+                          <h4 class="panel-title">
+                              <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                  Información del Departamento
+                              </a>
+                          </h4>
+                      </div>
+                      <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+                          <div class="panel-body">
+                              <ul class="lista">
+                                  <li><strong>Nombre:</strong>{{servicio.idDepartamento.nombre}}</li>
+                                  <li><strong>Ubicación:</strong>{{servicio.idDepartamento.ubicacion}}</li>
+                                  <li><strong>Teléfono:</strong>{{servicio.idDepartamento.telefono}}</li>
+                                  <li><strong>Extensión:</strong>{{servicio.idDepartamento.extension}}</li>
+                              </ul>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+              <a href="{% url 'producto:gestionarProducto'%}" class="btn btn-success btn-m">
+                <span class="bold">Regresar</span>
+                <i class="fa fa-angle-right"></i>
+              </a>
+          </div>
+      </div>
+  </div>
+</div>
+</div>
+<footer class="footer">
+    <span class="pull-right">
+        Todos los Derechos Reservados <i class="fa fa-copyright"></i>
+    </span>
+    Vive Tu Futuro 2017-2020
+</footer>
+{% endblock %}

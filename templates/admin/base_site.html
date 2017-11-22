@@ -48,7 +48,6 @@
         <div class="col-sm-1 col-xs-1 col-md-1"></div>
         <div id="panel-general" class="content animate-panel margin_small col-sm-10 col-xs-10 col-md-10">
             <div class="hpanel admin_header" id="header">
-              {% if not is_popup %}
               <div class="color-line">
               </div>
 
@@ -87,7 +86,6 @@
                                 {% if title %} &rsaquo; {{ title }}{% endif %}
                               </div>
                               {% endblock %}
-                              {% endif %}
 
                               {% block messages %}
                                   {% if messages %}

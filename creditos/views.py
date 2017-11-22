@@ -22,7 +22,7 @@ def orden(request):
                 for x in range(0,cantidad):
                     estatus = m.Estatuscredito.objects.get(nombre="Sin asignar")
                     credito = Creditos(
-                        idAsesor=request.user.persona,
+                        idAsesor=request.user,
                         estatusCredito=estatus
                     )
                     credito.save()

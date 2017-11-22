@@ -1,5 +1,6 @@
-{% extends 'base/main.html' %}
+{% extends 'base/vistas_base.html' %}
 {% load static  %}
+{% block title %}Ver Asesor{% endblock %}
 {% block content %}
 <!-- Simple splash screen-->
 
@@ -32,30 +33,26 @@
 	            <div class="panel-body">
                	<dl class="dl-horizontal">
                     <dt>Nombre: </dt>
-                    <dd>{{clientes.idCliente.user.first_name}}</dd>
+                    <dd>{{asesor.idAsesor.user.first_name}}</dd>
                     <dt>Apellidos: </dt>
-                    <dd>{{clientes.idCliente.user.last_name}}</dd>
+                    <dd>{{asesor.idAsesor.user.last_name}}</dd>
                     <dt>CURP:</dt>
-                    <dd>{{clientes.idCliente.curp}}</dd>
+                    <dd>{{asesor.idAsesor.curp}}</dd>
                     <dt>RFC:</dt>
-                    <dd>{{clientes.idCliente.rfc}}</dd>
+                    <dd>{{asesor.idAsesor.rfc}}</dd>
                     <dt>Fecha de Nacimiento:</dt>
-                    <dd>{{clientes.idCliente.fechaDeNacimiento}}</dd>
+                    <dd>{{asesor.idAsesor.fechaDeNacimiento}}</dd>
                     <dt>Estado Civil</dt>
-                    <dd>{{clientes.idCliente.estadoCivil}}</dd>
+                    <dd>{{asesor.idAsesor.estadoCivil}}</dd>
                     <dt>Correo Principal</dt>
-                    <dd>{{clientes.idCliente.user.email}}</dd>
-                    <dt>Clinte Prospecto</dt>
-                    {% if clientes.clienteProspecto == True%}
-                      <dd>Si</dd>
-                    {% else %}
-                      <dd>No</dd>
-                    {% endif %}
+                    <dd>{{asesor.idAsesor.user.email}}</dd>
+                    <dt>Institucion</dt>
+                    <dd>{{asesor.institucion}}</dd>
                 </dl>
             	</div>
 	        </div>
 	    </div>
-    {% for j in clientes.idCliente.direccion.all %}
+    {% for j in asesor.idAsesor.direccion.all %}
   		<div class="col-lg-4">
   	        <div class="hpanel hyellow">
   	            <div class="panel-heading hbuilt">
@@ -83,7 +80,7 @@
   	        </div>
   	    </div>
         {%endfor%}
-        {% for j in clientes.idCliente.contacto.all %}
+        {% for j in asesor.idAsesor.contacto.all %}
   	    <div class="col-lg-4">
   	        <div class="hpanel hgreen">
   	            <div class="panel-heading hbuilt">

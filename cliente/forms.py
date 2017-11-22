@@ -96,6 +96,15 @@ class ContactoForm(forms.ModelForm):
             self.fields[field].widget.attrs = {
                 'class': 'form-control'
             }
+            self.fields['celular'].widget.attrs = {
+                'class': 'form-control',
+                'max':'15',
+            }
+
+            self.fields['telcasa'].widget.attrs = {
+                'class': 'form-control',
+                'max':'15',
+            }
             self.fields['facebookid'].label = 'Facebook'
             self.fields['telcasa'].label = 'Telefono de Casa'
             self.fields['oficina'].label = 'Telefono de Oficina'

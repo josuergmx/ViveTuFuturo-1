@@ -1,25 +1,24 @@
 import os
 from django.core.urlresolvers import reverse_lazy
+
+#conecta public api key
+CONEKTA_PUBLIC_KEY = 'key_wfarNpvgNDNvt1kknSQfPw'
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.11/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get('SECRET_KEY','c8im-&h4mn2wzheql9r9z#d9&fj_xrhfu35l_5_i_lv@lk%hn3')
-
-#conecta public api key
-CONEKTA_PUBLIC_KEY = 'key_wfarNpvgNDNvt1kknSQfPw'
+SECRET_KEY = 'jjrp7uy8cy(+2%zfzk-5hftiq!c7t8m0w+!9y7%dnm)k)(4les'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost','vivefuturo.herokuapp.com']
+ALLOWED_HOSTS = []
 
 
 # Application definition
+
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -28,15 +27,14 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'agenda',
-    'aseguradoras',
     'asesor',
     'cliente',
-    'login',
     'creditos',
-    'sesion1',
-    'promotor',
-    'ventas',
+    'login',
     'productos',
+    'promotor',
+    'sesion1',
+    'ventas',
 ]
 
 MIDDLEWARE = [
@@ -69,6 +67,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'vive.wsgi.application'
 
+
 # Database
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
 
@@ -83,14 +82,9 @@ DATABASES = {
     }
 }
 
-#Para la conexion con el servicio gratuito de postgres en heroku
-import dj_database_url
-db_from_env = dj_database_url.config()
-DATABASES['default'].update(db_from_env)
-DATABASES['default']['CONN_MAX_AGE'] = 500
 
 # Password validation
-# https://docs.djangoproject.com/en/1.10/ref/settings/#auth-password-validators
+# https://docs.djangoproject.com/en/1.11/ref/settings/#auth-password-validators
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -109,9 +103,9 @@ AUTH_PASSWORD_VALIDATORS = [
 
 
 # Internationalization
-# https://docs.djangoproject.com/en/1.10/topics/i18n/
+# https://docs.djangoproject.com/en/1.11/topics/i18n/
 
-LANGUAGE_CODE = 'es-mx'
+LANGUAGE_CODE = 'en-us'
 
 TIME_ZONE = 'UTC'
 
@@ -121,8 +115,12 @@ USE_L10N = True
 
 USE_TZ = True
 
+
 # Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/1.10/howto/static-files/
+# https://docs.djangoproject.com/en/1.11/howto/static-files/
+
+STATIC_URL = '/static/'
+STATICFILES_DIRS = (os.path.join(BASE_DIR,'static'),)
 
 LOGIN_REDIRECT_URL = reverse_lazy('login:hola')
 LOGIN_URL = reverse_lazy('login:login')
@@ -130,19 +128,3 @@ LOGOUT_URL = reverse_lazy('login:logout')
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-
-STATIC_URL = '/static/'
-STATICFILES_DIRS = (os.path.join(BASE_DIR,'static'),)
-
-#HTTP and SSL para heroku
-"""
-CORS_REPLACE_HTTPS_REFERER   = True
-HOST_SCHEME                  = "https://"
-SECURE_PROXY_SSL_HEADER      = ('HTTP_X_FORWARDED_PROTO','https')
-SECURE_SSL_REDIRECT          = True
-SESSION_COOKIE_SECURE        = True
-CSRF_COOKIE_SECURE           = True
-SECURE_HSTS_INCLUDE_SUBDOMAINS = True
-SECURE_HSTS_SECONDS          = 1000000
-SECURE_FRAME_DENY            = True
-"""

@@ -5,6 +5,7 @@ from cliente.models import AsesorCliente
 from login.models import Persona
 from django.conf import settings
 from django.contrib.auth.models import User
+import conekta
 
 
 class Sale(models.Model):
@@ -60,5 +61,5 @@ class Estatuscredito(models.Model):
 class Creditos(models.Model):
     idCredito = models.AutoField(primary_key=True)
     estatusCredito = models.ForeignKey(Estatuscredito, blank=True, null=True)
-    idAsesor = models.ForeignKey(User,on_delete=models.CASCADE)
+    idAsesor = models.ForeignKey(User)
     idCliente = models.OneToOneField(AsesorCliente, blank=True, null=True)

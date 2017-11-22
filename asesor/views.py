@@ -1,10 +1,14 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect,render_to_response
 from django.contrib.auth.decorators import login_required
 from . import models as mAsesor
+from promotor import models as mPromotor
 from login import models as mLogin
 from login import forms as fLogin
 from cliente import forms as fInfo
 from . import forms as f
+from django.contrib.auth import get_user
+from productos import models as mProductos
+
 # Create your views here.
 @login_required(redirect_field_name='login:login')
 def agregarAsesor(request):
@@ -12,6 +16,9 @@ def agregarAsesor(request):
             if request.method == 'POST':
                 usuario = fLogin.UserForm(request.POST)
                 persona = fInfo.PersonaForm(request.POST)
+                direccion = fInfo.DireccionForm(request.POST)
+                contacto = fInfo.ContactoForm(request.POST)
+                asesor = f.promotorAsesorForm(request.POST)
                 if usuario.is_valid():
                     user = usuario.save()
                     rol = mLogin.Roles.objects.get(idRole=2)
@@ -19,6 +26,7 @@ def agregarAsesor(request):
                     estadoCivil = request.POST.get("estadoCivil",None)
                     direccion = request.POST.get("idtipodireccion",None)
                     persona = mLogin.Persona.objects.get(user_id=user)
+                    nombreaux = request.POST.get("institucion",None)
                     if estadoCivil == "":
                         estado = mLogin.EstadoCivil.objects.get(idEstadoCivil="1")
                     else:
@@ -31,6 +39,10 @@ def agregarAsesor(request):
                         prospecto = True
                     else:
                         prospecto = False
+
+                    nombre = nombreaux.split(" ")
+                    print(nombre[0])
+                    institucion = mProductos.InstitucionFinanciera.objects.get(idInstitucion=nombre[0])
                     mLogin.Persona.objects.filter(user_id=user).update(
                         estadoCivil = estado,
                         fechaDeNacimiento = fecha,
@@ -55,43 +67,103 @@ def agregarAsesor(request):
                         oficina = request.POST.get("oficina",None),
                         facebookid = request.POST.get("facebookid",None),
                     )
-                    clientec.save()
+                    promotor = mPromotor.promotorAsesor(
+                        idAsesor = persona,
+                        idPromotor = get_user(request),
+                        institucion = institucion,
+                        activo = True,
+                    )
                     contacto.save()
                     direccion.save()
-                    return redirect('asesor:gestionarAsesor')
+                    promotor.save()
+                    return redirect('asesor:agregar')
                 else:
-                    return redirect('asesor:agregarAsesor')
+                    context = {
+                        "usuario":usuario,
+                        "persona":persona,
+                        "contacto":contacto,
+                        "direccion":direccion,
+                    }
+                    return  render_to_response('asesor/asesor_add.html',context)
+
             usuario = fLogin.UserForm()
-            institucion = f.promotorAsesorForm()
             persona = fInfo.PersonaForm()
             direccion = fInfo.DireccionForm()
             contacto = fInfo.ContactoForm()
+            asesor = f.promotorAsesorForm()
             context = {
-                "institucion":institucion,
                 "usuario":usuario,
                 "persona":persona,
                 "contacto":contacto,
                 "direccion":direccion,
+                "asesor":asesor,
             }
             return render(request,"asesor/asesor_add.html",context)
+
+
+@login_required(redirect_field_name='login:login')
+def editarAsesor(request,idAsesorPromotor):
+    if request.user.persona.idRol.idRole == 3:
+        editar = mPromotor.promotorAsesor.objects.get(idAsesorPromotor=idAsesorPromotor)
+        if request.method == 'POST':
+            usuario = fLogin.UserForm(request.POST,instance=editar.idAsesor.user)
+            persona = fInfo.PersonaForm(request.POST,instance=editar.idAsesor)
+            asesor = f.promotorAsesorForm(request.POST,instance=editar)
+
+            if usuario.is_valid():
+                print(persona)
+                usuario.save()
+                persona.save()
+                asesor.save()
+                return redirect('asesor:gestionarAsesor')
         else:
-            return render(request,'error/404.html')
+            usuario = fLogin.UserForm(instance=editar.idAsesor.user)
+            persona = fInfo.PersonaForm(instance=editar.idAsesor)
+            asesor = f.promotorAsesorForm(instance=editar)
+            context = {
+                "usuario":usuario,
+                "persona":persona,
+                "asesor":asesor,
+            }
+            return render(request,"asesor/asesor_editar.html",context)
+
+    else:
+        return render(request,'error/404.html')
 
 @login_required(redirect_field_name='login:login')
-def editarAsesor(request):
-    return render()
+def eliminarAsesor(request,idAsesorPromotor):
+    if request.user.persona.idRol.idRole == 3:
+        eliminar = mPromotor.promotorAsesor.objects.get(idAsesorPromotor=idAsesorPromotor)
+        mPromotor.promotorAsesor.objects.filter(idAsesorPromotor=eliminar.idAsesorPromotor).update(
+            activo = False
+        )
+        return redirect('asesor:gestionarAsesor')
+    else:
+        return render(request,'error/404.html')
 
 @login_required(redirect_field_name='login:login')
-def eliminarAsesor(request):
-    return render()
+def asesor(request,idAsesorPromotor):
+    if request.user.persona.idRol.idRole == 3:
+        promotorAsesor = mPromotor.promotorAsesor.objects.get(idAsesorPromotor=idAsesorPromotor)
+        contacto = mLogin.Contacto.objects.filter(idpersona=promotorAsesor.idAsesor)
+        direccion = mLogin.Direccion.objects.filter(idpersona=promotorAsesor.idAsesor)
+        context = {
+            "asesor":promotorAsesor,
+            "contactos":contacto,
+            "direcciones":direccion,
+        }
+        return render(request,"asesor/asesor_show.html",context)
+    else:
+        return render(request,'error/404.html')
+
 
 @login_required(redirect_field_name='login:login')
 def gestionarAsesor(request):
     if request.user.persona.idRol.idRole == 3:
-        asesorClientes = m.AsesorCliente.objects.filter(idAsesor=request.user.id)
+        promotorAsesor = mPromotor.promotorAsesor.objects.filter(idPromotor=request.user)
         context = {
-            "clientes":asesorClientes,
+            "promotorAsesor":promotorAsesor,
         }
-        return render(request,"cliente/cliente_gestionar.html",context)
+        return render(request,"asesor/asesor_gestionar.html",context)
     else:
         return render(request,'error/404.html')
