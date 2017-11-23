@@ -24,69 +24,6 @@
     <link rel="stylesheet" href="{% static "styles/style.css" %}"/>
     <link rel="stylesheet" href="{% static "styles/vive.css"%}"/>
 </head>
-  <body>
-    <!-- Simple splash screen-->
-    <div class="splash">
-        <div class="splash-title">
-            <h1>Espera, por favor. </h1><p>El sistema está cargando tu futuro. </p>
-            <img src="{% static "images/loading-bars.svg" %}" width="64" height="64" />
-        </div>
-    </div>
-
-    <div id="header">
-        {% block header %}
-        <div class="color-line">
-        </div>
-        <div id="logo" class="light-version">
-            <span>
-               Vive tu Futuro: {{user.username}}
-            </span>
-        </div>
-        <nav role="navigation">
-            <div class="navbar-right">
-                <ul class="nav navbar-nav no-borders">
-                    <li class="dropdown">
-                        <a class="dropdown-toggle label-menu-corner" href="#" data-toggle="dropdown">
-                            <i class="pe-7s-mail"></i>
-                            <span class="label label-success">3</span>
-                        </a>
-                        <ul class="dropdown-menu hdropdown animated flipInX">
-                            <div class="title">
-                                Tienes 4 mensajes nuevos
-                            </div>
-                            <li>
-                                <a>
-                                    Tus créditos estan por acabarse
-                                </a>
-                            </li>
-                            <li>
-                                <a>
-                                    Tienes una cita el día de hoy
-                                </a>
-                            </li>
-                            <li>
-                                <a>
-                                    Recuerda revisar tus estadísticas
-                                </a>
-                            </li>
-                            <li class="summary"><a href="#">Ver todos los mensajes</a></li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="#" id="sidebar" class="right-sidebar-toggle">
-                            <i class="pe-7s-upload pe-7s-news-paper"></i>
-                        </a>
-                    </li>
-                    <li class="dropdown">
-                        <a href="{% url 'login:logout' %}">
-                            <i class="pe-7s-upload pe-rotate-90"></i>
-                        </a>
-                    </li>
-                </ul>
-            </div>
-        </nav>
-      {% endblock %}
-    </div>
 
     {% block content %}
     {% endblock %}
@@ -185,6 +122,5 @@
 
         });
     </script>
-
   </body>
 </html>

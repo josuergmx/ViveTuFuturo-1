@@ -1,6 +1,6 @@
 {% extends 'base/vistas_base.html' %}
 {% load static  %}
-{%block title%}Hola Cliente{%endblock%}
+{%block title%}Tus Citas{%endblock%}
 
 
 <!-- CSS individuales -->
@@ -11,19 +11,30 @@
 
 {% block content %}
 
-<div class="row">
-    <div class="col-lg-2 text-center">
-        <i class="pe-7s-date fa-5x text-muted"></i>
-        <p class="middle m-t-md">
-            <strong>Tus citas. <br>Organizate a tus tiempos </strong>
-        </p>
-        <p class="middle m-t-md">
-            <a href="{% url 'agenda:contactos' %}"><button>Agrega citas</button></a>
-        </p>
+<div class="content">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="hpanel">
+                <div class="panel-body">
+                    <div class="col-lg-2 text-center">
+                        <i class="pe-7s-date fa-5x text-muted"></i>
+                        <p class="middle m-t-md">
+                            <strong>Tus citas. <br>Organizate a tus tiempos </strong>
+                        </p>
+                        <p class="middle m-t-md">
+                            <a href="{% url 'agenda:contactos' %}" class="btn btn-success">
+                                <button>Agrega citas</button>
+                            </a>
+                        </p>
+                    </div>
+                    <div class="col-lg-10">
+                        <div id="calendar"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-<div class="col-lg-10">
-<div id="calendar"></div>
-</div> </div>
+</div>
 
 
 {% endblock %}
