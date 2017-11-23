@@ -2,7 +2,6 @@
 {% load static  %}
 {% block title%} Mis Clientes {% endblock %}
 {% block content %}
-
   <div class="content animate-panel">
       <div class="row">
           <div class="col-lg-12">
@@ -15,10 +14,10 @@
                 <thead>
                 <tr>
                     <th>Cliente</th>
-                    <th>Email</th>
-                    <th>Prospecto</th>
-                    <th>Origen</th>
-                    <th>Gestionar</th>
+                    <th>Tipo de Cita</th>
+                    <th>Estado</th>
+                    <th>Direccion</th>
+                    <th>Fecha</th>
                     <th>Opciones</th>
                 </tr>
                 </thead>
@@ -27,12 +26,7 @@
                 {% if i.activo == True %}
                   <tr>
                       <td>{{i.idCliente.user.first_name}} {{i.idCliente.user.last_name}}</td>
-                      <td>{{i.idCliente.user.email}}</td>
-                      {% if i.clienteProspecto == True%}
-                        <td>Si</td>
-                      {% else %}
-                        <td>No</td>
-                      {% endif %}
+                      <td></td>
                       <td>{{i.Origen}}</td>
                       <td>{{i.Estatus}}</td>
                       <td>

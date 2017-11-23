@@ -6,6 +6,7 @@ from login import forms as fLogin
 from login import models as mLogin
 from agenda import models as mAgenda
 from cliente import models as mcliente
+from agenda import models as mAgenda
 from datetime import date
 from django.contrib.auth.decorators import login_required
 
@@ -110,11 +111,18 @@ def clientes(request,idAsesorCliente):
         asesorClientes = m.AsesorCliente.objects.get(idAsesorCliente=idAsesorCliente)
         contacto = mLogin.Contacto.objects.filter(idpersona=asesorClientes.idCliente)
         direccion = mLogin.Direccion.objects.filter(idpersona=asesorClientes.idCliente)
-        print(contacto)
+        cita = mAgenda.Cita.objects.filter(idAsesorCliente=idAsesorCliente)
+        print(cita)
+        if len(cita) == 0:
+            cita = "Sin citas pendientes, has una ahora, dirigete a citas :)"
+        else:
+            cita = "Cita pendiente, revisa las citas para mas informacion :)"
+        print(cita)
         context = {
             "clientes":asesorClientes,
             "contactos":contacto,
             "direcciones":direccion,
+            "cita":cita,
         }
         return render(request,"cliente/cliente_show.html",context)
     else:

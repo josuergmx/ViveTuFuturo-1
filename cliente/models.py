@@ -31,6 +31,7 @@ class AsesorCliente(models.Model):
     Origen = models.ForeignKey(OrigenRecomendacion,blank=True, null=True)
     Estatus = models.ForeignKey(Estatus,blank=True, null=True)
     fechaActualizacion = models.DateField()
+    #Esto se llena hasta sesion 1
     ocupacion = models.CharField(max_length=150, blank=True, null=True)
     dependientes = models.CharField(max_length=150, blank=True, null=True)
     ingresos = models.FloatField(blank=True, null=True)

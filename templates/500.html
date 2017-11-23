@@ -1,1 +1,14 @@
-Error
+{% extends 'base/otros_base.html' %}
+{% load static  %}
+{% block title %}404{% endblock %}
+{% block content %}
+<div class="error-container">
+    <i class="pe-7s-way text-success big-icon"></i>
+    <h1>404</h1>
+    <strong class="fuerte">Página no encontrada</strong>
+    <p>
+      Ha ocurrido un error, lo sentimos
+    </p>
+    <a href="{% url 'login:hola' %}" class="btn btn-xs btn-success">Volver al Inicio</a>
+</div>
+{% endblock%}

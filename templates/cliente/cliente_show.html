@@ -11,9 +11,12 @@
                 </div>
             </a>
             <h3 class="font-light m-b-xs">
-                {{user.first_name}} {{user.last_name}}
+                {{clientes.idCliente.user.first_name}} {{clientes.idCliente.user.last_name}}
             </h3>
-            <small>Información del cliente.</small>
+            <h5 class="font-light m-b-xs">
+                {{cita}}
+            </h5>
+            <small>Información del cliente</small>
         </div>
     </div>
 </div>
@@ -109,6 +112,7 @@
               	</div>
   	        </div>
   	    </div>
+
         {%endfor%}
   	</div>
 </div>
