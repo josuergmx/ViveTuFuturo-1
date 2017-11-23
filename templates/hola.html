@@ -45,22 +45,22 @@
     </div>
 </nav>
 
-
-
-<div id="page-top" class="parallax">
-    <div class="container">
-        <div class="heading col-md-8 animated bounceInLeft shake" >
-            <h1 class="" style="font-size: 80px;">
-                Vive tu futuro
-            </h1>
-            <span style="font-size: 20px;">¡ Alcanza tu Lbertad Financiera ahora mismo !</span><br></br>
-            <br></br>
-            <a class="page-scroll btn btn-success btn-lg" href="#components">Conoce más</a>
+<header id="page-top" style="min-height: 100%;">
+    <div class="container ">
+    <div class="row">
+        <div class="heading animated bounceInLeft shake col-md-6">
+            <div class="row" style="background-color:#0082C8;">
+                <h1 class="" style="font-size: 80px;">
+                    Vive tu futuro
+                </h1>
+                <span style="font-size: 20px;">¡ Alcanza tu Lbertad Financiera ahora mismo !</span><br>
+                <br>
+                <a class="btn btn-success btn-lg" href="#components">Conoce más</a>
+            </div>
         </div>
-        <br></br>
-        <div class="heading-image animated bounceInRight animate-panel" data-child="img-animate" data-effect="fadeInRight">
+        
+        <div class="heading-image animated bounceInRight animate-panel col-md-6">
             <!--<img class="img-animate" src="images/landing/c1.jpg" %}">-->
-            <br></br>
             <div class="contrainer" >
               <div id="myCarousel" class="carousel slide" data-ride="carousel">
                 <!-- Indicators -->
@@ -73,15 +73,15 @@
                 <!-- Wrapper for slides -->
                 <div class="carousel-inner">
                   <div class="item active">
-                    <img src="{% static "images/landing/carousel1.jpg" %}" alt="Los Angeles" style="width:100%;"/>
+                    <img src="{% static "images/landing/carousel1.jpg" %}" style="width:100%;"/>
                   </div>
 
                   <div class="item">
-                    <img src="{% static "images/landing/carousel2.jpg" %}" alt="Chicago" style="width:100%;"/>
+                    <img src="{% static "images/landing/carousel2.jpg" %}" style="width:100%;"/>
                   </div>
 
                   <div class="item">
-                    <img src="{% static "images/landing/carousel3.jpg" %}" alt="New york" style="width:100%;"/>
+                    <img src="{% static "images/landing/carousel3.jpg" %}" style="width:100%;"/>
                   </div>
                 </div>
 
@@ -98,7 +98,8 @@
             </div>
         </div>
     </div>
-</div>
+    </div>
+</header>
 
 <section id="components" class="bg-light">
     <div class="container">
@@ -143,7 +144,7 @@
     </div>
 </section>
 
-<section id="team" style="min-height: 92%;">
+<section id="team" class="parallax" style="min-height: 92%;">
     <div class="container">
         <div class="row text-center">
             <div class="col-md-6 col-md-offset-3">
@@ -160,6 +161,7 @@
                     <img src="{% static "images/a2.jpg" %}" class="img-circle img-small" alt=""/>
                     <h4>Martín Gómez</h4>
                     <p>“Aprendí mi diagnóstico financiero actual y me enseñaron cómo poder arreglarlo, hoy vivo tranquilo sabiendo que el futuro de mis hijos está seguro”</p>
+
                 </div>
             </div>
             <div class="col-sm-4">
@@ -167,6 +169,7 @@
                     <img src="{% static "images/a5.jpg" %}" class="img-circle" alt=""/>
                     <h4><span>User</span> name</h4>
                     <p>Lorem ipsum dolor sit amet, illum fastidii dissentias quo ne. Sea ne sint animal iisque, nam an soluta sensibus.</p>
+
                 </div>
             </div>
             <div class="col-sm-4">
