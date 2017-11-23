@@ -19,10 +19,10 @@ class CatTipocita(models.Model):
 
 
 class Cita(models.Model):
-    idCita = models.BigIntegerField(primary_key=True)
-    idAsesorCliente = models.ForeignKey(AsesorCliente)
-    idTipoCita = models.OneToOneField(CatTipocita)
-    idEstatus = models.OneToOneField(CatEstatuscita)
+    idCita = models.AutoField(primary_key=True)
+    idAsesorCliente = models.OneToOneField(AsesorCliente)
+    idTipoCita = models.ForeignKey(CatTipocita)
+    idEstatus = models.ForeignKey(CatEstatuscita)
     fecha = models.DateTimeField()
     direccionCita = models.CharField(max_length=200, blank=True, null=True)
     descripcion = models.CharField(max_length=500, blank=True, null=True)

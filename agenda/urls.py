@@ -17,4 +17,9 @@ urlpatterns = [
         view=views.agenda,
         name='agendar'
     ),
+    url(
+        regex=r'^editar/(?P<idCita>\d+)$',
+        view=views.editar,
+        name='editar'
+    ),
 ]
