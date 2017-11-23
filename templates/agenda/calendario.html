@@ -15,29 +15,30 @@
         <div class="hpanel">
           <div class="panel-body">
             <div class="text-center m-b-md" id="wizardControl">
-                <a class="btn btn-info" href="#step1" data-toggle="tab">Citas</a>
             </div>
             <div class="tab-content">
-            <div id="step1" class="p-m tab-pane active">
-              <div class="row">
-
-            <div class="col-lg-2 text-center">
-            <i class="pe-7s-date fa-5x text-muted"></i>
-            <p class="middle m-t-md">
-              <strong>Tus citas. <br>Organizate a tus tiempos </strong>
-            </p>
-            <p class="middle m-t-md">
-              <a href="{% url 'agenda:contactos' %}"><button>Agrega citas</button></a>
-            </p>
+              <div class="p-m tab-pane active">
+                <div class="row">
+                  <div class="col-lg-2 text-center">
+                  <i class="pe-7s-date fa-5x text-muted"></i>
+                  <p class="middle m-t-md">
+                  <strong>Tus citas. <br>Organizate a tus tiempos </strong>
+                  </p>
+                  <p class="middle m-t-md">
+                  <a href="{% url 'agenda:contactos' %}"><button>Agrega citas</button></a>
+                  </p>
+                  </div>
+                  <div class="col-lg-10">
+                    <div id="calendar"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
-            <div id="calendar"></div>
-          </div>
-        </div>
         </div>
       </div>
     </div>
   </div>
-
 {% endblock %}
 
 {% block javascripts %}
@@ -81,7 +82,7 @@
             events: [
                   {% for k in cita %}
                     {
-                      title: 'Cita',
+                      title: "{{k.idAsesorCliente.idCliente.user.first_name}} {{k.idAsesorCliente.idCliente.user.last_name}}",
                       start: new Date("{{ k.fecha.isoformat}}"),
                       allDay: false
                     },
