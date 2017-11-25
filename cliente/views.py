@@ -8,6 +8,7 @@ from agenda import models as mAgenda
 from cliente import models as mcliente
 from agenda import models as mAgenda
 from datetime import date
+import agenda.models as mCita
 from django.contrib.auth.decorators import login_required
 
 @login_required(redirect_field_name='login:login')
@@ -193,11 +194,14 @@ def hola(request):
         asesorcliente = m.AsesorCliente.objects.get(idCliente=request.user.persona)
         contacto2 = mLogin.Contacto.objects.get(idpersona=asesorcliente.idAsesor.persona)
         domicilio = mLogin.Direccion.objects.get(idpersona=request.user.persona)
+        try:
+            cita = mCita.
         if request.method == 'POST':
             direccion1 = f.DireccionForm(request.POST,instance=domicilio)
             contacto3 = f.ContactoForm(request.POST,instance=contacto2)
             direccion1.save()
             contacto3.save()
+
         direccion = f.DireccionForm(instance=domicilio)
         contacto1 = f.ContactoForm(instance=contacto2)
         recomendacion = f.RecomendadoClienteForm()

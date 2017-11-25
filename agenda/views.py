@@ -104,7 +104,6 @@ def calendario(request):
                 minutos.append(cita[i].minute)
             except:
                 pass
-        print(cita[0].fecha)
         context = {
             "cita":cita,
             "hora":hora,
