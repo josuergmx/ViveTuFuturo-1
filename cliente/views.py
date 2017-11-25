@@ -195,17 +195,21 @@ def hola(request):
         contacto2 = mLogin.Contacto.objects.get(idpersona=asesorcliente.idAsesor.persona)
         domicilio = mLogin.Direccion.objects.get(idpersona=request.user.persona)
         try:
-            cita = mCita.
+            cita = mCita.Cita.objects.get(idAsesorCliente=asesorcliente)
+        except:
+            cita = "Sin Cita"
+
         if request.method == 'POST':
             direccion1 = f.DireccionForm(request.POST,instance=domicilio)
             contacto3 = f.ContactoForm(request.POST,instance=contacto2)
             direccion1.save()
             contacto3.save()
-
+            
         direccion = f.DireccionForm(instance=domicilio)
         contacto1 = f.ContactoForm(instance=contacto2)
         recomendacion = f.RecomendadoClienteForm()
         context = {
+            "cita":cita,
             "direccion":direccion,
             "asesor":asesorcliente,
             "contacto":contacto1,
