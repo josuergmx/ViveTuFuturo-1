@@ -1,5 +1,17 @@
 .titulo{
 	margin-top: 500px;
-	padding: 5% 3% 5% 5%;
-	background-color:#055FBD;
+	padding: 3% 3% 5% 3%;
+	/* Degradado del del div de color */
+	background: -webkit-gradient(linear, center top, center bottom, color-stop(36%, #0082C8),to(#055FBD));
+    background: -webkit-linear-gradient(top,#0082C8 36%,#055FBD);
+    background: linear-gradient(to bottom,#0082C8 36%,#055FBD);
+    /* Borde redondeado del div */
+	border-radius: 13px 13px 13px 13px;
+	-moz-border-radius: 13px 13px 13px 13px;
+	-webkit-border-radius: 13px 13px 13px 13px;
+	border: 0px solid #000000;
+	/* Sombra del div posisión, y degradado */
+	-webkit-box-shadow: -11px 12px 21px 13px rgba(0,0,0,0.75);
+	-moz-box-shadow: -11px 12px 21px 13px rgba(0,0,0,0.75);
+	box-shadow: -11px 12px 21px 13px rgba(0,0,0,0.75);
 }
