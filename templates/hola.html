@@ -8,7 +8,7 @@
 <div class="splash"> <div class="color-line"></div>
   <div class="splash-title">
     <h1>Espera, por favor. </h1><p>El sistema está cargando tu futuro. </p>
-    <img src="{% static "images/loading-bars.svg" %}" width="64" height="64" />
+    <img src="{% static "images/loading-bars.svg" %}" width="64" height="64"/>
   </div>
 </div>
 
@@ -22,8 +22,8 @@
                 <span class="icon-bar"></span>
             </button>
             <a href="" >
-                <img src="{% static "images/landing/logo.svg" %}" height="50px" class="imgSVG" alt="imagen SVG" title="imagen SVG" />
-                <!--<img src="{% static "images/landing/logo1.svg" %}" height="55px" class="imgSVG" alt="imagen SVG" title="imagen SVG" />-->
+                <img src="{% static "images/landing/logo.svg" %}" height="50px" class="textCenter imgSVG" alt="Vive tu Futuro" title="Vive Futuro"/>
+                <b>Vive tu futuro</b>
             </a>
             <div class="brand-desc">
             </div>
@@ -47,21 +47,37 @@
 
 <header id="page-top" style="min-height: 100%;">
     <div class="container ">
-    <div class="row">s
+    <div class="row">
         <!--Titulo Vive Tu futuro-->
+        <div class="heading animated bounceInLeft shake titulo col-md-5">
+            <h3><b>¡ Recibe tips para evitar un infarto financiero !</b></h3>
+            <hr>
+            <form action="">
+                <div class="input-group">
+                    <span class="input-group-addon" id="basic-addon1"><i class="fa fa-envelope"></i></span>
+                    <input type="email" class="form-control" aria-describedby="emailHelp" placeholder="Ingresa tu correo electronico">
+                </div>
+                <small id="emailHelp" class="form-text text-muted" style="color: #FFFFFF; font-size: 1.1em;">¡Nosotros NUNCA compartiremos tu correo con nadie más!.</small>
+            </form>
+            <br>
+            <a class="btn btn-warning btn-lg" href="#components">Conoce más</a>
+        </div>
+        <!--
         <div class="heading animated bounceInLeft shake titulo col-md-6">
             <div class="row" style="">
-                <h1 class="" style="font-size: 80px;">
-                    Vive tu futuro
-                </h1>
                 <span style="font-size: 20px;">¡ Alcanza tu Lbertad Financiera ahora mismo !</span><br>
-                <hr>
+                <form action="">
+                    <div class="form-group">
+                        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+                        <small id="emailHelp" class="form-text text-muted">¡Nosotros no compartiremos tu correo con nadie más!.</small>
+                    </div>
+                </form>
                 <a class="btn btn-success btn-lg" href="#components">Conoce más</a>
             </div>
         </div>
-        
+        -->
         <!--Carousel-->
-        <div class="heading animated bounceInRight col-md-6">
+        <div class="heading animated bounceInRight col-md-offset-6">
             <!--<img class="img-animate" src="images/landing/c1.jpg" %}">-->
             <div class="contrainer" >
               <div id="myCarousel" class="carousel slide" data-ride="carousel">
@@ -120,14 +136,14 @@
             </div>
             <div class="col-md-6">
                 <!--<iframe width="560" height="315" src="images/landing/video1.mp4?=1" allowfullscreen></iframe>-->
-                <video width="480" height="280" controls>
+                <video class="video" width="480" height="280" controls>
                     <source src="{% static "images/landing/video1.mp4" %}" type="video/mp4"></source>
                 </video>
             </div>
         </div>
         <div class="row m-t-xl">
             <div class="col-md-6" >
-                <video width="480" height="280" controls>
+                <video class="video" width="480" height="280" controls>
                     <source src="{% static "images/landing/video2.mp4" %}" type="video/mp4"></source>
                 </video>
             </div>
@@ -224,7 +240,7 @@
         </div>
 
         <div class="row m-t-lg">
-            <div class="col-lg-3">
+            <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
                 <ul class="pricing-plan list-unstyled">
                     <li class="pricing-title">
                         Básico
@@ -256,7 +272,7 @@
                 </ul>
             </div>
 
-            <div class="col-lg-3">
+            <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
                 <ul class="pricing-plan list-unstyled selected">
                     <li class="pricing-title">
                         Standard
@@ -288,7 +304,7 @@
                 </ul>
             </div>
 
-            <div class="col-lg-3">
+            <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
                 <ul class="pricing-plan list-unstyled">
                     <li class="pricing-title">
                         Premium
@@ -320,7 +336,7 @@
                 </ul>
             </div>
 
-            <div class="col-lg-3">
+            <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
                 <ul class="pricing-plan list-unstyled">
                     <li class="pricing-title">
                         Prestige

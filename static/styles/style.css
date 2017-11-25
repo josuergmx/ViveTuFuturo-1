@@ -3317,6 +3317,7 @@ ul.h-list li:hover a {
   height: 55px;
 }
 .landing-page header {
+    padding-top: 60px;
     /* The image used */
     background-image: url("../images/landing/header1.jpg");
 
