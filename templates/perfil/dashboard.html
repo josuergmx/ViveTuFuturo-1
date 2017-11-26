@@ -101,7 +101,7 @@
 															<i class="pe-7s-bookmarks fa-4x"></i>
 													</div>
 													<div class="m-t-xl">
-															<h1 class="text-danger">5</h1>
+															<h1 class="text-danger">{{citas}}</h1>
 															<small>
 																	Lorem Ipsum is simply dummy text of the printing and <strong>typesetting industry</strong>. Lorem Ipsum has been.
 															</small>
@@ -215,19 +215,23 @@
 																		<h3><i class="fa-exclamation-circle fa white"></i> Evento</h3>
 																		<div class="m-t-xl">
 																		<p>
-																				El día de hoy tienes una cita de tipo <strong> Sesión 1</strong> con el prospecto <strong>Juan Castillo</strong>, ¡Éxito!
+																			{% if hoy == 0 %}
+																				El día de hoy no tienes citas, consigue mas :) o disfruta a tu familia <strong> ¡Eres el mejor!	</strong>
+																			{% else %}
+																				El día de hoy tienes <strong> {{hoy}} </strong> citas, son muy importantes <strong> eres el mejor	</strong>, ¡Éxito!
+																			{% endif %}
 																		</p>
 																</div>
-																		<div class="m-t-xl">
-																		<div data-toggle="buttons" class="btn-group">
-																				<label class="btn btn-default">
-																						<input type="checkbox"> Comenzar
-																				</label>
-																				<label class="btn btn-default">
-																						<input type="checkbox"> Posponer
-																				</label>
-																		</div>
-															</div>
+																	{% if hoy == 0 %}
+																	<div class="m-t-xl">
+																				<a href="{% url 'agenda:contactos'%}"><button>Consigue mas citas.</button></a>
+																	</div>
+																	{% else %}
+																	<div class="m-t-xl">
+																				<a href="{% url 'agenda:hoy'%}"><button>Ver mis Citas</button></a>
+																	</div>
+																	{% endif %}
+
 															<br>
 																</div>
 														</div>
@@ -241,56 +245,27 @@
 																		<thead>
 																		<tr>
 																				<th>Eventos de la semana</th>
+																				<th>Cliente</th>
 																				<th>Tipo</th>
-																				<th>Date</th>
+																				<th>Direccion</th>
 																				<th>Estatus</th>
 																		</tr>
 																		</thead>
 																		<tbody>
-																		<tr>
-																				<td>Contract with Zender Company
-																						<br/>
-																						<small><i class="fa fa-clock-o"></i> Creado 14.08.2015</small>
-																				</td>
-																				<td>
-																						<span class="pie">Sesión 1</span>
-																				</td>
-																				<td>14 de Julio 2017</td>
-																				<td><a href=""><i class="fa fa-check text-success"></i></a></td>
-																		</tr>
-																		<tr>
-																				<td>There are many variations of passages
-																						<br/>
-																						<small><i class="fa fa-clock-o"></i> Creado 21.07.2015</small>
-																				</td>
-																				<td>
-																						<span class="pie">Sesión 2</span>
-																				</td>
-																				<td>16 de Julio 2017</td>
-																				<td><a href=""><i class="fa fa-check text-navy"></i></a></td>
-																		</tr>
-																		<tr>
-																				<td>Contrary to popular belief
-																						<br/>
-																						<small><i class="fa fa-clock-o"></i> Creado 12.06.2015</small>
-																				</td>
-																				<td>
-																						<span class="pie">Revisión</span>
-																				</td>
-																				<td>18 de Julio 2017</td>
-																				<td><a href=""><i class="fa fa-check text-navy"></i></a></td>
-																		</tr>
-																		<tr>
-																				<td>Gamma project
-																						<br/>
-																						<small><i class="fa fa-clock-o"></i> Creado 06.03.2015</small>
-																				</td>
-																				<td>
-																						<span class="pie">Junta</span>
-																				</td>
-																				<td>22 de Julio 2017</td>
-																				<td><a href=""><i class="fa fa-check text-navy"></i></a></td>
-																		</tr>
+																			{% for i in pendientes  %}
+																				<tr>
+																						<td>
+																								<small><i class="fa fa-clock-o"></i>{{i.fecha}}</small>
+																						</td>
+																						<td>
+																								<span class="pie">{{i.idAsesorCliente.idCliente.user.first_name}} {{i.idAsesorCliente.idCliente.user.last_name}}</span>
+																						</td>
+																						<td>
+																								<span class="pie">{{i.idTipoCita.nombre}}</span>
+																						</td>
+																						<td>{{i.direccionCita}}</td>
+																						<td>{{i.idEstatus.nombre}}</td>
+																			{% endfor %}
 																		</tbody>
 																</table>
 														</div>

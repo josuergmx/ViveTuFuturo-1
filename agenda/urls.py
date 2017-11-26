@@ -22,4 +22,14 @@ urlpatterns = [
         view=views.editar,
         name='editar'
     ),
+    url(
+        regex=r'^hoy/',
+        view=views.hoy,
+        name='hoy'
+    ),
+    url(
+        regex=r'^historial/',
+        view=views.historial,
+        name='historial'
+    ),
 ]

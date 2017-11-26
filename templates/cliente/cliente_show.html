@@ -56,68 +56,82 @@
                 </dl>
             	</div>
 	        </div>
-	    </div>
-    {% for j in clientes.idCliente.direccion.all %}
-  		<div class="col-lg-4">
-  	        <div class="hpanel hyellow">
-  	            <div class="panel-heading hbuilt">
-  	                <div class="panel-tools">
-  	                    <a class="showhide"><i class="fa fa-chevron-up"></i></a>
-  	                    <a class="closebox"><i class="fa fa-times"></i></a>
-  	                </div>
-  	                Información Geográfica
-  	            </div>
-  	            <div class="panel-body">
-  	            <h4>Domcilio {{ forloop.counter }} </h4>
-  	             <dl class="dl-horizontal">
-                      <dt>Tipo de Dirección: </dt>
-                      <dd>{{j.idtipodireccion}}</dd>
-                      <dt>Delegación / Municipio:</dt>
-                      <dd>{{j.delegacion}}</dd>
-                      <dt>Calle: </dt>
-                      <dd>{{j.calle}}</dd>
-                      <dt>Colonia: </dt>
-                      <dd>{{j.colonia}}</dd>
-                      <dt>Codigo Postal:</dt>
-                      <dd>{{j.cp}}</dd>
-                  </dl>
-              	</div>
-  	        </div>
-  	    </div>
+    </div>
+    <div class="col-lg-4">
+      <div class="hpanel hred">
+        <div class="panel-heading hbuilt">
+          <div class="panel-tools">
+            <a class="showhide"><i class="fa fa-chevron-up"></i></a>
+            <a class="closebox"><i class="fa fa-times"></i></a>
+          </div>
+          Direcciones
+        </div>
+        <div class="panel-body h-200">
+          <div class="text-center m-b-md">
+            <h3>Direccion</h3>
+            <small>Direcciones asociadas a tus clientes.</small>
+          </div>
+        {% for j in clientes.idCliente.direccion.all %}
+          <div class="row">
+            <div class="dropdown dropdown-example animated-panel zoomIn" style="animation-delay: 0.7s;">
+              <div class="panel-body">
+                <h4>Domcilio {{ forloop.counter }} </h4>
+                <dl class="dl-horizontal">
+                  <dt>Tipo de Dirección: </dt>
+                  <dd>{{j.idtipodireccion}}</dd>
+                  <dt>Delegación / Municipio:</dt>
+                  <dd>{{j.delegacion}}</dd>
+                  <dt>Calle: </dt>
+                  <dd>{{j.calle}}</dd>
+                  <dt>Colonia: </dt>
+                  <dd>{{j.colonia}}</dd>
+                  <dt>Codigo Postal:</dt>
+                  <dd>{{j.cp}}</dd>
+                </dl>
+              </div>
+            </div>
+          </div>
         {%endfor%}
-        {% for j in clientes.idCliente.contacto.all %}
-  	    <div class="col-lg-4">
-  	        <div class="hpanel hgreen">
-  	            <div class="panel-heading hbuilt">
-  	                <div class="panel-tools">
-  	                    <a class="showhide"><i class="fa fa-chevron-up"></i></a>
-  	                    <a class="closebox"><i class="fa fa-times"></i></a>
-  	                </div>
-  	                Contacto
-  	            </div>
-                <div class="panel-body">
+        </div>
+      </div>
+    </div>
+
+    <div class="col-lg-4">
+      <div class="hpanel hyellow">
+        <div class="panel-heading hbuilt">
+          <div class="panel-tools">
+            <a class="showhide"><i class="fa fa-chevron-up"></i></a>
+            <a class="closebox"><i class="fa fa-times"></i></a>
+          </div>
+          Contactos
+        </div>
+        <div class="panel-body h-200">
+          <div class="text-center m-b-md">
+            <h3>Contacto</h3>
+            <small>Contactos donde puedes encontrar a tus clientes.</small>
+          </div>
+          {% for j in clientes.idCliente.contacto.all %}
+          <div class="row">
+            <div class="dropdown dropdown-example animated-panel zoomIn" style="animation-delay: 0.7s;">
+              <div class="panel-body">
                 <h4>Contacto {{ forloop.counter }} </h4>
-  	             <dl class="dl-horizontal">
-                      <dt>Celular: </dt>
-                      <dd>{{j.celular}}</dd>
-                      <dt>Casa:</dt>
-                      <dd>{{j.telcasa}}</dd>
-                      <dt>Oficina: </dt>
-                      <dd>{{j.oficina}}</dd>
-                      <dt>Correo Secundario:</dt>
-                      <dd>{{j.email}}</dd>
-                      <dt>Facebook:</dt>
-                      <dd>{{j.facebookid}}</dd>
-                  </dl>
-              	</div>
-  	        </div>
-  	    </div>
-
+                <dl class="dl-horizontal">
+                  <dt>Celular: </dt>
+                  <dd>{{j.celular}}</dd>
+                  <dt>Casa:</dt>
+                  <dd>{{j.telcasa}}</dd>
+                  <dt>Oficina: </dt>
+                  <dd>{{j.oficina}}</dd>
+                  <dt>Correo:</dt>
+                  <dd>{{j.email}}</dd>
+                  <dt>Facebook:</dt>
+                  <dd>{{j.facebookid}}</dd>
+                </dl>
+              </div>
+            </div>
+          </div>
         {%endfor%}
-  	</div>
-</div>
-    <!-- Footer-->
-
-</div>
-
+        </div>
+      </div>
+    </div>
 {% endblock %}

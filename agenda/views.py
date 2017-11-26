@@ -1,5 +1,5 @@
 from django.shortcuts import render,redirect
-from datetime import datetime
+from datetime import datetime,timedelta
 from . import forms as f
 import cliente.models as m
 from . import models as mCita
@@ -33,6 +33,9 @@ def agenda(request,idAsesorCliente):
                     descripcion = descripcion,
                     fecha = fecha,
                 )
+                mCliente.AsesorCliente.objects.filter(idAsesorCliente=idAsesorCliente).update(
+                    fecha = fecha,
+                )
                 cita.save()
                 return redirect('agenda:contactos')
         else:
@@ -49,15 +52,25 @@ def contactos(request):
         asesorClientes = m.AsesorCliente.objects.filter(idAsesor=request.user.id)
         cita = []
         sin_agendar = []
+        dia = datetime.today().strftime("%Y-%m-%d")
         for i in range(0,len(asesorClientes)):
             try:
-                cita.append(mCita.Cita.objects.get(idAsesorCliente=asesorClientes[i]))
+                citas = mCita.Cita.objects.get(idAsesorCliente=asesorClientes[i],fecha=asesorClientes[i].fecha)
+                if asesorClientes[i].fecha.strftime("%Y-%m-%d") >= dia:
+                    cita.append(citas)
+                else:
+                    sin_agendar.append(asesorClientes[i])
             except:
                 sin_agendar.append(asesorClientes[i])
+        if len(sin_agendar) == 0:
+            bien = 1
+        else:
+            bien = 0
         context = {
             "clientes":asesorClientes,
             "sin_cita":sin_agendar,
             "citas":cita,
+            "bien":bien,
         }
         return render(request,"agenda/contactos.html",context)
     else:
@@ -79,6 +92,9 @@ def editar(request,idCita):
                 mCita.Cita.objects.filter(idCita=cita.idCita).update(
                     fecha = fecha,
                 )
+                mCliente.AsesorCliente.objects.filter(idAsesorCliente=idAsesorCliente).update(
+                    fecha = fecha,
+                )
                 return redirect('agenda:contactos')
         else:
             cita = f.agendaForm(instance=editar)
@@ -90,6 +106,46 @@ def editar(request,idCita):
     else:
         return render(request,'error/404.html')
 
+def hoy(request):
+    asesorClientes = mCliente.AsesorCliente.objects.filter(idAsesor=request.user.id)
+    hoy1 = []
+    hoy2 = []
+    iterar = 0
+    dia = datetime.today().strftime("%Y-%m-%d")
+    for i in asesorClientes:
+        if i.fecha.strftime("%Y-%m-%d") == dia:
+            if iterar%2 == 0:
+                hoy1.append(mCita.Cita.objects.get(idAsesorCliente=i,fecha=i.fecha))
+            else:
+                hoy2.append(mCita.Cita.objects.get(idAsesorCliente=i,fecha=i.fecha))
+        iterar = iterar + 1
+    context = {
+        "hoy1":hoy1,
+        "hoy2":hoy2,
+    }
+    return render(request,"agenda/hoy.html",context)
+
+def historial(request):
+    asesorClientes = mCliente.AsesorCliente.objects.filter(idAsesor=request.user.id)
+    historial1 = []
+    historial2 = []
+    iterar = 0
+    for i in asesorClientes:
+        try:
+            if iterar%2 == 0:
+                historial1.append(mCita.Cita.objects.filter(idAsesorCliente=i))
+                print(historial1)
+            else:
+                historial2.append(mCita.Cita.objects.filter(idAsesorCliente=i))
+        except:
+            pass
+        iterar = iterar + 1
+
+    context = {
+        "historial1":historial1,
+        "historial2":historial2,
+    }
+    return render(request,"agenda/historial.html",context)
 
 def calendario(request):
     if request.user.persona.idRol.idRole == 2 or request.user.persona.idRol.idRole == 3:
