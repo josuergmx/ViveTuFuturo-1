@@ -3317,6 +3317,7 @@ ul.h-list li:hover a {
   height: 55px;
 }
 .landing-page header {
+    padding-top: 60px;
     /* The image used */
     background-image: url("../images/landing/header1.jpg");
 
@@ -3337,23 +3338,6 @@ ul.h-list li:hover a {
     padding-top: 50px;
     margin-bottom: 30px;
     filter:brightness(0.6);*/
-}
-
-.parallax { 
-    /* The image used */
-    background-image: url("../images/landing/header2.jpg");
-
-    /* Full height */
-    min-height: 92%;
-    
-
-    /* Create the parallax scrolling effect */
-    background-attachment: fixed;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-
-    filter:brightness(0.9);
 }
 
 .landing-page section {
