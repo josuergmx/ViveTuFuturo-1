@@ -7,6 +7,19 @@
 	font-size: 1.3em;
 }
 
+.justificado{
+	text-align : justify;
+}
+
+.margen{
+	padding-left: 10%;
+	padding-right: 10%;
+}
+
+.margen p{
+	text-align : justify;
+}
+
 .titulo{
 	text-align: center;
 	margin-top: 500px;
