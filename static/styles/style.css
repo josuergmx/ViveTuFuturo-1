@@ -2566,10 +2566,12 @@ h6 {
 }
 @media (max-width: 768px) {
   .navbar-form-custom,
-  .navbar-right,
   #logo {
     display: none;
   }
+  .navbar-right{
+    display: none;
+   }
   .navbar-static-top {
     margin: 0;
   }
