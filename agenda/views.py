@@ -153,13 +153,15 @@ def calendario(request):
         cita = []
         hora = []
         minutos = []
+        print(len(asesorClientes))
         for i in range(0,len(asesorClientes)):
             try:
-                cita.append(mCita.Cita.objects.get(idAsesorCliente=asesorClientes[i]))
+                cita.append(mCita.Cita.objects.filter(idAsesorCliente=asesorClientes[i]))
                 hora.append(cita[i].hour)
                 minutos.append(cita[i].minute)
             except:
                 pass
+        print(cita)
         context = {
             "cita":cita,
             "hora":hora,

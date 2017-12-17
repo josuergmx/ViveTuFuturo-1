@@ -73,7 +73,7 @@
                 center: 'title',
                 right: 'month,agendaWeek,agendaDay'
             },
-            editable: true, //true
+            editable: false, //true
             droppable: false, //true, this allows things to be dropped onto the calendar
             drop: function() {
                 // is the "remove after drop" checkbox checked?
@@ -84,11 +84,13 @@
             },
             events: [
                   {% for k in cita %}
+                    {% for k1 in k %}
                     {
-                      title: "{{k.idAsesorCliente.idCliente.user.first_name}} {{k.idAsesorCliente.idCliente.user.last_name}}",
-                      start: Date.parse("{{k.fecha.isoformat}}"),
+                      title: "{{k1.idAsesorCliente.idCliente.user.first_name}} {{k1.idAsesorCliente.idCliente.user.last_name}}",
+                      start: Date.parse("{{k1.fecha.isoformat}}"),
                       allDay: false
                     },
+                    {% endfor %}
                   {% endfor %}
             ],
         });

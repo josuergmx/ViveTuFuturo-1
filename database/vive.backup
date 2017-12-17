@@ -2,8 +2,8 @@
 -- PostgreSQL database dump
 --
 
--- Dumped from database version 9.6.5
--- Dumped by pg_dump version 9.6.5
+-- Dumped from database version 9.6.6
+-- Dumped by pg_dump version 9.6.6
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -65,7 +65,7 @@ ALTER TABLE agenda_cattipocita OWNER TO vive;
 --
 
 CREATE TABLE agenda_cita (
-    "idCita" bigint NOT NULL,
+    "idCita" integer NOT NULL,
     fecha timestamp with time zone NOT NULL,
     "direccionCita" character varying(200),
     descripcion character varying(500),
@@ -76,6 +76,27 @@ CREATE TABLE agenda_cita (
 
 
 ALTER TABLE agenda_cita OWNER TO vive;
+
+--
+-- Name: agenda_cita_idCita_seq; Type: SEQUENCE; Schema: public; Owner: vive
+--
+
+CREATE SEQUENCE "agenda_cita_idCita_seq"
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE "agenda_cita_idCita_seq" OWNER TO vive;
+
+--
+-- Name: agenda_cita_idCita_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: vive
+--
+
+ALTER SEQUENCE "agenda_cita_idCita_seq" OWNED BY agenda_cita."idCita";
+
 
 --
 -- Name: asesor_reporteactividad; Type: TABLE; Schema: public; Owner: vive
@@ -352,7 +373,8 @@ CREATE TABLE cliente_asesorcliente (
     "Estatus_id" integer,
     "Origen_id" integer,
     "idAsesor_id" integer NOT NULL,
-    "idCliente_id" integer NOT NULL
+    "idCliente_id" integer NOT NULL,
+    fecha timestamp with time zone
 );
 
 
@@ -456,6 +478,7 @@ CREATE TABLE cliente_recomendadocliente (
     nombre character varying(80) NOT NULL,
     celular integer,
     hijos boolean NOT NULL,
+    activo boolean,
     asesor_id integer,
     "estadoCivil_id" integer
 );
@@ -1315,6 +1338,13 @@ ALTER SEQUENCE "ventas_planesconcretados_idPlan_seq" OWNED BY ventas_planesconcr
 
 
 --
+-- Name: agenda_cita idCita; Type: DEFAULT; Schema: public; Owner: vive
+--
+
+ALTER TABLE ONLY agenda_cita ALTER COLUMN "idCita" SET DEFAULT nextval('"agenda_cita_idCita_seq"'::regclass);
+
+
+--
 -- Name: asesor_reporteactividad idReporte; Type: DEFAULT; Schema: public; Owner: vive
 --
 
@@ -1550,11 +1580,8 @@ ALTER TABLE ONLY ventas_planesconcretados ALTER COLUMN "idPlan" SET DEFAULT next
 --
 
 COPY agenda_catestatuscita ("idEstatus", nombre, descripcion) FROM stdin;
-1	Sin asignar	------------------------
-2	En espera	------------------------
-3	Sesion 1	------------------------
-4	Sesion 2	------------------------
-5	Cancelada	------------------------
+1	Sin asignar	\N
+2	En espera	\N
 \.
 
 
@@ -1563,12 +1590,8 @@ COPY agenda_catestatuscita ("idEstatus", nombre, descripcion) FROM stdin;
 --
 
 COPY agenda_cattipocita ("idTipoCita", nombre, descripcion) FROM stdin;
-1	Sin asignar	------------------------
-2	Dudas	------------------------
-3	Sesion 1	------------------------
-4	Sesion 2	------------------------
-5	Final	------------------------
-6	Poliza	------------------------
+1	Sin asignar	\N
+2	Sesion 1	\N
 \.
 
 
@@ -1577,7 +1600,19 @@ COPY agenda_cattipocita ("idTipoCita", nombre, descripcion) FROM stdin;
 --
 
 COPY agenda_cita ("idCita", fecha, "direccionCita", descripcion, "idAsesorCliente_id", "idEstatus_id", "idTipoCita_id") FROM stdin;
+3	2017-11-28 22:06:00-06	ESCOM	ES CHIDA	5	2	1
+4	2017-11-24 10:40:00-06	Vasconcelos	Es una cita profesional	6	2	2
+5	2017-11-26 12:30:00-06	ESCOM	Es no se.	7	2	2
+6	2017-11-27 10:45:00-06	Escom	ES CHIDA	7	2	2
+7	2017-11-30 23:08:00-06	Vasconcelos	ES CHIDA	6	1	2
 \.
+
+
+--
+-- Name: agenda_cita_idCita_seq; Type: SEQUENCE SET; Schema: public; Owner: vive
+--
+
+SELECT pg_catalog.setval('"agenda_cita_idCita_seq"', 7, true);
 
 
 --
@@ -1633,12 +1668,12 @@ COPY auth_permission (id, name, content_type_id, codename) FROM stdin;
 1	Can add log entry	1	add_logentry
 2	Can change log entry	1	change_logentry
 3	Can delete log entry	1	delete_logentry
-4	Can add group	2	add_group
-5	Can change group	2	change_group
-6	Can delete group	2	delete_group
-7	Can add permission	3	add_permission
-8	Can change permission	3	change_permission
-9	Can delete permission	3	delete_permission
+4	Can add permission	2	add_permission
+5	Can change permission	2	change_permission
+6	Can delete permission	2	delete_permission
+7	Can add group	3	add_group
+8	Can change group	3	change_group
+9	Can delete group	3	delete_group
 10	Can add user	4	add_user
 11	Can change user	4	change_user
 12	Can delete user	4	delete_user
@@ -1648,93 +1683,93 @@ COPY auth_permission (id, name, content_type_id, codename) FROM stdin;
 16	Can add session	6	add_session
 17	Can change session	6	change_session
 18	Can delete session	6	delete_session
-19	Can add cita	7	add_cita
-20	Can change cita	7	change_cita
-21	Can delete cita	7	delete_cita
-22	Can add cat tipocita	8	add_cattipocita
-23	Can change cat tipocita	8	change_cattipocita
-24	Can delete cat tipocita	8	delete_cattipocita
+19	Can add cat tipocita	7	add_cattipocita
+20	Can change cat tipocita	7	change_cattipocita
+21	Can delete cat tipocita	7	delete_cattipocita
+22	Can add cita	8	add_cita
+23	Can change cita	8	change_cita
+24	Can delete cita	8	delete_cita
 25	Can add cat estatuscita	9	add_catestatuscita
 26	Can change cat estatuscita	9	change_catestatuscita
 27	Can delete cat estatuscita	9	delete_catestatuscita
 28	Can add reporte actividad	10	add_reporteactividad
 29	Can change reporte actividad	10	change_reporteactividad
 30	Can delete reporte actividad	10	delete_reporteactividad
-31	Can add asesor cliente	11	add_asesorcliente
-32	Can change asesor cliente	11	change_asesorcliente
-33	Can delete asesor cliente	11	delete_asesorcliente
-34	Can add estatus	12	add_estatus
-35	Can change estatus	12	change_estatus
-36	Can delete estatus	12	delete_estatus
-37	Can add origen recomendacion	13	add_origenrecomendacion
-38	Can change origen recomendacion	13	change_origenrecomendacion
-39	Can delete origen recomendacion	13	delete_origenrecomendacion
-40	Can add recomendado cliente	14	add_recomendadocliente
-41	Can change recomendado cliente	14	change_recomendadocliente
-42	Can delete recomendado cliente	14	delete_recomendadocliente
-43	Can add cat tipodireccion	15	add_cattipodireccion
-44	Can change cat tipodireccion	15	change_cattipodireccion
-45	Can delete cat tipodireccion	15	delete_cattipodireccion
-46	Can add persona	16	add_persona
-47	Can change persona	16	change_persona
-48	Can delete persona	16	delete_persona
-49	Can add roles	17	add_roles
-50	Can change roles	17	change_roles
-51	Can delete roles	17	delete_roles
-52	Can add contacto	18	add_contacto
-53	Can change contacto	18	change_contacto
-54	Can delete contacto	18	delete_contacto
-55	Can add estado civil	19	add_estadocivil
-56	Can change estado civil	19	change_estadocivil
-57	Can delete estado civil	19	delete_estadocivil
-58	Can add direccion	20	add_direccion
-59	Can change direccion	20	change_direccion
-60	Can delete direccion	20	delete_direccion
-61	Can add creditos	21	add_creditos
-62	Can change creditos	21	change_creditos
-63	Can delete creditos	21	delete_creditos
-64	Can add estatuscredito	22	add_estatuscredito
-65	Can change estatuscredito	22	change_estatuscredito
-66	Can delete estatuscredito	22	delete_estatuscredito
-67	Can add sale	23	add_sale
-68	Can change sale	23	change_sale
-69	Can delete sale	23	delete_sale
-70	Can add blindajefinanciero	24	add_blindajefinanciero
-71	Can change blindajefinanciero	24	change_blindajefinanciero
-72	Can delete blindajefinanciero	24	delete_blindajefinanciero
-73	Can add libertadfinanciera	25	add_libertadfinanciera
-74	Can change libertadfinanciera	25	change_libertadfinanciera
-75	Can delete libertadfinanciera	25	delete_libertadfinanciera
-76	Can add capitalizacion	26	add_capitalizacion
-77	Can change capitalizacion	26	change_capitalizacion
-78	Can delete capitalizacion	26	delete_capitalizacion
-79	Can add sesion1	27	add_sesion1
-80	Can change sesion1	27	change_sesion1
-81	Can delete sesion1	27	delete_sesion1
-82	Can add promotor asesor	28	add_promotorasesor
-83	Can change promotor asesor	28	change_promotorasesor
-84	Can delete promotor asesor	28	delete_promotorasesor
-85	Can add planes concretados	29	add_planesconcretados
-86	Can change planes concretados	29	change_planesconcretados
-87	Can delete planes concretados	29	delete_planesconcretados
-88	Can add localidad	30	add_localidad
-89	Can change localidad	30	change_localidad
-90	Can delete localidad	30	delete_localidad
-91	Can add departamento	31	add_departamento
-92	Can change departamento	31	change_departamento
-93	Can delete departamento	31	delete_departamento
-94	Can add servicio	32	add_servicio
-95	Can change servicio	32	change_servicio
-96	Can delete servicio	32	delete_servicio
-97	Can add cat pais	33	add_catpais
-98	Can change cat pais	33	change_catpais
-99	Can delete cat pais	33	delete_catpais
-100	Can add institucion financiera	34	add_institucionfinanciera
-101	Can change institucion financiera	34	change_institucionfinanciera
-102	Can delete institucion financiera	34	delete_institucionfinanciera
-103	Can add cat estados	35	add_catestados
-104	Can change cat estados	35	change_catestados
-105	Can delete cat estados	35	delete_catestados
+31	Can add origen recomendacion	11	add_origenrecomendacion
+32	Can change origen recomendacion	11	change_origenrecomendacion
+33	Can delete origen recomendacion	11	delete_origenrecomendacion
+34	Can add recomendado cliente	12	add_recomendadocliente
+35	Can change recomendado cliente	12	change_recomendadocliente
+36	Can delete recomendado cliente	12	delete_recomendadocliente
+37	Can add estatus	13	add_estatus
+38	Can change estatus	13	change_estatus
+39	Can delete estatus	13	delete_estatus
+40	Can add asesor cliente	14	add_asesorcliente
+41	Can change asesor cliente	14	change_asesorcliente
+42	Can delete asesor cliente	14	delete_asesorcliente
+43	Can add sale	15	add_sale
+44	Can change sale	15	change_sale
+45	Can delete sale	15	delete_sale
+46	Can add estatuscredito	16	add_estatuscredito
+47	Can change estatuscredito	16	change_estatuscredito
+48	Can delete estatuscredito	16	delete_estatuscredito
+49	Can add creditos	17	add_creditos
+50	Can change creditos	17	change_creditos
+51	Can delete creditos	17	delete_creditos
+52	Can add roles	18	add_roles
+53	Can change roles	18	change_roles
+54	Can delete roles	18	delete_roles
+55	Can add persona	19	add_persona
+56	Can change persona	19	change_persona
+57	Can delete persona	19	delete_persona
+58	Can add cat tipodireccion	20	add_cattipodireccion
+59	Can change cat tipodireccion	20	change_cattipodireccion
+60	Can delete cat tipodireccion	20	delete_cattipodireccion
+61	Can add direccion	21	add_direccion
+62	Can change direccion	21	change_direccion
+63	Can delete direccion	21	delete_direccion
+64	Can add estado civil	22	add_estadocivil
+65	Can change estado civil	22	change_estadocivil
+66	Can delete estado civil	22	delete_estadocivil
+67	Can add contacto	23	add_contacto
+68	Can change contacto	23	change_contacto
+69	Can delete contacto	23	delete_contacto
+70	Can add servicio	24	add_servicio
+71	Can change servicio	24	change_servicio
+72	Can delete servicio	24	delete_servicio
+73	Can add departamento	25	add_departamento
+74	Can change departamento	25	change_departamento
+75	Can delete departamento	25	delete_departamento
+76	Can add cat pais	26	add_catpais
+77	Can change cat pais	26	change_catpais
+78	Can delete cat pais	26	delete_catpais
+79	Can add institucion financiera	27	add_institucionfinanciera
+80	Can change institucion financiera	27	change_institucionfinanciera
+81	Can delete institucion financiera	27	delete_institucionfinanciera
+82	Can add localidad	28	add_localidad
+83	Can change localidad	28	change_localidad
+84	Can delete localidad	28	delete_localidad
+85	Can add cat estados	29	add_catestados
+86	Can change cat estados	29	change_catestados
+87	Can delete cat estados	29	delete_catestados
+88	Can add promotor asesor	30	add_promotorasesor
+89	Can change promotor asesor	30	change_promotorasesor
+90	Can delete promotor asesor	30	delete_promotorasesor
+91	Can add sesion1	31	add_sesion1
+92	Can change sesion1	31	change_sesion1
+93	Can delete sesion1	31	delete_sesion1
+94	Can add capitalizacion	32	add_capitalizacion
+95	Can change capitalizacion	32	change_capitalizacion
+96	Can delete capitalizacion	32	delete_capitalizacion
+97	Can add libertadfinanciera	33	add_libertadfinanciera
+98	Can change libertadfinanciera	33	change_libertadfinanciera
+99	Can delete libertadfinanciera	33	delete_libertadfinanciera
+100	Can add blindajefinanciero	34	add_blindajefinanciero
+101	Can change blindajefinanciero	34	change_blindajefinanciero
+102	Can delete blindajefinanciero	34	delete_blindajefinanciero
+103	Can add planes concretados	35	add_planesconcretados
+104	Can change planes concretados	35	change_planesconcretados
+105	Can delete planes concretados	35	delete_planesconcretados
 \.
 
 
@@ -1750,8 +1785,10 @@ SELECT pg_catalog.setval('auth_permission_id_seq', 105, true);
 --
 
 COPY auth_user (id, password, last_login, is_superuser, username, first_name, last_name, email, is_staff, is_active, date_joined) FROM stdin;
-1	pbkdf2_sha256$36000$VSutBxiSvjXu$U5sC6MvIxU52oPWdqVIijR2ora36u5ow420LKOH6TQM=	2017-11-10 10:24:04-06	t	huitzoo	Oscar Huitzilin	Chavez Barrera	eckobik@gmail.com	t	t	2017-11-10 10:23:51-06
-2	pbkdf2_sha256$36000$AxJwFQ2ksVYx$/8HX5XVOHu04oCbdo0o/LxOPeAPpJeRxL2f1s6H2S/4=	\N	f	jorgi	Jorge	Maldonado Carpio	jorge@gmail.com	f	t	2017-11-10 10:36:30.046195-06
+8	pbkdf2_sha256$36000$iyPiY49qgvWq$5wpS0DbPHle4UuXMNnGpJtBDSTmQpADzKFdg6uSICkw=	\N	f	Smariab	Santa	Barrera Ramirez	smariab11@gmail.com	f	t	2017-11-26 07:41:18.662463-06
+9	pbkdf2_sha256$36000$k4NxnaAJbcI9$e+uVIyDaPfuIqroOFj0r5tRRj/uVMNlzEw4BO8DYOho=	2017-11-26 11:05:07.657459-06	f	rosita	Rosa	Chavez Barrera	rosita@gmail.com	f	t	2017-11-26 08:01:27.677102-06
+10	pbkdf2_sha256$36000$9xzF0cGARX2F$uq+LXPLCarkYMVXYBgpZjwks5KZgajDJZFveHOPDyqw=	2017-11-26 11:09:22.172154-06	f	andy	Andres	Lopez Sanchez	andres@gmail.com	f	t	2017-11-26 08:31:59.22658-06
+1	pbkdf2_sha256$36000$NbIOE2SUGQxH$LkCu9E7YJiSOGc75BeBxZMPzcr+Y1EFL5yNkaayy0vs=	2017-12-17 10:50:09.243934-06	t	huitzoo	Oscar	Chavez Barrera	eckobik@gmail.com	t	t	2017-11-25 16:49:29-06
 \.
 
 
@@ -1774,7 +1811,7 @@ SELECT pg_catalog.setval('auth_user_groups_id_seq', 1, false);
 -- Name: auth_user_id_seq; Type: SEQUENCE SET; Schema: public; Owner: vive
 --
 
-SELECT pg_catalog.setval('auth_user_id_seq', 2, true);
+SELECT pg_catalog.setval('auth_user_id_seq', 10, true);
 
 
 --
@@ -1796,7 +1833,10 @@ SELECT pg_catalog.setval('auth_user_user_permissions_id_seq', 1, false);
 -- Data for Name: cliente_asesorcliente; Type: TABLE DATA; Schema: public; Owner: vive
 --
 
-COPY cliente_asesorcliente ("idAsesorCliente", "clienteProspecto", "fechaActualizacion", ocupacion, dependientes, ingresos, link, password, nombre, activo, "Estatus_id", "Origen_id", "idAsesor_id", "idCliente_id") FROM stdin;
+COPY cliente_asesorcliente ("idAsesorCliente", "clienteProspecto", "fechaActualizacion", ocupacion, dependientes, ingresos, link, password, nombre, activo, "Estatus_id", "Origen_id", "idAsesor_id", "idCliente_id", fecha) FROM stdin;
+5	f	2017-11-26	\N	\N	\N	\N	\N	\N	t	1	1	1	8	2017-11-28 22:06:00-06
+7	f	2017-11-26	\N	\N	\N	\N	\N	\N	t	1	1	1	10	2017-11-27 10:45:00-06
+6	f	2017-11-26	\N	\N	\N	\N	\N	\N	t	1	1	1	9	2017-11-30 23:08:00-06
 \.
 
 
@@ -1804,7 +1844,7 @@ COPY cliente_asesorcliente ("idAsesorCliente", "clienteProspecto", "fechaActuali
 -- Name: cliente_asesorcliente_idAsesorCliente_seq; Type: SEQUENCE SET; Schema: public; Owner: vive
 --
 
-SELECT pg_catalog.setval('"cliente_asesorcliente_idAsesorCliente_seq"', 1, false);
+SELECT pg_catalog.setval('"cliente_asesorcliente_idAsesorCliente_seq"', 7, true);
 
 
 --
@@ -1812,8 +1852,7 @@ SELECT pg_catalog.setval('"cliente_asesorcliente_idAsesorCliente_seq"', 1, false
 --
 
 COPY cliente_estatus ("idEstatus", nombre, descripcion) FROM stdin;
-1	Sin asignar	------------------------
-2	En espera	------------------------
+1	Sin asignar	\N
 \.
 
 
@@ -1821,7 +1860,7 @@ COPY cliente_estatus ("idEstatus", nombre, descripcion) FROM stdin;
 -- Name: cliente_estatus_idEstatus_seq; Type: SEQUENCE SET; Schema: public; Owner: vive
 --
 
-SELECT pg_catalog.setval('"cliente_estatus_idEstatus_seq"', 2, true);
+SELECT pg_catalog.setval('"cliente_estatus_idEstatus_seq"', 1, true);
 
 
 --
@@ -1829,9 +1868,7 @@ SELECT pg_catalog.setval('"cliente_estatus_idEstatus_seq"', 2, true);
 --
 
 COPY cliente_origenrecomendacion ("idOrigen", nombre, descripcion) FROM stdin;
-1	Sin asignar	------------------------
-2	Recomendacion	------------------------
-3	Talleres	------------------------
+1	Sin asignar	\N
 \.
 
 
@@ -1839,14 +1876,14 @@ COPY cliente_origenrecomendacion ("idOrigen", nombre, descripcion) FROM stdin;
 -- Name: cliente_origenrecomendacion_idOrigen_seq; Type: SEQUENCE SET; Schema: public; Owner: vive
 --
 
-SELECT pg_catalog.setval('"cliente_origenrecomendacion_idOrigen_seq"', 3, true);
+SELECT pg_catalog.setval('"cliente_origenrecomendacion_idOrigen_seq"', 1, true);
 
 
 --
 -- Data for Name: cliente_recomendadocliente; Type: TABLE DATA; Schema: public; Owner: vive
 --
 
-COPY cliente_recomendadocliente (id, nombre, celular, hijos, asesor_id, "estadoCivil_id") FROM stdin;
+COPY cliente_recomendadocliente (id, nombre, celular, hijos, activo, asesor_id, "estadoCivil_id") FROM stdin;
 \.
 
 
@@ -1877,9 +1914,6 @@ SELECT pg_catalog.setval('"creditos_creditos_idCredito_seq"', 1, false);
 --
 
 COPY creditos_estatuscredito (idestatuscredito, nombre, descripcion) FROM stdin;
-1	Sin asignar	------------------------
-2	En uso	------------------------
-3	Usado	------------------------
 \.
 
 
@@ -1887,7 +1921,7 @@ COPY creditos_estatuscredito (idestatuscredito, nombre, descripcion) FROM stdin;
 -- Name: creditos_estatuscredito_idestatuscredito_seq; Type: SEQUENCE SET; Schema: public; Owner: vive
 --
 
-SELECT pg_catalog.setval('creditos_estatuscredito_idestatuscredito_seq', 3, true);
+SELECT pg_catalog.setval('creditos_estatuscredito_idestatuscredito_seq', 1, false);
 
 
 --
@@ -1910,47 +1944,34 @@ SELECT pg_catalog.setval('creditos_sale_id_seq', 1, false);
 --
 
 COPY django_admin_log (id, action_time, object_id, object_repr, action_flag, change_message, content_type_id, user_id) FROM stdin;
-1	2017-11-10 10:24:55.479651-06	1	Sin asignar	1	[{"added": {}}]	9	1
-2	2017-11-10 10:25:02.164842-06	2	En espera	1	[{"added": {}}]	9	1
-3	2017-11-10 10:25:10.338443-06	3	Sesion 1	1	[{"added": {}}]	9	1
-4	2017-11-10 10:25:14.603582-06	4	Sesion 2	1	[{"added": {}}]	9	1
-5	2017-11-10 10:25:30.860682-06	5	Cancelada	1	[{"added": {}}]	9	1
-6	2017-11-10 10:25:47.120184-06	1	Sin asignar	1	[{"added": {}}]	8	1
-7	2017-11-10 10:26:03.50054-06	2	Dudas	1	[{"added": {}}]	8	1
-8	2017-11-10 10:26:07.905764-06	3	Sesion 1	1	[{"added": {}}]	8	1
-9	2017-11-10 10:26:12.570944-06	4	Sesion 2	1	[{"added": {}}]	8	1
-10	2017-11-10 10:26:23.284604-06	5	Final	1	[{"added": {}}]	8	1
-11	2017-11-10 10:26:31.324244-06	6	Poliza	1	[{"added": {}}]	8	1
-12	2017-11-10 10:27:21.628183-06	1	Sin asignar	1	[{"added": {}}]	12	1
-13	2017-11-10 10:27:25.856516-06	2	En espera	1	[{"added": {}}]	12	1
-14	2017-11-10 10:27:49.070451-06	1	Sin asignar	1	[{"added": {}}]	13	1
-15	2017-11-10 10:27:53.215821-06	2	Recomendacion	1	[{"added": {}}]	13	1
-16	2017-11-10 10:27:57.021282-06	3	Talleres	1	[{"added": {}}]	13	1
-17	2017-11-10 10:28:12.019125-06	1	Sin asignar	1	[{"added": {}}]	22	1
-18	2017-11-10 10:28:18.028962-06	2	En uso	1	[{"added": {}}]	22	1
-19	2017-11-10 10:28:24.378047-06	3	Usado	1	[{"added": {}}]	22	1
-20	2017-11-10 10:28:58.778893-06	1	Sin asignar	1	[{"added": {}}]	15	1
-21	2017-11-10 10:29:02.772886-06	2	Casa	1	[{"added": {}}]	15	1
-22	2017-11-10 10:29:07.492951-06	3	Oficina	1	[{"added": {}}]	15	1
-23	2017-11-10 10:29:16.038199-06	4	Empresa	1	[{"added": {}}]	15	1
-24	2017-11-10 10:29:32.064878-06	1	Sin asignar	1	[{"added": {}}]	19	1
-25	2017-11-10 10:29:35.979803-06	2	Soltero	1	[{"added": {}}]	19	1
-26	2017-11-10 10:29:44.398943-06	3	Casado	1	[{"added": {}}]	19	1
-27	2017-11-10 10:29:54.545116-06	4	Separado	1	[{"added": {}}]	19	1
-28	2017-11-10 10:30:00.027705-06	5	Divorciado	1	[{"added": {}}]	19	1
-29	2017-11-10 10:30:04.800871-06	6	Viudo	1	[{"added": {}}]	19	1
-30	2017-11-10 10:30:09.01526-06	7	Viudo	1	[{"added": {}}]	19	1
-31	2017-11-10 10:30:33.699225-06	1	Cliente	1	[{"added": {}}]	17	1
-32	2017-11-10 10:30:37.446157-06	2	Asesor	1	[{"added": {}}]	17	1
-33	2017-11-10 10:30:42.682427-06	3	Asesor-Promotor	1	[{"added": {}}]	17	1
-34	2017-11-10 10:31:14.157058-06	1	huitzoo	2	[{"changed": {"fields": ["first_name", "last_name"]}}]	4	1
-35	2017-11-10 10:32:03.225069-06	1	Oscar Huitzilin	2	[{"changed": {"fields": ["curp", "rfc", "fechaDeNacimiento", "idRol", "estadoCivil"]}}]	16	1
-36	2017-11-10 10:32:36.654284-06	1	Direccion object	1	[{"added": {}}]	20	1
-37	2017-11-10 10:32:57.875145-06	1	Contacto object	1	[{"added": {}}]	18	1
-38	2017-11-10 10:34:17.137833-06	1	Mexico	1	[{"added": {}}]	33	1
-39	2017-11-10 10:34:24.642178-06	1	CDMX	1	[{"added": {}}]	35	1
-40	2017-11-10 10:34:30.436019-06	1	Tlahuac	1	[{"added": {}}]	30	1
-41	2017-11-10 10:34:57.696351-06	1	Meerkats Vasconcelos	1	[{"added": {}}]	34	1
+1	2017-11-25 16:50:34.901224-06	1	Sin asignar	1	[{"added": {}}]	22	1
+2	2017-11-25 16:50:38.053438-06	2	SOlte	1	[{"added": {}}]	22	1
+3	2017-11-25 16:50:46.0251-06	2	Soltero	2	[{"changed": {"fields": ["nombre"]}}]	22	1
+4	2017-11-25 16:51:33.370026-06	1	Cliente	1	[{"added": {}}]	18	1
+5	2017-11-25 16:52:46.799744-06	2	Asesor	1	[{"added": {}}]	18	1
+6	2017-11-25 16:52:59.679212-06	3	Asesor-Promotor	1	[{"added": {}}]	18	1
+7	2017-11-25 16:53:44.993372-06	1	Sin asignar	1	[{"added": {}}]	20	1
+8	2017-11-25 16:54:07.06991-06	1	Sin asignar	1	[{"added": {}}]	11	1
+9	2017-11-25 16:54:38.629282-06	1	Sin asignar	1	[{"added": {}}]	13	1
+10	2017-11-25 16:54:51.501643-06	1	Sin asignar	1	[{"added": {}}]	9	1
+11	2017-11-25 16:54:56.394508-06	2	En espera	1	[{"added": {}}]	9	1
+12	2017-11-25 16:55:08.329786-06	1	Sin asignar	1	[{"added": {}}]	7	1
+13	2017-11-25 16:55:14.469014-06	2	Sesion 1	1	[{"added": {}}]	7	1
+14	2017-11-25 16:55:57.802171-06	1		2	[{"changed": {"fields": ["idRol", "estadoCivil"]}}]	19	1
+15	2017-11-25 16:57:18.336559-06	1	huitzoo	2	[{"changed": {"fields": ["first_name", "last_name"]}}]	4	1
+16	2017-11-25 17:07:34.720802-06	2	oscarin	3		4	1
+17	2017-11-25 17:57:13.064862-06	1	Cita object	3		8	1
+18	2017-11-25 17:57:46.643425-06	3	AsesorCliente object	3		14	1
+19	2017-11-26 07:03:53.484472-06	5	juanito	3		4	1
+20	2017-11-26 07:06:57.514897-06	6	juan	3		4	1
+21	2017-11-26 07:38:54.716578-06	4	AsesorCliente object	3		14	1
+22	2017-11-26 07:39:27.386413-06	7	JuanCr	3		4	1
+23	2017-11-26 07:39:27.390318-06	4	oscarin	3		4	1
+24	2017-11-26 07:39:27.393931-06	3	Oscarin	3		4	1
+25	2017-11-26 09:24:39.425596-06	5	Direccion object	2	[]	21	1
+26	2017-11-26 09:24:48.698182-06	6	Direccion object	1	[{"added": {}}]	21	1
+27	2017-11-26 10:48:20.017338-06	7	Direccion object	1	[{"added": {}}]	21	1
+28	2017-11-26 10:48:43.514824-06	6	Contacto object	1	[{"added": {}}]	23	1
 \.
 
 
@@ -1958,7 +1979,7 @@ COPY django_admin_log (id, action_time, object_id, object_repr, action_flag, cha
 -- Name: django_admin_log_id_seq; Type: SEQUENCE SET; Schema: public; Owner: vive
 --
 
-SELECT pg_catalog.setval('django_admin_log_id_seq', 41, true);
+SELECT pg_catalog.setval('django_admin_log_id_seq', 28, true);
 
 
 --
@@ -1967,40 +1988,40 @@ SELECT pg_catalog.setval('django_admin_log_id_seq', 41, true);
 
 COPY django_content_type (id, app_label, model) FROM stdin;
 1	admin	logentry
-2	auth	group
-3	auth	permission
+2	auth	permission
+3	auth	group
 4	auth	user
 5	contenttypes	contenttype
 6	sessions	session
-7	agenda	cita
-8	agenda	cattipocita
+7	agenda	cattipocita
+8	agenda	cita
 9	agenda	catestatuscita
 10	asesor	reporteactividad
-11	cliente	asesorcliente
-12	cliente	estatus
-13	cliente	origenrecomendacion
-14	cliente	recomendadocliente
-15	login	cattipodireccion
-16	login	persona
-17	login	roles
-18	login	contacto
-19	login	estadocivil
-20	login	direccion
-21	creditos	creditos
-22	creditos	estatuscredito
-23	creditos	sale
-24	sesion1	blindajefinanciero
-25	sesion1	libertadfinanciera
-26	sesion1	capitalizacion
-27	sesion1	sesion1
-28	promotor	promotorasesor
-29	ventas	planesconcretados
-30	productos	localidad
-31	productos	departamento
-32	productos	servicio
-33	productos	catpais
-34	productos	institucionfinanciera
-35	productos	catestados
+11	cliente	origenrecomendacion
+12	cliente	recomendadocliente
+13	cliente	estatus
+14	cliente	asesorcliente
+15	creditos	sale
+16	creditos	estatuscredito
+17	creditos	creditos
+18	login	roles
+19	login	persona
+20	login	cattipodireccion
+21	login	direccion
+22	login	estadocivil
+23	login	contacto
+24	productos	servicio
+25	productos	departamento
+26	productos	catpais
+27	productos	institucionfinanciera
+28	productos	localidad
+29	productos	catestados
+30	promotor	promotorasesor
+31	sesion1	sesion1
+32	sesion1	capitalizacion
+33	sesion1	libertadfinanciera
+34	sesion1	blindajefinanciero
+35	ventas	planesconcretados
 \.
 
 
@@ -2016,28 +2037,31 @@ SELECT pg_catalog.setval('django_content_type_id_seq', 35, true);
 --
 
 COPY django_migrations (id, app, name, applied) FROM stdin;
-1	contenttypes	0001_initial	2017-11-10 10:23:23.690016-06
-2	auth	0001_initial	2017-11-10 10:23:24.445113-06
-3	admin	0001_initial	2017-11-10 10:23:24.624643-06
-4	admin	0002_logentry_remove_auto_add	2017-11-10 10:23:24.677993-06
-5	login	0001_initial	2017-11-10 10:23:25.225346-06
-6	cliente	0001_initial	2017-11-10 10:23:25.746615-06
-7	agenda	0001_initial	2017-11-10 10:23:26.044028-06
-8	asesor	0001_initial	2017-11-10 10:23:26.194855-06
-9	contenttypes	0002_remove_content_type_name	2017-11-10 10:23:26.298305-06
-10	auth	0002_alter_permission_name_max_length	2017-11-10 10:23:26.35593-06
-11	auth	0003_alter_user_email_max_length	2017-11-10 10:23:26.413676-06
-12	auth	0004_alter_user_username_opts	2017-11-10 10:23:26.461395-06
-13	auth	0005_alter_user_last_login_null	2017-11-10 10:23:26.524648-06
-14	auth	0006_require_contenttypes_0002	2017-11-10 10:23:26.542312-06
-15	auth	0007_alter_validators_add_error_messages	2017-11-10 10:23:26.5846-06
-16	auth	0008_alter_user_username_max_length	2017-11-10 10:23:26.676467-06
-17	creditos	0001_initial	2017-11-10 10:23:26.995637-06
-18	productos	0001_initial	2017-11-10 10:23:27.660592-06
-19	promotor	0001_initial	2017-11-10 10:23:27.887972-06
-20	sesion1	0001_initial	2017-11-10 10:23:28.257516-06
-21	sessions	0001_initial	2017-11-10 10:23:28.635695-06
-22	ventas	0001_initial	2017-11-10 10:23:28.852582-06
+1	contenttypes	0001_initial	2017-11-25 14:57:01.073556-06
+2	auth	0001_initial	2017-11-25 14:57:01.264874-06
+3	admin	0001_initial	2017-11-25 14:57:01.324382-06
+4	admin	0002_logentry_remove_auto_add	2017-11-25 14:57:01.350265-06
+5	login	0001_initial	2017-11-25 14:57:01.57275-06
+6	cliente	0001_initial	2017-11-25 14:57:01.785197-06
+7	agenda	0001_initial	2017-11-25 14:57:01.888236-06
+8	asesor	0001_initial	2017-11-25 14:57:01.951712-06
+9	contenttypes	0002_remove_content_type_name	2017-11-25 14:57:02.022449-06
+10	auth	0002_alter_permission_name_max_length	2017-11-25 14:57:02.039617-06
+11	auth	0003_alter_user_email_max_length	2017-11-25 14:57:02.069487-06
+12	auth	0004_alter_user_username_opts	2017-11-25 14:57:02.097838-06
+13	auth	0005_alter_user_last_login_null	2017-11-25 14:57:02.134557-06
+14	auth	0006_require_contenttypes_0002	2017-11-25 14:57:02.139936-06
+15	auth	0007_alter_validators_add_error_messages	2017-11-25 14:57:02.16845-06
+16	auth	0008_alter_user_username_max_length	2017-11-25 14:57:02.211322-06
+17	productos	0001_initial	2017-11-25 14:57:02.481482-06
+18	promotor	0001_initial	2017-11-25 14:57:02.564751-06
+19	sesion1	0001_initial	2017-11-25 14:57:02.695305-06
+20	sessions	0001_initial	2017-11-25 14:57:02.737598-06
+21	ventas	0001_initial	2017-11-25 14:57:02.828687-06
+22	creditos	0001_initial	2017-11-25 17:00:56.330042-06
+23	cliente	0002_auto_20171125_2308	2017-11-25 17:08:33.245844-06
+24	cliente	0003_auto_20171126_1258	2017-11-26 06:58:59.171425-06
+25	cliente	0004_auto_20171126_1340	2017-11-26 07:40:29.12201-06
 \.
 
 
@@ -2045,7 +2069,7 @@ COPY django_migrations (id, app, name, applied) FROM stdin;
 -- Name: django_migrations_id_seq; Type: SEQUENCE SET; Schema: public; Owner: vive
 --
 
-SELECT pg_catalog.setval('django_migrations_id_seq', 22, true);
+SELECT pg_catalog.setval('django_migrations_id_seq', 25, true);
 
 
 --
@@ -2053,7 +2077,9 @@ SELECT pg_catalog.setval('django_migrations_id_seq', 22, true);
 --
 
 COPY django_session (session_key, session_data, expire_date) FROM stdin;
-t0fg1tyln8icv3rmkd41dqocz4w6mtbh	OWM1NWU1NGVkNzNlMGJhMTQ4ZGI2MzcwMWRmM2Q4YzNjYjE1OTVmMjp7Il9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIiwiX2F1dGhfdXNlcl9pZCI6IjEiLCJfYXV0aF91c2VyX2hhc2giOiI2NjZiZDU0YjkzMmU5NmYwZGU2MWVlNGVlZmU0ZDg5NGJmZmJiYjIyIn0=	2017-11-24 10:24:04.671631-06
+8ds8cyhsexthfkpi8f999m6io8ld794v	OTkyNTkzZTliNzIwMDM3MTMwMjc5NDczMTk4ZDg4ODBiYmRkMTBhNDp7Il9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIiwiX2F1dGhfdXNlcl9oYXNoIjoiZTFlMDhkYjU5MTM1NDM1NGRhM2E0OTVkMWM3Nzk0MGQzOWIwMGExNSIsIl9hdXRoX3VzZXJfaWQiOiIxIn0=	2017-12-10 11:15:58.383779-06
+jovzceb9k5gnt94578qbojixg2225okw	OTkyNTkzZTliNzIwMDM3MTMwMjc5NDczMTk4ZDg4ODBiYmRkMTBhNDp7Il9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIiwiX2F1dGhfdXNlcl9oYXNoIjoiZTFlMDhkYjU5MTM1NDM1NGRhM2E0OTVkMWM3Nzk0MGQzOWIwMGExNSIsIl9hdXRoX3VzZXJfaWQiOiIxIn0=	2017-12-13 12:48:25.510243-06
+j8zkyxfh9uiydz0quxjqkudna0dycg9c	YTllOTBmYzYxOWJlZTE2MzRjOTNkMzljZThkODg1YThlZDVmZDUzMDp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9oYXNoIjoiZTFlMDhkYjU5MTM1NDM1NGRhM2E0OTVkMWM3Nzk0MGQzOWIwMGExNSIsIl9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIn0=	2017-12-31 10:50:09.259322-06
 \.
 
 
@@ -2062,10 +2088,7 @@ t0fg1tyln8icv3rmkd41dqocz4w6mtbh	OWM1NWU1NGVkNzNlMGJhMTQ4ZGI2MzcwMWRmM2Q4YzNjYjE
 --
 
 COPY login_cattipodireccion ("idtipoDireccion", nombre, descripcion) FROM stdin;
-1	Sin asignar	------------------------
-2	Casa	------------------------
-3	Oficina	------------------------
-4	Empresa	------------------------
+1	Sin asignar	\N
 \.
 
 
@@ -2074,8 +2097,10 @@ COPY login_cattipodireccion ("idtipoDireccion", nombre, descripcion) FROM stdin;
 --
 
 COPY login_contacto (id, celular, telcasa, oficina, facebookid, idpersona_id) FROM stdin;
-1	5549140474	\N	\N	\N	1
-2	5530444231				2
+3	556643643				8
+4	535364343				9
+5	5570707070				10
+6	5549140474	26108029	\N	\N	1
 \.
 
 
@@ -2083,7 +2108,7 @@ COPY login_contacto (id, celular, telcasa, oficina, facebookid, idpersona_id) FR
 -- Name: login_contacto_id_seq; Type: SEQUENCE SET; Schema: public; Owner: vive
 --
 
-SELECT pg_catalog.setval('login_contacto_id_seq', 2, true);
+SELECT pg_catalog.setval('login_contacto_id_seq', 6, true);
 
 
 --
@@ -2091,8 +2116,11 @@ SELECT pg_catalog.setval('login_contacto_id_seq', 2, true);
 --
 
 COPY login_direccion (iddireccion, calle, colonia, delegacion, cp, numinterior, numexterior, idpersona_id, idtipodireccion_id) FROM stdin;
-1	Gitana	Col. Del Mar	Tlahuac	13270	202	4	1	2
-2							2	1
+3							8	1
+4							9	1
+5	\N	\N	\N	\N	\N	\N	10	1
+6	\N	\N	\N	\N	\N	\N	10	1
+7	gitana 331	Col. Del mar	Tlahuac	13270	\N	\N	1	1
 \.
 
 
@@ -2100,7 +2128,7 @@ COPY login_direccion (iddireccion, calle, colonia, delegacion, cp, numinterior, 
 -- Name: login_direccion_iddireccion_seq; Type: SEQUENCE SET; Schema: public; Owner: vive
 --
 
-SELECT pg_catalog.setval('login_direccion_iddireccion_seq', 2, true);
+SELECT pg_catalog.setval('login_direccion_iddireccion_seq', 7, true);
 
 
 --
@@ -2110,11 +2138,6 @@ SELECT pg_catalog.setval('login_direccion_iddireccion_seq', 2, true);
 COPY login_estadocivil ("idEstadoCivil", nombre) FROM stdin;
 1	Sin asignar
 2	Soltero
-3	Casado
-4	Separado
-5	Divorciado
-6	Viudo
-7	Viudo
 \.
 
 
@@ -2123,8 +2146,10 @@ COPY login_estadocivil ("idEstadoCivil", nombre) FROM stdin;
 --
 
 COPY login_persona (id, curp, rfc, "fechaDeNacimiento", "estadoCivil_id", "idRol_id", user_id) FROM stdin;
-1	CABO971603HDFHRS08	CABO971603	16/03/97	2	3	1
-2				2	2	2
+1	\N	\N	\N	2	3	1
+8				1	1	8
+9				1	1	9
+10				1	1	10
 \.
 
 
@@ -2132,7 +2157,7 @@ COPY login_persona (id, curp, rfc, "fechaDeNacimiento", "estadoCivil_id", "idRol
 -- Name: login_persona_id_seq; Type: SEQUENCE SET; Schema: public; Owner: vive
 --
 
-SELECT pg_catalog.setval('login_persona_id_seq', 2, true);
+SELECT pg_catalog.setval('login_persona_id_seq', 10, true);
 
 
 --
@@ -2140,9 +2165,9 @@ SELECT pg_catalog.setval('login_persona_id_seq', 2, true);
 --
 
 COPY login_roles ("idRole", nombre, descripcion) FROM stdin;
-1	Cliente	------------------------
-2	Asesor	------------------------
-3	Asesor-Promotor	------------------------
+1	Cliente	Es un cliente
+2	Asesor	Es un Asesor
+3	Asesor-Promotor	Es un asesor promotor
 \.
 
 
@@ -2158,7 +2183,6 @@ SELECT pg_catalog.setval('"login_roles_idRole_seq"', 3, true);
 --
 
 COPY productos_catestados ("idEstado", nombre, "idPais_id") FROM stdin;
-1	CDMX	1
 \.
 
 
@@ -2166,7 +2190,7 @@ COPY productos_catestados ("idEstado", nombre, "idPais_id") FROM stdin;
 -- Name: productos_catestados_idEstado_seq; Type: SEQUENCE SET; Schema: public; Owner: vive
 --
 
-SELECT pg_catalog.setval('"productos_catestados_idEstado_seq"', 1, true);
+SELECT pg_catalog.setval('"productos_catestados_idEstado_seq"', 1, false);
 
 
 --
@@ -2174,7 +2198,6 @@ SELECT pg_catalog.setval('"productos_catestados_idEstado_seq"', 1, true);
 --
 
 COPY productos_catpais ("idPais", nombre) FROM stdin;
-1	Mexico
 \.
 
 
@@ -2182,7 +2205,7 @@ COPY productos_catpais ("idPais", nombre) FROM stdin;
 -- Name: productos_catpais_idPais_seq; Type: SEQUENCE SET; Schema: public; Owner: vive
 --
 
-SELECT pg_catalog.setval('"productos_catpais_idPais_seq"', 1, true);
+SELECT pg_catalog.setval('"productos_catpais_idPais_seq"', 1, false);
 
 
 --
@@ -2205,7 +2228,6 @@ SELECT pg_catalog.setval('"productos_departamento_idDepartamento_seq"', 1, false
 --
 
 COPY productos_institucionfinanciera ("idInstitucion", nombre, calle, colonia, cp, num_int, num_ext, "idLocalidad_id", "idPersona_id") FROM stdin;
-1	Meerkats	Vasconcelos	Vasconcelos	13270	4	202	1	1
 \.
 
 
@@ -2213,7 +2235,7 @@ COPY productos_institucionfinanciera ("idInstitucion", nombre, calle, colonia, c
 -- Name: productos_institucionfinanciera_idInstitucion_seq; Type: SEQUENCE SET; Schema: public; Owner: vive
 --
 
-SELECT pg_catalog.setval('"productos_institucionfinanciera_idInstitucion_seq"', 1, true);
+SELECT pg_catalog.setval('"productos_institucionfinanciera_idInstitucion_seq"', 1, false);
 
 
 --
@@ -2221,7 +2243,6 @@ SELECT pg_catalog.setval('"productos_institucionfinanciera_idInstitucion_seq"', 
 --
 
 COPY productos_localidad ("idLocalidad", nombre, "CatEstados_id", "CatPais_id") FROM stdin;
-1	Tlahuac	1	1
 \.
 
 
@@ -2229,7 +2250,7 @@ COPY productos_localidad ("idLocalidad", nombre, "CatEstados_id", "CatPais_id") 
 -- Name: productos_localidad_idLocalidad_seq; Type: SEQUENCE SET; Schema: public; Owner: vive
 --
 
-SELECT pg_catalog.setval('"productos_localidad_idLocalidad_seq"', 1, true);
+SELECT pg_catalog.setval('"productos_localidad_idLocalidad_seq"', 1, false);
 
 
 --
@@ -2252,7 +2273,6 @@ SELECT pg_catalog.setval('"productos_servicio_idServicio_seq"', 1, false);
 --
 
 COPY promotor_promotorasesor ("idAsesorPromotor", activo, "idAsesor_id", "idPromotor_id", institucion_id) FROM stdin;
-1	t	2	1	1
 \.
 
 
@@ -2260,7 +2280,7 @@ COPY promotor_promotorasesor ("idAsesorPromotor", activo, "idAsesor_id", "idProm
 -- Name: promotor_promotorasesor_idAsesorPromotor_seq; Type: SEQUENCE SET; Schema: public; Owner: vive
 --
 
-SELECT pg_catalog.setval('"promotor_promotorasesor_idAsesorPromotor_seq"', 1, true);
+SELECT pg_catalog.setval('"promotor_promotorasesor_idAsesorPromotor_seq"', 1, false);
 
 
 --
@@ -2352,22 +2372,6 @@ ALTER TABLE ONLY agenda_catestatuscita
 
 ALTER TABLE ONLY agenda_cattipocita
     ADD CONSTRAINT agenda_cattipocita_pkey PRIMARY KEY ("idTipoCita");
-
-
---
--- Name: agenda_cita agenda_cita_idEstatus_id_key; Type: CONSTRAINT; Schema: public; Owner: vive
---
-
-ALTER TABLE ONLY agenda_cita
-    ADD CONSTRAINT "agenda_cita_idEstatus_id_key" UNIQUE ("idEstatus_id");
-
-
---
--- Name: agenda_cita agenda_cita_idTipoCita_id_key; Type: CONSTRAINT; Schema: public; Owner: vive
---
-
-ALTER TABLE ONLY agenda_cita
-    ADD CONSTRAINT "agenda_cita_idTipoCita_id_key" UNIQUE ("idTipoCita_id");
 
 
 --
@@ -2759,6 +2763,20 @@ ALTER TABLE ONLY ventas_planesconcretados
 --
 
 CREATE INDEX "agenda_cita_idAsesorCliente_id_67e8e83c" ON agenda_cita USING btree ("idAsesorCliente_id");
+
+
+--
+-- Name: agenda_cita_idEstatus_id_65b62f62; Type: INDEX; Schema: public; Owner: vive
+--
+
+CREATE INDEX "agenda_cita_idEstatus_id_65b62f62" ON agenda_cita USING btree ("idEstatus_id");
+
+
+--
+-- Name: agenda_cita_idTipoCita_id_7c5fc631; Type: INDEX; Schema: public; Owner: vive
+--
+
+CREATE INDEX "agenda_cita_idTipoCita_id_7c5fc631" ON agenda_cita USING btree ("idTipoCita_id");
 
 
 --
