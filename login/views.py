@@ -79,10 +79,11 @@ def hola(request):
         n_creditos = mCreditos.Creditos.objects.filter(idAsesor=request.user.id)
         recomendados = mCliente.RecomendadoCliente.objects.filter(asesor=request.user.persona)
         try:
-            recomendados = recomendados[0:4]
+            recomendados = recomendados[0:3]
         except:
             recomendados = recomendados
         context = {
+            "recomendados":recomendados,
             "pendientes":pendientes,
             "rol":request.user.persona.idRol.idRole,
             "asesores":n_asesores,
