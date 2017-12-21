@@ -12,6 +12,7 @@ class Capitalizacion(models.Model):
     idcapitalizacion = models.AutoField(primary_key=True)
     column = models.IntegerField(blank=True, null=True)  # Field name made lowercase.
 
+#Esta tabla cambiarà a Plan, donde iràn los datos ejes de edad, edad final, ahorro, grantotal.
 class Libertadfinanciera(models.Model):
     idlf = models.AutoField(primary_key=True)
     edad = models.IntegerField(blank=True, null=True)
@@ -19,6 +20,7 @@ class Libertadfinanciera(models.Model):
     anos = models.IntegerField(blank=True, null=True)
     ahorro = models.FloatField(blank=True, null=True)
 
+#Agregar tabla objetivos donde obtendremos los datos para calculas grantotal.
 class Sesion1(models.Model):
     idSesion = models.AutoField(primary_key=True)
     idAsesorCliente = models.OneToOneField(AsesorCliente)

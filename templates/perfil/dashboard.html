@@ -250,13 +250,13 @@
 																		</tr>
 																		</thead>
 																		<tbody>
-																			{% for i in pendientes  %}
+																			{% for i in recomendados  %}
 																				<tr>
 																						<td>
 																								<small><i class="fa fa-clock-o"></i>{{forloop.counter}}</small>
 																						</td>
-																						<td>{{i.direccionCita}}</td>
-																						<td>{{i.idEstatus.nombre}}</td>
+																						<td>{{i.nombre}}</td>
+																						<td>{{i.celular}}</td>
 																			{% endfor %}
 																		</tbody>
 																</table>
