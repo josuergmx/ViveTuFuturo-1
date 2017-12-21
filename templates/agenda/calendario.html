@@ -20,16 +20,20 @@
               <div class="p-m tab-pane active">
                 <div class="row">
                   <div class="col-lg-2 text-center">
-                  <i class="pe-7s-date fa-5x text-muted"></i>
-                  <p class="middle m-t-md">
-                  <strong>Tus citas. <br>Organizate a tus tiempos </strong>
-                  </p>
-                  <p class="middle m-t-md">
-                  <a href="{% url 'agenda:contactos' %}"><button>Agrega citas</button></a>
-                  </p>
-                  <p class="middle m-t-md">
-                  <a href="{% url 'agenda:historial' %}"><button>Ver historial</button></a>
-                  </p>
+                    <i class="pe-7s-date fa-5x text-muted"></i>
+                    <p class="middle m-t-md">
+                      <strong>Tus citas. <br>Organizate a tus tiempos </strong>
+                    </p>
+                    <p class="middle m-t-md">
+                      <a href="{% url 'agenda:contactos' %}" class="btn btn-success">
+                        Agrega citas <span class="icono-der fa fa-plus"></span>
+                      </a>
+                    </p>
+                    <p class="middle m-t-md">
+                      <a href="{% url 'agenda:historial' %}" class="btn btn-info">
+                        Ver historial <span class="icono-der pe-7s-clock"></span>
+                      </a>
+                    </p>
                   </div>
                   <div class="col-lg-10">
                     <div id="calendar"></div>
