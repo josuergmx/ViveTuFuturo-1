@@ -70,12 +70,18 @@ def hola(request):
                 pass
 
             iterar = iterar+1
+
         if request.user.persona.idRol.idRole == 3: #agregamos la parte de gestionar asesores
             asesorPromotor = mPromotor.promotorAsesor.objects.filter(idPromotor=request.user.id)
             for i in asesorPromotor:
                 if i.activo == True:
                     n_asesores = n_asesores + 1
         n_creditos = mCreditos.Creditos.objects.filter(idAsesor=request.user.id)
+        recomendados = mCliente.RecomendadoCliente.objects.filter(asesor=request.user.persona)
+        try:
+            recomendados = recomendados[0:4]
+        except:
+            recomendados = recomendados
         context = {
             "pendientes":pendientes,
             "rol":request.user.persona.idRol.idRole,

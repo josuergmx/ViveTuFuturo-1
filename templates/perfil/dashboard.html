@@ -244,6 +244,33 @@
 																<table class="table table-striped">
 																		<thead>
 																		<tr>
+																				<th>Clientes recomendados</th>
+																				<th>Nombre</th>
+																				<th>celular</th>
+																		</tr>
+																		</thead>
+																		<tbody>
+																			{% for i in pendientes  %}
+																				<tr>
+																						<td>
+																								<small><i class="fa fa-clock-o"></i>{{forloop.counter}}</small>
+																						</td>
+																						<td>{{i.direccionCita}}</td>
+																						<td>{{i.idEstatus.nombre}}</td>
+																			{% endfor %}
+																		</tbody>
+																</table>
+														</div>
+												</div>
+										</div>
+								</div>
+							<div class="col-md-12">
+										<div class="hpanel">
+												<div class="panel-body list">
+														<div class="table-responsive project-list">
+																<table class="table table-striped">
+																		<thead>
+																		<tr>
 																				<th>Eventos de la semana</th>
 																				<th>Cliente</th>
 																				<th>Tipo</th>
