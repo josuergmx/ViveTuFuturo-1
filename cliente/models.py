@@ -4,7 +4,6 @@ import login.models as lm
 import datetime
 from vive import settings
 from django.contrib.auth.models import User
-
 # Create your models here
 
 class Estatus(models.Model):
@@ -31,7 +30,7 @@ class AsesorCliente(models.Model):
     Origen = models.ForeignKey(OrigenRecomendacion,blank=True, null=True)
     Estatus = models.ForeignKey(Estatus,blank=True, null=True)
     fechaActualizacion = models.DateField()
-    #Esto se llena hasta sesion 1
+    fecha = models.DateTimeField(blank=True, null=True)
     ocupacion = models.CharField(max_length=150, blank=True, null=True)
     dependientes = models.CharField(max_length=150, blank=True, null=True)
     ingresos = models.FloatField(blank=True, null=True)
@@ -46,3 +45,4 @@ class RecomendadoCliente(models.Model):
     estadoCivil = models.ForeignKey(lm.EstadoCivil,blank=True, null=True)
     hijos = models.BooleanField()
     asesor = models.ForeignKey(Persona,blank=True, null=True)
+    activo = models.NullBooleanField()

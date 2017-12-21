@@ -7,19 +7,18 @@ from login import models as mLogin
 from agenda import models as mAgenda
 from cliente import models as mcliente
 from agenda import models as mAgenda
-from datetime import date
+from datetime import date,datetime
 import agenda.models as mCita
 from django.contrib.auth.decorators import login_required
 
 @login_required(redirect_field_name='login:login')
+
 def agregarCliente(request):
     if request.user.persona.idRol.idRole == 2 or request.user.persona.idRol.idRole == 3:
         if request.method == 'POST':
             usuario = fLogin.UserForm(request.POST)
             persona = f.PersonaForm(request.POST)
             cliente = f.ClienteForm(request.POST)
-            print(usuario.is_valid())
-            print(request.POST)
             if usuario.is_valid() and persona.is_valid() and cliente.is_valid():
                 user = usuario.save()
                 rol = mLogin.Roles.objects.get(idRole=1)
@@ -112,18 +111,10 @@ def clientes(request,idAsesorCliente):
         asesorClientes = m.AsesorCliente.objects.get(idAsesorCliente=idAsesorCliente)
         contacto = mLogin.Contacto.objects.filter(idpersona=asesorClientes.idCliente)
         direccion = mLogin.Direccion.objects.filter(idpersona=asesorClientes.idCliente)
-        cita = mAgenda.Cita.objects.filter(idAsesorCliente=idAsesorCliente)
-        print(cita)
-        if len(cita) == 0:
-            cita = "Sin citas pendientes, has una ahora, dirigete a citas :)"
-        else:
-            cita = "Cita pendiente, revisa las citas para mas informacion :)"
-        print(cita)
         context = {
             "clientes":asesorClientes,
             "contactos":contacto,
             "direcciones":direccion,
-            "cita":cita,
         }
         return render(request,"cliente/cliente_show.html",context)
     else:
@@ -191,25 +182,35 @@ def eliminar(request,idAsesorCliente):
 def hola(request):
     if request.user.persona.idRol.idRole == 1:
         mensaje= ""
+        contacto1 = []
+        direccion = []
+        hoy = None
+        bandera = 0
         asesorcliente = m.AsesorCliente.objects.get(idCliente=request.user.persona)
-        contacto2 = mLogin.Contacto.objects.get(idpersona=asesorcliente.idAsesor.persona)
-        domicilio = mLogin.Direccion.objects.get(idpersona=request.user.persona)
-        try:
-            cita = mCita.Cita.objects.get(idAsesorCliente=asesorcliente)
-        except:
-            cita = "Sin Cita"
+        contacto2 = mLogin.Contacto.objects.filter(idpersona=asesorcliente.idAsesor.persona)
+        domicilio = mLogin.Direccion.objects.filter(idpersona=request.user.persona)
+        dia = datetime.today().strftime("%Y-%m-%d")
+        if asesorcliente.fecha.strftime("%Y-%m-%d") >= dia:
+            hoy = mCita.Cita.objects.get(idAsesorCliente=asesorcliente,fecha=asesorcliente.fecha)
+            mensaje = "Tienes una cita pendiente :)"
+            bandera = 1
+        else:
+            mensaje = "No tienes cita pendientes, hazlas ahora! :D."
 
         if request.method == 'POST':
-            direccion1 = f.DireccionForm(request.POST,instance=domicilio)
-            contacto3 = f.ContactoForm(request.POST,instance=contacto2)
-            direccion1.save()
-            contacto3.save()
-            
-        direccion = f.DireccionForm(instance=domicilio)
-        contacto1 = f.ContactoForm(instance=contacto2)
+            for i in contacto2:
+                f.ContactoForm(request.POST,instance=i).save()
+            for j in domicilio:
+                f.DireccionForm(request.POST,instance=j).save()
+        for i in contacto2:
+            contacto1.append(f.ContactoForm(instance=i))
+        for j in domicilio:
+            direccion.append(f.DireccionForm(instance=j))
+
         recomendacion = f.RecomendadoClienteForm()
         context = {
-            "cita":cita,
+            "cita":hoy,
+            "bandera":bandera,
             "direccion":direccion,
             "asesor":asesorcliente,
             "contacto":contacto1,
@@ -234,6 +235,7 @@ def recomendar(request):
             estadoCivil = estado,
             hijos = hijo,
             asesor = asesorcliente.idAsesor.persona,
+            activo = True,
         )
         recomendacion.save()
         return redirect('cliente:hola')

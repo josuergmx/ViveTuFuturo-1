@@ -17,10 +17,9 @@ class CatTipocita(models.Model):
     def __str__(self):
         return (self.nombre)
 
-
 class Cita(models.Model):
     idCita = models.AutoField(primary_key=True)
-    idAsesorCliente = models.OneToOneField(AsesorCliente)
+    idAsesorCliente = models.ForeignKey(AsesorCliente)
     idTipoCita = models.ForeignKey(CatTipocita)
     idEstatus = models.ForeignKey(CatEstatuscita)
     fecha = models.DateTimeField()

@@ -1,0 +1,107 @@
+{% extends 'base/vistas_base.html' %}
+{% load static  %}
+{% block title%} Mis Clientes {% endblock %}
+{% block content %}
+<div class="normalheader transition animated fadeIn">
+  <div class="hpanel">
+      <div class="panel-body">
+          <a class="small-header-action" href="">
+              <div class="clip-header">
+                  <i class="fa fa-arrow-up"></i>
+              </div>
+          </a>
+          <h2 class="font-light m-b-xs">
+              Hoy tienes citas :), aqui esta la informacion.
+          </h2>
+      </div>
+  </div>
+  <div class="content">
+  <div class="row">
+      <div class="col-md-6">
+          <div class="hpanel">
+            {% for i in hoy1  %}
+                  <div class="v-timeline vertical-container animate-panel" data-child="vertical-timeline-block" data-delay="1">
+                      <div class="vertical-timeline-block animated-panel zoomIn" style="animation-delay: 0.2s;">
+                          <div class="vertical-timeline-icon navy-bg">
+                              <i class="fa fa-calendar"></i>
+                          </div>
+                          <div class="vertical-timeline-content">
+                              <div class="p-sm">
+                                  <span class="vertical-date pull-right"> {{i.fecha|date}} <br> <small>{{i.fecha|time}}</small> </span>
+                                  <br>
+                                    <dl class="dl-horizontal">
+                                        <dt>Nombre: </dt>
+                                        <dd>{{i.idAsesorCliente.idCliente.user.first_name}}</dd>
+                                        <dt>Apellidos: </dt>
+                                        <dd>{{i.idAsesorCliente.idCliente.user.last_name}}</dd>
+                                        <dt>Direccion:</dt>
+                                        <dd>{{i.direccionCita}}</dd>
+                                        <dt>Fecha y hora:</dt>
+                                        <dd>{{i.fecha}}</dd>
+                                        <dt>Tipo:</dt>
+                                        <dd>{{i.idTipoCita}}</dd>
+                                        <dt>Estatus:</dt>
+                                        <dd>{{i.idEstatus}}</dd>
+                                        <dt>Descripcion</dt>
+                                        <dd>{{i.descripcion}}</dd>
+                                    </dl>
+
+                              </div>
+                              <div class="panel-footer">
+                                No olvides contactarlo, sus contactos estan en clientes e informacion.
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+            {% endfor %}
+          </div>
+        </div>
+        <div class="col-md-6">
+            <div class="hpanel">
+              {% for j in hoy2  %}
+                    <div class="v-timeline vertical-container animate-panel" data-child="vertical-timeline-block" data-delay="1">
+                        <div class="vertical-timeline-block animated-panel zoomIn" style="animation-delay: 0.2s;">
+                            <div class="vertical-timeline-icon navy-bg">
+                                <i class="fa fa-calendar"></i>
+                            </div>
+                            <div class="vertical-timeline-content">
+                                <div class="p-sm">
+                                    <span class="vertical-date pull-right"> {{j.fecha|date}} <br> <small>{{j.fecha|time}}</small> </span>
+                                    <br>
+                                      <dl class="dl-horizontal">
+                                          <dt>Nombre: </dt>
+                                          <dd>{{j.idAsesorCliente.idCliente.user.first_name}}</dd>
+                                          <dt>Apellidos: </dt>
+                                          <dd>{{j.idAsesorCliente.idCliente.user.last_name}}</dd>
+                                          <dt>Direccion:</dt>
+                                          <dd>{{j.direccionCita}}</dd>
+                                          <dt>Fecha y hora:</dt>
+                                          <dd>{{j.fecha}}</dd>
+                                          <dt>Tipo:</dt>
+                                          <dd>{{j.idTipoCita}}</dd>
+                                          <dt>Estatus:</dt>
+                                          <dd>{{j.idEstatus}}</dd>
+                                          <dt>Descripcion</dt>
+                                          <dd>{{j.descripcion}}</dd>
+                                          <dt>Correo: </dt>
+                                          <dd>{{j.idAsesorCliente.idCliente.user.mail}}</dd>
+                                      </dl>
+                                </div>
+                                <div class="panel-footer">
+                                    No olvides contactarlo, sus contactos estan en clientes e informacion.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+      </div>
+  <footer class="footer">
+      <span class="pull-right">
+          Todos los Derechos Reservados <i class="fa fa-copyright"></i>
+      </span>
+      Vive Tu Futuro 2017-2020
+  </footer>
+{% endblock %}

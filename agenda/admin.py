@@ -8,4 +8,12 @@ from .models import (
 )
 admin.site.register(CatEstatuscita)
 admin.site.register(CatTipocita)
-admin.site.register(Cita)
+
+class CitaAdmin(admin.ModelAdmin):
+    def Cliente(self, instance):
+        return instance.idAsesorCliente.idCliente
+    def Asesor(self, instance):
+        return instance.idAsesorCliente.idAsesor
+    list_display=('Asesor','Cliente','idTipoCita','idEstatus','fecha','direccionCita')
+
+admin.site.register(Cita,CitaAdmin)
