@@ -18,7 +18,7 @@
     <link rel="stylesheet" href="{% static "vendor/metisMenu/src/metisMenu.css" %}">
     <link rel="stylesheet" href="{% static "vendor/animate.css/animate.css" %}">
     <link rel="stylesheet" href="{% static "vendor/bootstrap/dist/css/bootstrap.css" %}">
-    
+
      <!--CSS que pueden utilizar otras visats-->
     {% block css %}{% endblock %}
 
@@ -29,7 +29,7 @@
     <link rel="stylesheet" href="{% static "styles/style.css" %}"/>
     <link rel="stylesheet" href="{% static "styles/vive.css"%}"/>
 </head>
-  <body class="fixed-footer">
+<body class="fixed-sidebar fixed-navbar fixed-footer hide-sidebar"> <!-- hide-sidebar -->
     <!-- Simple splash screen-->
     <div class="splash">
         <div class="splash-title">
@@ -44,10 +44,15 @@
         </div>
         <div id="logo" class="light-version">
             <span>
-               Vive tu Futuro: {{user.username}}
+                Vive tu Futuro: {{user.username}}
+                <span class="fa fa-user"></span>   
             </span>
         </div>
         <nav role="navigation">
+            <div class="header-link hide-menu"><i class="fa fa-bars"></i></div>
+            <div class="small-logo">
+                <span class="text-primary">Vive tu Futuro: {{user.username}}</span>
+            </div>
             <div class="navbar-right">
                 <ul class="nav navbar-nav no-borders">
                     <li>
@@ -58,7 +63,7 @@
                     <li class="dropdown">
                         <a class="dropdown-toggle label-menu-corner" href="#" data-toggle="dropdown">
                             <i class="pe-7s-mail"></i>
-                            <span class="label label-success">3</span>
+                            <span class="label label-success">4</span>
                         </a>
                         <ul class="dropdown-menu hdropdown animated flipInX">
                             <div class="title">
@@ -69,20 +74,10 @@
                                     Tus créditos estan por acabarse
                                 </a>
                             </li>
-                            <li>
-                                <a>
-                                    Tienes una cita el día de hoy
-                                </a>
-                            </li>
-                            <li>
-                                <a>
-                                    Recuerda revisar tus estadísticas
-                                </a>
-                            </li>
                             <li class="summary"><a href="#">Ver todos los mensajes</a></li>
                         </ul>
                     </li>
-                    
+
                     <li class="dropdown">
                         <a href="{% url 'login:logout' %}">
                             <i class="pe-7s-upload pe-rotate-90"></i>
@@ -90,14 +85,36 @@
                     </li>
                 </ul>
             </div>
+
         </nav>
       {% endblock %}
     </div>
 
+<!-- Navigation -->
+<aside id="menu">
+    <div id="navigation">
+        <ul class="nav" id="side-menu">
+            <li>
+                <a href="{% url 'login:hola' %}" id="sidebar" class="right-sidebar-toggle">
+                    <span class="nav-label">Inicio</span>
+                    <i class="pe-7s-upload pe-7s-home"></i>
+                </a>
+            </li>
+            <li class="dropdown">
+                <a href="{% url 'login:logout' %}">
+                    <span class="nav-label">Salir</span>
+                    <i class="pe-7s-upload pe-rotate-90"></i>
+                </a>
+            </li>
+        </ul>
+    </div>
+</aside>
+
+<div id="wrapper">
     <!-- Bloque del contenido que estará debajo del navbar-->
     {% block content %}
     {% endblock %}
-
+</div>
 
     <footer class="footer" style="position: fixed;">
         Vive Tu Futuro 2017-2020
@@ -114,10 +131,10 @@
     <script src="{% static "vendor/metisMenu/src/metisMenu.js" %}"></script>
     <script src="{% static "vendor/iCheck/icheck.min.js" %}"></script>
     <script src="{% static "vendor/sparkline/index.js" %}"></script>
-    
+
     <!-- Javascript que utilizan de forma individual-->
     {% block javascripts %}{% endblock %}
-    
+
     <!-- App scripts -->
     <script src="{% static "scripts/homer.js" %}"></script>
   </body>
