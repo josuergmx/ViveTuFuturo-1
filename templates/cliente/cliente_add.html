@@ -1,7 +1,10 @@
 {% extends 'base/vistas_base.html' %}
 {% load static  %}
 {% block title %}Agregar Cliente{% endblock %}
-
+{% block css %}
+  <link rel="stylesheet" href="{% static "vendor/sweetalert/lib/sweet-alert.css" %}">
+  <link rel="stylesheet" href="{% static "vendor/toastr/build/toastr.min.css" %}">
+{% endblock %}
 {% block content %}
 <!-- Simple splash screen-->
 
@@ -138,17 +141,29 @@
 {% endblock %}
 
 {% block javascripts %}
-
-<script>
-  $(function(){
-   //Funcion da estilo a botones
-    $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
-        $('a[data-toggle="tab"]').removeClass('btn-success');
-        $('a[data-toggle="tab"]').addClass('btn-default');
-        $(this).removeClass('btn-default');
-        $(this).addClass('btn-info');
-    });
-  });
-</script>
-
+    <script src="{% static "vendor/sweetalert/lib/sweet-alert.min.js" %}"></script>
+    <script src="{% static "vendor/toastr/build/toastr.min.js" %}"></script>
 {% endblock %}
+
+{% block scripts %}
+    <script>
+      $(function(){
+       //Funcion da estilo a botones
+        $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+            $('a[data-toggle="tab"]').removeClass('btn-success');
+            $('a[data-toggle="tab"]').addClass('btn-default');
+            $(this).removeClass('btn-default');
+            $(this).addClass('btn-info');
+        });
+
+        function msjRepetido(){
+          var bandera = true;
+          if(bandera)
+            toastr.error('Error - This is a Homer error notification');
+        }
+
+        msjRepetido();
+      });
+    </script>
+{% endblock %}
+
