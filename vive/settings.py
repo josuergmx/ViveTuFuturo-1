@@ -1,8 +1,9 @@
 import os
 from django.core.urlresolvers import reverse_lazy
+from .configure import EMAIL_HOST,EMAIL_PORT,EMAIL_USE_TLS,EMAIL_HOST_USER,EMAIL_HOST_PASSWORD,CONEKTA_PUBLIC_KEY
 
 #conecta public api key
-CONEKTA_PUBLIC_KEY = 'key_wfarNpvgNDNvt1kknSQfPw'
+CONEKTA_PUBLIC_KEY = CONEKTA_PUBLIC_KEY
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # Quick-start development settings - unsuitable for production
@@ -105,7 +106,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/1.11/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'es-mx'
 
 TIME_ZONE = 'UTC'
 
@@ -128,3 +129,9 @@ LOGOUT_URL = reverse_lazy('login:logout')
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+EMAIL_HOST = EMAIL_HOST
+EMAIL_HOST_USER = EMAIL_HOST_USER
+EMAIL_HOST_PASSWORD = EMAIL_HOST_PASSWORD
+EMAIL_PORT = EMAIL_PORT
+EMAIL_USE_TLS = True

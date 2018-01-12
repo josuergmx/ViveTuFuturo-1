@@ -20,6 +20,8 @@
                     </div>
                       <form method="POST" class="post-form">
                         {% csrf_token %}
+
+
                         <div class="tab-content">
                           <div id="step1" class="p-m tab-pane active">
                             <div class="row">
@@ -31,24 +33,20 @@
                                     </p>
                                 </div>
                                 <div class="col-lg-9">
-
-                                  <div class="alert alert-info">La contraseña por defecto sera la primera letra del nombre y de los apellidos seguido por c1234.</div>
-                                  <div class=" alert alert-info">
-                                    {% if usuario.errors %}
-                                      {% for field in usuario %}
-                                          {% for error in field.errors %}
-                                              <div class="alert alert-danger">
-                                                  <strong>{{ error|escape }}</strong>
-                                              </div>
-                                          {% endfor %}
-                                      {% endfor %}
-                                      {% for error in usuario.non_field_errors %}
-                                          <div class="alert alert-danger">
-                                              <strong>{{ error|escape }}</strong>
-                                          </div>
-                                      {% endfor %}
-                                  {% endif %}
+                                  <div class="alert alert-info">Las contraseñas para los clientes seran: la primera letra de sus apellidos y nombre(s), seguidos por c1234.</div>
+                                  {% if usuario.errors or persona.errors or cliente.errors %}
+                                  <div class=" alert alert-danger">
+                                    {{usuario.errors}}
+                                    {{persona.errors}}
+                                    {{cliente.errors}}
+                                    {{contacto.errors}}
                                   </div>
+                                  {% endif %}
+                                  {% if mensaje == 1 %}
+                                  <div class=" alert alert-success">
+                                    Se ha agregado con exito.
+                                  </div>
+                                  {% endif %}
                                     <div class="row">
                                         <div class="form-group col-lg-8">
                                             {{usuario.as_p}}
@@ -138,5 +136,17 @@
     </div>
 </div>
 
-
+{% endblock %}
+{% block javascripts %}
+<script src="{% static "vendor/toastr/build/toastr.min.js" %}"></script>
+  <script>
+    {% if mensaje == 3 %}
+      console.log('nada');
+    {% elif mensaje == 0 %}
+      console.log('error');
+      toastr["success"]("Hola","como estas");
+    {% else %}
+      toastr.error('Error - This is a Homer error notification');
+    {% endif %}
+  </script>
 {% endblock %}

@@ -10,15 +10,17 @@ from agenda import models as mAgenda
 from datetime import date,datetime
 import agenda.models as mCita
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 
 @login_required(redirect_field_name='login:login')
-
 def agregarCliente(request):
     if request.user.persona.idRol.idRole == 2 or request.user.persona.idRol.idRole == 3:
         if request.method == 'POST':
             usuario = fLogin.UserForm(request.POST)
             persona = f.PersonaForm(request.POST)
             cliente = f.ClienteForm(request.POST)
+            direccion = f.DireccionForm(request.POST)
+            contacto = f.ContactoForm(request.POST)
             if usuario.is_valid() and persona.is_valid() and cliente.is_valid():
                 user = usuario.save()
                 rol = mLogin.Roles.objects.get(idRole=1)
@@ -86,19 +88,23 @@ def agregarCliente(request):
                 contacto.save()
                 direccion.save()
                 return redirect('cliente:agregarCliente')
+                mensaje = 1
             else:
-                return redirect('cliente:agregarCliente')
-        usuario = fLogin.UserForm()
-        persona = f.PersonaForm()
-        cliente = f.ClienteForm()
-        direccion = f.DireccionForm()
-        contacto = f.ContactoForm()
+                mensaje = 0
+        else:
+            usuario = fLogin.UserForm()
+            persona = f.PersonaForm()
+            cliente = f.ClienteForm()
+            direccion = f.DireccionForm()
+            contacto = f.ContactoForm()
+            mensaje = 3
         context = {
             "usuario":usuario,
             "persona":persona,
             "cliente":cliente,
             "contacto":contacto,
             "direccion":direccion,
+            "mensaje":mensaje,
         }
         return render(request,"cliente/cliente_add.html",context)
     else:

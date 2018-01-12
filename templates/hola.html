@@ -53,14 +53,15 @@
             <div class="heading animated bounceInLeft shake titulo">
                 <h3><b>¡ Recibe tips para evitar un infarto financiero !</b></h3>
                 <hr>
-                <form action="" method="">
+                <form action="" method="POST">
+                    {% csrf_token %}
                     <div class="input-group">
                         <span class="input-group-addon" id="basic-addon1"><i class="fa fa-envelope"></i></span>
-                        <input type="email" class="form-control" aria-describedby="emailHelp" placeholder="Ingresa tu correo electronico" required>
+                        <input type="email" name="mail"  class="form-control" aria-describedby="emailHelp" placeholder="Ingresa tu correo electronico" required>
                     </div>
                     <br>
                     <label for="comment">Envianos tu mensaje</label>
-                    <textarea class="form-control" rows="3" id="comment" placeholder="Escribe aquí tus dudas"></textarea>
+                    <textarea name="mensaje" class="form-control" rows="3" id="comment" placeholder="Escribe aquí tus dudas"></textarea>
                     <small id="emailHelp" class="form-text text-muted"  style="color: #FFFFFF; font-size: 1.0em;">¡Nosotros NUNCA compartiremos tu correo con nadie más!.</small>
                     <hr>
                     <button class="btn btn-warning btn-lg">Conoce más</button>
@@ -94,22 +95,22 @@
                         <li data-target="#myCarousel" data-slide-to="1"></li>
                         <li data-target="#myCarousel" data-slide-to="2"></li>
                     </ol>
-            
+
                     <!-- Wrapper for slides -->
                     <div class="carousel-inner">
                       <div class="item active">
                         <img src="{% static "images/landing/carousel1.jpg" %}" style="width:100%;"/>
                       </div>
-            
+
                       <div class="item">
                         <img src="{% static "images/landing/carousel2.jpg" %}" style="width:100%;"/>
                       </div>
-            
+
                       <div class="item">
                         <img src="{% static "images/landing/carousel3.jpg" %}" style="width:100%;"/>
                       </div>
                     </div>
-            
+
                     <!-- Left and right controls -->
                     <a class="left carousel-control" href="#myCarousel" data-slide="prev">
                       <span class="glyphicon glyphicon-chevron-left"></span>
@@ -402,14 +403,11 @@
                         <label for="email" class="col-sm-2 control-label">Correo</label>
 
                         <div class="col-sm-10">
-<<<<<<< HEAD
                             <div class="input-group">
                                 <span class="input-group-addon" id="basic-addon1"><i class="fa fa-envelope"></i></span>
                                 <input type="email" class="form-control" id="email" name="email" placeholder="usuario@ejemplo.com" value=""/ required>
                             </div>
-=======
                             <input type="email" class="form-control" id="email" name="email" placeholder="usuario@ejemplo.com" value="" required/>
->>>>>>> 4a5c46d2f4918e8d97d211fd273e05f364f00d26
                         </div>
                     </div>
                     <div class="form-group">
