@@ -25,3 +25,5 @@ class Cita(models.Model):
     fecha = models.DateTimeField()
     direccionCita = models.CharField(max_length=200, blank=True, null=True)
     descripcion = models.CharField(max_length=500, blank=True, null=True)
+    link = models.CharField(max_length=300,blank=True, null=True)
+    password = models.CharField(max_length=10,blank=True, null=True)

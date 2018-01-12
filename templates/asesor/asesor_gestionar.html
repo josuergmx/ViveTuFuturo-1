@@ -1,86 +1,97 @@
 {% extends 'base/vistas_base.html' %}
 {% load static  %}
 {% block title %}Mis asesores{% endblock %}
-
+{% block css %}
+  <link rel="stylesheet" href="{% static "vendor/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css" %}">
+{% endblock %}
 {% block content %}
-
   <div class="content animate-panel">
-    <div class="row">
-        <div class="col-lg-12">
-            <div class="hpanel">
+      <div class="row">
+          <div class="col-lg-12">
+              <div class="hpanel hgreen">
                 <div class="panel-heading mayusculas">
                     Mis Asesores
                 </div>
                 <div class="panel-body">
-                <table id="example2" class="table table-striped table-bordered table-hover">
-                <thead>
-                <tr>
-                    <th>Asesor</th>
-                    <th>Email</th>
-                    <th>Institucion</th>
-                    <th>Opciones</th>
-                </tr>
-                </thead>
-                <tbody>
-                {% for i in promotorAsesor %}
-                {% if i.activo == True %}
-                  <tr>
-                      <td>{{i.idAsesor.user.first_name}} {{i.idAsesor.user.last_name}}</td>
-                      <td>{{i.idAsesor.user.email}}</td>
-                      <td>{{i.institucion}}</td>
-                      <td>
-                          <a href="{% url 'asesor:asesor' i.idAsesorPromotor %}" class="white a_white">
-                            <button class="btn btn-info btn-xs" type="button">
-                                <i class="fa fa-info"></i>
-                            </button>
-                          </a>
-                          <a href="{% url 'asesor:editar' i.idAsesorPromotor %}" class="white a_white">
-                            <button class="btn btn-warning btn-xs" type="button">
-                                <i class="fa fa-pencil"></i>
-                            </button>
-                          </a>
-                          <button class="btn btn-danger btn-xs" type="button" data-toggle="modal" data-target="#{{i.idAsesorPromotor}}">
-                              <i class="fa fa-times"></i>
-                          </button>
-                          <div class="modal fade" id="{{i.idAsesorPromotor}}" tabindex="-1" role="dialog" aria-hidden="true">
-                              <div class="modal-dialog">
-                                  <div class="modal-content">
-                                      <div class="color-line"></div>
-                                      <div class="modal-header text-center">
-                                          <h4 class="modal-title">Eliminar cliente</h4>
-                                      </div>
-                                      <div class="modal-body">
-                                          Está seguro que desea eliminar al Asesor <strong>{{i.idAsesor.user.first_name}}</strong> todos sus datos personales serán eliminados pero la información sobre ventas permanecerá.
-                                      </div>
-                                      <div class="modal-footer">
-                                          <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-                                          <a href="{% url 'asesor:eliminar' i.idAsesorPromotor %}" class="white a_white">
-                                            <button type="button" class="btn btn-danger">Eliminar</button>
-                                          </a>
+                  <table id="clientesTable" class="table table-striped table-bordered table-hover">
+                    <thead>
+                      <tr>
+                        <th>Asesor</th>
+                        <th>Email</th>
+                        <th>Institucion</th>
+                        <th>Opciones</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                    {% for i in promotorAsesor %}
+                    {% if i.activo == True %}
+                      <tr>
+                          <td>{{i.idAsesor.user.first_name}} {{i.idAsesor.user.last_name}}</td>
+                          <td>{{i.idAsesor.user.email}}</td>
+                          <td>{{i.institucion}}</td>
+                          <td>
+                              <a href="{% url 'asesor:asesor' i.idAsesorPromotor %}" class="white a_white">
+                                <button class="btn btn-info btn-xs" type="button">
+                                    <i class="fa fa-info"></i>
+                                </button>
+                              </a>
+                              <a href="{% url 'asesor:editar' i.idAsesorPromotor %}" class="white a_white">
+                                <button class="btn btn-warning btn-xs" type="button">
+                                    <i class="fa fa-pencil"></i>
+                                </button>
+                              </a>
+                              <button class="btn btn-danger btn-xs" type="button" data-toggle="modal" data-target="#{{i.idAsesorPromotor}}">
+                                  <i class="fa fa-times"></i>
+                              </button>
+                              <div class="modal fade" id="{{i.idAsesorPromotor}}" tabindex="-1" role="dialog" aria-hidden="true">
+                                  <div class="modal-dialog">
+                                      <div class="modal-content">
+                                          <div class="color-line"></div>
+                                          <div class="modal-header text-center">
+                                              <h4 class="modal-title">Eliminar cliente</h4>
+                                          </div>
+                                          <div class="modal-body">
+                                              Está seguro que desea eliminar al Asesor <strong>{{i.idAsesor.user.first_name}}</strong> todos sus datos personales serán eliminados pero la información sobre ventas permanecerá.
+                                          </div>
+                                          <div class="modal-footer">
+                                              <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                                              <a href="{% url 'asesor:eliminar' i.idAsesorPromotor %}" class="white a_white">
+                                                <button type="button" class="btn btn-danger">Eliminar</button>
+                                              </a>
+                                          </div>
                                       </div>
                                   </div>
                               </div>
-                          </div>
-                      </td>
-                  </tr>
-                {% endif %}
-                {%endfor%}
-              </tbody>
-              </table>
-              <a href="{% url 'login:hola' %}" class="btn btn-success btn-m">
-                  <span class="bold">Regresar</span>
-                  <i class="fa fa-angle-right"></i>
-              </a>
-            </div>
-            </div>
-            </div>
-            </div>
-            </div>
-<footer class="footer">
-    <span class="pull-right">
-        Todos los Derechos Reservados <i class="fa fa-copyright"></i>
-    </span>
-    Vive Tu Futuro 2017-2020
-</footer>
-<!-- Vendor scripts -->
+                          </td>
+                      </tr>
+                    {% endif %}
+                    {%endfor%}
+                  </tbody>
+                  </table>
+                  <a href="{% url 'login:hola' %}" class="btn btn-success btn-m">
+                      <span class="bold">Regresar</span>
+                      <i class="fa fa-angle-right"></i>
+                  </a>
+                  <a href="{% url 'cliente:agregarCliente' %}" class="btn btn-success btn-m">
+                      <span class="bold">Agregar</span>
+                      <i class="icono-der fa fa-plus"></i>
+                  </a>
+                </div>
+              </div>
+          </div>
+      </div>
+  </div>
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{% static "vendor/datatables/media/js/jquery.dataTables.min.js" %}"></script>
+    <script src="{% static "vendor/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js" %}"></script>
+
+    <script>
+
+    $(function () {
+        $('#clientesTable').dataTable();
+    });
+
+  </script>
 {% endblock %}

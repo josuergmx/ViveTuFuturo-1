@@ -60,11 +60,11 @@ def hola(request):
             if i.activo == True:
                 n_clientes = n_clientes + 1
             try:
-                if i.fecha.strftime("%Y-%m-%d") >= dia:
+                if i.fecha.strftime("%Y-%m-%d") >= dia and i.estatusCita != "10":
                     citas = citas + 1
-                if i.fecha.strftime("%Y-%m-%d") >= dia and i.fecha.strftime("%Y-%m-%d") <= semana:
+                if i.fecha.strftime("%Y-%m-%d") >= dia and i.fecha.strftime("%Y-%m-%d") <= semana and i.estatusCita != "10":
                     pendientes.append(mCita.Cita.objects.get(idAsesorCliente=i,fecha=i.fecha))
-                if i.fecha.strftime("%Y-%m-%d") == dia:
+                if i.fecha.strftime("%Y-%m-%d") == dia and i.estatusCita != "10":
                     hoy = hoy + 1
             except:
                 pass

@@ -1,5 +1,7 @@
-from django.shortcuts import render,redirect
+from django.shortcuts import render,redirect,HttpResponse
 from django.contrib.auth import get_user
+from django.core.mail import send_mail,EmailMultiAlternatives
+from django.conf import settings
 from . import forms as f
 from . import models as m
 from login import forms as fLogin
@@ -11,6 +13,7 @@ from datetime import date,datetime
 import agenda.models as mCita
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+import random
 
 @login_required(redirect_field_name='login:login')
 def agregarCliente(request):
@@ -23,6 +26,10 @@ def agregarCliente(request):
             contacto = f.ContactoForm(request.POST)
             if usuario.is_valid() and persona.is_valid() and cliente.is_valid():
                 user = usuario.save()
+                contra = request.POST.get('password1', '')
+                contra = contra+str(random.randint(1,200))
+                user.set_password(contra)
+                user.save()
                 rol = mLogin.Roles.objects.get(idRole=1)
                 origin = request.POST.get("Origen",None)
                 status = request.POST.get("Estatus",None)
@@ -87,6 +94,25 @@ def agregarCliente(request):
                 clientec.save()
                 contacto.save()
                 direccion.save()
+                correo = user.email
+                print(correo)
+                subject = 'Bienvenido a Vive tu futuro!'
+                from_email = settings.EMAIL_HOST_USER
+                mensaje = '\n Tu usuario es: ' + user.username + '\n Tu password es: ' + contra
+                html_content = '<p> hola <strong>'+mensaje+'</strong>.</p>'
+                print(mensaje)
+                print(from_email)
+                if mensaje and from_email:
+                    try:
+                        msg = EmailMultiAlternatives(subject,mensaje,from_email,[correo])
+                        msg.attach_alternative(html_content,"text/html")
+                        msg.send()
+                    except BadHeaderError:
+                        return HttpResponse('Invalid header found.')
+                else:
+                    # In reality we'd use a form class
+                    # to get proper validation errors.
+                    return HttpResponse('Make sure all fields are entered and valid.')
                 return redirect('cliente:agregarCliente')
                 mensaje = 1
             else:
@@ -182,6 +208,16 @@ def eliminar(request,idAsesorCliente):
     else:
         return render(request,'error/404.html')
 
+@login_required(redirect_field_name='login:login')
+def recomendados(request):
+    if request.user.persona.idRol.idRole == 2 or request.user.persona.idRol.idRole == 3:
+        recomendados = mcliente.RecomendadoCliente.objects.filter(asesor=request.user.persona)
+        context = {
+            "recomendados":recomendados,
+        }
+        return render(request,"cliente/recomendados.html",context)
+    else:
+        return render(request,'error/404.html')
 
 
 @login_required(redirect_field_name='login:login')
@@ -228,6 +264,7 @@ def hola(request):
     else:
         return render(request,'error/404.html')
 
+@login_required(redirect_field_name='login:login')
 def recomendar(request):
         asesorcliente = m.AsesorCliente.objects.get(idCliente=request.user.persona)
         if request.POST.get("hijos",None) == "on":

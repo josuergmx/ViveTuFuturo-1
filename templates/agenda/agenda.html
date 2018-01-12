@@ -5,9 +5,7 @@
 {% block css %}
 <link rel="stylesheet" href="{% static "styles/vive.css" %}"/>
 {% endblock %}
-
 {% block content %}
-
 <div class="content animate-panel">
 <form method="POST">
   {% csrf_token %}
@@ -19,19 +17,20 @@
                 </div>
                 <div class="panel-body">
                   {{cita.as_p}}
-                  <input type="time" name="hora">
+                  <label>Hora: </label>
+                  <input type="time" name="hora" required>
                 </div>
             </div>
         </div>
     </div>
     <div class="text-right m-t-xs">
-        <button class ="btn btn-info btn-m" type="submit">Haz la cita!</button>
+        <button class ="btn btn-success btn-m" type="submit">Haz la cita!</button>
+        <a href="{% url 'agenda:contactos' %}" class="btn btn-info btn-m">
+            <span class="bold">Regresar</span>
+            <i class="fa fa-angle-right"></i>
+        </a>
     </div>
   </form>
 </div>
-
-
-
-
 <!-- Vendor scripts -->
 {% endblock %}

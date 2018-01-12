@@ -1,0 +1,80 @@
+{% extends 'base/vistas_base.html' %}
+{% load static  %}
+{% block title%} Mis Clientes {% endblock %}
+{% block content %}
+<div class="normalheader transition animated fadeIn">
+  <div class="hpanel">
+      <div class="panel-body">
+          <a class="small-header-action" href="">
+              <div class="clip-header">
+                  <i class="fa fa-arrow-up"></i>
+              </div>
+          </a>
+          <h2 class="font-light m-b-xs">
+              Date prisa! Y ponte en contacto con ellos.
+          </h2>
+      </div>
+  </div>
+  <div class="content">
+  <div class="row">
+      <div class="col-md-6">
+            {% for reco in recomendados  %}
+            <div class="hpanel hblue contact-panel">
+              <div class="panel-body">
+                  <h3><a href="">{{reco.nombre}}</a></h3>
+                  <div class="text-muted font-bold m-b-xs">{{reco.vivienda}}</div>
+                  <p>
+                    <label>Celular: </label>{{reco.celular}}
+                  </p>
+                  <p>
+                    <label>Correo: </label>{{reco.correo}}
+                  </p>
+                  <p>
+                    <div class="row">
+                        <div class="col-md-3">
+                          <button type="button" class="btn btn-sm btn-success">Si se pudo :D</button>
+                        </div>
+                        <div class="col-md-3">
+                          <button type="button" class="btn btn-sm btn-warning">A la espera :p</button>
+                        </div>
+                        <div class="col-md-3">
+                          <button type="button" class="btn btn-sm btn-danger">No se pudo :(</button>
+                        </div>
+                    </div>
+                  </p>
+              </div>
+              <div class="panel-footer contact-footer">
+                  <div class="row">
+                      <div class="col-md-4 border-right animated-panel zoomIn" style="animation-delay: 1.1s;"> <div class="contact-stat"><span>Hijos: </span>
+                      <strong>
+                        {% if reco.hijos %}
+                          Si
+                        {% else %}
+                         No
+                        {% endif %}
+                      </strong></div> </div>
+                      <div class="col-md-4 border-right animated-panel zoomIn" style="animation-delay: 1.1s;"> <div class="contact-stat"><span>Edad: </span>
+                      <strong>
+                        {% if reco.edad %}
+                          {{reco.edad}}
+                        {% else %}
+                          Sin especificar
+                        {% endif %}
+                      </strong></div> </div>
+                      <div class="col-md-4 animated-panel zoomIn" style="animation-delay: 1.2s;"> <div class="contact-stat"><span>Estado Civil: </span>
+                        <strong>
+                          {% if reco.estadoCivil %}
+                            {{reco.estadoCivil}}
+                          {% else %}
+                            Sin especificar
+                          {% endif %}
+                        </strong></div> </div>
+                  </div>
+              </div>
+          </div>
+            {% endfor %}
+        </div>
+        </div>
+      </div>
+    </div>
+{% endblock %}

@@ -55,6 +55,29 @@
                               <i class="fa fa-pencil"></i>
                           </button>
                         </a>
+
+                        <button class="btn btn-danger btn-xs" type="button" data-toggle="modal" data-target="#{{i.idCita}}">
+                            <i class="fa fa-times"></i>
+                        </button>
+                        <div class="modal fade" id="{{i.idCita}}" tabindex="-1" role="dialog" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="color-line"></div>
+                                        <div class="modal-header text-center">
+                                            <h4 class="modal-title">Eliminar Cita</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            <strong> ¿Está seguro que desea eliminar la cita? </strong>.
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                                            <a href="{% url 'agenda:eliminar' i.idCita %}" class="white a_white">
+                                              <button type="button" class="btn btn-danger">Eliminar</button>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                        </div>
                       </td>
                   </tr>
                 {%endfor%}
@@ -98,6 +121,7 @@
                               <i class="fa fa-pencil"></i>
                           </button>
                         </a>
+
                       </td>
                   </tr>
                 {%endfor%}

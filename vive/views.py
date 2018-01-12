@@ -1,17 +1,22 @@
 from django.shortcuts import render,HttpResponse
-from django.core.mail import send_mail
+from django.core.mail import send_mail,EmailMultiAlternatives
+from django.contrib import messages
 from django.conf import settings
 
 def principal(request):
     if request.method == 'POST':
         message = request.POST.get('mensaje', '')
         from_email = request.POST.get('mail', '')
-        subject = 'Prueba'
+        subject = from_email
+        to = settings.EMAIL_HOST_USER
+        html_content = '<p> hola <strong>'+message+'</strong>.</p>'
         print(message)
         print(from_email)
         if message and from_email:
             try:
-                send_mail(subject, message, from_email, ['eckobik@gmail.com'], fail_silently=True)
+                msg = EmailMultiAlternatives(subject,message,'eckobik@gmail.com',['eckobik@hotmail.com'])
+                msg.attach_alternative(html_content,"text/html")
+                msg.send()
             except BadHeaderError:
                 return HttpResponse('Invalid header found.')
         else:

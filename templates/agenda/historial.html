@@ -35,8 +35,10 @@
                                         <dd>{{i.idAsesorCliente.idCliente.user.first_name}}</dd>
                                         <dt>Apellidos: </dt>
                                         <dd>{{i.idAsesorCliente.idCliente.user.last_name}}</dd>
-                                        <dt>Direccion:</dt>
-                                        <dd>{{i.direccionCita}}</dd>
+                                        {% if i.direccionCita%}
+                                          <dt>Direccion:</dt>
+                                          <dd>{{i.direccionCita}}</dd>
+                                        {% endif %}
                                         <dt>Fecha y hora:</dt>
                                         <dd>{{i.fecha}}</dd>
                                         <dt>Tipo:</dt>
@@ -76,8 +78,10 @@
                                           <dd>{{j.idAsesorCliente.idCliente.user.first_name}}</dd>
                                           <dt>Apellidos: </dt>
                                           <dd>{{j.idAsesorCliente.idCliente.user.last_name}}</dd>
-                                          <dt>Direccion:</dt>
-                                          <dd>{{j.direccionCita}}</dd>
+                                          {% if i.direccionCita%}
+                                            <dt>Direccion:</dt>
+                                            <dd>{{i.direccionCita}}</dd>
+                                          {% endif %}
                                           <dt>Fecha y hora:</dt>
                                           <dd>{{j.fecha}}</dd>
                                           <dt>Tipo:</dt>
@@ -86,8 +90,6 @@
                                           <dd>{{j.idEstatus}}</dd>
                                           <dt>Descripcion</dt>
                                           <dd>{{j.descripcion}}</dd>
-                                          <dt>Correo: </dt>
-                                          <dd>{{j.idAsesorCliente.idCliente.user.mail}}</dd>
                                       </dl>
                                 </div>
                                 <div class="panel-footer">

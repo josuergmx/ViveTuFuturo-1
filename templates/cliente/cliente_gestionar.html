@@ -76,9 +76,13 @@
                       {%endfor%}
                     </tbody>
                   </table>
-                  <a href="{% url 'login:hola' %}" class="btn btn-success btn-m">
+                  <a href="{% url 'login:hola' %}" class="btn btn-info btn-m">
                       <span class="bold">Regresar</span>
                       <i class="fa fa-angle-right"></i>
+                  </a>
+                  <a href="{% url 'cliente:agregarCliente' %}" class="btn btn-success btn-m">
+                      <span class="bold">Agregar</span>
+                      <i class="icono-der fa fa-plus"></i>
                   </a>
                 </div>
               </div>

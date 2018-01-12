@@ -23,6 +23,11 @@ urlpatterns = [
         name='editar'
     ),
     url(
+        regex=r'^eliminar/(?P<idCita>\d+)$',
+        view=views.eliminar,
+        name='eliminar'
+    ),
+    url(
         regex=r'^hoy/',
         view=views.hoy,
         name='hoy'

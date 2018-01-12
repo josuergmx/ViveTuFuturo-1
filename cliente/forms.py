@@ -98,12 +98,13 @@ class ContactoForm(forms.ModelForm):
             }
             self.fields['celular'].widget.attrs = {
                 'class': 'form-control',
-                'max':'15',
+                'maxlength':15,
+                'type':'number',
             }
 
             self.fields['telcasa'].widget.attrs = {
                 'class': 'form-control',
-                'max':'15',
+                'maxlength':15,
             }
             self.fields['facebookid'].label = 'Facebook'
             self.fields['telcasa'].label = 'Telefono de Casa'
@@ -127,7 +128,7 @@ class UserForm(forms.ModelForm):
             }
             self.fields['email'].widget.attrs = {
                 'placeholder':'user@email.com',
-                'class': 'form-control'
+                'class': 'form-control',
             }
     class Meta:
         model = User

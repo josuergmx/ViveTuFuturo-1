@@ -36,4 +36,9 @@ urlpatterns = [
         view=views.recomendar,
         name='recomendar'
     ),
+    url(
+        regex=r'^recomendados/$',
+        view=views.recomendados,
+        name='recomendados'
+    ),
 ]

@@ -224,11 +224,17 @@
 																</div>
 																	{% if hoy == 0 %}
 																	<div class="m-t-xl">
-																				<a href="{% url 'agenda:contactos'%}"><button>Consigue mas citas.</button></a>
+																			<a href="{% url 'agenda:contactos' %}" class="btn btn-default btn-m">
+																					<span class="bold">Haz mas citas</span>
+																				 <i class="fa fa-angle-right"></i>
+																			</a>
 																	</div>
 																	{% else %}
 																	<div class="m-t-xl">
-																				<a href="{% url 'agenda:hoy'%}"><button>Ver mis Citas</button></a>
+																			<a href="{% url 'agenda:hoy' %}" class="btn btn-default btn-m">
+																					<span class="bold">Ver mis citas</span>
+																				 <i class="fa fa-angle-right"></i>
+																			</a>
 																	</div>
 																	{% endif %}
 
@@ -261,8 +267,11 @@
 																		</tbody>
 																</table>
 														</div>
+														<a href="{% url 'cliente:recomendados' %}" class="btn btn-default btn-m">
+																<span class="bold">Ver mas</span>
+															 <i class="fa fa-angle-right"></i>
+														</a>
 												</div>
-												
 										</div>
 								</div>
 							<div class="col-md-12">
