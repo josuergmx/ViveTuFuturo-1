@@ -21,15 +21,15 @@
   </div>
 </div>
   <div class="content animate-panel">
-      <div class="row">
-          <div class="col-lg-12">
-              <div class="hpanel hgreen">
-                <div class="panel-heading mayusculas">
-                    Citas
-                </div>
-                <div class="panel-body">
-                <table id="clientesTable" class="table table-striped table-bordered table-hover">
-                <thead>
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="hpanel hgreen">
+          <div class="panel-heading mayusculas">
+            Citas
+          </div>
+          <div class="panel-body">
+            <table id="clientesTable" class="table table-striped table-bordered table-hover">
+              <thead>
                 <tr>
                     <th>Cliente</th>
                     <th>Tipo de Cita</th>
@@ -39,8 +39,8 @@
                     <th>Descripcion</th>
                     <th>Opciones</th>
                 </tr>
-                </thead>
-                <tbody>
+              </thead>
+              <tbody>
                 {% for i in citas %}
                   <tr>
                       <td>{{i.idAsesorCliente.idCliente.user.first_name}} {{i.idAsesorCliente.idCliente.user.last_name}}</td>
@@ -51,7 +51,7 @@
                       <td>{{i.descripcion}}</td>
                       <td>
                         <a href="{% url 'agenda:editar' i.idCita %}" class="white a_white">
-                          <button class="btn btn-danger btn-xs" type="button">
+                          <button class="btn btn-warning btn-xs" type="button">
                               <i class="fa fa-pencil"></i>
                           </button>
                         </a>
@@ -59,12 +59,12 @@
                   </tr>
                 {%endfor%}
               </tbody>
-              </table>
-            </div>
+            </table>
           </div>
         </div>
       </div>
     </div>
+  </div>
     <div class="content animate-panel">
       <div class="row">
           <div class="col-lg-12">
@@ -94,7 +94,7 @@
                       {% endif %}
                       <td>
                         <a href="{% url 'agenda:agendar' i.idAsesorCliente %}" class="white a_white">
-                          <button class="btn btn-danger btn-xs" type="button">
+                          <button class="btn btn-warning btn-xs" type="button">
                               <i class="fa fa-pencil"></i>
                           </button>
                         </a>
@@ -103,16 +103,16 @@
                 {%endfor%}
               </tbody>
               </table>
-              <a href="{% url 'login:hola' %}" class="btn btn-success btn-m">
-                  <span class="bold">Regresar</span>
-                  <i class="fa fa-angle-right"></i>
-              </a>
             </div>
           </div>
         </div>
       </div>
     </div>
-    </div>
+    <a href="{% url 'login:hola' %}" class="btn btn-success btn-m">
+        <span class="bold">Regresar</span>
+        <i class="fa fa-angle-right"></i>
+    </a>
+</div>
 
   <footer class="footer">
       <span class="pull-right">

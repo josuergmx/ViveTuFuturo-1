@@ -42,6 +42,7 @@
         {% block header %}
         <div class="color-line">
         </div>
+        <div class="header-link hide-menu" style="margin: 0px;"><i class="fa fa-bars"></i></div>
         <div id="logo" class="light-version">
             <span>
                 Vive tu Futuro: {{user.username}}
@@ -49,8 +50,8 @@
             </span>
         </div>
         <nav role="navigation">
-            <div class="header-link hide-menu"><i class="fa fa-bars"></i></div>
-            <div class="small-logo">
+
+            <div class="small-logo" style="padding-left: 10px;">
                 <span class="text-primary">Vive tu Futuro: {{user.username}}</span>
             </div>
             <div class="navbar-right">
@@ -114,7 +115,7 @@
     <script src="{% static "vendor/metisMenu/src/metisMenu.js" %}"></script>
     <script src="{% static "vendor/iCheck/icheck.min.js" %}"></script>
     <script src="{% static "vendor/sparkline/index.js" %}"></script>
-    
+
     <!-- Javascript que utilizan de forma individual-->
     {% block javascripts %}{% endblock %}
 

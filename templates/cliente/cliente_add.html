@@ -14,7 +14,7 @@
                 </div>
                 <div class="panel-body">
                     <div class="text-center m-b-md" id="wizardControl">
-                        <a class="btn btn-primary" href="#step1" data-toggle="tab">Paso 1: Información Personal</a>
+                        <a class="btn btn-info" href="#step1" data-toggle="tab">Paso 1: Información Personal</a>
                         <a class="btn btn-default" href="#step2" data-toggle="tab">Paso 2: Información Geográfica</a>
                         <a class="btn btn-default" href="#step3" data-toggle="tab">Paso 3: Contacto</a>
                     </div>
@@ -135,18 +135,20 @@
         </div>
     </div>
 </div>
-
 {% endblock %}
+
 {% block javascripts %}
-<script src="{% static "vendor/toastr/build/toastr.min.js" %}"></script>
-  <script>
-    {% if mensaje == 3 %}
-      console.log('nada');
-    {% elif mensaje == 0 %}
-      console.log('error');
-      toastr["success"]("Hola","como estas");
-    {% else %}
-      toastr.error('Error - This is a Homer error notification');
-    {% endif %}
-  </script>
+
+<script>
+  $(function(){
+   //Funcion da estilo a botones
+    $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+        $('a[data-toggle="tab"]').removeClass('btn-success');
+        $('a[data-toggle="tab"]').addClass('btn-default');
+        $(this).removeClass('btn-default');
+        $(this).addClass('btn-info');
+    });
+  });
+</script>
+
 {% endblock %}
