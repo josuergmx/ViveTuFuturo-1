@@ -93,5 +93,7 @@ def hola(request):
             "hoy":hoy,
         }
         return render(request,"perfil/dashboard.html",context)
+    elif request.user.persona.idRol.idRole == 1:
+        return redirect('cliente:hola')
     else: #Aqui va la vista del cliente
         return render(request,'log/404.html')

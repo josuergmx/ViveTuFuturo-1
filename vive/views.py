@@ -14,7 +14,7 @@ def principal(request):
         print(from_email)
         if message and from_email:
             try:
-                msg = EmailMultiAlternatives(subject,message,'eckobik@gmail.com',['eckobik@hotmail.com'])
+                msg = EmailMultiAlternatives(subject,message,to,[to])
                 msg.attach_alternative(html_content,"text/html")
                 msg.send()
             except BadHeaderError:
