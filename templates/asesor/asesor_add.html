@@ -31,39 +31,8 @@
                                 </div>
                                 <div class="col-lg-9">
                                   <div class="alert alert-info">
-                                    La contraseña por defecto sera la primera letra del nombre y de los apellidos seguido por c1234.</div>
-                                    <div class="alert alert-info">
-                                    {% if usuario.errors %}
-                                        {% for field in usuario %}
-                                            {% for error in field.errors %}
-                                                <div class="alert alert-danger">
-                                                    <strong>{{ error|escape }}</strong>
-                                                </div>
-                                            {% endfor %}
-                                        {% endfor %}
-                                        {% for error in usuario.non_field_errors %}
-                                            <div class="alert alert-danger">
-                                                <strong>{{ error|escape }}</strong>
-                                            </div>
-                                        {% endfor %}
-                                    {% endif %}
-                                  </div>
-                                    <div class="alert alert-info">
-                                    {% if persona.errors %}
-                                        {% for field in persona %}
-                                            {% for error in field.errors %}
-                                                <div class="alert alert-danger">
-                                                    <strong>{{ error|escape }}</strong>
-                                                </div>
-                                            {% endfor %}
-                                        {% endfor %}
-                                        {% for error in persona.non_field_errors %}
-                                            <div class="alert alert-danger">
-                                                <strong>{{ error|escape }}</strong>
-                                            </div>
-                                        {% endfor %}
-                                    {% endif %}
-                                  </div>
+                                    La contraseña por defecto sera la primera letra del nombre y de los apellidos seguido por c1234.
+                                  </div>  
                                     <div class="row">
                                         <div class="form-group col-lg-8">
                                             {{usuario.as_p}}
@@ -139,7 +108,7 @@
                             </div>
                             <div class="text-right m-t-xs">
                                 <a class="btn btn-default prev" href="#step2"data-toggle="tab">Anterior</a>
-                                <button type="submit">Agregar</button>
+                                <button class = "btn btn-default" type="submit">Agregar</button>
                             </div>
                         </div>
                       </div>
@@ -154,6 +123,39 @@
         </div>
     </div>
 </div>
+{% endblock %}
 
+{% block javascripts %}
+    <script src="{% static "vendor/sweetalert/lib/sweet-alert.min.js" %}"></script>
+    <script src="{% static "vendor/toastr/build/toastr.min.js" %}"></script>
+{% endblock %}
 
+{% block scripts %}
+    <script>
+      $(function(){
+       //Funcion da estilo a botones
+        $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+            $('a[data-toggle="tab"]').removeClass('btn-success');
+            $('a[data-toggle="tab"]').addClass('btn-default');
+            $(this).removeClass('btn-default');
+            $(this).addClass('btn-info');
+        });
+
+        function msjRepetido(){
+          var bandera = {{bandera}}
+
+          if(bandera == 0){
+            toastr.error('Error - Se produjo un error, revisa la caja de errores.');
+          }
+          else if (bandera == 1){
+            toastr.success('Exito - Se agrego correctamente el cliente.');
+          }
+          else if (bandera == 2){
+            toastr.warning('Notificacion - No se pudo mandar el correo, revisar direccion de correo.');
+          }
+        }
+
+        msjRepetido();
+      });
+    </script>
 {% endblock %}

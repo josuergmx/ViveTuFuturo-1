@@ -36,7 +36,9 @@
                                     </p>
                                 </div>
                                 <div class="col-lg-9">
-                                  <div class="alert alert-info">Las contraseñas para los clientes seran: la primera letra de sus apellidos y nombre(s), seguidos por c1234.</div>
+                                  <div class="alert alert-info">
+                                    Las contraseñas para los clientes seran: la primera letra de sus apellidos y nombre(s), seguidos por c1234.
+                                  </div>
                                   {% if usuario.errors or persona.errors or cliente.errors %}
                                   <div class=" alert alert-danger">
                                     {{usuario.errors}}
@@ -123,7 +125,7 @@
                             </div>
                             <div class="text-right m-t-xs">
                                 <a class="btn btn-default prev" href="#step2"data-toggle="tab">Anterior</a>
-                                <button type="submit">Agregar</button>
+                                <button class = "btn btn-default" type="submit">Agregar</button>
                             </div>
                         </div>
                       </div>
@@ -157,13 +159,20 @@
         });
 
         function msjRepetido(){
-          var bandera = true;
-          if(bandera)
-            toastr.error('Error - This is a Homer error notification');
+          var bandera = {{bandera}}
+
+          if(bandera == 0){
+            toastr.error('Error - Se produjo un error, revisa la caja de errores.');
+          }
+          else if (bandera == 1){
+            toastr.success('Exito - Se agrego correctamente el cliente.');
+          }
+          else if (bandera == 2){
+            toastr.warning('Notificacion - No se pudo mandar el correo, revisar direccion de correo.');
+          }
         }
 
         msjRepetido();
       });
     </script>
 {% endblock %}
-

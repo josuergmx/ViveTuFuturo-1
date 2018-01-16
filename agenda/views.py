@@ -1,4 +1,5 @@
 from django.shortcuts import render,redirect
+from django.contrib.auth.decorators import login_required
 from datetime import datetime,timedelta
 from . import forms as f
 import cliente.models as m
@@ -6,6 +7,7 @@ from . import models as mCita
 from cliente import models as mCliente
 # Create your views here.
 
+@login_required(redirect_field_name='login:login')
 def agenda(request,idAsesorCliente):
     if request.user.persona.idRol.idRole == 2 or request.user.persona.idRol.idRole == 3:
         if request.method == "POST":
@@ -45,6 +47,7 @@ def agenda(request,idAsesorCliente):
     else:
         return render(request,'error/404.html')
 
+@login_required(redirect_field_name='login:login')
 def contactos(request):
     if request.user.persona.idRol.idRole == 2 or request.user.persona.idRol.idRole == 3:
         asesorClientes = m.AsesorCliente.objects.filter(idAsesor=request.user.id)
@@ -75,6 +78,7 @@ def contactos(request):
     else:
         return render(request,'error/404.html')
 
+@login_required(redirect_field_name='login:login')
 def editar(request,idCita):
     if request.user.persona.idRol.idRole == 2 or request.user.persona.idRol.idRole == 3:
         editar = mCita.Cita.objects.get(idCita=idCita)
@@ -103,6 +107,7 @@ def editar(request,idCita):
     else:
         return render(request,'error/404.html')
 
+@login_required(redirect_field_name='login:login')
 def eliminar(request,idCita):
     if request.user.persona.idRol.idRole == 2 or request.user.persona.idRol.idRole == 3:
         eliminar = mCita.Cita.objects.filter(idCita=idCita)
@@ -119,48 +124,56 @@ def eliminar(request,idCita):
     else:
         return render(request,'error/404.html')
 
-
+@login_required(redirect_field_name='login:login')
 def hoy(request):
-    asesorClientes = mCliente.AsesorCliente.objects.filter(idAsesor=request.user.id)
-    hoy1 = []
-    hoy2 = []
-    iterar = 0
-    dia = datetime.today().strftime("%Y-%m-%d")
-    for i in asesorClientes:
-        if i.fecha.strftime("%Y-%m-%d") == dia:
-            if iterar%2 == 0:
-                hoy1.append(mCita.Cita.objects.get(idAsesorCliente=i,fecha=i.fecha))
-            else:
-                hoy2.append(mCita.Cita.objects.get(idAsesorCliente=i,fecha=i.fecha))
-        iterar = iterar + 1
-    context = {
-        "hoy1":hoy1,
-        "hoy2":hoy2,
-    }
-    return render(request,"agenda/hoy.html",context)
+    if request.user.persona.idRol.idRole == 2 or request.user.persona.idRol.idRole == 3:
+        asesorClientes = mCliente.AsesorCliente.objects.filter(idAsesor=request.user.id)
+        hoy1 = []
+        hoy2 = []
+        iterar = 0
+        dia = datetime.today().strftime("%Y-%m-%d")
+        for i in asesorClientes:
+            print(i.fecha, i.idAsesorCliente)
+            try:
+                if i.fecha.strftime("%Y-%m-%d") == dia and i.estatusCita != "10":
+                    hoy1.append(mCita.Cita.objects.get(idAsesorCliente=i,fecha=i.fecha))
+            except:
+                pass
 
+        context = {
+            "hoy1":hoy1,
+        }
+        return render(request,"agenda/hoy.html",context)
+    else:
+        return render(request,'error/404.html')
+
+@login_required(redirect_field_name='login:login')
 def historial(request):
-    asesorClientes = mCliente.AsesorCliente.objects.filter(idAsesor=request.user.id)
-    historial1 = []
-    historial2 = []
-    iterar = 0
-    for i in asesorClientes:
-        try:
-            if iterar%2 == 0:
-                historial1.append(mCita.Cita.objects.filter(idAsesorCliente=i))
-                print(historial1)
-            else:
-                historial2.append(mCita.Cita.objects.filter(idAsesorCliente=i))
-        except:
-            pass
-        iterar = iterar + 1
+    if request.user.persona.idRol.idRole == 2 or request.user.persona.idRol.idRole == 3:
+        asesorClientes = mCliente.AsesorCliente.objects.filter(idAsesor=request.user.id)
+        historial1 = []
+        historial2 = []
+        iterar = 0
+        for i in asesorClientes:
+            try:
+                if iterar%2 == 0:
+                    historial1.append(mCita.Cita.objects.filter(idAsesorCliente=i))
+                    print(historial1)
+                else:
+                    historial2.append(mCita.Cita.objects.filter(idAsesorCliente=i))
+            except:
+                pass
+            iterar = iterar + 1
 
-    context = {
-        "historial1":historial1,
-        "historial2":historial2,
-    }
-    return render(request,"agenda/historial.html",context)
+        context = {
+            "historial1":historial1,
+            "historial2":historial2,
+        }
+        return render(request,"agenda/historial.html",context)
+    else:
+        return render(request,'error/404.html')
 
+@login_required(redirect_field_name='login:login')
 def calendario(request):
     if request.user.persona.idRol.idRole == 2 or request.user.persona.idRol.idRole == 3:
         asesorClientes = m.AsesorCliente.objects.filter(idAsesor=request.user.id)

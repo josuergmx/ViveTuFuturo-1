@@ -1,6 +1,6 @@
 from django.shortcuts import render,redirect,HttpResponse
 from django.contrib.auth import get_user
-from django.core.mail import send_mail,EmailMultiAlternatives
+from django.core.mail import send_mail,EmailMessage
 from django.conf import settings
 from . import forms as f
 from . import models as m
@@ -18,12 +18,16 @@ import random
 @login_required(redirect_field_name='login:login')
 def agregarCliente(request):
     if request.user.persona.idRol.idRole == 2 or request.user.persona.idRol.idRole == 3:
+        bandera = 3
         if request.method == 'POST':
             usuario = fLogin.UserForm(request.POST)
             persona = f.PersonaForm(request.POST)
             cliente = f.ClienteForm(request.POST)
             direccion = f.DireccionForm(request.POST)
             contacto = f.ContactoForm(request.POST)
+            print(usuario.is_valid())
+            print(persona.is_valid())
+            print(cliente.is_valid())
             if usuario.is_valid() and persona.is_valid() and cliente.is_valid():
                 user = usuario.save()
                 contra = request.POST.get('password1', '')
@@ -35,16 +39,16 @@ def agregarCliente(request):
                 status = request.POST.get("Estatus",None)
                 fecha = request.POST.get("fechaDeNacimiento",None)
                 estadoCivil = request.POST.get("estadoCivil",None)
-                direccion = request.POST.get("idtipodireccion",None)
+                direccion1 = request.POST.get("idtipodireccion",None)
                 persona = mLogin.Persona.objects.get(user_id=user)
                 if estadoCivil == "":
                     estado = mLogin.EstadoCivil.objects.get(idEstadoCivil="1")
                 else:
                     estado = mLogin.EstadoCivil.objects.get(idEstadoCivil=estadoCivil)
-                if direccion == "":
+                if direccion1 == "":
                     tipodireccion = mLogin.CatTipodireccion.objects.get(idtipoDireccion="1")
                 else:
-                    tipodireccion = mLogin.CatTipodireccion.objects.get(idtipoDireccion=direccion)
+                    tipodireccion = mLogin.CatTipodireccion.objects.get(idtipoDireccion=direccion1)
                 if origin == "":
                     origenCliente = mcliente.OrigenRecomendacion.objects.get(idOrigen="1")
                 else:
@@ -95,42 +99,37 @@ def agregarCliente(request):
                 contacto.save()
                 direccion.save()
                 correo = user.email
-                print(correo)
                 subject = 'Bienvenido a Vive tu futuro!'
                 from_email = settings.EMAIL_HOST_USER
                 mensaje = '\n Tu usuario es: ' + user.username + '\n Tu password es: ' + contra
-                html_content = '<p> hola <strong>'+mensaje+'</strong>.</p>'
-                print(mensaje)
-                print(from_email)
-                if mensaje and from_email:
-                    try:
-                        msg = EmailMultiAlternatives(subject,mensaje,from_email,[correo])
-                        msg.attach_alternative(html_content,"text/html")
-                        msg.send()
-                    except BadHeaderError:
-                        return HttpResponse('Invalid header found.')
-                else:
-                    # In reality we'd use a form class
-                    # to get proper validation errors.
-                    return HttpResponse('Make sure all fields are entered and valid.')
-                return redirect('cliente:agregarCliente')
-                mensaje = 1
+                body = '<p> hola <strong>'+mensaje+'</strong>.</p>'
+                try:
+                    msg = EmailMessage(subject, body, from_email, [correo])
+                    msg.content_subtype = "html"
+                    bandera = 1
+                    msg.send()
+                except BadHeaderError:
+                    bandera = 2 #Warning
             else:
-                mensaje = 0
-        else:
+                bandera = 0
+                print(usuario.errors)
+                print(persona.is_valid())
+                print(cliente.errors)
+
+        if bandera == 3:
             usuario = fLogin.UserForm()
             persona = f.PersonaForm()
             cliente = f.ClienteForm()
             direccion = f.DireccionForm()
             contacto = f.ContactoForm()
-            mensaje = 3
+
         context = {
             "usuario":usuario,
             "persona":persona,
             "cliente":cliente,
             "contacto":contacto,
             "direccion":direccion,
-            "mensaje":mensaje,
+            "bandera":bandera,
         }
         return render(request,"cliente/cliente_add.html",context)
     else:
@@ -232,11 +231,14 @@ def hola(request):
         contacto2 = mLogin.Contacto.objects.filter(idpersona=asesorcliente.idAsesor.persona)
         domicilio = mLogin.Direccion.objects.filter(idpersona=request.user.persona)
         dia = datetime.today().strftime("%Y-%m-%d")
-        if asesorcliente.fecha.strftime("%Y-%m-%d") >= dia:
-            hoy = mCita.Cita.objects.get(idAsesorCliente=asesorcliente,fecha=asesorcliente.fecha)
-            mensaje = "Tienes una cita pendiente :)"
-            bandera = 1
-        else:
+        try:
+            if asesorcliente.fecha.strftime("%Y-%m-%d") >= dia:
+                hoy = mCita.Cita.objects.get(idAsesorCliente=asesorcliente,fecha=asesorcliente.fecha)
+                mensaje = "Tienes una cita pendiente :)"
+                bandera = 1
+            else:
+                mensaje = "No tienes cita pendientes, hazlas ahora! :D."
+        except:
             mensaje = "No tienes cita pendientes, hazlas ahora! :D."
 
         if request.method == 'POST':
@@ -244,6 +246,7 @@ def hola(request):
                 f.ContactoForm(request.POST,instance=i).save()
             for j in domicilio:
                 f.DireccionForm(request.POST,instance=j).save()
+                
         for i in contacto2:
             contacto1.append(f.ContactoForm(instance=i))
         for j in domicilio:
