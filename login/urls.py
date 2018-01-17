@@ -7,7 +7,7 @@ from django.conf.urls import handler404
 urlpatterns = [
     url(r'^logout/$',auth_views.logout,{'template_name':'hola.html'},'logout'),
     url(
-        regex=r'^login/$',
+        regex=r'^$',
         view=views.login,
         name='login'
     ),

@@ -4,6 +4,7 @@ import login.models as lm
 import datetime
 from vive import settings
 from django.contrib.auth.models import User
+
 # Create your models here
 
 class Estatus(models.Model):

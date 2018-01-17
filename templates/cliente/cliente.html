@@ -23,7 +23,7 @@
                             <a class="btn btn-default" href="#step5" data-toggle="tab">Agregar una Recomendacion</a>
                         </div>
                         <div class="tab-content">
-                        
+
                         <div id="step1" class="p-m tab-pane active">
                           <div class="content">
                             <div class="row">
@@ -56,7 +56,7 @@
                                                       <dd>{{cita.idAsesorCliente.idCliente.user.last_name}}</dd>
                                                       <dt>Direccion:</dt>
                                                       <dd>{{cita.direccionCita}}</dd>
-                                                    
+
                                                       <dt>Tipo:</dt>
                                                       <dd>{{cita.idTipoCita}}</dd>
                                                       <dt>Estatus:</dt>
@@ -217,6 +217,9 @@
                                       <h4>
                                       <span class="pe-7s-mail fa-1x text-muted icono"></span>  Correo: {{asesor.idAsesor.persona.user.email}}
                                       </h4><br>
+                                      <h4>
+                                      <a class="btn btn-xs btn-primary" href="{% url 'mensajes:mensajes' %}"><i class="fa fa-pencil"></i> Mesaje</a>
+                                      </h4>
                                   </table>
                               </div>
                             </div>
@@ -262,94 +265,6 @@
   <script src="{% static "vendor/fullcalendar/dist/lang-all.js" %}"></script>
 
   <script>
-
-  function activar(){
-    $(this).click();
-    console.log(""+$(this));
-      $('#calendar').fullCalendar('render');
-    }
-
-    $(function(){
-
-        /* initialize the calendar
-         -----------------------------------------------------------------*/
-        var date = new Date();
-        var d = date.getDate();
-        var m = date.getMonth();
-        var y = date.getFullYear();
-
-        $('#calendar').fullCalendar({
-          //lang: 'es',
-            header: {
-                left: 'prev,next today',
-                center: 'title',
-                right: 'month,agendaWeek,agendaDay'
-            },
-            editable: true, //true
-            droppable: false, //true, this allows things to be dropped onto the calendar
-            drop: function() {
-                // is the "remove after drop" checkbox checked?
-                if ($('#drop-remove').is(':checked')) {
-                    // if so, remove the element from the "Draggable Events" list
-                    $(this).remove();
-                }
-            },
-            events: [
-                {
-                    title: 'Cita',
-                    start: new Date(y, m, 1)
-                },
-                {
-                    title: 'Long Event',
-                    start: new Date(y, m, d-5),
-                    end: new Date(y, m, d-2),
-                },
-                {
-                    id: 999,
-                    title: 'Repeating Event',
-                    start: new Date(y, m, d-3, 16, 0),
-                    allDay: false,
-                },
-                {
-                    title: 'Homer task',
-                    start: new Date(y, m, d + 5, 19, 0),
-                    end: new Date(y, m, d + 6, 22, 30),
-                    allDay: false,
-                    backgroundColor: "#62cb31",
-                    borderColor: "#62cb31"
-                },
-                {
-                    id: 999,
-                    title: 'Repeating Event',
-                    start: new Date(y, m, d+4, 16, 0),
-                    allDay: false
-                },
-                {
-                    title: 'Meeting',
-                    start: new Date(y, m, d, 10, 30),
-                    allDay: false
-                },
-                {
-                    title: 'Lunch',
-                    start: new Date(y, m, d, 12, 0),
-                    end: new Date(y, m, d, 14, 0),
-                    allDay: false
-                },
-                {
-                    title: 'Birthday Party',
-                    start: new Date(y, m, d+1, 19, 0),
-                    end: new Date(y, m, d+1, 22, 30),
-                    allDay: false
-                },
-                {
-                    title: 'Click for Google',
-                    start: new Date(y, m, 28),
-                    end: new Date(y, m, 29),
-                    url: 'http://google.com/'
-                }
-            ],
-        });
-
       //Funcion da estilo a botones
         $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
             $('a[data-toggle="tab"]').removeClass('btn-success');

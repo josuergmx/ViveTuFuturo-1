@@ -14,6 +14,7 @@ urlpatterns = [
     url(r'^sesion1/',include('sesion1.urls',namespace='sesion1')),
     url(r'^cliente/',include('cliente.urls',namespace='cliente')),
     url(r'^creditos/',include('creditos.urls',namespace='conekta')),
+    url(r'^mensajes/',include('mensajes.urls',namespace='mensajes')),
     url(r'^productos/',include('productos.urls',namespace='producto')),
 ]
 

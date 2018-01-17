@@ -33,9 +33,11 @@ INSTALLED_APPS = [
     'creditos',
     'login',
     'productos',
+    'mensajes',
     'promotor',
     'sesion1',
     'ventas',
+    'reportes',
 ]
 
 MIDDLEWARE = [
