@@ -1,0 +1,57 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+  {% block head %}
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+
+    <!-- title -->
+    <title>{% block title %} Bienvenido {% endblock %}</title>
+
+    <!-- CSS que utlizan todas las vistas-->
+    {% endblock %}
+    <!-- Vendor styles -->
+    <link rel="stylesheet" href="{% static "vendor/fullscreenBoolBlock/css/jquery.jscrollpane.custom.css" %}">
+    <link rel="stylesheet" href="{% static "vendor/fullscreenBoolBlock/css/bookblock.css" %}">
+    <link rel="stylesheet" href="{% static "vendor/fullscreenBoolBlock/css/custom.css" %}">
+    <script src="{% static "vendor/fullscreenBoolBlock/js/modernizr.custom.79639.js" %}"></script>
+     <!--CSS que pueden utilizar otras visats-->
+    {% block css %}{% endblock %}
+
+    <!-- Stilo de la plantilla -->
+    <link rel="stylesheet" href="{% static "styles/style.css" %}"/>
+    <link rel="stylesheet" href="{% static "styles/vive.css"%}"/>
+</head>
+<body> <!-- hide-sidebar -->
+    <!-- Simple splash screen-->
+
+    {% block header %}
+        <div id="header">
+            <div class="color-line">
+            </div>
+            <div class="header-link hide-menu" style="margin: 0px;"><i class="fa fa-bars"></i></div>
+        </div>
+    {% endblock %}
+
+    <!-- Bloque del contenido que estará debajo del navbar-->
+    {% block content %}
+    {% endblock %}
+
+    <!-- Javascript que utilizan todas las vistas -->
+    <script src="{% static "vendor/jquery/dist/jquery.min.js" %}"></script>
+    <script src="{% static "vendor/fullscreenBoolBlock/js/jquery.mousewheel.js" %}"></script>
+    <script src="{% static "vendor/fullscreenBoolBlock/js/jquery.jscrollpane.min.js" %}"></script>
+    <script src="{% static "vendor/fullscreenBoolBlock/js/jquerypp.custom.js" %}"></script>
+    <script src="{% static "vendor/fullscreenBoolBlock/js/jquery.bookblock.js" %}"></script>
+    <script src="{% static "vendor/fullscreenBoolBlock/js/page.js" %}"></script>
+    
+    <!-- Javascript que utilizan de forma individual-->
+    {% block javascripts %}{% endblock %}
+
+    <!-- App scripts -->
+
+  </body>
+</html>

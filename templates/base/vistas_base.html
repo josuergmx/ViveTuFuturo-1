@@ -29,7 +29,7 @@
     <link rel="stylesheet" href="{% static "styles/style.css" %}"/>
     <link rel="stylesheet" href="{% static "styles/vive.css"%}"/>
 </head>
-<body class="fixed-sidebar fixed-navbar fixed-footer hide-sidebar"> <!-- hide-sidebar -->
+<body class="fixed-sidebar fixed-navbar hide-sidebar"> <!-- hide-sidebar -->
     <!-- Simple splash screen-->
     <div class="splash">
         <div class="splash-title">
@@ -94,38 +94,39 @@
       {% endblock %}
     </div>
 
-<!-- Navigation -->
-<aside id="menu">
-    <div id="navigation">
-        <ul class="nav" id="side-menu">
-            <li>
-                <a href="{% url 'login:hola' %}" id="sidebar" class="right-sidebar-toggle">
-                    <span class="nav-label">Inicio</span>
-                    <i class="pe-7s-upload pe-7s-home"></i>
-                </a>
-            </li>
-            <li class="dropdown">
-                <a href="{% url 'login:logout' %}">
-                    <span class="nav-label">Salir</span>
-                    <i class="pe-7s-upload pe-rotate-90"></i>
-                </a>
-            </li>
-        </ul>
-    </div>
-</aside>
+    <!-- Navigation -->
+    <aside id="menu">
+        <div id="navigation">
+            <ul class="nav" id="side-menu">
+                <li>
+                    <a href="{% url 'login:hola' %}" id="sidebar" class="right-sidebar-toggle">
+                        <span class="nav-label">Inicio</span>
+                        <i class="pe-7s-upload pe-7s-home"></i>
+                    </a>
+                </li>
+                <li class="dropdown">
+                    <a href="{% url 'login:logout' %}">
+                        <span class="nav-label">Salir</span>
+                        <i class="pe-7s-upload pe-rotate-90"></i>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </aside>
 
-<div id="wrapper">
-    <!-- Bloque del contenido que estará debajo del navbar-->
-    {% block content %}
-    {% endblock %}
-</div>
+    <div id="wrapper">
+        <!-- Bloque del contenido que estará debajo del navbar-->
+        {% block content %}
+        {% endblock %}
+    
+        <footer class="footer" >
+            Vive Tu Futuro 2017-2020
+            <span class="pull-right">
+                Todos los Derechos Reservados <i class="fa fa-copyright"></i>
+            </span>
+        </footer>
 
-    <footer class="footer" style="position: fixed;">
-        Vive Tu Futuro 2017-2020
-        <span class="pull-right">
-            Todos los Derechos Reservados <i class="fa fa-copyright"></i>
-        </span>
-    </footer>
+    </div>   
 
     <!-- Javascript que utilizan todas las vistas -->
     <script src="{% static "vendor/jquery/dist/jquery.min.js" %}"></script>
