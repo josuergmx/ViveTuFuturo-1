@@ -160,22 +160,25 @@
                                   {% csrf_token %}
 
                                 <div class="col-lg-10">
-                                    <!-- INFROMACION GEOGRAFICA -->
-                                    <hr>
-                                	<h3 class="titulo1">Información Geográfica</h3>
-                                	<br>
-                                    <div class="row">
+                                  <!-- INFROMACION GEOGRAFICA -->
+                                  <div class="row">
+                                      <hr>
+                                    	<h3 class="titulo1">Información Geográfica</h3>
+                                    	<br>
                                       {% for i in  direccion%}
-                                      <h3 class="titulo1">Direccion{{forloop.counter}}</h3>
+                                      <div class="col-md-6">
+                                        <h3 class="titulo1">Dirección {{forloop.counter}}</h3>
                                         {{i.as_p}}
+                                      </div>
                                       {% endfor %}
-
-                                    </div>
-                                    <!-- INFORMACION DE PROPUESTA-->
-                                    <hr>
+                                  </div>
+                                  
+                                  <!-- INFORMACION DE PROPUESTA-->
+                                  <br>
+                                  <hr>
                                 	<h3 class="titulo1">Información Contacto</h3>
                                 	<br>
-                                    <div class="row">
+                                    <div class="col-md-6">
                                         <div class="form-group col-lg-12">
                                             <div class="row">
                                               {% for i in  contacto%}
@@ -187,8 +190,8 @@
                                         </div>
                                     </div>
                                     <div class="text-right m-t-xs">
-		                                <button type="sumbit" class="btn btn-success ">Subir Cambios</button>
-		                            </div>
+		                                    <button type="sumbit" class="btn btn-success ">Subir Cambios</button>
+		                                </div>
                                 </div>
 	                            </form>
                             </div>
@@ -271,7 +274,8 @@
             $('a[data-toggle="tab"]').addClass('btn-default');
             $(this).removeClass('btn-default');
             $(this).addClass('btn-info');
-        })
+        });
+
 
         /* initialize the external events
          -----------------------------------------------------------------*/
@@ -290,6 +294,10 @@
                 revertDuration: 0  //  original position after the drag
             });
 
+<<<<<<< HEAD
       });
+=======
+        });
+>>>>>>> 3af57cb4ceeb40f3a587b211c95b81d7ec265ca8
   </script>
 {% endblock %}
