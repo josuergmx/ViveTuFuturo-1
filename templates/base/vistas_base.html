@@ -7,9 +7,9 @@
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-
     <!-- title -->
     <title>{% block title %}Menú | ViveTuFuturo{% endblock %}</title>
+    <link rel="shortcut icon" href="{% static "icons/vive.ico" %}">
 
     <!-- CSS que utlizan todas las vistas-->
     {% endblock %}
@@ -118,7 +118,7 @@
         <!-- Bloque del contenido que estará debajo del navbar-->
         {% block content %}
         {% endblock %}
-    
+
         <footer class="footer" >
             Vive Tu Futuro 2017-2020
             <span class="pull-right">
@@ -126,7 +126,7 @@
             </span>
         </footer>
 
-    </div>   
+    </div>
 
     <!-- Javascript que utilizan todas las vistas -->
     <script src="{% static "vendor/jquery/dist/jquery.min.js" %}"></script>
