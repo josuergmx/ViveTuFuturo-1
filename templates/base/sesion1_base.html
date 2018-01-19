@@ -22,18 +22,15 @@
     {% block css %}{% endblock %}
 
     <!-- Stilo de la plantilla -->
-    <link rel="stylesheet" href="{% static "styles/style.css" %}"/>
-    <link rel="stylesheet" href="{% static "styles/vive.css"%}"/>
+    <link rel="stylesheet" href="{% static "styles/vive_sesion1.css" %}"/>
+    
 </head>
 <body> <!-- hide-sidebar -->
     <!-- Simple splash screen-->
 
     {% block header %}
-        <div id="header">
-            <div class="color-line">
-            </div>
-            <div class="header-link hide-menu" style="margin: 0px;"><i class="fa fa-bars"></i></div>
-        </div>
+        <div class="color-line"></div>
+        
     {% endblock %}
 
     <!-- Bloque del contenido que estará debajo del navbar-->
