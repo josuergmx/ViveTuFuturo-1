@@ -174,10 +174,11 @@
                                   </div>
                                   
                                   <!-- INFORMACION DE PROPUESTA-->
-                                  <br>
-                                  <hr>
-                                	<h3 class="titulo1">Información Contacto</h3>
-                                	<br>
+                                  <div class="row">
+                                    <br>
+                                    <hr>
+                                  	<h3 class="titulo1">Información Contacto</h3>
+                                  	<br>
                                     <div class="col-md-6">
                                         <div class="form-group col-lg-12">
                                             <div class="row">
@@ -189,9 +190,12 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="text-right m-t-xs">
-		                                    <button type="sumbit" class="btn btn-success ">Subir Cambios</button>
-		                                </div>
+                                  </div>
+                                  <div class="row">
+                                    <div class="right m-t-xs">
+  	                                    <button type="sumbit" class="btn btn-success ">Subir Cambios</button>
+  	                                </div>
+                                  </div>
                                 </div>
 	                            </form>
                             </div>
@@ -221,7 +225,7 @@
                                       <span class="pe-7s-mail fa-1x text-muted icono"></span>  Correo: {{asesor.idAsesor.persona.user.email}}
                                       </h4><br>
                                       <h4>
-                                      <a class="btn btn-xs btn-primary" href="{% url 'mensajes:mensajes' %}"><i class="fa fa-pencil"></i> Mesaje</a>
+                                      <a class="btn btn-primary" href="{% url 'mensajes:mensajes' %}"><i class="fa fa-pencil"></i> Mesaje</a>
                                       </h4>
                                   </table>
                               </div>
@@ -240,7 +244,6 @@
                               <div class="form-group col-lg-10">
                                 <form method="POST" action="{% url 'cliente:recomendar'%}">
                                   {% csrf_token %}
-
                                   <div class="row">
                                     {{recomendacion.as_p}}
                                   </div>
