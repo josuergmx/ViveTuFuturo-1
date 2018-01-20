@@ -68,22 +68,29 @@
                 <div class="panel-footer">
                     <div class="input-group">
                         <input type="text" maxlength="240" class="form-control" placeholder="Escribe tu mensaje aqui">
-                        <textarea name="" id="" class="form-control" cols="25" rows="3"></textarea>
+                        <textarea name="" id="caja_texto" class="form-control" cols="25" rows="3"></textarea>
                         <span class="input-group-btn">
-                            <button class="btn btn-success">
+                            <button class="btn btn-success" id="btn_enviar">
                                 Enviar</button>
                         </span>
                     </div>
                 </div>
-
             </div>
-
-
         </div>
-
     </div>
-
-
 </div>
 
+{% endblock %}
+
+{% block scripts %}
+    <script>
+        $("#caja_texto").keypress(function(e) {
+           if(e.which == 13) {
+                // Acciones a realizar, por ej: enviar formulario.
+                $('#frm').submit();
+                $("#caja_texto").val("");
+           }
+        });
+
+    </script>
 {% endblock %}
