@@ -20,11 +20,37 @@
                     <div class="row">
                         <div class="col-md-9  animated-panel zoomIn" style="animation-delay: 0.2s;">
                           <div class="chat-discussion">
-                            {% for index,msj in mensajes.items %}
-                              {% for m in msj  %}
-                                  {{m.tipo}}
+                            {% if mensajes == 'No hay mensajes' %}
+                              {{mensajes}}
+                            {% else %}
+                            <div class="chat-discussion">
+                              {% for msj in mensajes %}
+                                  {% if msj.tipo == 2 %}
+                                      <div class="chat-message left">
+                                        <img class="message-avatar" src="images/a2.jpg" alt="">
+                                        <div class="message">
+                                          <a class="message-author" href="#"> Michael Smith </a>
+                                          <span class="message-date">  Fri Jan 25 2015 - 11:12:36 </span>
+                                          <span class="message-content">
+                                            There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration.
+                                          </span>
+                                        </div>
+                                      </div>
+                                  {% else %}
+                                    <div class="chat-message right">
+                                      <img class="message-avatar" src="images/a2.jpg" alt="">
+                                      <div class="message">
+                                        <a class="message-author" href="#"> Michael Smith </a>
+                                        <span class="message-date">  Fri Jan 25 2015 - 11:12:36 </span>
+                                        <span class="message-content">
+                                          There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration.
+                                        </span>
+                                      </div>
+                                    </div>
+                                  {% endif %}
                               {% endfor %}
-                            {% endfor %}
+                          </div>
+                          {% endif %}
                           </div>
                         </div>
                         <div class="col-md-3 animated-panel zoomIn" style="animation-delay: 0.2s;">
@@ -34,7 +60,7 @@
                                     <div class="chat-user">
                                         <img class="chat-avatar" src="images/a3.jpg" alt="">
                                         <div class="chat-user-name">
-                                            <a href="#">{{usuario.idAsesor.first_name}}{{usuario.idAsesor.last_name}}</a>
+                                            <a href="">{{usuario.idAsesor.first_name}}{{usuario.idAsesor.last_name}}</a>
                                         </div>
                                     </div>
                                   {% endfor %}
@@ -48,8 +74,7 @@
 
                 <div class="panel-footer">
                     <div class="input-group">
-                        <input type="text" maxlength="240" class="form-control" placeholder="Escribe tu mensaje aqui">
-                        <textarea name="" id="" class="form-control" cols="25" rows="3"></textarea>
+                        <textarea name="mensaje" id="" class="form-control" placeholder="Escribe tu mensaje aqui" cols="25" rows="3"></textarea>
                         <span class="input-group-btn">
                             <button class="btn btn-success">
                                 Enviar</button>
@@ -68,26 +93,3 @@
 </div>
 
 {% endblock %}
-
-<div class="chat-discussion">
-    <div class="chat-message left">
-        <img class="message-avatar" src="images/a2.jpg" alt="">
-        <div class="message">
-            <a class="message-author" href="#"> Michael Smith </a>
-            <span class="message-date">  Fri Jan 25 2015 - 11:12:36 </span>
-                <span class="message-content">
-                    There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration.
-                </span>
-        </div>
-    </div>
-    <div class="chat-message right">
-        <img class="message-avatar" src="images/a2.jpg" alt="">
-        <div class="message">
-            <a class="message-author" href="#"> Michael Smith </a>
-            <span class="message-date">  Fri Jan 25 2015 - 11:12:36 </span>
-              <span class="message-content">
-                  There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration.
-              </span>
-        </div>
-    </div>
-</div>
