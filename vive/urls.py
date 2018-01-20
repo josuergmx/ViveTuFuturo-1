@@ -16,6 +16,7 @@ urlpatterns = [
     url(r'^creditos/',include('creditos.urls',namespace='conekta')),
     url(r'^mensajes/',include('mensajes.urls',namespace='mensajes')),
     url(r'^productos/',include('productos.urls',namespace='producto')),
+    url(r'^reportes/',include('reportes.urls', namespace='generacion')),
 ]
 
 if settings.DEBUG:

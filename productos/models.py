@@ -1,6 +1,4 @@
-# -*- coding: utf-8 -*-
 from __future__ import unicode_literals
-
 from django.db import models
 from login.models import Persona
 
@@ -50,10 +48,10 @@ class Departamento(models.Model):
         return(self.nombre)
 
 class Servicio(models.Model):
-    idServicio = models.AutoField(primary_key = True)
-    idDepartamento = models.ForeignKey(Departamento, null = False)
-    descripcion = models.CharField(max_length=300)
-    nombre = models.CharField(max_length=300)
+    idServicio = models.AutoField(primary_key=True)
+    idDepartamento = models.ForeignKey(Departamento,db_column='unique_together')
+    nombrePlan = models.CharField(max_length=300)
+    descripcion = models.CharField(max_length=300, blank=True, null=True)
 
     def __str__(self):
-        return(self.nombre +" "+ self.descripcion)
+        return (self.nombrePlan)

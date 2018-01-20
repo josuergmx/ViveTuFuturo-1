@@ -26,7 +26,7 @@ class DepartamentoAdmin(admin.ModelAdmin):
     list_display=('idInstitucion','nombre','ubicacion','telefono','extension')
 
 class ServicioAdmin(admin.ModelAdmin):
-    list_display=('idDepartamento','nombre','descripcion')
+    list_display=('idDepartamento','nombrePlan','descripcion')
 
 admin.site.register(CatPais,PaisAdmin)
 admin.site.register(CatEstados, EstadoAdmin)

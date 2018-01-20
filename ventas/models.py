@@ -9,7 +9,7 @@ class PlanesConcretados(models.Model):
     idAsesor = models.ForeignKey(User)
     idCliente = models.ForeignKey(Persona)
     idServicio = models.ForeignKey(Servicio)
-    fechaContratacion = models.TimeField()
+    fechaContratacion = models.DateField()
     numeroPoliza = models.CharField(max_length=10)
     primaNetaAnual = models.FloatField()
     plazoAnos = models.IntegerField()
