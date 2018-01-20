@@ -157,10 +157,8 @@
             $(this).removeClass('btn-default');
             $(this).addClass('btn-info');
         });
-
         function msjRepetido(){
           var bandera = {{bandera}}
-
           if(bandera == 0){
             toastr.error('Error - Se produjo un error, revisa la caja de errores.');
           }
@@ -171,7 +169,6 @@
             toastr.warning('Notificacion - No se pudo mandar el correo, revisar direccion de correo.');
           }
         }
-
         msjRepetido();
       });
     </script>

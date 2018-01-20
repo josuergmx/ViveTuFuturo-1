@@ -19,7 +19,6 @@ class OrigenRecomendacion(models.Model):
     idOrigen = models.AutoField(primary_key=True)
     nombre = models.CharField(max_length=50)
     descripcion = models.CharField(max_length=200, blank=True, null=True)
-
     def __str__(self):
         return (self.nombre)
 
@@ -38,7 +37,7 @@ class AsesorCliente(models.Model):
     ingresos = models.FloatField(blank=True, null=True)
     nombre = models.CharField(max_length=20, blank=True, null=True)
     activo = models.NullBooleanField()
-
+    
 class RecomendadoCliente(models.Model):
     nombre = models.CharField(max_length=80)
     vivienda = models.CharField(max_length=80,blank=True, null=True)

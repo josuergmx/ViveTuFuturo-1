@@ -19,44 +19,25 @@
                 <div class="panel-body no-padding">
                     <div class="row">
                         <div class="col-md-9  animated-panel zoomIn" style="animation-delay: 0.2s;">
-                            <div class="chat-discussion">
-
-                                <div class="chat-message left">
-                                    <img class="message-avatar" src="images/a2.jpg" alt="">
-                                    <div class="message">
-                                        <a class="message-author" href="#"> Michael Smith </a>
-                                        <span class="message-date">  Fri Jan 25 2015 - 11:12:36 </span>
-                                            <span class="message-content">
-											There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration.
-                                            </span>
-                                    </div>
-                                </div>
-                                <div class="chat-message right">
-                                    <img class="message-avatar" src="images/a2.jpg" alt="">
-                                    <div class="message">
-                                        <a class="message-author" href="#"> Michael Smith </a>
-                                        <span class="message-date">  Fri Jan 25 2015 - 11:12:36 </span>
-                                            <span class="message-content">
-											There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration.
-                                            </span>
-                                    </div>
-                                </div>
-                            </div>
+                          <div class="chat-discussion">
+                            {% for index,msj in mensajes.items %}
+                              {% for m in msj  %}
+                                  {{m.tipo}}
+                              {% endfor %}
+                            {% endfor %}
+                          </div>
                         </div>
                         <div class="col-md-3 animated-panel zoomIn" style="animation-delay: 0.2s;">
                             <div class="chat-users">
-
                                 <div class="users-list">
-
+                                  {% for usuario in asesorCliente %}
                                     <div class="chat-user">
-                                        <span class="pull-right label label-success">Online</span>
                                         <img class="chat-avatar" src="images/a3.jpg" alt="">
                                         <div class="chat-user-name">
-                                            <a href="#">Janet Smith</a>
+                                            <a href="#">{{usuario.idAsesor.first_name}}{{usuario.idAsesor.last_name}}</a>
                                         </div>
                                     </div>
-
-
+                                  {% endfor %}
                                 </div>
 
                             </div>
@@ -86,3 +67,26 @@
 </div>
 
 {% endblock %}
+
+<div class="chat-discussion">
+    <div class="chat-message left">
+        <img class="message-avatar" src="images/a2.jpg" alt="">
+        <div class="message">
+            <a class="message-author" href="#"> Michael Smith </a>
+            <span class="message-date">  Fri Jan 25 2015 - 11:12:36 </span>
+                <span class="message-content">
+                    There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration.
+                </span>
+        </div>
+    </div>
+    <div class="chat-message right">
+        <img class="message-avatar" src="images/a2.jpg" alt="">
+        <div class="message">
+            <a class="message-author" href="#"> Michael Smith </a>
+            <span class="message-date">  Fri Jan 25 2015 - 11:12:36 </span>
+              <span class="message-content">
+                  There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration.
+              </span>
+        </div>
+    </div>
+</div>

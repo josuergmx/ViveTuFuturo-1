@@ -111,7 +111,7 @@ def agregarCliente(request):
                 except BadHeaderError:
                     bandera = 2 #Warning
             else:
-                bandera = 0
+                bandera = 0 #Es un error
                 print(usuario.errors)
                 print(persona.is_valid())
                 print(cliente.errors)
@@ -246,7 +246,7 @@ def hola(request):
                 f.ContactoForm(request.POST,instance=i).save()
             for j in domicilio:
                 f.DireccionForm(request.POST,instance=j).save()
-                
+
         for i in contacto2:
             contacto1.append(f.ContactoForm(instance=i))
         for j in domicilio:

@@ -1,0 +1,88 @@
+{% extends 'base/vistas_base.html' %}
+{% load static  %}
+{%block title%}Mensajes{%endblock%}
+
+
+{% block content %}
+<div class="content animate-panel">
+
+    <div class="row">
+      <div class="col-md-2"></div>
+        <div class="col-md-8 animated-panel zoomIn" style="animation-delay: 0.1s;">
+            <div class="hpanel ">
+                <div class="panel-heading hbuilt">
+                    <div class="panel-tools">
+                        <a class="closebox"><i class="fa fa-times"></i></a>
+                    </div>
+                    Mensajes
+                </div>
+                <div class="panel-body no-padding">
+                    <div class="row">
+                        <div class="col-md-9  animated-panel zoomIn" style="animation-delay: 0.2s;">
+                            <div class="chat-discussion">
+
+                                <div class="chat-message left">
+                                    <img class="message-avatar" src="images/a2.jpg" alt="">
+                                    <div class="message">
+                                        <a class="message-author" href="#"> Michael Smith </a>
+                                        <span class="message-date">  Fri Jan 25 2015 - 11:12:36 </span>
+                                            <span class="message-content">
+											There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration.
+                                            </span>
+                                    </div>
+                                </div>
+                                <div class="chat-message right">
+                                    <img class="message-avatar" src="images/a2.jpg" alt="">
+                                    <div class="message">
+                                        <a class="message-author" href="#"> Michael Smith </a>
+                                        <span class="message-date">  Fri Jan 25 2015 - 11:12:36 </span>
+                                            <span class="message-content">
+											There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration.
+                                            </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3 animated-panel zoomIn" style="animation-delay: 0.2s;">
+                            <div class="chat-users">
+
+                                <div class="users-list">
+
+                                    <div class="chat-user">
+                                        <span class="pull-right label label-success">Online</span>
+                                        <img class="chat-avatar" src="images/a3.jpg" alt="">
+                                        <div class="chat-user-name">
+                                            <a href="#">Janet Smith</a>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="panel-footer">
+                    <div class="input-group">
+                        <input type="text" maxlength="240" class="form-control" placeholder="Escribe tu mensaje aqui">
+                        <span class="input-group-btn">
+                            <button class="btn btn-success">
+                                Enviar</button>
+                        </span>
+                    </div>
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+
+</div>
+
+{% endblock %}

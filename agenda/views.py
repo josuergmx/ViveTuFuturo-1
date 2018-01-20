@@ -83,18 +83,30 @@ def editar(request,idCita):
     if request.user.persona.idRol.idRole == 2 or request.user.persona.idRol.idRole == 3:
         editar = mCita.Cita.objects.get(idCita=idCita)
         if request.method == "POST":
-            cita = f.agendaForm(request.POST,instance=editar)
+            editar = mCita.Cita.objects.filter(idCita=idCita)
+            tipoCita = request.POST.get("idTipoCita",None)
+            estadoCita = request.POST.get("idEstatus",None)
             mes = request.POST.get("fecha_month",None)
             dia = request.POST.get("fecha_day",None)
             año = request.POST.get("fecha_year",None)
             hora = request.POST.get("hora",None)
             fecha = año+"-"+mes+"-"+dia+" "+hora
             fecha = datetime.strptime(fecha,"%Y-%m-%d %H:%M")
-            mCita.Cita.objects.filter(idCita=cita.idCita).update(
+            direccion = request.POST.get("direccionCita",None)
+            descripcion = request.POST.get("descripcion",None)
+            estado = mCita.CatEstatuscita.objects.get(idEstatus=estadoCita)
+            tipoCita = mCita.CatTipocita.objects.get(idTipoCita=tipoCita)
+            editar.update(
+                idTipoCita = tipoCita,
+                idEstatus = estado,
+                direccionCita  = direccion,
+                descripcion = descripcion,
                 fecha = fecha,
             )
+            editar = mCita.Cita.objects.get(idCita=idCita)
             mCliente.AsesorCliente.objects.filter(idAsesorCliente=editar.idAsesorCliente.idAsesorCliente).update(
                 fecha = fecha,
+                estatusCita = estadoCita,
             )
             return redirect('agenda:contactos')
         else:
@@ -139,7 +151,6 @@ def hoy(request):
                     hoy1.append(mCita.Cita.objects.get(idAsesorCliente=i,fecha=i.fecha))
             except:
                 pass
-
         context = {
             "hoy1":hoy1,
         }
