@@ -8,6 +8,6 @@ from .views import(
 app_name="reportes"
 urlpatterns = [
     url(r'^$', GeneracionDepartamentos.as_view(), name="reportes"),
-    url(r'^reportes/servicios/$', GeneracionServicios.as_view(), name="servicios"),
-    url(r'^reportes/generacion/$', ReporteView.as_view(), name="generacion"),
+    url(r'^servicios/$', GeneracionServicios.as_view(), name="servicios"),
+    url(r'^generacion/$', ReporteView.as_view(), name="generacion"),
 ]
