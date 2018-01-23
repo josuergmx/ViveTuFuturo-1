@@ -28,8 +28,8 @@ class AsesorCliente(models.Model):
     idAsesor = models.ForeignKey(User)
     clienteProspecto = models.BooleanField()
     Origen = models.ForeignKey(OrigenRecomendacion,blank=True, null=True)
-    Estatus = models.ForeignKey(Estatus,blank=True, null=True) #Para saber en que estado me quede, si en sesiòn 1, sesiòn 2, etc...
-    estatusCita = models.CharField(max_length=2,blank=True, null=True) #Para saber en que estado se quedo la ultima cita, si fue cancelada, si esta en espera de confirmaciòn o si ya es un hecho.
+    Estatus = models.ForeignKey(Estatus,blank=True, null=True) #Para saber en que estado me quede, si en sesion 1, sesion 2, etc...
+    estatusCita = models.CharField(max_length=2,blank=True, null=True) #Para saber en que estado se quedo la ultima cita, si fue cancelada, si esta en espera de confirmacion o si ya es un hecho.
     fechaActualizacion = models.DateField()
     fecha = models.DateTimeField(blank=True, null=True)
     ocupacion = models.CharField(max_length=150, blank=True, null=True)
@@ -37,7 +37,7 @@ class AsesorCliente(models.Model):
     ingresos = models.FloatField(blank=True, null=True)
     nombre = models.CharField(max_length=20, blank=True, null=True)
     activo = models.NullBooleanField()
-    
+
 class RecomendadoCliente(models.Model):
     nombre = models.CharField(max_length=80)
     vivienda = models.CharField(max_length=80,blank=True, null=True)
