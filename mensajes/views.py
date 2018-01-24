@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render,render_to_response
 from . import models as m
 from cliente import models as mc
 # Create your views here.
@@ -16,7 +16,9 @@ def mensajes(request):
         return render(request,'mensajes/mensajes_asesor.html')
 
     elif request.user.persona.idRol.idRole == 1: #Tipo 2 el manda el cliente manda el mensaje
-
+        if request.is_ajax() and request.method == 'POST':
+            print('hola')
+            pass
         asesorCliente = mc.AsesorCliente.objects.filter(idCliente=request.user.persona)
         try:
             mensajes = m.Mensajes.objects.filter(idAsesorCliente=asesorCliente[0]).order_by('fecha')
@@ -34,5 +36,6 @@ def mensajes(request):
         return render(request,'error/404.html')
 
 
-def mandar_mensaje(request):
+def mandar_mensaje(request,idAsesorCliente):
+
     pass

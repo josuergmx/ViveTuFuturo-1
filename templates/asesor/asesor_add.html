@@ -9,13 +9,14 @@
         <div class="col-lg-12">
             <div class="hpanel">
                 <div class="panel-heading mayusculas">
-                    Agregar Cliente
+                    Agregar Asesor
                 </div>
                 <div class="panel-body">
                     <div class="text-center m-b-md" id="wizardControl">
                         <a class="btn btn-primary" href="#step1" data-toggle="tab">Paso 1: Información Personal</a>
-                        <a class="btn btn-default" href="#step2" data-toggle="tab">Paso 2: Información Geográfica</a>
-                        <a class="btn btn-default" href="#step3" data-toggle="tab">Paso 3: Contacto</a>
+                        <a class="btn btn-default" href="#step2" data-toggle="tab">Paso 2: Lugar de trabajo</a>
+                        <a class="btn btn-default" href="#step3" data-toggle="tab">Paso 3: Información Geográfica</a>
+                        <a class="btn btn-default" href="#step4" data-toggle="tab">Paso 4: Contacto</a>
                     </div>
                       <form method="POST" class="post-form">
                         {% csrf_token %}
@@ -32,7 +33,7 @@
                                 <div class="col-lg-9">
                                   <div class="alert alert-info">
                                     La contraseña por defecto sera la primera letra del nombre y de los apellidos seguido por c1234.
-                                  </div>  
+                                  </div>
                                     <div class="row">
                                         <div class="form-group col-lg-8">
                                             {{usuario.as_p}}
@@ -46,9 +47,10 @@
                                 <a class="btn btn-default next" href="#step2" data-toggle="tab">Siguiente</a>
                             </div>
                         </div>
-
                         <div id="step2" class="p-m tab-pane">
 
+                        </div>
+                        <div id="step3" class="p-m tab-pane">
                             <div class="row">
                                 <div class="col-lg-3 text-center">
                                     <i class="pe-7s-map-marker fa-5x text-muted"></i>
@@ -70,7 +72,7 @@
                                 <a class="btn btn-default next" href="#step3" data-toggle="tab">Siguiente</a>
                             </div>
                         </div>
-                          <div id="step3" class="tab-pane">
+                          <div id="step4" class="tab-pane">
                               <div class="row">
                                 <div class="col-lg-3 text-center">
                                     <i class="pe-7s-call fa-5x text-muted"></i>
@@ -112,7 +114,7 @@
                             </div>
                         </div>
                       </div>
-                    </for m>
+                    </form>
                     <div class="m-t-md">
                       <p>
                           <strong>Vive Tu Futuro 2017-2020 </strong>  Todos los Derechos Reservados <strong><i class="fa fa-copyright"></i> </strong>
@@ -126,7 +128,6 @@
 {% endblock %}
 
 {% block javascripts %}
-    <script src="{% static "vendor/sweetalert/lib/sweet-alert.min.js" %}"></script>
     <script src="{% static "vendor/toastr/build/toastr.min.js" %}"></script>
 {% endblock %}
 
@@ -154,7 +155,6 @@
             toastr.warning('Notificacion - No se pudo mandar el correo, revisar direccion de correo.');
           }
         }
-
         msjRepetido();
       });
     </script>

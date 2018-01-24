@@ -19,38 +19,8 @@
                 <div class="panel-body no-padding">
                     <div class="row">
                         <div class="col-md-9  animated-panel zoomIn" style="animation-delay: 0.2s;">
-                          <div class="chat-discussion">
-                            {% if mensajes == 'No hay mensajes' %}
-                              {{mensajes}}
-                            {% else %}
-                            <div class="chat-discussion">
-                              {% for msj in mensajes %}
-                                  {% if msj.tipo == 2 %}
-                                      <div class="chat-message left">
-                                        <img class="message-avatar" src="images/a2.jpg" alt="">
-                                        <div class="message">
-                                          <a class="message-author" href="#"> Michael Smith </a>
-                                          <span class="message-date">  Fri Jan 25 2015 - 11:12:36 </span>
-                                          <span class="message-content">
-                                            There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration.
-                                          </span>
-                                        </div>
-                                      </div>
-                                  {% else %}
-                                    <div class="chat-message right">
-                                      <img class="message-avatar" src="images/a2.jpg" alt="">
-                                      <div class="message">
-                                        <a class="message-author" href="#"> Michael Smith </a>
-                                        <span class="message-date">  Fri Jan 25 2015 - 11:12:36 </span>
-                                        <span class="message-content">
-                                          There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration.
-                                        </span>
-                                      </div>
-                                    </div>
-                                  {% endif %}
-                              {% endfor %}
-                          </div>
-                          {% endif %}
+                          <div class="chat-discussion" id="chat">
+                            {% include "mensajes/chat.html" %}
                           </div>
                         </div>
                         <div class="col-md-3 animated-panel zoomIn" style="animation-delay: 0.2s;">
@@ -58,9 +28,9 @@
                                 <div class="users-list">
                                   {% for usuario in asesorCliente %}
                                     <div class="chat-user">
-                                        <img class="chat-avatar" src="images/a3.jpg" alt="">
                                         <div class="chat-user-name">
-                                            <a href="">{{usuario.idAsesor.first_name}}{{usuario.idAsesor.last_name}}</a>
+                                            <button onclick="mostrar('{{forloop.counter0}}')" class="btn w-xs btn-link">{{usuario.idAsesor.first_name}}{{usuario.idAsesor.last_name}}</button>
+                                            <div hidden value="{{usuario.idAsesorCliente}}" id="{{forloop.counter0}}"></div>
                                         </div>
                                     </div>
                                   {% endfor %}
@@ -74,12 +44,7 @@
 
                 <div class="panel-footer">
                     <div class="input-group">
-<<<<<<< HEAD
-                        <textarea name="mensaje" id="" class="form-control" placeholder="Escribe tu mensaje aqui" cols="25" rows="3"></textarea>
-=======
-                        <input type="text" maxlength="240" class="form-control" placeholder="Escribe tu mensaje aqui">
-                        <textarea name="" id="caja_texto" class="form-control" cols="25" rows="3"></textarea>
->>>>>>> deb482f1228c4932c7d0d5c1e2e1e771241b2c88
+                        <textarea name="mensaje" placeholder="Escribe tu mensaje" id="caja_texto" class="form-control" data-href="643" cols="25" rows="3"></textarea>
                         <span class="input-group-btn">
                             <button class="btn btn-success" id="btn_enviar">
                                 Enviar</button>
@@ -102,6 +67,28 @@
                 $("#caja_texto").val("");
            }
         });
+    </script>
+    <script>
+      function mostrar(id) {
+        ids = '#'+id;
+        console.log(ids)
+        var a = $('#0').val();
+        console.log(a)
+        alert(a);
+      }
 
+    </script>
+    <script>
+      $("#btn_enviar").on("click",function(){
+        var csrf = {csrfmiddlewaretoken: '{{ csrf_token }}'}
+        $.ajax({
+          type: "POST",
+          data: csrf,
+          url: $(this).atrr('data-href'),
+          success: function(mensajes_nuevos){
+            $("#chat").load(mensajes_nuevos);
+          },
+        });
+      });
     </script>
 {% endblock %}

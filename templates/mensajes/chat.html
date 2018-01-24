@@ -1,0 +1,29 @@
+{% if mensajes == 'No hay mensajes' %}
+  {{mensajes}}
+{% else %}
+  {% for msj in mensajes %}
+      {% if msj.tipo == 2 %}
+          <div class="chat-message left">
+            <img class="message-avatar" src="images/a2.jpg" alt="">
+            <div class="message">
+              <a class="message-author" href="#"> Michael Smith </a>
+              <span class="message-date">  Fri Jan 25 2015 - 11:12:36 </span>
+              <span class="message-content">
+                There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration.
+              </span>
+            </div>
+          </div>
+      {% else %}
+        <div class="chat-message right">
+          <img class="message-avatar" src="images/a2.jpg" alt="">
+          <div class="message">
+            <a class="message-author" href="#"> Michael Smith </a>
+            <span class="message-date">  Fri Jan 25 2015 - 11:12:36 </span>
+            <span class="message-content">
+              There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration.
+            </span>
+          </div>
+        </div>
+      {% endif %}
+  {% endfor %}
+  {% endif %}

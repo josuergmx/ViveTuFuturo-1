@@ -172,7 +172,7 @@
                                       </div>
                                       {% endfor %}
                                   </div>
-                                  
+
                                   <!-- INFORMACION DE PROPUESTA-->
                                   <div class="row">
                                     <br>
@@ -183,7 +183,7 @@
                                         <div class="form-group col-lg-12">
                                             <div class="row">
                                               {% for i in  contacto%}
-                                              <h3 class="titulo1">Contacto1{{forloop.counter}}</h3>
+                                              <h3 class="titulo1">Contacto{{forloop.counter}}</h3>
                                                 {{i.as_p}}
                                                 {{i.as_p}}
                                               {% endfor %}
@@ -225,7 +225,7 @@
                                       <span class="pe-7s-mail fa-1x text-muted icono"></span>  Correo: {{asesor.idAsesor.persona.user.email}}
                                       </h4><br>
                                       <h4>
-                                      <a class="btn btn-primary" href="{% url 'mensajes:mensajes' %}"><i class="fa fa-pencil"></i> Mesaje</a>
+                                      <a class="btn btn-primary" href="{% url 'mensajes:mensajes' %}"><i class="fa fa-pencil"></i> Mensaje</a>
                                       </h4>
                                   </table>
                               </div>

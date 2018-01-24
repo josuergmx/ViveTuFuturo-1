@@ -229,6 +229,7 @@ def hola(request):
         bandera = 0
         asesorcliente = m.AsesorCliente.objects.get(idCliente=request.user.persona)
         contacto2 = mLogin.Contacto.objects.filter(idpersona=asesorcliente.idAsesor.persona)
+        print(contacto2)
         domicilio = mLogin.Direccion.objects.filter(idpersona=request.user.persona)
         dia = datetime.today().strftime("%Y-%m-%d")
         try:

@@ -8,4 +8,9 @@ urlpatterns = [
         view=views.mensajes,
         name='mensajes'
     ),
+    url(
+        regex=r'^mensaje/(?P<idAsesorCliente>\d+)$',
+        view=views.mandar_mensaje,
+        name='send'
+    ),
 ]
