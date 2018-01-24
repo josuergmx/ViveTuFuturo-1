@@ -1,85 +1,98 @@
-
-
- {%extends 'base/vistas_base.html' %}
- {% load static %}
- {% block title %} Agregar Producto {% endblock %}
- {% block content %}
-
-
- <!-- Main Wrapper -->
-<div id="wrapper">
-  <div class="row">
-    <div class="col-lg-6">
-        <div class="hpanel">
-            <div class="panel-heading">
-                <div class="panel-tools">
-                    <a class="showhide"><i class="fa fa-chevron-up"></i></a>
-                    <a class="closebox"><i class="fa fa-times"></i></a>
+{% extends 'base/vistas_base.html' %}
+{% load static  %}
+{% block title %}Reporte{% endblock %}
+{% block css %}
+  <link rel="stylesheet" href="{% static "vendor/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css" %}">
+{% endblock %}
+{% block content %}
+  <div class="content animate-panel">
+      <div class="row">
+          <div class="col-lg-12">
+              <div class="hpanel hgreen">
+                <div class="panel-heading mayusculas">
+                    Reporte de Ventas para {{asesor}}
                 </div>
-                Line type chart
-            </div>
-            <div class="panel-body">
-                <div>
-                    <canvas id="lineOptions" height="140"></canvas>
+                <div class="panel-body">
+
+                    <div class="col-md-8">
+                        <canvas id="sharpLineOptions" height="140"></canvas>
+                    </div>
+
                 </div>
-            </div>
-        </div>
-    </div>
+              </div>
+          </div>
+      </div>
   </div>
-</div>
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{% static "vendor/datatables/media/js/jquery.dataTables.min.js" %}"></script>
+    <script src="{% static "vendor/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js" %}"></script>
+
+    <script>
+
+    $(function () {
+        /**
+         * Options for Sharp Line chart
+         */
+
+        nivel = "{{ nivel }}"
+        graficas = "{{ graficas | safe }}"
+        console.log("nivel: " + nivel)
+        console.log("graficas: " + graficas)
+        if(nivel == "Institucion Todos"){
+          {% for inst in graficas %}
+            {% for x in inst%}
+              console.log(inst[x])
+            {% endfor %}
+                //inst.push(inst);
+            /*{% for keyDepto,valDepto in value.items %}
+              {% for keyDepto,valPlan in valDepto.items%}
+                console.log(valDepto[valPlan])
+              {% endfor %}
+            {% endfor %}*/
+            //labels: inst
+          {% endfor %}
+        }
+
+        /*Se procesa el diccionario de datos para graficarlo*/
 
 
- <footer class="footer">
- <span class="pull-right">
-     Todos los Derechos Reservados <i class="fa fa-copyright"></i>
- </span>
- Vive Tu Futuro 2017-2020
- </footer>
+        var sharpLineData = {
+            labels: ["January", "February", "March", "April", "May", "June", "July"],
+            datasets: [
+                {
+                    label: "Example dataset",
+                    fillColor: "rgba(98,203,49,0.5)",
+                    strokeColor: "rgba(98,203,49,0.7)",
+                    pointColor: "rgba(98,203,49,1)",
+                    pointStrokeColor: "#fff",
+                    pointHighlightFill: "#fff",
+                    pointHighlightStroke: "rgba(98,203,49,1)",
+                    data: [33, 48, 40, 19, 54, 27, 54]
+                }
+            ]
+        };
 
- <!-- App scripts -->
- <script >
+        var sharpLineOptions = {
+            scaleShowGridLines : true,
+            scaleGridLineColor : "rgba(0,0,0,.05)",
+            scaleGridLineWidth : 1,
+            bezierCurve : false,
+            pointDot : true,
+            pointDotRadius : 4,
+            pointDotStrokeWidth : 1,
+            pointHitDetectionRadius : 20,
+            datasetStroke : true,
+            datasetStrokeWidth : 1,
+            datasetFill : true,
+            responsive: true
+        };
 
- <script>
-   $(document).ready(function(event){
-     {% block jquery %}
-     /**
-      * Options for Sharp Line chart
-      */
-      console.log("AQUI")
-     var sharpLineData = {
-         labels: ["January", "February", "March", "April", "May", "June", "July"],
-         datasets: [
-             {
-                 label: "Example dataset",
-                 fillColor: "rgba(98,203,49,0.5)",
-                 strokeColor: "rgba(98,203,49,0.7)",
-                 pointColor: "rgba(98,203,49,1)",
-                 pointStrokeColor: "#fff",
-                 pointHighlightFill: "#fff",
-                 pointHighlightStroke: "rgba(98,203,49,1)",
-                 data: [33, 48, 40, 19, 54, 27, 54]
-             }
-         ]
-     };
+        var ctx = document.getElementById("sharpLineOptions").getContext("2d");
+        var myNewChart = new Chart(ctx).Line(sharpLineData, sharpLineOptions);
 
-     var sharpLineOptions = {
-         scaleShowGridLines : true,
-         scaleGridLineColor : "rgba(0,0,0,.05)",
-         scaleGridLineWidth : 1,
-         bezierCurve : false,
-         pointDot : true,
-         pointDotRadius : 4,
-         pointDotStrokeWidth : 1,
-         pointHitDetectionRadius : 20,
-         datasetStroke : true,
-         datasetStrokeWidth : 1,
-         datasetFill : true,
-         responsive: true
-     };
+    });
 
-     var ctx = document.getElementById("sharpLineOptions").getContext("2d");
-     var myNewChart = new Chart(ctx).Line(sharpLineData, sharpLineOptions);
-   });
- </script>
-
- {% endblock %}
+  </script>
+{% endblock %}

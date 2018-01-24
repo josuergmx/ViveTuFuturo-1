@@ -154,10 +154,13 @@ class ReporteView(LoginRequiredMixin, View):
             print("NIVEL: {}\n\n".format(nivel))
             print("\n\n______________________")
 
+            print("Usuario: {}".format(request.user))
+
             context = {
                 "datos":datos,
                 "graficas":graficas,
-                "nivel": nivel
+                "nivel": nivel,
+                "asesor": request.user,
             }
         return render(request,template, context)
 
