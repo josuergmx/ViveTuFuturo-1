@@ -38,6 +38,8 @@
 
  <!-- App scripts -->
  <script >
+
+ <script>
    $(document).ready(function(event){
      {% block jquery %}
      /**
@@ -77,8 +79,7 @@
 
      var ctx = document.getElementById("sharpLineOptions").getContext("2d");
      var myNewChart = new Chart(ctx).Line(sharpLineData, sharpLineOptions);
-     {% endblock jquery%}
-   })
+   });
  </script>
 
  {% endblock %}
