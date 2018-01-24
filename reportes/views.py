@@ -61,8 +61,8 @@ class ReporteView(LoginRequiredMixin, View):
         #form = ReporteForm(request.POST)
         #print("FORM: {}".format(form))
         #se valida que el id de la Institucionfinanciera se encuentre en sessions
-        template = get_template('reportes/reporte.html')
-        #template = 'reportes/reporte.html'
+        #template = get_template('reportes/reporte.html')
+        template = 'reportes/reporte.html'
         pInicial = self.request.POST.get('periodoInicial')
         pFinal = self.request.POST.get('periodoFinal')
         print("Periodos: {} - {}".format(pInicial, pFinal))
@@ -159,9 +159,9 @@ class ReporteView(LoginRequiredMixin, View):
                 "graficas":graficas,
                 "nivel": nivel
             }
-        #return render(request,template, context)
+        return render(request,template, context)
 
-        #la redenderizacion se hace en un html
+        '''#la redenderizacion se hace en un html
         html = template.render(context)
         #La renderizacion de hace a un render_to_pdf
         pdf = render_to_pdf('reportes/reporte.html', context)
@@ -176,7 +176,7 @@ class ReporteView(LoginRequiredMixin, View):
                 content = "attachment; filename='%s'" %(filename)
             response['Content-Disposition'] = content
             return response
-        return HttpResponse("nor found")
+        return HttpResponse("nor found")'''
 
 
 class GeneracionServicios(View):
