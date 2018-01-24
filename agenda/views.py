@@ -15,9 +15,9 @@ def agenda(request,idAsesorCliente):
             estadoCita = request.POST.get("idEstatus",None)
             mes = request.POST.get("fecha_month",None)
             dia = request.POST.get("fecha_day",None)
-            año = request.POST.get("fecha_year",None)
+            ano = request.POST.get("fecha_year",None)
             hora = request.POST.get("hora",None)
-            fecha = año+"-"+mes+"-"+dia+" "+hora
+            fecha = ano+"-"+mes+"-"+dia+" "+hora
             fecha = datetime.strptime(fecha,"%Y-%m-%d %H:%M")
             direccion = request.POST.get("direccionCita",None)
             descripcion = request.POST.get("descripcion",None)
@@ -88,9 +88,9 @@ def editar(request,idCita):
             estadoCita = request.POST.get("idEstatus",None)
             mes = request.POST.get("fecha_month",None)
             dia = request.POST.get("fecha_day",None)
-            año = request.POST.get("fecha_year",None)
+            ano = request.POST.get("fecha_year",None)
             hora = request.POST.get("hora",None)
-            fecha = año+"-"+mes+"-"+dia+" "+hora
+            fecha = ano+"-"+mes+"-"+dia+" "+hora
             fecha = datetime.strptime(fecha,"%Y-%m-%d %H:%M")
             direccion = request.POST.get("direccionCita",None)
             descripcion = request.POST.get("descripcion",None)
