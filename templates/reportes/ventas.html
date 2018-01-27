@@ -14,7 +14,7 @@
                     Ventas
                 </div>
                 <div class="panel-body">
-                  
+
                   <div class='text-center'>
                       <h1>{{title}}</h1>
                       <div class="container">
@@ -37,7 +37,7 @@
                       <div class="form-group">
                         <h3>Selecciona las opciones, para generar el reporte</h3>
                         {% csrf_token %}
-                        <div class="input-daterange input-group" id="datepicker">
+                        <div class="input-daterange input-group" id="datepicker" name="datepicker">
                             <span class="input-group-addon"> De </span>
                             <input type="text" class="input-sm form-control" name="start" />
                             <span class="input-group-addon"> a </span>

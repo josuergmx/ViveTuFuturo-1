@@ -35,7 +35,7 @@ class ReporteView(LoginRequiredMixin, View):
                 #Se llama al metodo que devuelve el conjunto de planes para cada departamento
                 planes = self.desdePlan(queryset.filter(idServicio__idDepartamento__nombre = elem.idServicio.idDepartamento.nombre))
                 #Se contruye el diccionario con el nombre del departamento y sus PLANES
-                #print("PLANES: {}".format(planes))
+                print("PLANES: {} - {}".format(elem.idServicio.idDepartamento.nombre, type(elem.idServicio.idDepartamento.nombre)))
                 departamentos[elem.idServicio.idDepartamento.nombre] = planes
                 planes = {}
 
@@ -44,15 +44,10 @@ class ReporteView(LoginRequiredMixin, View):
     def desdePlan(self, queryset):
         planes = {}
         plan = []
-        datos = []
         for p in queryset:
-            datos.append(p.numeroPoliza)
-            datos.append(p.formaPago)
-            datos.append(p.plazoAnos)
-            datos.append(p.valorPlan)
-            plan.append(datos)
-            datos = []
+            plan.append([p.numeroPoliza, p.formaPago,p.plazoAnos,p.valorPlan])
 
+        print("Nombre Plan: {} - {}".format(p.idServicio.nombrePlan, type(p.idServicio.nombrePlan)))
         planes[p.idServicio.nombrePlan] = plan
 
         return planes
@@ -65,10 +60,15 @@ class ReporteView(LoginRequiredMixin, View):
         #se valida que el id de la Institucionfinanciera se encuentre en sessions
         #template = get_template('reportes/reporte.html')
         template = 'reportes/reporte.html'
-        pInicial = self.request.POST.get('periodoInicial')
-        pFinal = self.request.POST.get('periodoFinal')
+        #pInicial = self.request.POST.get('periodoInicial')
+        #pFinal = self.request.POST.get('periodoFinal')
+        pInicial = self.request.POST.get('start')
+        pFinal = self.request.POST.get('end')
+        #print("\n\n*******Fechas: {}".format(Fechas))
         print("Periodos: {} - {}".format(pInicial, pFinal))
         datos = {}
+
+
 
         if self.request.session.has_key('institucion'):
             inst = self.request.session['institucion']
@@ -124,17 +124,16 @@ class ReporteView(LoginRequiredMixin, View):
         for inst in datos.keys():
             print(inst)
             deptos = datos[inst]
-            print("deptos: {}".format(deptos))
+            #print("DEPTOS: {}\n".format(deptos))
             for d in deptos.keys():
-                print("\t " + d)
+                print("\t {}\n".format(d))
                 planes = deptos[d]
                 for p in planes.keys():
-                    print("\t\t " + p)
+                    print("\t\t {}\n".format(p))
                     datos = planes[p]
-                    for d in datos:
-                        for dat in d:
-                            print("\t\t\tdat: {}".format(dat))
-                        print("\n")
+                    #print("\t\t {}".format(p))
+
+
         print("\n\n______________________")
 
         context = {
