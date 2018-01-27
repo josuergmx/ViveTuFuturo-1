@@ -37,12 +37,21 @@
                       <div class="form-group">
                         <h3>Selecciona las opciones, para generar el reporte</h3>
                         {% csrf_token %}
-                        <div class="input-daterange input-group" id="datepicker" name="datepicker">
+                        <label class="control-label">Selecciona Fecha</label>
+                        <div class="input-daterange input-group" id="datepicker">
                             <span class="input-group-addon"> De </span>
                             <input type="text" class="input-sm form-control" name="start" />
                             <span class="input-group-addon"> a </span>
                             <input type="text" class="input-sm form-control" name="end" />
                         </div>
+
+                        <label class="control-label">Selecciona ...</label>
+                        <select class="form-control m-b" name="account">
+                            <option>option 1</option>
+                            <option>option 2</option>
+                            <option>option 3</option>
+                            <option>option 4</option>
+                        </select>
                         {{form.as_p}}
                         <button type="submit" class="btn btn-success">Ir</button>
                       </div>
@@ -60,6 +69,7 @@
     <script src="{% static "vendor/datatables/media/js/jquery.dataTables.min.js" %}"></script>
     <script src="{% static "vendor/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js" %}"></script>
     <script src="{% static "vendor/bootstrap-datepicker-master/dist/js/bootstrap-datepicker.min.js" %}" charset="UTF-8"></script>
+    <script src="{% static "vendor/bootstrap-datepicker-master/dist/locales/bootstrap-datepicker.es.min.js" %}" charset="UTF-8"></script>
 
     <script>
 
