@@ -1,4 +1,5 @@
 import datetime
+import json
 from django.core import serializers
 from django.http import HttpResponse, JsonResponse
 from django.views.generic import View
@@ -14,48 +15,51 @@ from .make_report_pdf import render_to_pdf
 
 class ReporteView(LoginRequiredMixin, View):
 
-    def desdeInstitucion(self,queryset, datos, graficas):
+    def desdeInstitucion(self,queryset, datos):
         departamentos = {}
-        conteoDepto = {}
         for institucion in queryset:
             if not datos.get(institucion.idServicio.idDepartamento.idInstitucion.nombre) :
                 #print("institucion:{}".format(institucion.idServicio.idDepartamento.idInstitucion.nombre))
                 #Ahora se obtienen todos los departamentos pertenecientes a la institucion indicada
-                departamentos, conteoDepto = self.desdeDepartamento(queryset.filter(idServicio__idDepartamento__idInstitucion__nombre = institucion.idServicio.idDepartamento.idInstitucion.nombre ))
+                departamentos = self.desdeDepartamento(queryset.filter(idServicio__idDepartamento__idInstitucion__nombre = institucion.idServicio.idDepartamento.idInstitucion.nombre ))
                 #Se agrega el diccionario de departamentos con planes al diccionario de las instituciones
+                #print("DEPTOS: {}".format(departamentos))
                 datos[institucion.idServicio.idDepartamento.idInstitucion.nombre] = departamentos
-                graficas[institucion.idServicio.idDepartamento.idInstitucion.nombre] = conteoDepto
+
 
     def desdeDepartamento(self, queryset):
-        planes = []
+        planes = {}
         departamentos = {}
-        conteoDepto = {}
+
         for elem in queryset:
             if not elem.idServicio.idDepartamento.nombre in departamentos:
                 #print("depto: {}".format(elem.idServicio.idDepartamento.nombre))
                 #Se llama al metodo que devuelve el conjunto de planes para cada departamento
-                planes, conteo = self.desdePlan(queryset.filter(idServicio__idDepartamento__nombre = elem.idServicio.idDepartamento.nombre))
+                planes = self.desdePlan(queryset.filter(idServicio__idDepartamento__nombre = elem.idServicio.idDepartamento.nombre))
                 #Se contruye el diccionario con el nombre del departamento y sus PLANES
-                #print("CONTEO: {}".format(conteo))
+                #print("PLANES: {}".format(planes))
                 departamentos[elem.idServicio.idDepartamento.nombre] = planes
-                conteoDepto[elem.idServicio.idDepartamento.nombre] = conteo
-                planes = []
-                conteo = {}
-        #print("departamentos: {}".format(departamentos))
-        return departamentos, conteoDepto
+                planes = {}
+
+        return departamentos
 
     def desdePlan(self, queryset):
-        planes = []
-        conteo = {}
-        primaAnual = 0
+        planes = {}
+        plan = []
+        datos = []
         for p in queryset:
-            planes.append((p.idServicio.nombrePlan, p.numeroPoliza, p.formaPago, p.plazoAnos, p.primaNetaAnual, p.valorPlan))
-            primaAnual += p.primaNetaAnual
-        #print("planes: {}".format(planes))
-        #Se forma el diccionario con el conteo de los planes y sus primas anuales
-        conteo["polizas"] = len(queryset)
-        conteo["primaAnual"] = primaAnual
-        return planes, conteo
+            datos.append(p.numeroPoliza)
+            datos.append(p.formaPago)
+            datos.append(p.plazoAnos)
+            datos.append(p.valorPlan)
+            plan.append(datos)
+            datos = []
+
+        planes[p.idServicio.nombrePlan] = plan
+
+        return planes
+
+
 
     def post(self, request, *args, **kwargs):
         #form = ReporteForm(request.POST)
@@ -67,14 +71,13 @@ class ReporteView(LoginRequiredMixin, View):
         pFinal = self.request.POST.get('periodoFinal')
         print("Periodos: {} - {}".format(pInicial, pFinal))
         datos = {}
-        graficas = {}
 
         if self.request.session.has_key('institucion'):
             inst = self.request.session['institucion']
             if(inst == "0"):
                 #se Obtiene el query set que trae todos los planes de todas las instituciones financieras pertenecientes al asesor indicado, en la fecha solicitada
                 queryset = PlanesConcretados.objects.filter(Q(idAsesor=request.user.id), Q(fechaContratacion__range=[pInicial,pFinal]))
-                self.desdeInstitucion(queryset, datos, graficas)
+                self.desdeInstitucion(queryset, datos)
                 # se define el nivel de que el usuario selecciono para ver como se organizan las graficas
                 nivel = "Institucion Todos"
             else:
@@ -84,7 +87,7 @@ class ReporteView(LoginRequiredMixin, View):
                         queryset = PlanesConcretados.objects.filter(Q(idAsesor=request.user.id), Q(fechaContratacion__range=[pInicial,pFinal])).filter(idServicio__idDepartamento__idInstitucion = inst)
                         #print("NOMBRE INST: {}".format(queryset[0].idServicio.idDepartamento.idInstitucion.nombre))
                         #datos[queryset[0].idServicio.idDepartamento.idInstitucion.nombre] = self.desdeDepartamento(queryset)
-                        self.desdeInstitucion(queryset,datos,graficas)
+                        self.desdeInstitucion(queryset,datos)
                         #print("Datos: {}".format(datos))
                         # se define el nivel de que el usuario selecciono para ver como se organizan las graficas
                         nivel = "Departamentos Todos"
@@ -101,7 +104,7 @@ class ReporteView(LoginRequiredMixin, View):
                             #    print("NOMBRE INST: {}".format(x.idServicio.idDepartamento.idInstitucion.nombre))
                             #    print("NOMBRE DEPTO: {}".format(x.idServicio.idDepartamento.nombre))
                                 #datos[x.idServicio.idDepartamento.idInstitucion.nombre] = {x.idServicio.idDepartamento.nombre : self.desdePlan(qset)}
-                            self.desdeInstitucion(queryset,datos,graficas)
+                            self.desdeInstitucion(queryset,datos)
                             print("Datos X: {}".format(datos))
                             # se define el nivel de que el usuario selecciono para ver como se organizan las graficas
                             nivel = "Planes Todos"
@@ -109,7 +112,7 @@ class ReporteView(LoginRequiredMixin, View):
                             queryset = PlanesConcretados.objects.filter(Q(idAsesor=request.user.id), Q(fechaContratacion__range=[pInicial,pFinal])).filter(idServicio__idDepartamento__idInstitucion = inst).filter(idServicio__idDepartamento__idDepartamento = deptos).filter(idServicio = plan)
                             #for p in queryset:
                                 #datos[p.idServicio.idDepartamento.idInstitucion.nombre] = {p.idServicio.idDepartamento.nombre : self.desdePlan(queryset)}
-                            self.desdeInstitucion(queryset, datos,graficas)
+                            self.desdeInstitucion(queryset, datos)
                             print("Datos Y: {}".format(datos))
                             # se define el nivel de que el usuario selecciono para ver como se organizan las graficas
                             nivel = "Plan Especifico"
@@ -123,45 +126,24 @@ class ReporteView(LoginRequiredMixin, View):
         for inst in datos.keys():
             print(inst)
             deptos = datos[inst]
+            print("deptos: {}".format(deptos))
             for d in deptos.keys():
+                print("\t " + d)
                 planes = deptos[d]
-                print("\t" + d)
-                for p in planes:
-                    for dat in p:
-                        print("\t\tdat: {}".format(dat))
-                    print("\n")
-            print("\n\n______________________")
-            context = {
-                "datos":datos
-            }
-
-
-        print("\n\n______________________")
-        print("GRAFICAS: {}\n\n".format(graficas))
-        for inst in graficas.keys():
-            print(inst)
-            deptos = graficas[inst]
-            for d in deptos.keys():
-                planes = deptos[d]
-                print("\t" + d)
                 for p in planes.keys():
-                    #for dat in p:
-                    print("\t\tvalores: {}".format(planes[p]))
-                    print("\n")
-            print("\n\n______________________")
+                    print("\t\t " + p)
+                    datos = planes[p]
+                    for d in datos:
+                        for dat in d:
+                            print("\t\t\tdat: {}".format(dat))
+                        print("\n")
+        print("\n\n______________________")
 
-            print("\n\n______________________")
-            print("NIVEL: {}\n\n".format(nivel))
-            print("\n\n______________________")
-
-            print("Usuario: {}".format(request.user))
-
-            context = {
-                "datos":datos,
-                "graficas":graficas,
-                "nivel": nivel,
-                "asesor": request.user,
-            }
+        context = {
+            "datos":datos,
+            "nivel": nivel,
+            "asesor": request.user,
+        }
         return render(request,template, context)
 
         '''#la redenderizacion se hace en un html

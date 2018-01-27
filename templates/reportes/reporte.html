@@ -32,67 +32,117 @@
     <script>
 
     $(function () {
-        /**
-         * Options for Sharp Line chart
-         */
+         nivel = "{{ nivel }}"
+         graficas = "{{ datos | safe }}";
+         console.log("nivel: " + nivel)
+         console.log("graficas: " + graficas)
 
-        nivel = "{{ nivel }}"
-        graficas = "{{ graficas | safe }}"
-        console.log("nivel: " + nivel)
-        console.log("graficas: " + graficas)
-        if(nivel == "Institucion Todos"){
-          {% for inst in graficas %}
-            {% for x in inst%}
-              console.log(inst[x])
-            {% endfor %}
-                //inst.push(inst);
-            /*{% for keyDepto,valDepto in value.items %}
-              {% for keyDepto,valPlan in valDepto.items%}
-                console.log(valDepto[valPlan])
-              {% endfor %}
-            {% endfor %}*/
-            //labels: inst
-          {% endfor %}
-        }
-
-        /*Se procesa el diccionario de datos para graficarlo*/
-
-
-        var sharpLineData = {
-            labels: ["January", "February", "March", "April", "May", "June", "July"],
-            datasets: [
-                {
-                    label: "Example dataset",
-                    fillColor: "rgba(98,203,49,0.5)",
-                    strokeColor: "rgba(98,203,49,0.7)",
-                    pointColor: "rgba(98,203,49,1)",
-                    pointStrokeColor: "#fff",
-                    pointHighlightFill: "#fff",
-                    pointHighlightStroke: "rgba(98,203,49,1)",
-                    data: [33, 48, 40, 19, 54, 27, 54]
-                }
-            ]
-        };
-
-        var sharpLineOptions = {
-            scaleShowGridLines : true,
-            scaleGridLineColor : "rgba(0,0,0,.05)",
-            scaleGridLineWidth : 1,
-            bezierCurve : false,
-            pointDot : true,
-            pointDotRadius : 4,
-            pointDotStrokeWidth : 1,
-            pointHitDetectionRadius : 20,
-            datasetStroke : true,
-            datasetStrokeWidth : 1,
-            datasetFill : true,
-            responsive: true
-        };
-
-        var ctx = document.getElementById("sharpLineOptions").getContext("2d");
-        var myNewChart = new Chart(ctx).Line(sharpLineData, sharpLineOptions);
+         //Se hace realiza la extraccion de los datos de cada compañia(nombre, # de polizas, y total de Prima anualizada)
+        resultados = ExtraccionDatos(graficas, nivel)
+        console.log("resultados: "+ resultados)
+        GraficaBarras(instituciones, polizas, primaAnual);
 
     });
+
+    //funcion que realiza la extraccion de datos para su graficacion
+    function ExtraccionDatos(graficas, nivel){
+      resultados = {}
+      instituciones = []
+      departamentos = []
+      planes = []
+      polizas = []
+      primaAnual = []
+      sumPolizas = 0;
+      sumPrimaAnual = 0;
+      {% for keyInst,valueInst in graficas.items %}
+        instituciones.push("{{keyInst | safe }}")
+        {% for keyDepto,valueDepto in valueInst.items %}
+          departamentos.push("{{keyDepto | safe}}")
+          {% for keyPlan, valuePlan in valueDepto.items%}
+            console.log("VP: " + "{{valuePlan | safe}}")
+
+
+            //planes.push("{{valuePlan | safe}}")
+            /*{% for valueDatos in valuePlan %}
+
+              planes.push("{{valueDatos | safe}}")
+              if("polizas" == "{{keyDatos | safe}}"){
+                sumPolizas = sumPolizas + parseInt("{{valueDatos | safe}}")
+              }
+              else if ("primaAnual" == "{{keyDatos | safe}}") {
+                sumPrimaAnual = sumPrimaAnual + parseInt("{{valueDatos | safe}}")
+              }
+            {%endfor%}*/
+          {% endfor %}
+        {%endfor%}
+        polizas.push(sumPolizas);
+        primaAnual.push(sumPrimaAnual);
+        sumPolizas = 0;
+        sumPrimaAnual = 0;
+      {%endfor%}
+      console.log("I: " + instituciones)
+      console.log("D: " + departamentos)
+      console.log("P: " + planes)
+      console.log("Polizas: " + polizas)
+      console.log("PrimaAnual: " + primaAnual)
+      if(nivel == "Institucion Todos"){
+        resultados["label"] = instituciones
+      }
+      else if (nivel == "Departamentos Todos") {
+        resultados["label"] = departamentos
+      }
+      else if (nivel == "Planes Todos" || nivel == "Plan Especifico") {
+        resultados["label"] = planes
+      }
+      resultados["polizas"] = sumPolizas
+      resultados["primaAnual"] = sumPrimaAnual
+      return resultados
+    }
+
+    //Funcion que contiene la grafica (Barras)
+    function GraficaBarras(instituciones, polizas, primaAnual){
+      /**
+       * Options for Bar chart
+       */
+      var barOptions = {
+          scaleBeginAtZero : true,
+          scaleShowGridLines : true,
+          scaleGridLineColor : "rgba(0,0,0,.05)",
+          scaleGridLineWidth : 1,
+          barShowStroke : true,
+          barStrokeWidth : 1,
+          barValueSpacing : 5,
+          barDatasetSpacing : 1,
+          responsive:true
+      };
+
+      /**
+       * Data for Bar chart
+       */
+      var barData = {
+          labels: instituciones,
+          datasets: [
+              {
+                  label: "polizas",
+                  fillColor: "rgba(220,220,220,0.5)",
+                  strokeColor: "rgba(220,220,220,0.8)",
+                  highlightFill: "rgba(220,220,220,0.75)",
+                  highlightStroke: "rgba(220,220,220,1)",
+                  data: polizas
+              },
+              {
+                  label: "Prima Anualizada",
+                  fillColor: "rgba(98,203,49,0.5)",
+                  strokeColor: "rgba(98,203,49,0.8)",
+                  highlightFill: "rgba(98,203,49,0.75)",
+                  highlightStroke: "rgba(98,203,49,1)",
+                  data: primaAnual
+              }
+          ]
+      };
+      var ctx = document.getElementById("barOptions").getContext("2d");
+      var myNewChart = new Chart(ctx).Bar(barData, barOptions);
+    }
 
   </script>
 {% endblock %}
