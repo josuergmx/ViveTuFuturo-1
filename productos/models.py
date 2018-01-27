@@ -33,8 +33,9 @@ class InstitucionFinanciera(models.Model):
     cp      = models.CharField(max_length=5, blank=True, null = True)
     num_int = models.CharField(max_length=7, blank=True, null = True)
     num_ext = models.CharField(max_length=7, blank=True, null = True)
+
     def __str__(self):
-        return(self.nombre +" "+self.calle)
+        return (self.nombre)
 
 class Departamento(models.Model):
     idDepartamento = models.AutoField(primary_key = True)

@@ -15,7 +15,6 @@ class EstadoCivil(models.Model):
     idEstadoCivil = models.PositiveIntegerField(primary_key=True, unique=True, null=False)
     nombre = models.CharField(max_length=20,null=False)
 
-
     def __str__(self):
         return self.nombre
 

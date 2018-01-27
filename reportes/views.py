@@ -7,7 +7,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import get_object_or_404, render, redirect
 from productos.models import InstitucionFinanciera, Departamento, Servicio
 from ventas.models import PlanesConcretados
-from .forms import ReporteForm
+from . import forms as f
 from django.db.models import Q
 
 
@@ -165,8 +165,7 @@ class GeneracionServicios(View):
 
     def post(self, request, *args, **kwargs):
         plan = {}
-        print(request.POST.get("departamento"))
-        depto = request.POST.get("departamento")
+        depto = self.request.POST.get('departamento')
         #print("DEPTO: {}".format(depto))
 
         #se sube a la sesion el id del departamento
@@ -188,18 +187,19 @@ class GeneracionServicios(View):
 
     def get(self, request, *args, **kwargs):
         template = "reportes/ventas.html"
-        departamento = ReporteForm()
+        context = {}
+        '''departamento = f.departamentoForm()
         print("Departamento***: {}".format(departamento))
         context = {
             "form":departamento
-        }
+        }'''
         return render(request, template, context)
 
 class GeneracionDepartamentos(View):
 
     def post(self, request, *args, **kwargs):
-        print(request.POST.get("institucion"))
-        inst = request.POST.get("institucion")
+
+        inst =  self.request.POST.get('institucion')
         #print("Intitucion: {}".format(inst))
         depto = {}
 
@@ -225,7 +225,7 @@ class GeneracionDepartamentos(View):
 
     def get(self, request, *args, **kwargs):
         template = "reportes/ventas.html"
-        institucion = ReporteForm()
+        institucion = InstitucionFinanciera.objects.all().values_list('nombre', 'idInstitucion')
         print("Type: {}".format(type(institucion)))
         #print("Institucion: {}".format(institucion))
         context = {
