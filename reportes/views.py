@@ -8,9 +8,7 @@ from django.shortcuts import get_object_or_404, render, redirect
 from productos.models import InstitucionFinanciera, Departamento, Servicio
 from ventas.models import PlanesConcretados
 from .forms import ReporteForm
-from django.template.loader import get_template
 from django.db.models import Q
-from .make_report_pdf import render_to_pdf
 
 
 class ReporteView(LoginRequiredMixin, View):
