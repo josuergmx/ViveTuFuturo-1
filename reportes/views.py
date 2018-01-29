@@ -227,8 +227,8 @@ class GeneracionDepartamentos(View):
         template = "reportes/ventas.html"
         institucion = InstitucionFinanciera.objects.all().values_list('nombre', 'idInstitucion')
         print("Type: {}".format(type(institucion)))
-        #print("Institucion: {}".format(institucion))
+        print("Institucion: {}".format(institucion))
         context = {
-            "form":institucion
+            "institucion":institucion
         }
         return render(request, template, context)

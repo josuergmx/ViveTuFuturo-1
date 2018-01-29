@@ -37,7 +37,7 @@
                       <div class="form-group">
                         <h3>Selecciona las opciones, para generar el reporte</h3>
                         {% csrf_token %}
-                        <label class="control-label">Selecciona Fecha</label>
+                        <label class="control-label">Selecciona Fecha </label>
                         <div class="input-daterange input-group" id="datepicker">
                             <span class="input-group-addon"> De </span>
                             <input type="text" class="input-sm form-control" name="start" />
@@ -45,14 +45,20 @@
                             <input type="text" class="input-sm form-control" name="end" />
                         </div>
 
-                        <label class="control-label">Selecciona ...</label>
-                        <select class="form-control m-b" name="account">
-                            <option>option 1</option>
-                            <option>option 2</option>
-                            <option>option 3</option>
-                            <option>option 4</option>
+                        <label class="control-label">Selecciona la Institucion Financiera</label>
+
+                        <select class="form-control m-b" id="id_institucion" name="id_institucion">
+                          {% for item in institucion%}
+                            <option value="{{item.1}}" > {{item.0}} </option>
+                          {% endfor %}
                         </select>
-                        {{form.as_p}}
+
+                        <select class="form-control m-b" id="id_departamento" name="id_departamento">
+                        </select>
+
+                        <select class="form-control m-b" id="id_plan" name="id_plan">
+                        </select>
+
                         <button type="submit" class="btn btn-success">Ir</button>
                       </div>
                     </form>
