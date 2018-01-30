@@ -36,6 +36,7 @@ class ReporteView(LoginRequiredMixin, View):
                 planes = self.desdePlan(queryset.filter(idServicio__idDepartamento__nombre = elem.idServicio.idDepartamento.nombre))
                 #Se contruye el diccionario con el nombre del departamento y sus PLANES
                 print("PLANES: {} - {}".format(elem.idServicio.idDepartamento.nombre, type(elem.idServicio.idDepartamento.nombre)))
+                print("TYPO: {}".format(type(planes)))
                 departamentos[elem.idServicio.idDepartamento.nombre] = planes
                 planes = {}
 
@@ -52,8 +53,6 @@ class ReporteView(LoginRequiredMixin, View):
 
         return planes
 
-
-
     def post(self, request, *args, **kwargs):
         #form = ReporteForm(request.POST)
         #print("FORM: {}".format(form))
@@ -67,8 +66,6 @@ class ReporteView(LoginRequiredMixin, View):
         #print("\n\n*******Fechas: {}".format(Fechas))
         print("Periodos: {} - {}".format(pInicial, pFinal))
         datos = {}
-
-
 
         if self.request.session.has_key('institucion'):
             inst = self.request.session['institucion']
@@ -124,16 +121,14 @@ class ReporteView(LoginRequiredMixin, View):
         for inst in datos.keys():
             print(inst)
             deptos = datos[inst]
-            #print("DEPTOS: {}\n".format(deptos))
             for d in deptos.keys():
-                print("\t {}\n".format(d))
+                print("\t{}\n".format(d))
                 planes = deptos[d]
-                for p in planes.keys():
-                    print("\t\t {}\n".format(p))
-                    datos = planes[p]
-                    #print("\t\t {}".format(p))
-
-
+                for keyArr, valueArr in planes.items():
+                    print("---\t\t  {}\n".format(keyArr))
+                    for x in valueArr:
+                        for y in x:
+                            print("\t\t\tdatos: {}".format(y))
         print("\n\n______________________")
 
         context = {

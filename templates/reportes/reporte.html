@@ -40,7 +40,7 @@
          //Se hace realiza la extraccion de los datos de cada compañia(nombre, # de polizas, y total de Prima anualizada)
         resultados = ExtraccionDatos(graficas, nivel)
         console.log("resultados: "+ resultados)
-        GraficaBarras(instituciones, polizas, primaAnual);
+        //GraficaBarras(instituciones, polizas, primaAnual);
 
     });
 
@@ -54,9 +54,15 @@
       primaAnual = []
       sumPolizas = 0;
       sumPrimaAnual = 0;
-      {% for keyInst,valueInst in graficas.items %}
+
+      console.log("Estamos aqui")
+      console.log(graficas)
+
+      {% for keyInst,valueInst in graficas.items%}
+        console.log("----- ");
         instituciones.push("{{keyInst | safe }}")
         {% for keyDepto,valueDepto in valueInst.items %}
+          console.log("==== " + valueDepto);
           departamentos.push("{{keyDepto | safe}}")
           {% for keyPlan, valuePlan in valueDepto.items%}
             console.log("VP: " + "{{valuePlan | safe}}")
@@ -80,11 +86,13 @@
         sumPolizas = 0;
         sumPrimaAnual = 0;
       {%endfor%}
+
       console.log("I: " + instituciones)
       console.log("D: " + departamentos)
       console.log("P: " + planes)
       console.log("Polizas: " + polizas)
       console.log("PrimaAnual: " + primaAnual)
+
       if(nivel == "Institucion Todos"){
         resultados["label"] = instituciones
       }

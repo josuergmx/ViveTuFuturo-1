@@ -82,7 +82,10 @@
     $(function () {
           //Calendario.
           $('#datepicker').datepicker({
-              language: 'es'
+              language: 'es',
+              locale: {
+                format: 'YYYY-MM-DD'
+              },
           });
 
           $("#datepicker").on("changeDate", function(event) {
