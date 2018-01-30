@@ -2,10 +2,7 @@
 	vertical-align: middle;
 }
 
-.navbar .navbar-header a b{
-	margin-top: 1.5em !important;
-	font-size: 1.3em;
-}
+
 
 .justificado{
 	text-align : justify;
@@ -18,6 +15,10 @@
 
 .margen p{
 	text-align : justify;
+}
+
+nav{
+	height: 50px !important;
 }
 
 .titulo{
